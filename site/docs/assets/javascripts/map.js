@@ -512,7 +512,9 @@ async function updateMapWithNodes() {
 
     // create new markers and marker data
     nodeData.forEach((node) => {
-      let user = usernames.find(u => u.user_id === node.user_id);
+      if (userId) {
+        var user = usernames.find(u => u.user_id === node.user_id);
+      }
       let username;
       if (user) {
         username = user.global_name;
