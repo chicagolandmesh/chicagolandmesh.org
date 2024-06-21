@@ -1,5 +1,7 @@
 ---
 title: Avoid these mistakes
+tags:
+  - Info
 ---
 
 #### Do NOT power on your node without an antenna!

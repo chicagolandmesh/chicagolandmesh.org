@@ -1,8 +1,10 @@
 ---
 title: Resources
 hide: 
-    - navigation
-    - toc
+  - navigation
+  - toc
+tags:
+  - Resources
 ---
 
 # Resources to check out

@@ -1,5 +1,8 @@
 ---
 title: MQTT
+tags:
+  - MQTT
+  - Info
 ---
 # Setting up MQTT for your node
 
