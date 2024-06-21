@@ -33,7 +33,7 @@ tags:
 
     Learn how to join our local and secure mesh network!
 
-    [:fontawesome-solid-angle-right: Setup now](local-mqtt)
+    [:fontawesome-solid-angle-right: Setup now](local-channel)
 
 -   :material-solar-power-variant:{ .lg .middle } __Solar builds__
 

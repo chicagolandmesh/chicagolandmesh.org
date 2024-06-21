@@ -1,6 +1,6 @@
 ---
+title: Local Channel
 tags:
-  - MQTT
   - Info
 ---
 # Local Encrypted Channel Configuration

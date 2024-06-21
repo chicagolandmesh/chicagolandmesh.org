@@ -13,7 +13,7 @@ nav:
       - Configuring Meshtastic: guides/getting-started/configure.md
       - Mistakes to Avoid: guides/getting-started/avoid-mistakes.md
     - Setup MQTT: guides/mqtt.md
-    - Local MQTT Channel: guides/local-mqtt.md
+    - Local Channel: guides/local-channel.md
     - Builds: 
       - guides/builds/index.md
   - News: news/index.md
