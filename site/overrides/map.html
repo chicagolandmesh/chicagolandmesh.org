@@ -296,25 +296,23 @@
     </div>
     -->
 
-    <div style="background-color: var(--md-admonition-bg-color); width: 100%;" data-md-component="announce">
-        <aside>
-            <div class="md-banner__inner md-grid md-typeset">
-                <button class="md-banner__button md-icon" aria-label="Don't show this again">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z">
-                        </path>
-                    </svg>
-                </button>
-                <div>
-                    <h2 style="text-align:center;margin-top:0">Chicagoland Meshtastic Self-Reported Node map</h2>
-                    <p style="text-align:center">Please add your node(s) to this map, whether or not you are sharing your location via MQTT. This helps others easily identify you and allows you to identify others. Click anywhere on map to create node. Login to add your node and view the owners of other nodes. Hover over a pin to view node info, click the same pin to close node info.</p>
-                </div>
+   <div id="announcementBox" style="background-color: var(--md-admonition-bg-color); width: 100%;" data-md-component="announce">
+    <aside>
+        <div class="md-banner__inner md-grid md-typeset">
+            <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z">
+                    </path>
+                </svg>
+            </button>
+            <div>
+                <h2 style="text-align:center;margin-top:0">Chicagoland Meshtastic Self-Reported Node map</h2>
+                <p style="text-align:center">Please add your node(s) to this map, whether or not you are sharing your location via MQTT. This helps others easily identify you and allows you to identify others. Click anywhere on map to create node. Login to add your node and view the owners of other nodes. Hover over a pin to view node info, click the same pin to close node info.</p>
             </div>
-            <script>var content, el = document.querySelector("[data-md-component=announce]"); el && (content = el.querySelector(".md-typeset"), __md_hash(content.innerHTML) === __md_get("__announce") && (el.hidden = !0))</script>
-        </aside>
-    </div>
-
+        </div>
+    </aside>
+</div>
       <!-- map -->
     <noscript>
         <p style="text-align:center">Enable javascript to use map.</p>
