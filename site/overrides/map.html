@@ -1,0 +1,482 @@
+{% extends "main.html" %}
+
+{% block styles %}
+{{ super() }}
+    <link rel="stylesheet" href="../assets/stylesheets/leaflet.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"> -->
+{% endblock %}
+
+{% block content %}
+    <style>
+        .leaflet-popup-content {
+            margin: 0;
+        }
+        .leaflet-popup-content-wrapper {
+            border-radius: 5px;
+            background: var(--md-default-bg-color);
+            color: var(--md-default-fg-color);
+            border: 1px solid var(--md-default-fg-color);
+        }
+        .leaflet-popup-tip {
+            background: var(--md-default-bg-color);
+            color: var(--md-default-fg-color);
+            border: 1px solid var(--md-default-fg-color);
+        }
+        /* set map color based on scheme */
+        [data-md-color-scheme="slate"] {
+            --map-color-scheme: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
+
+        [data-md-color-scheme="chicago-light"] {
+            --map-color-scheme: initial;
+        }
+        .leaflet-layer,
+        .leaflet-control-zoom-in,
+        .leaflet-control-zoom-out,
+        .leaflet-control-attribution {
+            filter: var(--map-color-scheme);
+        }
+        /* other leaflet options */
+        .leaflet-control-button {
+            cursor: pointer;
+        }
+        .leaflet-control-attribution.leaflet-control a:first-child,
+        .leaflet-control-attribution.leaflet-control span {
+            display: none;
+        }
+        .leaflet-control-attribution.leaflet-control {
+            font-size: 12px;
+        }
+        .leaflet-popup.leaflet-zoom-animated {
+            opacity: 0.85 !important;
+        }
+        /* content full width */
+        .md-main {
+            position: relative;
+        }
+        .md-main__inner.md-grid {
+            margin-top: 0;
+            margin: 0;
+            position: absolute;
+            max-width: 100%;
+            width: 100%;
+        }
+        .md-content {
+            height: 100%;
+        }
+        .md-content__inner {
+            margin: 0;
+            padding-top: 0;
+            height: 100%;
+        }
+        .md-content__inner:before {
+            display: none;
+        }
+        /* modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 30px;
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: var(--md-default-bg-color);
+            margin: auto;
+            padding: 20px;
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            overflow: auto;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.5s ease;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        form {
+            display: grid;
+            row-gap: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="button"] {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        #deleteButton {
+            background-color: #ff1717;
+        }
+        #deleteButton:hover {
+            background-color: #c71c1c;
+        }
+
+
+        #loginButton {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #submitButton {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+
+        /* marker popup buttons */
+        .popup-buttons {
+            display: flex;
+            align-items: center;
+            fill: var(--md-default-fg-color);
+            margin: 5%;
+        }
+        .popup-button {
+            display: flex;
+            cursor: pointer;
+            width: 24px;
+            margin: 0 3px 0 3px;
+        }
+        .popup-button.shake:hover {
+            animation: shake 0.5s ease-in-out;
+        }
+        .button-disabled {
+            fill: gray;
+            cursor: not-allowed;
+        }
+        .button-disabled:hover {
+            fill: gray !important;
+        }
+        #popup-edit-button:hover {
+            fill: orange;
+        }
+        .popup-edit-button-enabled {
+            fill: red;
+        }
+        #popup-delete-button:hover {
+            fill: red;
+        }
+        #popup-drag-button:hover {
+            fill: orange;
+        }
+
+        /* notifications */
+        .md-content__inner.md-typeset {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .notification-container {
+            display: flex;
+            position: absolute;
+            flex-direction: column;
+        }
+        .message-box {
+            display: none;
+            position: absolute;
+            margin-bottom: 10px;
+            background-color: var(--md-default-bg-color);
+            padding: 10px;
+            border: 2px solid var(--md-default-fg-color);
+            border-radius: 10px;
+            opacity: 0.8;
+            z-index: 9999;
+        }
+        .notification-container .message-box {
+            display: none;
+            margin-bottom: 10px;
+            background-color: var(--md-default-bg-color);
+            padding: 10px;
+            border: 2px solid var(--md-default-fg-color);
+            border-radius: 10px;
+            opacity: 1;
+            z-index: 9999;
+        }
+        .message-content {
+            text-align: center;
+        }
+        .message-content * {
+            margin: 0 !important;
+        }
+        #message-alert {
+            opacity: 1;
+        }
+        .message-box.success {
+            background-color: #EFE;
+            border: 1px solid #DED;
+            color: #9A9;
+            border: 2px solid #9A9;
+        }
+        .message-box.error {
+            cursor: pointer;
+            background-color: #FEE;
+            border: 1px solid #EDD;
+            color: #A66;
+            border: 2px solid #A66;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .message-box.shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        .message-box.close-animation {
+            animation: fadeOut 0.5s forwards;
+        }
+        .message-box.open {
+            animation: fadeIn 0.5s forwards;
+        }
+    </style>
+
+    <!--
+    <div data-md-component="announce">
+        <aside>
+            <div class="md-banner__inner md-grid md-typeset">
+                <div>
+                    <h2 style="text-align:center;margin-top:0">Chicagoland Meshtastic Self-Reported Node map</h2>
+                    <p style="text-align:center">Please add your node(s) to this map regardless if you are sharing location to MQTT to make it easy for others to identify you and for you to identify others.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+    -->
+
+    <div style="background-color: var(--md-admonition-bg-color); width: 100%;" data-md-component="announce">
+        <aside>
+            <div class="md-banner__inner md-grid md-typeset">
+                <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z">
+                        </path>
+                    </svg>
+                </button>
+                <div>
+                    <h2 style="text-align:center;margin-top:0">Chicagoland Meshtastic Self-Reported Node map</h2>
+                    <p style="text-align:center">Please add your node(s) to this map, whether or not you are sharing your location via MQTT. This helps others easily identify you and allows you to identify others. Click anywhere on map to create node. Login to add your node and view the owners of other nodes. Hover over a pin to view node info, click the same pin to close node info.</p>
+                </div>
+            </div>
+            <script>var content, el = document.querySelector("[data-md-component=announce]"); el && (content = el.querySelector(".md-typeset"), __md_hash(content.innerHTML) === __md_get("__announce") && (el.hidden = !0))</script>
+        </aside>
+    </div>
+
+      <!-- map -->
+    <noscript>
+        <p style="text-align:center">Enable javascript to use map.</p>
+    </noscript>
+    <div id="osm-map"></div>
+
+    <!-- modals -->
+    <div id="nodeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin:0;margin-bottom:2%;margin-top:1.5%">Enter Node Information</h2>
+            <form id="nodeForm">
+                <label for="nodeTitle">Node Name:</label>
+                <input type="text" id="nodeTitle" name="nodeTitle" placeholder="Anonymous if empty"><br>
+                <label for="nodeElevation">Node Elevation:</label>
+                <input type="text" id="nodeElevation" name="nodeElevation" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" placeholder="In feet or meters">
+                <select type="number" class="form-control" id="elevationUnit">
+                    <option value="ft">ft</option>
+                    <option value="m">m</option>
+                </select><br>
+                <label for="nodeFrequency">Node Frequency:</label>
+                <select id="nodeFrequency" name="nodeFrequency">
+                    <option value="915">915 MHz</option>
+                    <option value="868">868 MHz</option>
+                    <option value="443">433 MHz</option>
+                </select><br>
+                <label for="nodeMQTT">Using msh/US/IL/Chi MQTT root topic:</label>
+                <select id="nodeMQTT" name="nodeMQTT">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+                <label for="nodeRole">Node Role:</label>
+                <select id="nodeRole" name="nodeRole">
+                    <option value="fixed">Fixed</option>
+                    <option value="portable">Portable</option>
+                    <option value="router">Router</option>
+                    <option value="repeater">Repeater</option>
+                </select><br>
+                <label for="usernamePrivacy">Keep Discord username hidden:
+                <input type="checkbox" id="usernamePrivacy" name="usernamePrivacy">
+                </label><br>
+                <input id="loginButton" type="button" value="Login">
+                <input id="submitButton" type="button" value="Submit" onclick="submitNode()" disabled>
+            </form>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2 style="margin:0;margin-bottom:2%;margin-top:1.5%">Edit Node Information</h2>
+            <form id="editForm">
+                <label for="editTitle">Node Name:</label>
+                <input type="text" id="editTitle" name="editTitle" placeholder="Anonymous if empty"><br>
+                <label for="editRole">Node Role:</label>
+                <select id="editRole" name="editRole">
+                    <option value="fixed">Fixed</option>
+                    <option value="portable">Portable</option>
+                    <option value="router">Router</option>
+                    <option value="repeater">Repeater</option>
+                </select><br>
+                <label for="editElevation">Node Elevation:</label>
+                <input type="text" id="editElevation" name="editElevation" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" placeholder="In feet or meters">
+                <select type="number" class="form-control" id="editElevationUnit">
+                    <option value="ft">ft</option>
+                    <option value="m">m</option>
+                </select><br>
+                <label for="editFrequency">Node Frequency:</label>
+                <select id="editFrequency" name="editFrequency">
+                    <option value="915">915 MHz</option>
+                    <option value="868">868 MHz</option>
+                    <option value="443">433 MHz</option>
+                </select><br>
+                <label for="editMQTT">Using msh/US/IL/Chi MQTT root topic:</label>
+                <select id="editMQTT" name="editMQTT">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+                <input id="editButton" type="button" value="Submit" onclick="editNode()">
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h2 style="margin:0;margin-bottom:4%;margin-top:1%">Are you sure you want to delete this node?</h2>
+            <form id="editForm">
+                <input type="button" value="No" onclick="closeDeleteModal()">
+                <input id="deleteButton" type="button" value="Yes" onclick="deleteNode()">
+            </form>
+        </div>
+    </div>
+
+    <!-- notifications -->
+    <div class="notification-container">
+        <div id="message-alert" class="message-box" onclick="closeNotification()">
+            <div class="message-content">
+                <h2><b id="message-title"></b></h2>
+                <p id="message-body"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Node drag alert -->
+    <div id="drag-box" class="message-box">
+        <div class="message-content">
+            <h2>Edit mode activated</h2>
+            <p>To change node position drag it to your desired spot then click the drag button again.</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <!-- <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script> -->
+    <script src="../assets/javascripts/leaflet.min.js"></script>
+    <script src="../assets/javascripts/map.js"></script>
+{% endblock %}
+
+<!--
+        // add ws support?
+        // custom controls for node management and mqtt (not implemented)
+        // https://stackoverflow.com/questions/64046196/i%C2%B4m-stucked-creating-a-new-leaflet-custom-control
+        // https://leafletjs.com/examples/extending/extending-3-controls.html
+        // downloads/chatgpt.mhtml
+        /*
+        L.Control.Button = L.Control.extend({
+            options: {
+                position: 'topright'
+            },
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                var button = L.DomUtil.create('a', 'leaflet-control-button', container);
+                button.innerHTML = '<img src="https://chicagolandmesh.org/assets/img/logo.png">';
+                L.DomEvent.disableClickPropagation(button);
+                L.DomEvent.on(button, 'click', function(){
+                    console.log('click');
+                    var rect = button.getBoundingClientRect();
+                    var popup = document.createElement('div');
+                    popup.className = 'popup';
+                    popup.style.position = 'absolute';
+                    popup.style.left = (rect.left + window.pageXOffset) + 'px';
+                    popup.style.top = (rect.bottom + window.pageYOffset) + 'px';
+                    popup.innerHTML = 'Popup content here';
+                    document.getElementById('popupContainer').appendChild(popup);
+                });
+
+                container.title = "Node Management";
+
+                return container;
+            },
+            onRemove: function(map) {},
+        });
+        var control = new L.Control.Button()
+        control.addTo(map);
+        */
+                        /*
+                        if (Array.isArray(error)) {
+                            body = error.map(error => error.msg).join('<br>');
+                        } else {
+                            body = error;
+                        }
+                        */
+-->

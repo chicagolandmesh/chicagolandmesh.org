@@ -1,0 +1,137 @@
+{% extends "main.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="assets/stylesheets/image-gallery.css">
+<!--<style>
+    .widget-2vZvsN.widget-theme-dark {
+      overflow: unset;
+    }
+  </style>-->
+{{ super() }}
+{% endblock %}
+
+{% block tabs %}
+{{ super() }}
+<style>
+  .background-color {
+    background: linear-gradient(to bottom, var(--md-primary-fg-color), rgb(63, 148, 217) 99%, var(--md-default-bg-color) 99%);
+  }
+
+  .mdx-container {
+    padding-top: px2rem(20px);
+  }
+
+  .md-main__inner {
+    max-width: 60%;
+  }
+  @media only screen {
+  .md-main__inner {
+    max-width: 100%;
+  }
+}
+</style>
+<div class="background-color">
+  <section class="mdx-container">
+    <div class="md-grid md-typeset">
+      <div class="mdx-gallery">
+        <div style="margin: 5%; margin-bottom: 10%" class="mdx-hero__content">
+          <h1>Welcome to the Chicagoland Meshtastic community!</h1>
+          <p>{{ config.site_description }}</p>
+          <a href="/about" title="About" class="md-button md-button--primary">
+            Learn more
+          </a>
+          <a href="/guides/getting-started/" title="Guides" class="md-button">
+            Getting started
+          </a>
+        </div>
+      </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- slideshow -->
+<section>
+  <noscript>
+    <p style="text-align:center">Enable JavaScript to view slideshow.</p>
+  </noscript>
+  <div style="
+    display:flex;
+    justify-content:center;
+    " id="image-slides"></div>
+  
+  <div style="
+      text-align: center;
+      margin-top:10px;
+    ">
+    <a href="/gallery" title="" class="md-button md-button--primary">
+      View more
+    </a>
+  </div>
+</section>
+
+<!-- discord -->
+<section style="
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 5% 0% 5% 0%;
+  ">
+  <div>
+    <div>
+      <h1 style="margin-bottom:10px">Join our Discord server</h1>
+      <p style="
+        margin-bottom: 20px;
+        max-width: 20em;
+        ">
+        Want to participate? Have ideas? Need help? Join the over 200+ members and counting!
+        <!-- make the number dynamic -->
+      </p>
+    </div>
+    <iframe 
+      src="https://discord.com/widget?id=1218078395565608990"
+      width="450"
+      height="600"
+      allowtransparency="true"
+      frameborder="0"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+    ></iframe>
+  </div>
+  <div style="max-width: 50vh">
+    <img style="width: 100%; height: auto;" src="assets/images/nodes.png"></img>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!-- react for image slides -->
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<!-- image slides -->
+<script src="https://unpkg.com/react-image-gallery@1.3.0/build/image-gallery.js"></script>
+<script>
+  var images = [
+    {original: 'assets/images/gallery/image01.jpg'},
+    {original: 'assets/images/gallery/image02.jpg'},
+    {original: 'assets/images/gallery/image03.jpg'},
+    {original: 'assets/images/gallery/image04.jpg'},
+    {original: 'assets/images/gallery/image05.jpg'}
+  ];
+  ReactDOM.render(
+    React.createElement(ImageGallery.default, {
+      items: images,
+      autoPlay: true,
+      showBullets: true,
+      showThumbnails: false,
+      slideDuration: 800,
+      slideInterval: 5000,
+      showFullscreenButton: false,
+      showPlayButton: false,
+      showNav: true
+    }),
+    document.getElementById('image-slides')
+  );
+</script>
+{{ super() }}
+{% endblock %}

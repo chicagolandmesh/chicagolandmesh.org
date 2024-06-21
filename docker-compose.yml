@@ -1,0 +1,19 @@
+services:
+  mkdocs-develop:
+    container_name: mkdocs-develop
+    image: squidfunk/mkdocs-material
+    command: serve -w /docs -a 0.0.0.0:8000
+    user: 1000:1000
+    volumes:
+      - ./site/mkdocs.yml:/docs/mkdocs.yml
+      - ./site/docs:/docs/docs
+      - ./site/overrides:/docs/overrides
+    expose:
+      - "8000"
+    networks:
+      - main
+    restart: unless-stopped
+
+networks:
+  main:
+    external: true
