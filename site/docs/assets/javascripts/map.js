@@ -1,4 +1,4 @@
-const API_ENDPOINT = "https://dev.chicagolandmesh.org/api";
+const API_ENDPOINT = "https://chicagolandmesh.org/api";
 
 document.addEventListener("DOMContentLoaded", async function () {
   await apiGetNodes();

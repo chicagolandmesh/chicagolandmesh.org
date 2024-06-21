@@ -26,7 +26,7 @@ To get started, you'll need the following:
 !!! warning "Important Note"
 
     Never power on your Meshtastic device without an antenna connected. This could permanently damage the radio.
-    Make sure to look into the [mistakes to avoid](https://dev.chicagolandmesh.org/guides/getting-started/avoid-mistakes) page to avoid common pitfalls.
+    Make sure to look into the [mistakes to avoid](../getting-started/avoid-mistakes) page to avoid common pitfalls.
 
 ## Software Setup and Flashing the Firmware
 
