@@ -3,7 +3,7 @@ site_description: >-
   Join the local community of Meshtastic enthusiasts in the Chicagoland area, and collaborate in building a sustainable and interconnected network of decentralized nodes.
 site_url: https://chicagolandmesh.org
 #repo_url: https://github.com/chicagolandmesh/chicagolandmesh.org
-copyright: 'Copyright &copy; 2024 Chicagoland Meshtastic'
+copyright: 'Copyright &copy; 2024 Chicagoland Meshtastic <u><a href="https://github.com/chicagolandmesh/chicagolandmesh.org">Contributors</a></u>'
 nav:
   - About: about/index.md
   - Guides:
