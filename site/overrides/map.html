@@ -329,7 +329,7 @@
             <form id="nodeForm">
                 <label for="nodeTitle">Node Name:</label>
                 <input type="text" id="nodeTitle" name="nodeTitle" placeholder="Anonymous if empty"><br>
-                <label for="nodeElevation">Node Elevation:</label>
+                <label for="nodeElevation">Node Elevation (from ground level):</label>
                 <input type="text" id="nodeElevation" name="nodeElevation" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" placeholder="In feet or meters">
                 <select type="number" class="form-control" id="elevationUnit">
                     <option value="ft">ft</option>
@@ -376,7 +376,7 @@
                     <option value="router">Router</option>
                     <option value="repeater">Repeater</option>
                 </select><br>
-                <label for="editElevation">Node Elevation:</label>
+                <label for="editElevation">Node Elevation (from ground level):</label>
                 <input type="text" id="editElevation" name="editElevation" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" placeholder="In feet or meters">
                 <select type="number" class="form-control" id="editElevationUnit">
                     <option value="ft">ft</option>
