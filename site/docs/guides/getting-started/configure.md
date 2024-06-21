@@ -49,7 +49,9 @@ More details can be found at [Meshtastic.org](https://meshtastic.org/docs/config
 - Max Transmit Power: 30dBm
 - Override Duty Cycle: Enabled
 - Boosted RX Gain: Enabled
-- Store and Forward: Enabled
+- Store and Forward:
+    - Mobile/Client Nodes: Disabled
+    - Router and Fixed Nodes: Enabled
 - Heartbeat: Enabled
 - Number of Records: 100
 - History Return Max: 100
