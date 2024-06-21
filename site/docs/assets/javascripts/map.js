@@ -512,13 +512,9 @@ async function updateMapWithNodes() {
 
     // create new markers and marker data
     nodeData.forEach((node) => {
-      if (userId) {
-        var user = usernames.find(u => u.user_id === node.user_id);
-      }
-      let username;
-      if (user) {
-        username = user.global_name;
-      } else {
+      var user = usernames.find(u => u.user_id === node.user_id);
+      var username = user.global_name;
+      if (!user) {
         username = 'hidden';
       }
       const {
@@ -780,6 +776,8 @@ async function editNode() {
     const frequency = parseInt(document.getElementById("editFrequency").value);
     const mqtt = document.getElementById("editMQTT").value;
 
+    const privacy = document.getElementById("editUsernamePrivacy").checked;
+
     // submit new data to api
     const putData = {
       uuid,
@@ -792,9 +790,11 @@ async function editNode() {
       frequency,
       mqtt,
     };
+
+    await apiPutUserPrivacy(privacy);
     const node = await apiPutNode(putData);
     if (!node) {
-      throw new Error("Node data is missing");
+      throw new Error("Node data is missing or duplicate entry");
     }
 
     // update popup with new data
@@ -809,6 +809,7 @@ async function editNode() {
       elevation_unit: elevation_unit,
       frequency: frequency,
       mqtt: mqtt,
+      createdAt: new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium' }),
     };
 
     const index = nodeData.findIndex((item) => item.uuid === uuid);
