@@ -6,3 +6,4 @@
 6. fix gallery
 7. social cards.
 8. add imbeded iframes into resource page
+9. implement log in and log out buttons to the right of the search bar
