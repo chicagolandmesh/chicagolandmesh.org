@@ -49,6 +49,7 @@ Enabling MQTT will allow you to connect to us and appear on the [Global MeshMap]
     - This is set to send messages recieved to MQTT but prevents your node from getting messages from MQTT. Read more about this in the [optional settings](#optional-settings-below).
 13. Enable Map Reporting, set Map Publish Interval to 30 (seconds), and set your desired Position Precision
 
+    <br>
     ![MQTT Settings Example](../assets/images/mqtt3.png)
 
 ### Optional Settings
