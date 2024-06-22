@@ -1,6 +1,6 @@
 # ChicagolandMesh.org
 
-ChicagolandMesh.org is the official website for the Meshtastic Chicagoland group utilizing the Meshtastic open-source mesh networking platform.
+ChicagolandMesh.org is the official website for the Chicagoland Mesh utilizing the Meshtastic open-source mesh networking platform.
 
 ## About Meshtastic and Meshtastic Chicagoland Group
 
