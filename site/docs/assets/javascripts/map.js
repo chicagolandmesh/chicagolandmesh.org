@@ -514,7 +514,9 @@ async function updateMapWithNodes() {
     nodeData.forEach((node) => {
       if (usernames) {
         var user = usernames.find(u => u.user_id === node.user_id);
-        var username = user.global_name;
+        if (user) {
+          var username = user.global_name;
+        }
       }
       if (!user) {
         username = 'hidden';
