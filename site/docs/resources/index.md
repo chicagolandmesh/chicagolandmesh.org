@@ -11,7 +11,7 @@ tags:
 
 ![Hamspiced LILYGO T-Deck](/assets/images/t-deck.png){ align=right }
 
-- [Chicagoland Meshtastic Github](https://github.com/chicagolandmesh/chicagolandmesh.org)
+- [Chicagoland Mesh Github](https://github.com/chicagolandmesh/chicagolandmesh.org)
 - [Official Meshtastic Website](https://meshtastic.org/)
 - [MQTT MeshMap](https://meshmap.net/)
 - [Awesome Meshtastic Github](https://github.com/ShakataGaNai/awesome-meshtastic/)

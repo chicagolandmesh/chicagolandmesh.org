@@ -7,4 +7,4 @@ hide:
     - navigation
 ---
 
-Chicagoland Meshtastic
+Chicagoland Mesh
