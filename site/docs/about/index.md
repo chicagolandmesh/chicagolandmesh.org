@@ -28,7 +28,7 @@ We are a growing community of people working together to create an off-grid resi
 
 Meshtastic does not require you to have a HAM license and operates in unlicensed frequency meaning that it can be encrypted and your messages will remain secure from prying eyes.
 
-The purpose of Chicagoland Mesh is to expand coverage in our area and build out the network to make it more usable. We currently have a number of nodes located in in downtown Chicago and on top of other buildings out in the suburbs. We are always looking to expand our coverage and rely on ourselves and others who can get nodes in high up places to join us in building our off-grid communications network.
+The purpose of Chicagoland Mesh is to expand coverage in our area and build out the network to make it more usable. We currently have a number of nodes located in downtown Chicago and on top of other buildings out in the suburbs. We are always looking to expand our coverage and rely on ourselves and others who can get nodes in high up places to join us in building our off-grid communications network.
 
 <figure markdown="span">
   ![Community Upload](/assets/images/node.jpg){ width=500 }
