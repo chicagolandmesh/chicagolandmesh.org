@@ -24,14 +24,11 @@ nav:
   - Contact: contact/index.md
 
 plugins:
-  #- git-revision-date-localized:
-  #    enable_creation_date: true
-  #    fallback_to_build_date: true
   - tags:
       tags_file: tags.md
   - search
-  #- git-authors
   - glightbox
+  #- git-authors
   #- awesome-pages
   #- blog:
   #  - blog_dir: guides/builds
@@ -51,12 +48,11 @@ markdown_extensions:
         custom_icons:
           - overrides/.icons
 
-
 theme:
   name: 'material'
   custom_dir: 'overrides'
   logo: 'assets/images/logo-clear.svg'
-  favicon: 'https://chicagolandmesh.org/assets/img/logo-rounded.png'
+  favicon: 'assets/images/logo-clear.svg'
   features:
       - navigation.tabs
       - navigation.path
@@ -65,7 +61,7 @@ theme:
       - navigation.indexes
       - navigation.top
       - navigation.footer
-      #- toc.integrate
+      - toc.integrate
       - search.suggest
       - search.share
       - announce.dismiss
@@ -94,6 +90,8 @@ theme:
         icon: material/brightness-4
         name: Switch to auto
 
+extra_css:
+  - assets/stylesheets/extra.css
 
 extra:
   generator: false
@@ -123,6 +121,3 @@ extra:
   #        note: >- 
   #          Thanks for your feedback! Help us improve this page by
   #          using our <a href="..." target="_blank" rel="noopener">feedback form</a>.
-
-extra_css:
-  - assets/stylesheets/extra.css

@@ -46,8 +46,3 @@ The purpose of Chicagoland Mesh is to expand coverage in our area and build out 
 3. [Flash](https://flasher.meshtastic.org) your hardware with the Meshtastic firmware
 4. Download the [iOS](https://apps.apple.com/us/app/meshtastic/id1586432531) or [Android](https://play.google.com/store/apps/details?id=com.geeksville.mesh) app & connect to your node
 5. Read the [getting started](https://chicagolandmesh.org/guides/getting-started) page for more information
-
-<figure markdown="span">
-  ![Meshtastic Logos](../assets/images/meshtastic-twin.png)
-  <figcaption></figcaption>
-</figure>
