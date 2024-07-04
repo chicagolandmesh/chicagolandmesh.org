@@ -20,7 +20,7 @@ tags:
      - Set your device name.
      - Choose the correct region (in this case, choose United States for 915MHz).
      - Set other preferences such as GPS settings, screen brightness, etc.
-     - View our [recommened settings](#other-recommended-settings).
+     - View our [recommended settings](#other-recommended-settings).
 
 ### Networking Configuration
 More details can be found at [Meshtastic.org](https://meshtastic.org/docs/configuration/radio/device/).
