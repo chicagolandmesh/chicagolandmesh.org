@@ -28,7 +28,7 @@ tags:
 - Other roles from the linked Meshtastic document can be used at your discretion.
 
 ### Other Recommended Settings
-- If you want, add ChicagolandMesh.org to your node name, For example: (NODENAME) ChicagolandMesh.org, to help grow our community.
+- If you want, add ChicagolandMesh.org or ChiMesh.org to your node name, For example: (NODENAME) ChiMesh.org, to help grow our community.
 - Broadcast Node Info Interval: 10800 seconds (3 hours)
 - GPS for Mobile Nodes: Enabled
 - GPS for Fixed Nodes: Fixed Location
