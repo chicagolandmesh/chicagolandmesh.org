@@ -18,7 +18,7 @@ nav:
       - guides/builds/index.md
   - News: news/index.md
   - Map: map/index.md
-  - MeshView: https://meshview.chicagolandmesh.org
+  #- MeshView: https://meshview.chicagolandmesh.org
   #- Gallery: gallery/index.md
   - Resources: resources/index.md
   - Contact: contact/index.md
