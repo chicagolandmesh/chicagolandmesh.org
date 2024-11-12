@@ -15,7 +15,7 @@ MQTT stands for Message Queuing Telemetry Transport. It is a protocol that has b
 </figure>
 
 ## MQTT Settings
-Enabling MQTT will allow you to appear on the [Global MeshMap](https://meshmap.net) and [Chicagoland(MeshView)](https://meshview.chicagolandmesh.org).
+Enabling MQTT will allow you to appear on the [Global MeshMap](https://meshmap.net).
 
 1. Go to your MQTT settings and select enable.
 2. Use `mqtt.meshtastic.org` for MQTT server address
@@ -56,4 +56,4 @@ Enabling MQTT will allow you to appear on the [Global MeshMap](https://meshmap.n
 
 1. If you are using a mobile device, Make sure to enable Connect to mesh
 2. The uplink and downlink settings can be changed to your preference if you want to contact others through MQTT. These instructions were created for the standard set by us
-3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [MeshMap](https://meshmap.net) and [Chicagoland(MeshView)](https://meshview.chicagolandmesh.org) 
+3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [MeshMap](https://meshmap.net).
