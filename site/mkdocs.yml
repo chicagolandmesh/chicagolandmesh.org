@@ -55,7 +55,7 @@ theme:
   logo: 'assets/images/logo-clear.svg'
   favicon: 'assets/images/logo-clear.svg'
   features:
-    - navigation.instant
+    #- navigation.instant
     - navigation.tabs
     - navigation.path
     - navigation.section
