@@ -1,5 +1,5 @@
 ---
-title: Chicagoland Mesh
+title:
 template: home.html
 hide:
     - footer
