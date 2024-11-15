@@ -5,7 +5,7 @@ site_url: https://chicagolandmesh.org
 #repo_url: https://github.com/chicagolandmesh/chicagolandmesh.org
 copyright: 'Copyright &copy; 2024 Chicagoland Mesh <u><a href="https://github.com/chicagolandmesh/chicagolandmesh.org">Contributors</a></u><br><p style="margin:0">Chicagoland Mesh is not affilated with <u><a href="https://meshtastic.org" target="_blank" rel="noreferrer noopener">Meshtastic®</a></u>, nor endorsed by <u><a href="https://meshtastic.org/docs/legal/licensing-and-trademark" target="_blank" rel="noreferrer noopener">Meshtastic LLC</a></u>.</p>'
 nav:
-  - About: about/index.md
+  - About: about.md
   - Guides:
     - guides/index.md
     - Getting Started:
@@ -16,12 +16,13 @@ nav:
     - Local Channel: guides/local-channel.md
     - Builds: 
       - guides/builds/index.md
-  - News: news/index.md
-  - Map: map/index.md
-  #- MeshView: https://meshview.chicagolandmesh.org
+  - News: news.md
+  - Map: map.md
+  - MeshView: meshview.md
+  #https://meshview.chicagolandmesh.org
   #- Gallery: gallery/index.md
-  - Resources: resources/index.md
-  - Contact: contact/index.md
+  - Resources: resources.md
+  - Contact: contact.md
 
 plugins:
   - tags:
@@ -54,17 +55,18 @@ theme:
   logo: 'assets/images/logo-clear.svg'
   favicon: 'assets/images/logo-clear.svg'
   features:
-      - navigation.tabs
-      - navigation.path
-      - navigation.section
-      - navigation.path
-      - navigation.indexes
-      - navigation.top
-      - navigation.footer
-      - toc.integrate
-      - search.suggest
-      - search.share
-      - announce.dismiss
+    - navigation.instant
+    - navigation.tabs
+    - navigation.path
+    - navigation.section
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.integrate
+    - search.suggest
+    - search.share
+    - announce.dismiss
   icon:
     repo: 'fontawesome/brands/github'
   palette:

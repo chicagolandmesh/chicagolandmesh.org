@@ -4,7 +4,7 @@ hide:
   - navigation
   - toc
 tags:
-  - Resources
+  - Info
 ---
 
 # Resources to check out
