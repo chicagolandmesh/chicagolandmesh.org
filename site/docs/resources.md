@@ -28,3 +28,4 @@ tags:
 - [Meshtastic Android Beta](https://play.google.com/apps/testing/com.geeksville.mesh)
 - [MeshView](https://github.com/armooo/meshview)
 - [meshtastic-mqtt-discord-bridge](https://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
+- [MeshSense](https://affirmatech.com/meshsense)
