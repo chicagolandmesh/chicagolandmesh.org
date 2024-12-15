@@ -1,17 +1,19 @@
 {% extends "main.html" %}
 
 {% block styles %}
-    {{ super() }}
-    <style>
-        .md-sidebar {
-            display: none;
-        }
-    </style>
+  {{ super() }}
+  <style>
+  .md-sidebar {
+     display: none;
+   }
+  .md-content {
+    text-align: center;
+  }
+  </style>
 {% endblock %}
 
 {% block content %}
-    <h1 id="404-page-not-found" style="text-align: center">404 Not Found</h1>
-    <p style="text-align: center"></p>
-    <p style="text-align: center">Try navigating using the heading tabs, or just search 👆</p>
+  <h1>404 Not Found</h1>
+  <p>Try navigating using the heading tabs, or just search 👆</p>
 {% endblock %}
 
