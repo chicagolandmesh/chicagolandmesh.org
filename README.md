@@ -13,7 +13,7 @@ We welcome contributions from the community! To contribute to the website:
 - Fork the repository and clone it locally.
 - Create a new branch for your feature or fix.
 - Ensure your changes do not damage or deface the website.
-- Submitted build guides MUST be in Markdown format and placed in the `/guides/builds` directory.
+- Submitted contributions must be in Markdown format located in the `docs` directory.
 - Commit your changes and push them to your fork.
 - Submit a pull request to the `main` branch of our repository.
 
@@ -21,9 +21,9 @@ We welcome contributions from the community! To contribute to the website:
 
 We encourage users to submit their Meshtastic build guides as Markdown files. These guides should include detailed steps, configurations, and any necessary resources. To submit your build guide:
 
-- Create a new Markdown file in the `/guides/builds` directory.
+- Create a new Markdown file in the `docs/guides/builds` directory.
 - Format your guide using Markdown syntax.
-- Include images or diagrams as needed in the same directory.
+- Include images or diagrams as needed into the `docs/assets/images` directory.
 - Ensure your guide is clear, concise, and informative.
 - Submit a pull request to have your guide featured on our website.
 
