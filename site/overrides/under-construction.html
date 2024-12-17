@@ -1,6 +1,22 @@
 {% extends "main.html" %}
 
+{% block styles %}
+  {{ super() }}
+
+  <style>
+  .md-content h1 {
+    text-align: center;
+  }
+
+  .md-content img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  </style>
+{% endblock styles %}
+
 {% block content %}
-<h1 style="text-align:center;">🚧 Under Contruction 🏗️🚧 </h1>
-<img style="display:block;margin-left:auto;margin-right:auto" src="/assets/images/cry.png">
+  <h1>🚧 Under Construction 🏗️🚧 </h1>
+  <img src="/assets/images/cry.png">
 {% endblock %}
