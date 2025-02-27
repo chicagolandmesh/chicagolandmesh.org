@@ -1,5 +1,9 @@
 {% extends "main.html" %}
 
+{% block htmltitle %}
+  <title>Chicagoland Mesh</title>
+{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" href="assets/stylesheets/image-gallery.css">
 <!--<style>
@@ -27,6 +31,10 @@
   @media only screen {
   .md-main__inner {
     max-width: 100%;
+  }
+
+  .md-ellipsis {
+    font-weight: bold;
   }
 }
 </style>
@@ -85,8 +93,7 @@
         margin-bottom: 20px;
         max-width: 20em;
         ">
-        Want to participate? Have ideas? Need help? Join the over 200+ members and counting!
-        <!-- make the number dynamic -->
+        Want to participate? Have ideas? Need help? Join the over <span id="count">600</span> members and counting!
       </p>
     </div>
     <iframe 

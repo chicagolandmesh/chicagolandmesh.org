@@ -1,5 +1,5 @@
 ---
-title: Map
+title: Self-Reported Map
 template: map.html
 hide:
     - navigation
@@ -7,4 +7,4 @@ hide:
     - footer
 ---
 
-Map
+Self-Reported Map

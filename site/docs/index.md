@@ -6,5 +6,3 @@ hide:
     - toc
     - navigation
 ---
-
-Chicagoland Mesh
