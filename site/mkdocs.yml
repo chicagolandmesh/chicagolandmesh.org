@@ -1,6 +1,6 @@
 site_name: Chicagoland Mesh
 site_description: >-
-  Join the local community of Meshtastic enthusiasts in the Chicagoland area, and collaborate in building a sustainable and interconnected network of decentralized nodes that have the capability of sending encrypted text messages and telemetry.
+  Join the local community of Meshtastic enthusiasts in the Chicagoland area, and collaborate in building a sustainable and interconnected network of decentralized nodes that have the capability of sending encrypted text messages, telemetry, and location.
 site_url: https://chicagolandmesh.org
 #repo_url: https://github.com/chicagolandmesh/chicagolandmesh.org
 copyright: 'Copyright &copy; 2025 Chicagoland Mesh <u><a href="https://github.com/chicagolandmesh/chicagolandmesh.org">Contributors</a></u><br><p style="margin:0">Chicagoland Mesh is not affilated with <u><a href="https://meshtastic.org" target="_blank" rel="noreferrer noopener">Meshtastic®</a></u>, nor endorsed by <u><a href="https://meshtastic.org/docs/legal/licensing-and-trademark" target="_blank" rel="noreferrer noopener">Meshtastic LLC</a></u>.</p>'
