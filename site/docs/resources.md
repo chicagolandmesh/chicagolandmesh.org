@@ -31,9 +31,17 @@ tags:
 
     ![Link preivew](https://image.thum.io/get/width/700/http://github.com/TheCommsChannel/TC2-BBS-mesh)
 
+-   [meshing-around BBS bot](https://github.com/SpudGunMan/meshing-around)
+
+-   ![Link preview](https://image.thum.io/get/width/700/http://github.com/SpudGunMan/meshing-around)
+
 -   [Meshtastic Antenna Reports](https://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
 
     ![Link preivew](https://image.thum.io/get/width/700/http://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
+
+-   [Meshtastic SAME EAS Alerter](https://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
+
+-   ![Link preview](https://image.thum.io/get/width/700/http://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
 
 </div>
 
@@ -56,9 +64,9 @@ tags:
 
     ![Link preivew](https://image.thum.io/get/width/700/http://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
 
--   [MeshView](https://github.com/armooo/meshview)
+-   [MeshView](https://github.com/pablorevilla-meshtastic/meshview)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/armooo/meshview)
+    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/pablorevilla-meshtastic/meshview)
 
 </div>
 
@@ -70,14 +78,6 @@ tags:
 -   [MeshSense](https://affirmatech.com/meshsense)
 
     ![Link preivew](https://image.thum.io/get/width/700/http://affirmatech.com/meshsense)
-
--   [Meshtastic Android App Beta](https://play.google.com/apps/testing/com.geeksville.mesh)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://play.google.com/apps/testing/com.geeksville.mesh)
-
--   [Mňoukátko IOS Client](https://apps.apple.com/app/id6535862998)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://apps.apple.com/app/id6535862998)
 
 -   [Liam Cottle's MeshTXT](https://meshtxt.liamcottle.net/)
 
