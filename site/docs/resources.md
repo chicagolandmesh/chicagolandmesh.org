@@ -33,7 +33,7 @@ tags:
 
 -   [meshing-around BBS bot](https://github.com/SpudGunMan/meshing-around)
 
--   ![Link preview](https://image.thum.io/get/width/700/http://github.com/SpudGunMan/meshing-around)
+    ![Link preview](https://image.thum.io/get/width/700/http://github.com/SpudGunMan/meshing-around)
 
 -   [Meshtastic Antenna Reports](https://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
 
@@ -41,7 +41,7 @@ tags:
 
 -   [Meshtastic SAME EAS Alerter](https://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
 
--   ![Link preview](https://image.thum.io/get/width/700/http://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
+    ![Link preview](https://image.thum.io/get/width/700/http://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
 
 </div>
 
