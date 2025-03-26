@@ -48,3 +48,8 @@
 .md-nav__title {
     color: red !important;
 }
+
+.md-tabs__link {
+    color: var(--md-default-fg-color--light);
+}
+
