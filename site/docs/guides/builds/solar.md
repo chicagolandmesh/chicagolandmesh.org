@@ -31,7 +31,7 @@ Connection: RP-SMA male N-Female Bulkhead (nut and washer) 4135
 - [RAKwireless Unify Pole Mounting Vertical Kit (Type A) 910247]
   - $7.97
 
-Total Cost: $158.82 + tax (free shipping from rokland)
+Total Cost: $158.82 + tax (free shipping from Rokland)
 
 ### Building Your Node
 
@@ -45,26 +45,26 @@ Total Cost: $158.82 + tax (free shipping from rokland)
 
 #### Preparation
 
-Open all packages and ensure all components work. The Wiseblock starter kit comes pre-loaded with Meshtastic firmware, but now is a good time to update it.
+Open all packages and ensure all components work. The Wiseblock starter kit comes pre-loaded with Meshtastic firmware but now is a good time to update it.
 
-- IMPORTANT - Check the polarity of the batter plug. The RED cable from the battery should corrospond with the terminal next to the '+' symbol printed on the Wiseblock PCB.  
+- IMPORTANT - Check the polarity of the battery connector. The RED cable from the battery should correspond with the terminal next to the '+' symbol printed on the Wiseblock PCB.  
 If you cross the polarity YOU WILL DAMAGE YOUR BOARD.
 
 - IMPORTANT - Do not plug in any power to the device without first attaching a LoRa Antenna. ALWAYS have a LoRa antenna connected when the device is powered on (Unless you have disabled TX within the Meshtastic Firmware).  
 If you power on the board without a LoRa antenna connected YOU WILL DAMAGE YOUR BOARD.
 
 Connect the included BLE and LoRa PCB antennas to the node, THEN connect USB to the node from your computer. You can update the firmware using the [Meshtastic Flasher](https://flasher.meshtastic.org/).  
-Configure your meshtastic settings here if you'd like.
+Configure your Meshtastic settings here if you'd like.
 
- At this stage, I'd reccomend disabling TX in the Meshtastic LoRa settings until the node is fully installed. Since we'll be enclosing this equipment, it makes it easier to have the solar panel and battery connected without worrying about keeping a LoRA antenna attached.  
+ At this stage, I'd recommend disabling TX in the Meshtastic LoRa settings until the node is fully installed. Since we will be enclosing this equipment, it makes it easier to have the solar panel and battery connected without worrying about keeping a LoRa antenna attached.  
  [Instructions to disable TX available here](https://meshtastic.org/docs/configuration/radio/lora/#transmit-enabled).
 
 #### Let's Build!
 
- 1. On the black plastic mounting plate use scissors or side cutters to remove the tabs marked for the WiseBlock Baseboard. Insert into the enclosure and using the included screws, fasten the Wiseblock baseboard to the mounting plate. Be sure the Wiseblock is mounted near the LoRa Antenna jumper from the enclosure.
+ 1. On the black plastic mounting plate use scissors or side cutters to remove the tabs marked for the Wiseblock Baseboard. Insert into the enclosure and using the included screws, fasten the Wiseblock baseboard to the mounting plate. Be sure the Wiseblock is mounted near the LoRa Antenna jumper from the enclosure.
  1. Using the small zip ties, secure the battery to the other half of the mounting plate in the enclosure. Be sure not to tighten so much that it damages the battery.
  1. Connect the BLE PCB antenna to the BLE connector on the Wiseblock module, feel free to use the adhesive backing to secure to the side of the enclosure
- 1. Connect the LoRa Antenna jumper from the enclosure to the LoRA connector on the Wiseblock Module.
+ 1. Connect the LoRa Antenna jumper from the enclosure to the LoRa connector on the Wiseblock Module.
  1. Connect the battery plug to the BATT connector on the Wiseblock.  
  DOUBLE-CHECK POLARITY MATCHES WHAT IS PRINTED ON THE BOARD.
  1. At this stage, I spread a bit of dielectric grease around the rubber gasket, but this is an optional step.
