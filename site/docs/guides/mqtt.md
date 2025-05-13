@@ -56,4 +56,4 @@ Enabling MQTT will allow you to appear on [Liam Cottle MeshMap](https://meshtast
 
 1. If you are using a mobile device, Make sure to enable Connect to mesh
 2. The uplink and downlink settings can be changed to your preference if you want to contact others through MQTT. These instructions were created for the standard set by us
-3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.org) and [Chicagoland(MeshView)](https://chicagolandmesh.org/meshview)) 
+3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.org) and [Chicagoland(MeshView)](https://chicagolandmesh.org/meshview) 
