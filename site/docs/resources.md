@@ -62,8 +62,6 @@ tags:
 
     ![Link preivew](https://image.thum.io/get/width/700/http://meshtastic.liamcottle.net/)
 
-    ##### *requires custom MQTT server configuration*
-
 -   [meshtastic-mqtt-discord-bridge](https://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
 
     ![Link preivew](https://image.thum.io/get/width/700/http://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
