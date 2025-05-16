@@ -4,7 +4,7 @@ tags:
   - Info
 ---
 # Local Encrypted Channel Configuration
-Adding the following configuration to your node allows it to communicate encrypted messages over our local MQTT channel.
+Adding the following configuration to your node allows it to communicate encrypted messages over our local channel.
 
 1. Go to Channel 2
     - Navigate to the settings or configuration section where channel settings are managed.
