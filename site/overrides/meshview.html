@@ -1,0 +1,217 @@
+{% extends "main.html" %} {% block content %}
+<style>
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        /* make iframe invisible initially */
+        opacity: 0;
+        /* smooth transition when iframe loads */
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    /* iframe animations and notifications */
+    .loading-container {
+        align-items: center;
+        position: fixed;
+        top: 40%;
+        display: flex;
+        left: 50%;
+        gap: 100px;
+        transform: translate(-50%, -50%);
+        justify-content: center;
+        /* z-index: 1000; */
+        flex-direction: column;
+    }
+    .loading-spinner {
+        border: 4px solid darkgrey;
+        border-top: 4px solid #f66;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .loading-notification {
+        top: 20px;
+        background-color: #ff4444;
+        background-color: #ff4444;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+
+    /* make content full width */
+    .md-main {
+        position: relative;
+    }
+    .md-main__inner.md-grid {
+        margin-top: 0;
+        margin: 0;
+        position: absolute;
+        max-width: 100%;
+        width: 100%;
+    }
+    .md-content {
+        height: 100%;
+        /* margin-right: 242px; */
+    }
+    .md-content__inner {
+        margin: 0;
+        padding-top: 0;
+        height: 100%;
+    }
+    .md-content__inner:before {
+        display: none;
+    }
+    /* fix margining issues with sidebar after making content full width */
+    .md-sidebar__inner {
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 9rem;
+    }
+
+    @media only screen and (min-width: 1220px) {
+        .md-content {
+            margin-right: 242px;
+        }
+    }
+</style>
+
+<iframe
+    id="meshview"
+    onload="this"
+    src="https://meshview.chicagolandmesh.org/{{ page.url[9:-1] }}"
+></iframe>
+
+<div class="loading-container">
+    <div class="loading-spinner"></div>
+    <div class="loading-notification">MeshView backend may be down...</div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const iframe = document.querySelector("iframe");
+    const container = document.querySelector(".loading-container");
+    const notification = document.querySelector(".loading-notification");
+    const spinner = document.querySelector(".loading-spinner");
+
+    var timeoutId = setTimeout(() => {
+      notification.style.opacity = 1;
+    }, 3000);
+
+    iframe.addEventListener("load", () => {
+      // reset spinner on iframe load
+      clearTimeout(timeoutId);
+      notification.style.opacity = 0;
+      spinner.style.opacity = 0;
+      container.style.display = "none";
+      iframe.style.opacity = 1;
+
+      // send event to iframe on theme change
+      updateTheme(iframe);
+      new MutationObserver(() => updateTheme(iframe)).observe(document.body, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+    });
+
+    // set spinner on iframe change
+    window.addEventListener("message", function (e) {
+      if (e.data === "iframeNavigationStart") {
+        document.querySelector(".loading-container").style.display = "flex";
+        spinner.style.opacity = 1;
+        iframe.style.opacity = 0.5;
+
+        timeoutId = setTimeout(() => {
+          notification.style.opacity = 1;
+        }, 3000);
+      }
+    });
+
+    // add icon to extenral link and set to open in new tab
+    const link = document.querySelector('a[href="https://meshview.chicagolandmesh.org"]');
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.innerHTML = `<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" />`;
+    link.appendChild(svg);
+    link.setAttribute('target', '_blank');
+  });
+
+  function updateTheme(iframe) {
+    if (document.body.getAttribute('data-md-color-scheme') == 'chicago-light') {
+      iframe.contentWindow.postMessage('updateThemeLight', '*');
+    } else {
+      iframe.contentWindow.postMessage('updateThemeDark', '*');
+    }
+  }
+</script>
+
+<!--
+<head>
+	<script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/htmx-ext-sse@2.2.2/sse.js"></script>
+	<script>
+		function removeLastRow(count = 10) {
+		    const tbody = document.getElementById('messages');
+		    if (tbody.children.length > count) {
+			tbody.removeChild(tbody.lastElementChild);
+		    }
+		}
+	</script>
+	<style>
+		table {
+		    border-collapse: collapse;
+		    width: 100%;
+		}
+
+		td, th {
+		    border: 1px solid #ddd;
+		    padding: 10px;
+		    text-align: left;
+		    cursor: default;
+		}
+
+		.node-icon {
+		    width: 32px;
+		    float: left;
+		}
+
+		.node-name {
+		    margin: 0;
+		    margin-top: 7px;
+		    margin-left: 42px;
+		}
+	</style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Gateway</th>
+                <th style="width:65vw">Message</th>
+                <th style="width:100px">Time</th>
+            </tr>
+        </thead>
+	<div>
+		<label>Count</label>
+		<select name="count" hx-get="/api/rows" hx-swap="innerHTML" hx-target="#messages">
+			<option value="10">10</option>
+			<option value="100">100</option>
+		</select>
+	</div>
+        <tbody id="messages" hx-swap="afterbegin" hx-get="/api/rows?count=10" hx-trigger="load" hx-ext="sse" sse-connect="/events" sse-swap="message" hx-on::after-swap='removeLastRow()'>
+    </table>
+</body>
+</html>
+-->
+{% endblock %}
