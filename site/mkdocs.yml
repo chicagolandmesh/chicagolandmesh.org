@@ -18,7 +18,15 @@ nav:
       - guides/builds/index.md
   - News: news.md
   - Map: map.md
-  - MeshView: meshview.md
+  - MeshView:
+    - meshview/index.md
+    - Nodes: meshview/nodelist.md
+    - Conversations: meshview/chat.md
+    - See everything: meshview/firehose.md
+    - Graph: meshview/nodegraph.md
+    - Stats: meshview/stats.md
+    - Top Traffic: meshview/top.md
+    - View Externally: https://meshview.chicagolandmesh.org
   #https://meshview.chicagolandmesh.org
   #- Gallery: gallery/index.md
   - Resources: resources.md
@@ -34,6 +42,7 @@ plugins:
   #- blog:
   #  - blog_dir: guides/builds
   #  - post_dir:
+  - macros
 
 markdown_extensions:
   - md_in_html

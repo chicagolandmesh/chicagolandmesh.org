@@ -4,3 +4,4 @@ FROM squidfunk/mkdocs-material
 #RUN pip install mkdocs-git-authors-plugin
 RUN pip install mkdocs-glightbox
 RUN pip install mkdocs-awesome-pages-plugin
+RUN pip install mkdocs-macros-plugin
