@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Latest news and updates from the Chicagoland Mesh community.">
+    <title>News - Chicagoland Mesh</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo-clear.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Theme Toggle Script (must be in head for no flash) -->
+    <script>
+        (() => {
+            'use strict'
+            const getStoredTheme = () => localStorage.getItem('theme')
+            const setStoredTheme = theme => localStorage.setItem('theme', theme)
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+            setTheme(getPreferredTheme())
+        })()
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/logo-clear.svg" alt="Chicagoland Mesh" width="32" height="32" class="me-2">
+                <span class="fw-bold">Chicagoland Mesh</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Guides
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="guides.html">Overview</a></li>
+                            <li><a class="dropdown-item" href="getting-started.html">Getting Started</a></li>
+                            <li><a class="dropdown-item" href="mqtt.html">Setup MQTT</a></li>
+                            <li><a class="dropdown-item" href="local-channel.html">Local Channel</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map.html">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="meshview.html">MeshView</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- Theme Toggle -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="bd-theme">
+                        <i class="bi bi-circle-half"></i>
+                        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="light">
+                                <i class="bi bi-sun-fill me-2"></i>
+                                Light
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="dark">
+                                <i class="bi bi-moon-stars-fill me-2"></i>
+                                Dark
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="auto">
+                                <i class="bi bi-circle-half me-2"></i>
+                                Auto
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="display-4 fw-bold mb-4">News & Updates</h1>
+                
+                <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <div>
+                        Stay updated with the latest developments in the Chicagoland Mesh community. Join our <a href="https://chicagolandmesh.org/discord" target="_blank" rel="noopener" class="alert-link">Discord server</a> for real-time updates!
+                    </div>
+                </div>
+
+                <!-- News Articles -->
+                <article class="card mb-4">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Welcome to the New Chicagoland Mesh Website!</h5>
+                            <small class="text-muted">January 2025</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">We're excited to launch our redesigned website built with Bootstrap 5! The new site features improved accessibility, mobile responsiveness, and a clean design that works great in both light and dark modes.</p>
+                        <p class="card-text">Key improvements include:</p>
+                        <ul>
+                            <li>Modern, responsive design that works on all devices</li>
+                            <li>Automatic light/dark theme switching</li>
+                            <li>Improved navigation and user experience</li>
+                            <li>Better accessibility features</li>
+                            <li>Faster loading times with static hosting</li>
+                        </ul>
+                        <p class="card-text">The website is now hosted on GitHub Pages and built with static HTML, CSS, and JavaScript - no build process required!</p>
+                    </div>
+                </article>
+
+                <article class="card mb-4">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Community Growth Milestone</h5>
+                            <small class="text-muted">December 2024</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Our Discord community has reached over 600 members! This incredible growth shows the strong interest in mesh networking throughout the Chicagoland area.</p>
+                        <p class="card-text">We've seen increased activity in:</p>
+                        <ul>
+                            <li>Node deployments across the metro area</li>
+                            <li>Technical discussions and troubleshooting</li>
+                            <li>Hardware recommendations and reviews</li>
+                            <li>Range testing and optimization</li>
+                        </ul>
+                        <a href="https://chicagolandmesh.org/discord" class="btn btn-primary" target="_blank" rel="noopener">
+                            <i class="bi bi-discord me-2"></i>Join the Community
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card mb-4">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Network Expansion Updates</h5>
+                            <small class="text-muted">November 2024</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">The Chicagoland mesh network continues to expand with new nodes being deployed throughout the region. We now have coverage in downtown Chicago and several suburban areas.</p>
+                        <p class="card-text">Recent additions include:</p>
+                        <ul>
+                            <li>High-elevation nodes in downtown Chicago</li>
+                            <li>Suburban repeater stations</li>
+                            <li>Mobile nodes for emergency communications</li>
+                            <li>Solar-powered remote installations</li>
+                        </ul>
+                        <p class="card-text">Check out our <a href="map.html">network map</a> to see current coverage areas and plan your node placement.</p>
+                    </div>
+                </article>
+
+                <!-- Call to Action -->
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-green">Want to Contribute News?</h5>
+                        <p class="card-text">Have updates about your node deployment, range tests, or community events? Share them with us!</p>
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="https://chicagolandmesh.org/discord" class="btn btn-primary" target="_blank" rel="noopener">
+                                <i class="bi bi-discord me-2"></i>Share on Discord
+                            </a>
+                            <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="btn btn-outline-primary" target="_blank" rel="noopener">
+                                <i class="bi bi-github me-2"></i>Submit via GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2">&copy; 2025 Chicagoland Mesh <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="text-decoration-none text-light">Contributors</a></p>
+                    <p class="small mb-0">Chicagoland Mesh is not affiliated with <a href="https://meshtastic.org" target="_blank" rel="noreferrer noopener" class="text-decoration-none text-light">Meshtastic®</a>, nor endorsed by <a href="https://meshtastic.org/docs/legal/licensing-and-trademark" target="_blank" rel="noreferrer noopener" class="text-decoration-none text-light">Meshtastic LLC</a>.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end gap-3">
+                        <a href="https://meshtastic.org" class="text-light" title="Check out the official Meshtastic site!">
+                            <i class="bi bi-globe fs-4"></i>
+                        </a>
+                        <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="text-light" title="Contribute to the github!">
+                            <i class="bi bi-github fs-4"></i>
+                        </a>
+                        <a href="https://chicagolandmesh.org/discord" class="text-light" title="Join the discord!">
+                            <i class="bi bi-discord fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        (() => {
+            'use strict'
+
+            const getStoredTheme = () => localStorage.getItem('theme')
+            const setStoredTheme = theme => localStorage.setItem('theme', theme)
+
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitcher = document.querySelector('#bd-theme')
+
+                if (!themeSwitcher) {
+                    return
+                }
+
+                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active')
+                    element.setAttribute('aria-pressed', 'false')
+                })
+
+                btnToActive.classList.add('active')
+                btnToActive.setAttribute('aria-pressed', 'true')
+
+                if (focus) {
+                    themeSwitcher.focus()
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme())
+                }
+            })
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme())
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            setStoredTheme(theme)
+                            setTheme(theme)
+                            showActiveTheme(theme, true)
+                        })
+                    })
+            })
+        })()
+    </script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Helpful resources for Meshtastic and mesh networking in the Chicagoland area.">
+    <title>Resources - Chicagoland Mesh</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo-clear.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Theme Toggle Script (must be in head for no flash) -->
+    <script>
+        (() => {
+            'use strict'
+            const getStoredTheme = () => localStorage.getItem('theme')
+            const setStoredTheme = theme => localStorage.setItem('theme', theme)
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+            setTheme(getPreferredTheme())
+        })()
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/logo-clear.svg" alt="Chicagoland Mesh" width="32" height="32" class="me-2">
+                <span class="fw-bold">Chicagoland Mesh</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Guides
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="guides.html">Overview</a></li>
+                            <li><a class="dropdown-item" href="getting-started.html">Getting Started</a></li>
+                            <li><a class="dropdown-item" href="mqtt.html">Setup MQTT</a></li>
+                            <li><a class="dropdown-item" href="local-channel.html">Local Channel</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map.html">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="meshview.html">MeshView</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- Theme Toggle -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="bd-theme">
+                        <i class="bi bi-circle-half"></i>
+                        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="light">
+                                <i class="bi bi-sun-fill me-2"></i>
+                                Light
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="dark">
+                                <i class="bi bi-moon-stars-fill me-2"></i>
+                                Dark
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="auto">
+                                <i class="bi bi-circle-half me-2"></i>
+                                Auto
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="display-4 fw-bold mb-4">Resources</h1>
+                
+                <div class="row g-4">
+                    <!-- Official Resources -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0 text-green">
+                                    <i class="bi bi-globe me-2"></i>Official Meshtastic
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-house me-2"></i>Official Website
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-book me-2"></i>Documentation
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-download me-2"></i>Web Flasher
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://github.com/meshtastic" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-github me-2"></i>GitHub Repository
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0 text-green">
+                                    <i class="bi bi-cpu me-2"></i>Hardware
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs/hardware/devices" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-motherboard me-2"></i>Supported Devices
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs/hardware/antennas" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-broadcast me-2"></i>Antenna Guide
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs/hardware/enclosures" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-box me-2"></i>Enclosures
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Apps -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0 text-green">
+                                    <i class="bi bi-phone me-2"></i>Mobile Apps
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="https://apps.apple.com/us/app/meshtastic/id1586432531" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-apple me-2"></i>iOS App Store
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-google-play me-2"></i>Google Play Store
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://github.com/meshtastic/Meshtastic-Android/releases" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-github me-2"></i>Android APK (GitHub)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0 text-green">
+                                    <i class="bi bi-people me-2"></i>Community
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="https://chicagolandmesh.org/discord" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-discord me-2"></i>Chicagoland Discord
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://discord.gg/ktMAKGBnBs" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-discord me-2"></i>Official Meshtastic Discord
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://reddit.com/r/meshtastic" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-reddit me-2"></i>Reddit Community
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0 text-green">
+                                    <i class="bi bi-mortarboard me-2"></i>Learning
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="getting-started.html" class="text-decoration-none">
+                                            <i class="bi bi-play-circle me-2"></i>Getting Started Guide
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs/overview" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-info-circle me-2"></i>How Meshtastic Works
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs/overview/range-tests" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-broadcast-pin me-2"></i>Range Testing
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0 text-green">
+                                    <i class="bi bi-tools me-2"></i>Tools & Utilities
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-download me-2"></i>Firmware Flasher
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://client.meshtastic.org" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-globe me-2"></i>Web Client
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="https://meshtastic.org/docs/software/python-cli" target="_blank" rel="noopener" class="text-decoration-none">
+                                            <i class="bi bi-terminal me-2"></i>Python CLI
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0 text-green">
+                            <i class="bi bi-lightning me-2"></i>Quick Start Links
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <a href="https://flasher.meshtastic.org" class="btn btn-outline-primary w-100" target="_blank" rel="noopener">
+                                    <i class="bi bi-download me-2"></i>Flash Firmware
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="https://chicagolandmesh.org/discord" class="btn btn-outline-primary w-100" target="_blank" rel="noopener">
+                                    <i class="bi bi-discord me-2"></i>Join Discord
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="getting-started.html" class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-play-circle me-2"></i>Get Started
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="https://meshtastic.org/docs" class="btn btn-outline-primary w-100" target="_blank" rel="noopener">
+                                    <i class="bi bi-book me-2"></i>Read Docs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2">&copy; 2025 Chicagoland Mesh <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="text-decoration-none text-light">Contributors</a></p>
+                    <p class="small mb-0">Chicagoland Mesh is not affiliated with <a href="https://meshtastic.org" target="_blank" rel="noreferrer noopener" class="text-decoration-none text-light">Meshtastic®</a>, nor endorsed by <a href="https://meshtastic.org/docs/legal/licensing-and-trademark" target="_blank" rel="noreferrer noopener" class="text-decoration-none text-light">Meshtastic LLC</a>.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end gap-3">
+                        <a href="https://meshtastic.org" class="text-light" title="Check out the official Meshtastic site!">
+                            <i class="bi bi-globe fs-4"></i>
+                        </a>
+                        <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="text-light" title="Contribute to the github!">
+                            <i class="bi bi-github fs-4"></i>
+                        </a>
+                        <a href="https://chicagolandmesh.org/discord" class="text-light" title="Join the discord!">
+                            <i class="bi bi-discord fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        (() => {
+            'use strict'
+
+            const getStoredTheme = () => localStorage.getItem('theme')
+            const setStoredTheme = theme => localStorage.setItem('theme', theme)
+
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitcher = document.querySelector('#bd-theme')
+
+                if (!themeSwitcher) {
+                    return
+                }
+
+                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active')
+                    element.setAttribute('aria-pressed', 'false')
+                })
+
+                btnToActive.classList.add('active')
+                btnToActive.setAttribute('aria-pressed', 'true')
+
+                if (focus) {
+                    themeSwitcher.focus()
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme())
+                }
+            })
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme())
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            setStoredTheme(theme)
+                            setTheme(theme)
+                            showActiveTheme(theme, true)
+                        })
+                    })
+            })
+        })()
+    </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Comprehensive guides for Meshtastic and mesh networking in the Chicagoland area.">
+    <title>Guides - Chicagoland Mesh</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo-clear.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Theme Toggle Script (must be in head for no flash) -->
+    <script>
+        (() => {
+            'use strict'
+            const getStoredTheme = () => localStorage.getItem('theme')
+            const setStoredTheme = theme => localStorage.setItem('theme', theme)
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+            setTheme(getPreferredTheme())
+        })()
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/logo-clear.svg" alt="Chicagoland Mesh" width="32" height="32" class="me-2">
+                <span class="fw-bold">Chicagoland Mesh</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Guides
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="guides.html">Overview</a></li>
+                            <li><a class="dropdown-item" href="getting-started.html">Getting Started</a></li>
+                            <li><a class="dropdown-item" href="mqtt.html">Setup MQTT</a></li>
+                            <li><a class="dropdown-item" href="local-channel.html">Local Channel</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map.html">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="meshview.html">MeshView</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- Theme Toggle -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="bd-theme">
+                        <i class="bi bi-circle-half"></i>
+                        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="light">
+                                <i class="bi bi-sun-fill me-2"></i>
+                                Light
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="dark">
+                                <i class="bi bi-moon-stars-fill me-2"></i>
+                                Dark
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="auto">
+                                <i class="bi bi-circle-half me-2"></i>
+                                Auto
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="display-4 fw-bold mb-4">Guides</h1>
+                <p class="lead mb-5">Comprehensive guides to help you get started with Meshtastic and join the Chicagoland mesh network.</p>
+                
+                <div class="row g-4">
+                    <!-- Getting Started -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-play-circle text-green fs-2 me-3"></i>
+                                    <h5 class="card-title mb-0">Getting Started</h5>
+                                </div>
+                                <p class="card-text">Complete beginner's guide to setting up your first Meshtastic node and joining the network.</p>
+                                <ul class="list-unstyled small text-muted">
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Hardware selection</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Firmware flashing</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Initial configuration</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Common mistakes to avoid</li>
+                                </ul>
+                                <a href="getting-started.html" class="btn btn-primary">Start Here</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MQTT Setup -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-router text-green fs-2 me-3"></i>
+                                    <h5 class="card-title mb-0">Setup MQTT</h5>
+                                </div>
+                                <p class="card-text">Connect your node to the internet for extended range and advanced features.</p>
+                                <ul class="list-unstyled small text-muted">
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>MQTT configuration</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Internet gateway setup</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Security considerations</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Troubleshooting</li>
+                                </ul>
+                                <a href="mqtt.html" class="btn btn-outline-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Local Channels -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-broadcast-pin text-green fs-2 me-3"></i>
+                                    <h5 class="card-title mb-0">Local Channels</h5>
+                                </div>
+                                <p class="card-text">Join local community channels and configure your node for optimal local communication.</p>
+                                <ul class="list-unstyled small text-muted">
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Channel configuration</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Community channels</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Privacy settings</li>
+                                    <li><i class="bi bi-check-circle text-green me-2"></i>Best practices</li>
+                                </ul>
+                                <a href="local-channel.html" class="btn btn-outline-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Topics -->
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-gear text-green fs-2 me-3"></i>
+                                    <h5 class="card-title mb-0">Advanced Topics</h5>
+                                </div>
+                                <p class="card-text">Advanced configuration, custom builds, and network optimization techniques.</p>
+                                <ul class="list-unstyled small text-muted">
+                                    <li><i class="bi bi-clock text-muted me-2"></i>Custom hardware builds</li>
+                                    <li><i class="bi bi-clock text-muted me-2"></i>Solar power setups</li>
+                                    <li><i class="bi bi-clock text-muted me-2"></i>Range optimization</li>
+                                    <li><i class="bi bi-clock text-muted me-2"></i>Network analysis</li>
+                                </ul>
+                                <span class="badge bg-secondary">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Start Section -->
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0 text-green">
+                            <i class="bi bi-lightning me-2"></i>Quick Start Checklist
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-green">Before You Begin:</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Join our <a href="https://chicagolandmesh.org/discord" target="_blank" rel="noopener">Discord community</a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Read the <a href="getting-started.html#mistakes">mistakes to avoid</a> section
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Choose your <a href="https://meshtastic.org/docs/hardware/devices" target="_blank" rel="noopener">hardware</a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Select an appropriate <a href="https://meshtastic.org/docs/hardware/antennas" target="_blank" rel="noopener">antenna</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-green">Setup Steps:</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">Flash firmware</a> to your device
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Download the mobile app (<a href="https://apps.apple.com/us/app/meshtastic/id1586432531" target="_blank" rel="noopener">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" rel="noopener">Android</a>)
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Configure your node settings
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-square text-muted me-2"></i>
+                                        Test your setup and range
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Section -->
+                <div class="alert alert-info d-flex align-items-center mt-4" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <div>
+                        <strong>Need help?</strong> Our community is here to assist! Join our <a href="https://chicagolandmesh.org/discord" target="_blank" rel="noopener" class="alert-link">Discord server</a> for real-time support and discussions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2">&copy; 2025 Chicagoland Mesh <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="text-decoration-none text-light">Contributors</a></p>
+                    <p class="small mb-0">Chicagoland Mesh is not affiliated with <a href="https://meshtastic.org" target="_blank" rel="noreferrer noopener" class="text-decoration-none text-light">Meshtastic®</a>, nor endorsed by <a href="https://meshtastic.org/docs/legal/licensing-and-trademark" target="_blank" rel="noreferrer noopener" class="text-decoration-none text-light">Meshtastic LLC</a>.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end gap-3">
+                        <a href="https://meshtastic.org" class="text-light" title="Check out the official Meshtastic site!">
+                            <i class="bi bi-globe fs-4"></i>
+                        </a>
+                        <a href="https://github.com/chicagolandmesh/chicagolandmesh.org" class="text-light" title="Contribute to the github!">
+                            <i class="bi bi-github fs-4"></i>
+                        </a>
+                        <a href="https://chicagolandmesh.org/discord" class="text-light" title="Join the discord!">
+                            <i class="bi bi-discord fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        (() => {
+            'use strict'
+
+            const getStoredTheme = () => localStorage.getItem('theme')
+            const setStoredTheme = theme => localStorage.setItem('theme', theme)
+
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitcher = document.querySelector('#bd-theme')
+
+                if (!themeSwitcher) {
+                    return
+                }
+
+                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active')
+                    element.setAttribute('aria-pressed', 'false')
+                })
+
+                btnToActive.classList.add('active')
+                btnToActive.setAttribute('aria-pressed', 'true')
+
+                if (focus) {
+                    themeSwitcher.focus()
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme()
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme())
+                }
+            })
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme())
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            setStoredTheme(theme)
+                            setTheme(theme)
+                            showActiveTheme(theme, true)
+                        })
+                    })
+            })
+        })()
+    </script>
+</body>
+</html>

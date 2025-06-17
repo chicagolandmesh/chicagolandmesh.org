@@ -1,0 +1,267 @@
+/* Custom CSS for Chicagoland Mesh Bootstrap Site */
+
+/* Custom Green Color Palette */
+:root {
+  --cm-green-50: #f0fdf4;
+  --cm-green-100: #dcfce7;
+  --cm-green-200: #bbf7d0;
+  --cm-green-300: #86efac;
+  --cm-green-400: #4ade80;
+  --cm-green-500: #22c55e;
+  --cm-green-600: #16a34a;
+  --cm-green-700: #15803d;
+  --cm-green-800: #166534;
+  --cm-green-900: #14532d;
+  --cm-green-950: #052e16;
+}
+
+/* Bootstrap Theme Customization */
+[data-bs-theme="light"] {
+  --bs-primary: var(--cm-green-600);
+  --bs-primary-rgb: 22, 163, 74;
+  --bs-secondary: var(--cm-green-500);
+  --bs-secondary-rgb: 34, 197, 94;
+  --bs-success: var(--cm-green-500);
+  --bs-success-rgb: 34, 197, 94;
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+}
+
+[data-bs-theme="dark"] {
+  --bs-primary: var(--cm-green-400);
+  --bs-primary-rgb: 74, 222, 128;
+  --bs-secondary: var(--cm-green-300);
+  --bs-secondary-rgb: 134, 239, 172;
+  --bs-success: var(--cm-green-400);
+  --bs-success-rgb: 74, 222, 128;
+  --bs-body-bg: #0d1117;
+  --bs-body-color: #e6edf3;
+  --bs-dark: #21262d;
+  --bs-dark-rgb: 33, 38, 45;
+}
+
+/* Custom Components */
+.bg-primary {
+  background: linear-gradient(135deg, var(--cm-green-600) 0%, var(--cm-green-700) 100%) !important;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, var(--cm-green-600) 0%, var(--cm-green-800) 100%);
+  min-height: 60vh;
+}
+
+.min-vh-50 {
+  min-height: 50vh;
+}
+
+/* Navigation Enhancements */
+.navbar-brand img {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--cm-green-200);
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--cm-green-100);
+  font-weight: 500;
+}
+
+/* Button Enhancements */
+.btn-primary {
+  background: linear-gradient(135deg, var(--cm-green-600) 0%, var(--cm-green-700) 100%);
+  border-color: var(--cm-green-600);
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--cm-green-700) 0%, var(--cm-green-800) 100%);
+  border-color: var(--cm-green-700);
+  box-shadow: 0 4px 8px rgba(22, 163, 74, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  color: var(--cm-green-600);
+  border-color: var(--cm-green-600);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--cm-green-600);
+  border-color: var(--cm-green-600);
+}
+
+/* Dark theme button adjustments */
+[data-bs-theme="dark"] .btn-primary {
+  background: linear-gradient(135deg, var(--cm-green-500) 0%, var(--cm-green-600) 100%);
+  border-color: var(--cm-green-500);
+}
+
+[data-bs-theme="dark"] .btn-primary:hover {
+  background: linear-gradient(135deg, var(--cm-green-400) 0%, var(--cm-green-500) 100%);
+  border-color: var(--cm-green-400);
+}
+
+/* Card Enhancements */
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-bs-theme="dark"] .card {
+  background-color: var(--bs-dark);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Alert Enhancements */
+.alert-warning {
+  background-color: var(--cm-green-50);
+  border-color: var(--cm-green-200);
+  color: var(--cm-green-800);
+}
+
+[data-bs-theme="dark"] .alert-warning {
+  background-color: rgba(74, 222, 128, 0.1);
+  border-color: var(--cm-green-600);
+  color: var(--cm-green-200);
+}
+
+/* Footer Enhancements */
+.bg-dark {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+}
+
+/* Image Enhancements */
+.img-fluid {
+  border-radius: 0.5rem;
+}
+
+/* Carousel Enhancements */
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Link Enhancements */
+a {
+  color: var(--cm-green-600);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--cm-green-700);
+}
+
+[data-bs-theme="dark"] a {
+  color: var(--cm-green-400);
+}
+
+[data-bs-theme="dark"] a:hover {
+  color: var(--cm-green-300);
+}
+
+/* Dropdown Enhancements */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-bs-theme="dark"] .dropdown-menu {
+  background-color: var(--bs-dark);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Typography Enhancements */
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+  font-weight: 700;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+  
+  .carousel-item img {
+    height: 250px;
+  }
+  
+  .display-4 {
+    font-size: 2rem;
+  }
+}
+
+/* Animation Enhancements */
+.btn, .card, .nav-link {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom Utilities */
+.text-green {
+  color: var(--cm-green-600) !important;
+}
+
+[data-bs-theme="dark"] .text-green {
+  color: var(--cm-green-400) !important;
+}
+
+.bg-green {
+  background-color: var(--cm-green-600) !important;
+}
+
+.border-green {
+  border-color: var(--cm-green-600) !important;
+}
+
+/* Theme Toggle Button */
+.dropdown-toggle::after {
+  display: none;
+}
+
+/* Accessibility Improvements */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Focus States */
+.btn:focus,
+.nav-link:focus,
+.dropdown-item:focus {
+  box-shadow: 0 0 0 0.2rem rgba(74, 222, 128, 0.25);
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .btn,
+  footer {
+    display: none !important;
+  }
+  
+  .hero-section {
+    background: white !important;
+    color: black !important;
+  }
+}
