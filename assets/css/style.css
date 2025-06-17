@@ -72,14 +72,20 @@ html {
   filter: brightness(0) invert(1);
 }
 
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: var(--chicago-red) !important;
+  font-weight: 500;
+}
+
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:focus {
-  color: var(--chicago-blue);
+  color: var(--chicago-white) !important;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
-  color: var(--chicago-white);
-  font-weight: 500;
+  color: var(--chicago-white) !important;
+  font-weight: 600;
 }
 
 /* Button Enhancements */
@@ -162,6 +168,30 @@ html {
 /* Footer Enhancements */
 .bg-dark {
   background: linear-gradient(135deg, var(--dark-navy) 0%, var(--slate-800) 100%) !important;
+}
+
+footer,
+footer p,
+footer .small,
+footer .mb-2,
+footer .mb-0 {
+  color: var(--chicago-red) !important;
+}
+
+footer a,
+footer a.text-decoration-none,
+footer a.text-light {
+  color: var(--chicago-red) !important;
+}
+
+footer a:hover,
+footer a.text-decoration-none:hover,
+footer a.text-light:hover {
+  color: var(--chicago-white) !important;
+}
+
+footer .text-light {
+  color: var(--chicago-red) !important;
 }
 
 /* Image Enhancements */
