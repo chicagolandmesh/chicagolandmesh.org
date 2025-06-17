@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,28 +19,6 @@
     <link rel="icon" href="assets/images/logo-clear.svg" type="image/svg+xml">
 </head>
 <body>
-    <!-- Theme Toggle Script (must be in head for no flash) -->
-    <script>
-        (() => {
-            'use strict'
-            const getStoredTheme = () => localStorage.getItem('theme')
-            const setStoredTheme = theme => localStorage.setItem('theme', theme)
-            const getPreferredTheme = () => {
-                const storedTheme = getStoredTheme()
-                if (storedTheme) {
-                    return storedTheme
-                }
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-            }
-            const setTheme = theme => {
-                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.setAttribute('data-bs-theme', 'dark')
-                } else {
-                    document.documentElement.setAttribute('data-bs-theme', theme)
-                }
-            }
-            setTheme(getPreferredTheme())
-        })()
     </script>
 
     <!-- Navigation -->
@@ -91,33 +69,6 @@
                     </li>
                 </ul>
                 
-                <!-- Theme Toggle -->
-                <div class="dropdown">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="bd-theme">
-                        <i class="bi bi-circle-half"></i>
-                        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <button type="button" class="dropdown-item" data-bs-theme-value="light">
-                                <i class="bi bi-sun-fill me-2"></i>
-                                Light
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="dropdown-item" data-bs-theme-value="dark">
-                                <i class="bi bi-moon-stars-fill me-2"></i>
-                                Dark
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="dropdown-item" data-bs-theme-value="auto">
-                                <i class="bi bi-circle-half me-2"></i>
-                                Auto
-                            </button>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </nav>
@@ -129,14 +80,14 @@
                 <h1 class="display-4 fw-bold mb-4">About</h1>
                 
                 <section class="mb-5">
-                    <h2 class="h3 text-green fw-bold mb-3">What is Meshtastic?</h2>
+                    <h2 class="h3 text-chicago-blue fw-bold mb-3">What is Meshtastic?</h2>
                     <p class="lead"><a href="https://meshtastic.org" target="_blank" rel="noopener">Meshtastic®</a> is a community project that allows anybody to communicate over LoRa radios serving as a decentralized communications platform. Learn more about the interworkings through the <a href="https://meshtastic.org/docs/overview" target="_blank" rel="noopener">documentation</a>.</p>
                     
                     <div class="row g-4 my-4">
                         <div class="col-md-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-green"><i class="bi bi-broadcast me-2"></i>Long Range</h5>
+                                    <h5 class="card-title text-chicago-blue"><i class="bi bi-broadcast me-2"></i>Long Range</h5>
                                     <p class="card-text">Up to 254km record by kboxlabs - perfect for wide area coverage.</p>
                                 </div>
                             </div>
@@ -144,7 +95,7 @@
                         <div class="col-md-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-green"><i class="bi bi-diagram-3 me-2"></i>Decentralized</h5>
+                                    <h5 class="card-title text-chicago-blue"><i class="bi bi-diagram-3 me-2"></i>Decentralized</h5>
                                     <p class="card-text">No dedicated router required - the network is self-organizing.</p>
                                 </div>
                             </div>
@@ -152,7 +103,7 @@
                         <div class="col-md-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-green"><i class="bi bi-shield-lock me-2"></i>Encrypted</h5>
+                                    <h5 class="card-title text-chicago-blue"><i class="bi bi-shield-lock me-2"></i>Encrypted</h5>
                                     <p class="card-text">Secure communication keeps your messages private.</p>
                                 </div>
                             </div>
@@ -160,7 +111,7 @@
                         <div class="col-md-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-green"><i class="bi bi-battery-full me-2"></i>Long Battery Life</h5>
+                                    <h5 class="card-title text-chicago-blue"><i class="bi bi-battery-full me-2"></i>Long Battery Life</h5>
                                     <p class="card-text">Excellent power efficiency for extended operation.</p>
                                 </div>
                             </div>
@@ -168,7 +119,7 @@
                         <div class="col-md-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-green"><i class="bi bi-chat-dots me-2"></i>Text Messages</h5>
+                                    <h5 class="card-title text-chicago-blue"><i class="bi bi-chat-dots me-2"></i>Text Messages</h5>
                                     <p class="card-text">Send and receive text messages between mesh members.</p>
                                 </div>
                             </div>
@@ -176,7 +127,7 @@
                         <div class="col-md-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-green"><i class="bi bi-geo-alt me-2"></i>GPS Location</h5>
+                                    <h5 class="card-title text-chicago-blue"><i class="bi bi-geo-alt me-2"></i>GPS Location</h5>
                                     <p class="card-text">Optional GPS-based location features for coordination.</p>
                                 </div>
                             </div>
@@ -185,7 +136,7 @@
                 </section>
 
                 <section class="mb-5">
-                    <h2 class="h3 text-green fw-bold mb-3">What is Chicagoland Mesh?</h2>
+                    <h2 class="h3 text-chicago-blue fw-bold mb-3">What is Chicagoland Mesh?</h2>
                     <p>We are a growing community of people working together to create an off-grid resilient communications network using inexpensive LoRa devices. Operating within unlicensed 915MHz frequency, these devices are loaded with the Meshtastic firmware automatically connecting with each other.</p>
                     
                     <p>Meshtastic does not require you to have a HAM license and operates in unlicensed frequency meaning that it can be encrypted and your messages will remain secure from prying eyes.</p>
@@ -198,7 +149,7 @@
                 </section>
 
                 <section class="mb-5">
-                    <h2 class="h3 text-green fw-bold mb-3">How to get started</h2>
+                    <h2 class="h3 text-chicago-blue fw-bold mb-3">How to get started</h2>
                     
                     <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
                         <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -280,73 +231,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
-    <!-- Theme Toggle Script -->
-    <script>
-        (() => {
-            'use strict'
-
-            const getStoredTheme = () => localStorage.getItem('theme')
-            const setStoredTheme = theme => localStorage.setItem('theme', theme)
-
-            const getPreferredTheme = () => {
-                const storedTheme = getStoredTheme()
-                if (storedTheme) {
-                    return storedTheme
-                }
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-            }
-
-            const setTheme = theme => {
-                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.setAttribute('data-bs-theme', 'dark')
-                } else {
-                    document.documentElement.setAttribute('data-bs-theme', theme)
-                }
-            }
-
-            const showActiveTheme = (theme, focus = false) => {
-                const themeSwitcher = document.querySelector('#bd-theme')
-
-                if (!themeSwitcher) {
-                    return
-                }
-
-                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-
-                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-                    element.classList.remove('active')
-                    element.setAttribute('aria-pressed', 'false')
-                })
-
-                btnToActive.classList.add('active')
-                btnToActive.setAttribute('aria-pressed', 'true')
-
-                if (focus) {
-                    themeSwitcher.focus()
-                }
-            }
-
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-                const storedTheme = getStoredTheme()
-                if (storedTheme !== 'light' && storedTheme !== 'dark') {
-                    setTheme(getPreferredTheme())
-                }
-            })
-
-            window.addEventListener('DOMContentLoaded', () => {
-                showActiveTheme(getPreferredTheme())
-
-                document.querySelectorAll('[data-bs-theme-value]')
-                    .forEach(toggle => {
-                        toggle.addEventListener('click', () => {
-                            const theme = toggle.getAttribute('data-bs-theme-value')
-                            setStoredTheme(theme)
-                            setTheme(theme)
-                            showActiveTheme(theme, true)
-                        })
-                    })
-            })
-        })()
     </script>
 </body>
 </html>
