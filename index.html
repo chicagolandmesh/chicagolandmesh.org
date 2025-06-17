@@ -68,6 +68,12 @@
                     </li>
                 </ul>
                 
+                <!-- Search Bar -->
+                <div class="search-container ms-auto" style="width: 300px;">
+                    <input type="search" placeholder="Search..." aria-label="Search" id="searchInput" autocomplete="off">
+                    <i class="bi bi-search search-icon"></i>
+                    <div id="searchResults" class="search-results position-absolute w-100" style="top: 100%; display: none;"></div>
+                </div>
             </div>
         </div>
     </nav>
@@ -166,6 +172,238 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Lunr.js for search -->
+    <script src="https://unpkg.com/lunr/lunr.min.js"></script>
+    
+    <!-- Lunr.js Full-Text Search -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            // Comprehensive site content for full-text search
+            const documents = [
+                {
+                    id: 'home',
+                    title: 'Home',
+                    url: 'index.html',
+                    content: 'Welcome to Chicagoland Mesh! Join the local community of Meshtastic enthusiasts in the Chicagoland area, and collaborate in building a sustainable and interconnected network of decentralized nodes that have the capability of sending encrypted text messages, telemetry, and location. Join our Discord server Want to participate? Have ideas? Need help? Join the over 600 members and counting!'
+                },
+                {
+                    id: 'about',
+                    title: 'About',
+                    url: 'about.html',
+                    content: 'What is Meshtastic? Meshtastic is a community project that allows anybody to communicate over LoRa radios serving as a decentralized communications platform. Learn more about the interworkings through the documentation. Long Range Up to 254km record by kboxlabs perfect for wide area coverage. Decentralized No dedicated router required the network is self-organizing. Encrypted Secure communication keeps your messages private. Long Battery Life Excellent power efficiency for extended operation. Text Messages Send and receive text messages between mesh members. GPS Location Optional GPS-based location features for coordination. What is Chicagoland Mesh? We are a growing community of people working together to create an off-grid resilient communications network using inexpensive LoRa devices. Operating within unlicensed 915MHz frequency, these devices are loaded with the Meshtastic firmware automatically connecting with each other. Meshtastic does not require you to have a HAM license and operates in unlicensed frequency meaning that it can be encrypted and your messages will remain secure from prying eyes. The purpose of Chicagoland Mesh is to expand coverage in our area and build out the network to make it more usable. We currently have a number of nodes located in downtown Chicago and on top of other buildings out in the suburbs. We are always looking to expand our coverage and rely on ourselves and others who can get nodes in high up places to join us in building our off-grid communications network.'
+                },
+                {
+                    id: 'guides',
+                    title: 'Guides',
+                    url: 'guides.html',
+                    content: 'Comprehensive guides to help you get started with Meshtastic and join the Chicagoland mesh network. Getting Started Complete beginners guide to setting up your first Meshtastic node and joining the network. Hardware selection Firmware flashing Initial configuration Common mistakes to avoid. Setup MQTT Connect your node to the internet for extended range and advanced features. MQTT configuration Internet gateway setup Security considerations Troubleshooting. Local Channels Join local community channels and configure your node for optimal local communication. Channel configuration Community channels Privacy settings. Advanced Topics Advanced configuration, custom builds, and network optimization techniques. Custom hardware builds Solar power setups Range optimization.'
+                },
+                {
+                    id: 'getting-started',
+                    title: 'Getting Started',
+                    url: 'getting-started.html',
+                    content: 'How to get started with Meshtastic and join the Chicagoland mesh network. Important Make sure to look into the mistakes to avoid page to avoid common pitfalls. Join our Discord Connect with the community and get to know us. Purchase Hardware Get supported hardware and antenna. Flash Firmware Flash your hardware with the Meshtastic firmware. Download App Get the iOS or Android app and connect to your node. Learn More Read the getting started page for more information. Hardware selection choosing the right device firmware flashing step by step configuration avoiding common mistakes troubleshooting connection issues'
+                },
+                {
+                    id: 'mqtt',
+                    title: 'Setup MQTT',
+                    url: 'mqtt.html',
+                    content: 'Connect your Meshtastic node to the internet for extended range and advanced features. This guide is currently being developed. For now, please refer to the official MQTT documentation or ask for help in our Discord server. MQTT Guide Coming Soon Comprehensive MQTT setup and configuration guide. MQTT broker configuration internet gateway setup security considerations troubleshooting connection issues protocol settings advanced features'
+                },
+                {
+                    id: 'local-channel',
+                    title: 'Local Channel',
+                    url: 'local-channel.html',
+                    content: 'Join local community channels and configure your node for optimal local communication. Channel configuration community channels privacy settings frequency settings encryption keys mesh networking local area network communication range optimization'
+                },
+                {
+                    id: 'news',
+                    title: 'News',
+                    url: 'news.html',
+                    content: 'Latest updates and announcements from the Chicagoland Mesh community. Community updates network expansion new features hardware releases firmware updates events meetups announcements'
+                },
+                {
+                    id: 'map',
+                    title: 'Map',
+                    url: 'map.html',
+                    content: 'View mesh network coverage and nodes in the Chicagoland area. Interactive map showing node locations coverage areas network topology signal strength connection status real-time data visualization geographic distribution'
+                },
+                {
+                    id: 'meshview',
+                    title: 'MeshView',
+                    url: 'meshview.html',
+                    content: 'Network visualization and monitoring tools for the Chicagoland mesh network. Real-time network topology visualization node status monitoring connection analysis performance metrics network health diagnostics troubleshooting tools'
+                },
+                {
+                    id: 'resources',
+                    title: 'Resources',
+                    url: 'resources.html',
+                    content: 'Helpful links and tools for Meshtastic and mesh networking. Hardware recommendations software tools documentation links community resources troubleshooting guides technical specifications antenna guides range calculators'
+                },
+                {
+                    id: 'contact',
+                    title: 'Contact',
+                    url: 'contact.html',
+                    content: 'Get in touch with the Chicagoland Mesh community. Join our Discord server for support, questions, and community discussion. Discord community support help questions collaboration networking events meetups'
+                }
+            ];
+            
+            // Build Lunr search index
+            const idx = lunr(function () {
+                this.ref('id');
+                this.field('title', { boost: 10 });
+                this.field('content');
+                
+                documents.forEach(function (doc) {
+                    this.add(doc);
+                }, this);
+            });
+            
+            let selectedIndex = -1;
+            
+            function highlightText(text, query) {
+                if (!query) return text;
+                const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                return text.replace(regex, '<mark>$1</mark>');
+            }
+            
+            function getSnippet(content, query, maxLength = 150) {
+                if (!query) return content.substring(0, maxLength) + '...';
+                
+                const queryLower = query.toLowerCase();
+                const contentLower = content.toLowerCase();
+                const index = contentLower.indexOf(queryLower);
+                
+                if (index === -1) {
+                    return content.substring(0, maxLength) + '...';
+                }
+                
+                const start = Math.max(0, index - 50);
+                const end = Math.min(content.length, start + maxLength);
+                let snippet = content.substring(start, end);
+                
+                if (start > 0) snippet = '...' + snippet;
+                if (end < content.length) snippet = snippet + '...';
+                
+                return highlightText(snippet, query);
+            }
+            
+            function showResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.style.display = 'none';
+                    return;
+                }
+                
+                searchResults.innerHTML = results.map((result, index) => {
+                    const doc = documents.find(d => d.id === result.ref);
+                    const snippet = getSnippet(doc.content, query);
+                    
+                    return `
+                        <div class="search-result-item ${index === selectedIndex ? 'selected' : ''}"
+                             data-url="${doc.url}">
+                            <div class="search-result-title">${highlightText(doc.title, query)}</div>
+                            <div class="search-result-description">${snippet}</div>
+                        </div>
+                    `;
+                }).join('');
+                
+                searchResults.style.display = 'block';
+                
+                // Add click handlers to results
+                searchResults.querySelectorAll('.search-result-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        window.location.href = this.dataset.url;
+                    });
+                    
+                    item.addEventListener('mouseenter', function() {
+                        searchResults.querySelectorAll('.search-result-item').forEach(el => {
+                            el.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                        selectedIndex = Array.from(searchResults.children).indexOf(this);
+                    });
+                });
+            }
+            
+            function performSearch(query) {
+                if (!query.trim()) {
+                    searchResults.style.display = 'none';
+                    return;
+                }
+                
+                try {
+                    const results = idx.search(query).slice(0, 6);
+                    showResults(results, query);
+                } catch (e) {
+                    // Fallback to simple search if Lunr query fails
+                    const simpleResults = documents.filter(doc =>
+                        doc.title.toLowerCase().includes(query.toLowerCase()) ||
+                        doc.content.toLowerCase().includes(query.toLowerCase())
+                    ).slice(0, 6).map(doc => ({ ref: doc.id }));
+                    showResults(simpleResults, query);
+                }
+            }
+            
+            // Handle input changes for live search
+            searchInput.addEventListener('input', function() {
+                selectedIndex = -1;
+                performSearch(this.value);
+            });
+            
+            // Handle keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                const items = searchResults.querySelectorAll('.search-result-item');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                    updateSelection(items);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    updateSelection(items);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (selectedIndex >= 0 && items[selectedIndex]) {
+                        window.location.href = items[selectedIndex].dataset.url;
+                    } else if (items.length > 0) {
+                        window.location.href = items[0].dataset.url;
+                    }
+                } else if (e.key === 'Escape') {
+                    searchResults.style.display = 'none';
+                    searchInput.blur();
+                }
+            });
+            
+            function updateSelection(items) {
+                items.forEach((item, index) => {
+                    if (index === selectedIndex) {
+                        item.classList.add('selected');
+                    } else {
+                        item.classList.remove('selected');
+                    }
+                });
+            }
+            
+            // Hide results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Show results when focusing on input if there's content
+            searchInput.addEventListener('focus', function() {
+                if (this.value.trim()) {
+                    performSearch(this.value);
+                }
+            });
+        });
+    </script>
     
 </body>
 </html>
