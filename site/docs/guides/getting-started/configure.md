@@ -39,7 +39,7 @@ tags:
     - Non-Solar Nodes: `Disabled`
     - Solar Nodes: `Enabled`
 - Lora Region: `US`
-- Hop Count: `7`
+- Hop Count: `4` (City of Chicago) `7` (Suburbs)
 - Frequency Slot: `20`
 - Waveform Settings: `LongFast`
 - Radio Transmit: `Enabled`
