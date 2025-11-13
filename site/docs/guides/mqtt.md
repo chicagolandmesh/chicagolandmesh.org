@@ -47,7 +47,7 @@ Enabling MQTT will allow you to appear on [Liam Cottle MeshMap](https://meshtast
 11. Leave the name blank
 12. Enable MQTT uplink and disable downlink
     - This is set to send messages recieved to MQTT but prevents your node from getting messages from MQTT. Read more about this in the [optional settings](#optional-settings-below).
-13. Enable Map Reporting, set Map Publish Interval to 30 (seconds), and set your desired Position Precision
+13. Enable Map Reporting, set Map Publish Interval to 3600 (seconds), and set your desired Position Precision
 
     <br>
     ![MQTT Settings Example](../assets/images/mqtt3.png)
