@@ -93,6 +93,57 @@ Configure your device for the Chicago Meshcore Experiment using the **"USA/Canad
 
     Consider adding "ChiMesh.org" or "ChicagolandMesh.org" to your node name to help identify fellow community members during the experiment.
 
+## Using Meshcore Client Apps
+
+After setting up your Meshcore device with Companion firmware, you'll need a client app to send and receive messages. Meshcore offers several client options depending on your device and preferences.
+
+### Mobile Apps
+
+#### Android
+
+- Download from [Google Play Store](https://play.google.com/store/apps/details?id=com.liamcottle.meshcore.android)
+- Or download the [APK file directly](https://files.liamcottle.net/MeshCore/)
+- Developed by Liam Cottle
+
+#### iOS
+
+- Download from the [Apple App Store](https://apps.apple.com/gb/app/meshcore/id6742354151)
+- Compatible with iPhone and iPad
+
+### Web Clients
+
+#### Official Web Client
+
+- Visit [https://app.meshcore.nz/](https://app.meshcore.nz/)
+- Requires Chrome browser
+- Works with USB serial connections
+
+#### Community Web Client
+
+- Visit [https://meshcore.liamcottle.net/](https://meshcore.liamcottle.net/)
+- Also by Liam Cottle
+- Works with Chrome browser and iOS Bluefy app
+
+### Connecting Your Client
+
+1. **For BLE Companion firmware**: Use Bluetooth pairing with mobile apps
+2. **For USB Companion firmware**: Use web clients with USB serial connection
+3. **Default Bluetooth pairing code**: `123456` (if prompted)
+
+### Basic Usage
+
+Once connected to your client app:
+
+- **Send messages**: Type and send text messages to other Meshcore users
+- **View contacts**: See discovered nodes and their last seen times  
+- **Join channels**: Connect to public channels for group communications
+- **Manage settings**: Configure your node remotely through the app
+- **View diagnostics**: Monitor signal strength, battery, and network status
+
+!!! tip "First Time Setup"
+
+    When you first connect your client app to your Companion device, take some time to explore the interface and send test messages to verify everything is working correctly.
+
 ## Experiment Guidelines
 
 ### Participation Expectations
