@@ -1,0 +1,101 @@
+/* styles for map modal */
+.modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  transition: opacity 0.2s;
+}
+.modal-content {
+  border: 1px solid #495057;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  background-color: var(--md-admonition-bg-color);
+  max-width: 25rem;
+  margin-top: 2rem;
+}
+@media (max-width: 576px) {
+  .modal-content {
+    margin-top: 0.5rem;
+  }
+}
+.modal-content label {
+  outline: revert;
+  color: var(--md-default-fg-color);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.modal-content > h2 {
+  color: var(--md-default-fg-color);
+  margin: 0 0 0.5rem !important;
+  font-weight: 400;
+}
+.close {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 0.5;
+  padding: 0.25rem;
+}
+.hidden {
+  opacity: 0 !important;
+}
+.under {
+  z-index: -1 !important;
+}
+.form-text {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: var(--md-default-fg-color--light);
+}
+.form-input {
+  width: 100%;
+  padding: 0.375em 0.75em;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: var(--md-accent-fg-color--transparent);
+  background-clip: padding-box;
+  border: 1px solid #495057;
+  border-radius: 0.375rem;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  outline: revert;
+}
+.form-input option {
+  color: var(--md-default-fg-color);
+  background-color: var(--md-admonition-bg-color);
+}
+.modal-content > form > div {
+  margin-bottom: 0.5rem;
+}
+.form-button {
+  padding: 0.375em 0.75em;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #6c757d;
+  border: 0;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+.form-button:hover {
+  background-color: #5c636a;
+}
+.blue {
+  background-color: #0d6efd;
+}
+.blue:hover {
+  background-color: #0b5ed7;
+}

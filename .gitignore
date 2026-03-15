@@ -1,0 +1,14 @@
+.env
+data/
+dist/
+
+__pycache__/
+venv/
+javascript/map/node_modules/
+api/map/tmp/
+api/map/bin/
+
+docs/assets/javascripts/
+docs/assets/stylesheets/map.*.css
+docs/assets/fonts/
+docs/assets/sprites/

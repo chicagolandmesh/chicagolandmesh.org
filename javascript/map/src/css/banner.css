@@ -1,0 +1,47 @@
+/* styles for map banner */
+#helper-banner {
+  z-index: 2;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 24.4rem;
+  margin-top: 10px !important;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity ease-in-out 0.2s;
+  padding: 1px;
+}
+#helper-banner button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 0 var(--ml-ctrl-border-radius) 0 var(--ml-ctrl-border-radius);
+  font-size: 1rem;
+  z-index: 2;
+}
+#helper-banner p {
+  color: var(--md-default-fg-color);
+  margin: 0.35rem;
+  line-height: 1rem;
+  z-index: 1;
+  position: relative;
+}
+@media (max-width: 600px) {
+  #helper-banner {
+    margin: 0 56px;
+  }
+}
+.fill {
+  background-color: #fe00001f;
+  position: absolute;
+  width: 0%;
+  height: 100%;
+}
+@keyframes fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

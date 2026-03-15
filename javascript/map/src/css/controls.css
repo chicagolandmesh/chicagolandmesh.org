@@ -1,0 +1,136 @@
+@import "maplibre-theme/icons.default.css";
+@import "../icons/icons.css";
+@import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+
+.maplibregl-ctrl button.maplibregl-ctrl-marker-add .maplibregl-ctrl-icon:before {
+  margin-left: 2px;
+}
+
+/* prevent double click zoom on mobile */
+.maplibregl-control-container {
+  touch-action: manipulation;
+}
+
+/* fix stuck hover effect on mobile */
+@media (hover: none) {
+  .maplibregl-ctrl button:not(:disabled):hover,
+  .maplibregl-ctrl-attrib-button:not(:disabled):hover {
+    background-color: unset;
+  }
+  .maplibregl-ctrl button:not(:disabled):active,
+  .maplibregl-ctrl-attrib-button:not(:disabled):active {
+    background-color: var(--ml-c-bg-3);
+  }
+}
+
+/* shift geocoder to the right */
+.maplibregl-ctrl-geocoder {
+  position: absolute;
+  left: 40px;
+}
+
+/* bigger controls for mobile */
+@media screen and (max-width: 600px) {
+  .maplibregl-ctrl-group button {
+    height: 36px;
+    width: 36px;
+  }
+  .maplibregl-ctrl-geocoder {
+    left: 46px;
+  }
+  .maplibregl-ctrl button .maplibregl-ctrl-icon:before {
+    font-size: 20px;
+  }
+  /* fullscreen icon has weird shift on 20px size */
+  .maplibregl-ctrl button.maplibregl-ctrl-fullscreen .maplibregl-ctrl-icon:before {
+      line-height: 1.1em;
+  }
+}
+
+/* set geocoder to always use the desktop width regardless of screen size (copied from maplibre-gl-geocoder css) */
+.maplibregl-ctrl-geocoder.maplibregl-ctrl-geocoder--collapsed {
+  width: 36px;
+  min-width: 36px;
+}
+.maplibregl-ctrl-geocoder {
+  width: 33.3333%;
+  max-width: 360px;
+  font-size: 16px;
+  line-height: 20px;
+}
+.maplibregl-ctrl-geocoder .suggestions {
+  font-size: 13px;
+}
+.maplibregl-ctrl-geocoder--icon {
+  top: 8px;
+}
+.maplibregl-ctrl-geocoder--icon-close {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  margin-right: 0;
+}
+.maplibregl-ctrl-geocoder--icon-search {
+  width: 20px;
+  height: 20px;
+  left: 7px;
+}
+.maplibregl-ctrl-geocoder--input {
+  height: 36px;
+  padding: 6px 35px;
+}
+.maplibregl-ctrl-geocoder--icon-loading {
+  width: 26px;
+  height: 26px;
+  margin-top: -2px;
+  margin-right: -5px;
+}
+
+/* dark theme for geocoder */
+.maplibregl-ctrl-geocoder.maplibregl-ctrl.maplibregl-ctrl-geocoder.maplibregl-ctrl {
+    background: var(--ml-c-bg-1);
+}
+.maplibregl-ctrl-geocoder--icon {
+    fill: var(--ml-c-icon-1);
+}
+.maplibregl-ctrl-geocoder--input {
+    color: var(--ml-c-link-1);
+}
+.maplibregl-ctrl-geocoder--input.focus-visible {
+    color: unset;
+    outline: unset;
+    box-shadow: unset;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+.maplibregl-ctrl-geocoder--button {
+    background: var(--ml-c-bg-1);
+}
+.maplibregl-ctrl-geocoder .suggestions {
+    background: var(--ml-c-bg-1);
+    margin-left: 0 !important;
+    box-shadow: var(--ml-shadow-ctrl);
+}
+.maplibregl-ctrl-geocoder .suggestions li {
+    margin-left: 0 !important;
+}
+.maplibregl-ctrl-geocoder--result-title {
+    color: var(--ml-c-link-1);
+}
+.maplibregl-ctrl-geocoder--result-address {
+    color: rgb(from var(--ml-c-link-1) r g b / 0.75);
+}
+.maplibregl-ctrl-geocoder .suggestions > .active > a, .maplibregl-ctrl-geocoder .suggestions > li > a:hover {
+    background-color: var(--ml-c-bg-2);
+    color: unset;
+}
+.maplibregl-ctrl-geocoder {
+   box-shadow: var(--ml-shadow-ctrl);
+}
+.maplibregl-ctrl-geocoder--icon-close {
+    margin-top: 0;
+}

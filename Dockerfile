@@ -1,7 +1,5 @@
-FROM squidfunk/mkdocs-material
-#RUN pip install mkdocs-git-revision-date-localized-plugin
-#RUN pip install mkdocs-git-committers-plugin-2
-#RUN pip install mkdocs-git-authors-plugin
-RUN pip install mkdocs-glightbox
-RUN pip install mkdocs-awesome-pages-plugin
-RUN pip install mkdocs-macros-plugin
+FROM squidfunk/mkdocs-material:latest
+RUN pip install \
+    mkdocs-glightbox \
+    mkdocs-minify-plugin \
+    click==8.2.1 # https://github.com/squidfunk/mkdocs-material/issues/8478#issue-3476831556

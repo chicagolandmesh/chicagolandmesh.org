@@ -1,0 +1,64 @@
+networks:
+  main:
+    enable_ipv6: true
+
+services:
+  caddy:
+    image: caddy-cloudflare
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./site:/srv
+      - ./logs:/logs
+      - ./data:/data
+      - ./conf:/config
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+      - DISCORD_INVITE_URL=${DISCORD_INVITE_URL}
+      - MESHVIEW_ADDR=${MESHVIEW_ADDR}
+    networks:
+      - main
+    restart: unless-stopped
+
+  map-api:
+    image: map-api
+    expose:
+      - 8080
+    volumes:
+      - ./data:/data
+      - ./logs:/logs
+    environment:
+      - LOG_PATH=/logs/api.log
+      - TOKEN_SECRET=${TOKEN_SECRET}
+      - CLIENT_ID=${DISCORD_CLIENT_ID}
+      - CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
+      - REDIRECT_URL=${DISCORD_CALLBACK_URL}
+    networks:
+      - main
+    restart: unless-stopped
+
+  pmtiles:
+    image: protomaps/go-pmtiles
+    expose:
+      - 8080
+    command: >
+      serve /map
+      --quiet
+      --public-url ${TILES_URL}
+    volumes:
+      - ./data/midwest.pmtiles:/map/midwest.pmtiles
+      - ./data/globe.pmtiles:/map/globe.pmtiles
+    networks:
+      - main
+    restart: unless-stopped
+
+  hashicon:
+    image: hashicon
+    expose:
+      - 3000
+    networks:
+      - main
+    restart: unless-stopped

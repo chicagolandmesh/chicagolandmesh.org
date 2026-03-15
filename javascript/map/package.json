@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@maplibre/maplibre-gl-geocoder": "^1.9.4",
+    "@protomaps/basemaps": "^5.4.1",
+    "maplibre-gl": "^5.6.0",
+    "maplibre-theme": "^1.0.0",
+    "pentatrion-fontello-cli": "^0.0.5",
+    "pmtiles": "^4.3.0"
+  }
+}

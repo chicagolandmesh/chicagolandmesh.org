@@ -1,19 +1,105 @@
 services:
-  mkdocs-develop:
-    container_name: mkdocs-develop
-    image: squidfunk/mkdocs-material
-    command: serve -w /docs -a 0.0.0.0:8000
-    user: 1000:1000
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - ${DEV_PORT}:80
     volumes:
-      - ./site/mkdocs.yml:/docs/mkdocs.yml
-      - ./site/docs:/docs/docs
-      - ./site/overrides:/docs/overrides
-    expose:
-      - "8000"
-    networks:
-      - main
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      caddy: ${DEV_BASE_URL}
+      caddy.log.output: stdout
+      caddy.log.format: console
     restart: unless-stopped
 
-networks:
-  main:
-    external: true
+  mkdocs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: 1000:1000
+    command: >
+      serve
+      --watch /docs/docs
+      --watch /docs/mkdocs.yml
+      --watch /docs/overrides
+      --livereload
+      --dev-addr 0.0.0.0:80
+    volumes:
+      - ./docs:/docs/docs
+      - ./overrides:/docs/overrides
+      - ./mkdocs.yml:/docs/mkdocs.yml
+      - ./mkdocs_hooks.py:/docs/mkdocs_hooks.py
+    labels:
+      caddy: ${DEV_BASE_URL}
+      caddy.handle: /*
+      caddy.handle.reverse_proxy: "{{upstreams 80}}"
+    restart: unless-stopped
+
+  bun:
+    image: oven/bun
+    user: 1000:1000
+    command: sh -c "
+      bun build /build/code/src/js/main.js \
+        --outdir /build/out \
+        --sourcemap=inline \
+        --watch \
+        --entry-naming javascripts/map.dev.[ext] & \
+      bun build /build/code/src/css/main.css \
+        --outdir /build/out \
+        --sourcemap=inline \
+        --watch \
+        --entry-naming stylesheets/map.dev.[ext]"
+    volumes:
+      - ./javascript/map/:/build/code/
+      - ./docs/assets/:/build/out/
+    network_mode: "none"
+    restart: unless-stopped
+
+  map-api:
+    image: cosmtrek/air
+    command: -build.cmd="go build -o ./tmp/main ./cmd/server"
+    working_dir: /code
+    expose:
+      - 8080
+    volumes:
+      - ./api/map:/code
+    environment:
+      - SECURE=false
+      - LOG_PATH=/code/tmp/map.log
+      - DSN=/code/tmp/data.db
+      - TOKEN_SECRET=${DEV_TOKEN_SECRET}
+      - CLIENT_ID=${DISCORD_CLIENT_ID}
+      - CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
+      - REDIRECT_URL=${DEV_DISCORD_CALLBACK_URL}
+    labels:
+      caddy: ${DEV_BASE_URL}
+      caddy.handle: /api/*
+      caddy.handle.reverse_proxy: "{{upstreams 8080}}"
+    restart: unless-stopped
+
+  pmtiles:
+    image: protomaps/go-pmtiles
+    command: >
+      serve /map
+      --admin-port 8081
+      --public-url ${DEV_TILES_URL}
+    volumes:
+      - ./data/midwest.pmtiles:/map/midwest.pmtiles
+      - ./data/globe.pmtiles:/map/globe.pmtiles
+    labels:
+      caddy: ${DEV_BASE_URL}
+      caddy.handle_path: /tiles/*
+      caddy.handle_path.reverse_proxy: "{{upstreams 8080}}"
+    restart: unless-stopped
+
+  # martin:
+  #   image: ghcr.io/maplibre/martin
+  #   command: ["/map/midwest.pmtiles", "/map/globe.pmtiles"]
+  #   volumes:
+  #      - ./data/midwest.pmtiles:/map/midwest.pmtiles
+  #      - ./data/globe.pmtiles:/map/globe.pmtiles
+  #   labels: # https://maplibre.org/martin/run-with-nginx.html
+  #     caddy: ${DEV_BASE_URL}
+  #     caddy.handle_path: /tiles/*
+  #     caddy.handle_path.reverse_proxy: "{{upstreams 3000}}"
+  #     caddy.handle_path.reverse_proxy.header_up: X-Rewrite-URL "/tiles{uri}"
+  #   restart: unless-stopped
