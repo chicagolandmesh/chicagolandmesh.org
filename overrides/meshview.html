@@ -1,4 +1,6 @@
-{% extends "main.html" %} {% block content %}
+{% extends "main.html" %}
+
+{% block content %}
 <style>
     iframe {
         width: 100%;
@@ -92,7 +94,7 @@
 <iframe
     id="meshview"
     onload="this"
-    src="https://meshview.chicagolandmesh.org/{{ page.url[9:-1] }}"
+    src="https://meshview.chicagolandmesh.org/{{ page.url | replace('meshview', '') | trim('/') }}"
 ></iframe>
 
 <div class="loading-container">
