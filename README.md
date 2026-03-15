@@ -35,8 +35,8 @@ resources. To submit your build guide:
 
 ## Development
 
-Use `make build` to build the static site into the `dist` directory and `make
-dev` to start up the development server in docker.
+Use `make build/site` to build the static site into the `dist` directory and
+`make dev` to start up the development server in docker.
 
 ## License
 
