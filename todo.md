@@ -1,5 +1,0 @@
-- release meshview feature
-- release news feature
-  - discord bot to update news
-- release gallery feature
-- social cards for link embeds
