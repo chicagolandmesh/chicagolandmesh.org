@@ -26,7 +26,7 @@ To get started, you'll need the following:
 !!! warning "Important Note"
 
     Never power on your Meshtastic device without an antenna connected. This could permanently damage the radio.
-    Make sure to look into the [mistakes to avoid](../getting-started/avoid-mistakes) page to avoid common pitfalls.
+    Make sure to look into the [mistakes to avoid](avoid-mistakes.md) page to avoid common pitfalls.
 
 ## Software Setup and Flashing the Firmware
 
@@ -35,7 +35,7 @@ To get started, you'll need the following:
 
 !!! tip "Next Steps"
 
-    View the [Configuring Meshtastic](/guides/getting-started/configure) page to configure your node.
+    View the [Configuring Meshtastic](configure.md) page to configure your node.
 
 ## Legal Considerations
 

@@ -15,7 +15,7 @@ tags:
 
 #### Avoid sketchy batteries
    [18650 Batteries](https://en.wikipedia.org/wiki/18650_battery) are very common in Meshtastic builds for their large capacity and rechargability. They are lithium-ion batteries first created for use in laptops. Many fake or misleading manufacturers will sell batteries that are way above their capacity. Stick to name brands like *Samsung* or *Panasonic*. A big hint that a battery is fake is if the weight is under 40 grams.
-   ![Fake 18650 Batteries](/assets/images/batteries.png)
+   ![Fake 18650 Batteries](../../assets/images/batteries.png)
 
 #### Pay attention to SMA cables
    When you are purchasing SMA cables and adapters make sure you check the gender of the antenna and cables you're going to use. Mismatched connectors may cause permanent damage to your node, possibly leaving it unusable.

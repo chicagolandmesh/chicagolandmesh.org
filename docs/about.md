@@ -31,7 +31,7 @@ Meshtastic does not require you to have a HAM license and operates in unlicensed
 The purpose of Chicagoland Mesh is to expand coverage in our area and build out the network to make it more usable. We currently have a number of nodes located in downtown Chicago and on top of other buildings out in the suburbs. We are always looking to expand our coverage and rely on ourselves and others who can get nodes in high up places to join us in building our off-grid communications network.
 
 <figure markdown="span">
-  ![Community Upload](/assets/images/node.jpg){ width=500 }
+  ![Community Upload](assets/images/node.jpg){ width=500 }
   <figcaption></figcaption>
 </figure>
 
@@ -39,7 +39,7 @@ The purpose of Chicagoland Mesh is to expand coverage in our area and build out 
 
 !!! warning
 
-    Make sure to look into the [mistakes to avoid](/guides/getting-started/avoid-mistakes) page to avoid common pitfalls
+    Make sure to look into the [mistakes to avoid](guides/getting-started/avoid-mistakes.md) page to avoid common pitfalls
 
 1. Join [our Discord](https://chicagolandmesh.org/discord) to get to know us
 2. Purchase [supported hardware](https://meshtastic.org/docs/hardware/devices) and [antenna](https://meshtastic.org/docs/hardware/antennas)

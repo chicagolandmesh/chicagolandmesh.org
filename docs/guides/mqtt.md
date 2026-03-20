@@ -46,7 +46,7 @@ Enabling MQTT will allow you to appear on [Liam Cottle MeshMap](https://meshtast
 10. Set the pre-Shared key to `AQ==`
 11. Leave the name blank
 12. Enable MQTT uplink and disable downlink
-    - This is set to send messages recieved to MQTT but prevents your node from getting messages from MQTT. Read more about this in the [optional settings](#optional-settings-below).
+    - This is set to send messages recieved to MQTT but prevents your node from getting messages from MQTT. Read more about this in the [optional settings](#optional-settings).
 13. Enable Map Reporting, set Map Publish Interval to 30 (seconds), and set your desired Position Precision
 
     <br>
@@ -56,4 +56,4 @@ Enabling MQTT will allow you to appear on [Liam Cottle MeshMap](https://meshtast
 
 1. If you are using a mobile device, Make sure to enable Connect to mesh
 2. The uplink and downlink settings can be changed to your preference if you want to contact others through MQTT. These instructions were created for the standard set by us
-3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.net) and [Chicagoland(MeshView)](https://chicagolandmesh.org/meshview) 
+3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.net) and [Chicagoland(MeshView)](https://chicagolandmesh.org/meshview)

@@ -16,7 +16,7 @@ tags:
 
     Configure your node for the best possible optimizations.
 
-    [:fontawesome-solid-angle-right: Customization](getting-started)
+    [:fontawesome-solid-angle-right: Customization](getting-started/index.md)
 
 -   :material-radar:{ .lg .middle } __Local MQTT Setup__
 
@@ -25,7 +25,7 @@ tags:
     Properly setup MQTT on your node. Make sure to disable
     downlink!
 
-    [:fontawesome-solid-angle-right: Learn how](mqtt)
+    [:fontawesome-solid-angle-right: Learn how](mqtt.md)
 
 -   :material-lock:{ .lg .middle } __Local Encrypted Channel Setup__
 
@@ -33,7 +33,7 @@ tags:
 
     Learn how to join our local and secure mesh network!
 
-    [:fontawesome-solid-angle-right: Setup now](local-channel)
+    [:fontawesome-solid-angle-right: Setup now](local-channel.md)
 
 -   :material-solar-power-variant:{ .lg .middle } __Solar builds__
 
@@ -42,7 +42,7 @@ tags:
     Solar builds allow for the placement of fixed routers
     without the need of dedicated power of previous wiring.
 
-    [:fontawesome-solid-angle-right: Get started](builds/solar)
+    [:fontawesome-solid-angle-right: Get started](builds/solar.md)
 
 -   :material-crosshairs-gps:{ .lg .middle } __Fixed builds__
 
@@ -50,7 +50,7 @@ tags:
 
     Learn how to setup a fixed node for your home or other locations.
 
-    [:fontawesome-solid-angle-right: Jump start](builds/fixed)
+    [:fontawesome-solid-angle-right: Jump start](builds/fixed.md)
 
 -   :material-cellphone-text:{ .lg .middle } __Mobile builds__
 
@@ -59,6 +59,6 @@ tags:
     Have LoRa communications everywhere you go. Learn how to
     build enclosures for your mobile nodes.
 
-    [:fontawesome-solid-angle-right: Explore](builds/mobile)
+    [:fontawesome-solid-angle-right: Explore](builds/mobile.md)
 
 </div>

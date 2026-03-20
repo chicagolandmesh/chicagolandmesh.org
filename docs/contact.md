@@ -7,4 +7,4 @@ hide: navigation
 and join the [Discord server](https://chicagolandmesh.org/discord)! -->
 Reach out on our [Discord server](https://chicagolandmesh.org/discord)!
 
-![Chicagoland Mesh Logo](/assets/images/logo-background.png){ width=500 }
+![Chicagoland Mesh Logo](assets/images/logo-background.png){ width=500 }
