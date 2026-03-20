@@ -42,8 +42,7 @@ hooks:
   - mkdocs_hooks.py
 
 plugins:
-  - tags:
-      tags_file: tags.md
+  - tags
   - search
   - glightbox
   - minify:
