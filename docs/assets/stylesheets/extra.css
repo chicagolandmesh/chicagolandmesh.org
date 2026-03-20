@@ -53,3 +53,7 @@
     color: var(--md-default-fg-color--light);
 }
 
+/* prevent bouncing effect when scrolling out of bounds */
+html {
+    overscroll-behavior-y: none;
+}
