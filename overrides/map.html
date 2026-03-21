@@ -11,10 +11,26 @@
 {% endblock %}
 
 {% block content %}
+  <!-- if page loaded from instant navigation plugin, reload to page because the
+  js bundle will error if loaded twice in same session -->
+  <script>
+    if (typeof document$ !== "undefined") {
+      window.location.reload();
+    }
+  </script>
+
   <noscript>
     <p style="text-align: center; margin-top: 2rem;">Enable javascript to use map.</p>
   </noscript>
   <div id="map"></div>
+
+  <!-- if page loaded from instant navigation plugin, set modal hidden because
+  css bundle doesn't load fast enough -->
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 
   <div class="modal-overlay hidden under">
     <div class="modal-content">

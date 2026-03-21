@@ -76,11 +76,9 @@ theme:
   logo: "assets/images/logo-clear.svg"
   favicon: "assets/images/logo-clear.svg"
   features:
-    # TODO:
-    # - navigation.instant
-    # - navigation.instant.prefetch
-    # - navigation.instant.progress
-    # - navigation.instant.preview
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
     - navigation.tabs
     - navigation.path
     - navigation.section

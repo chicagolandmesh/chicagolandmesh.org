@@ -103,7 +103,14 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  // handle mkdocs instant loading feature
+  if (typeof document$ !== "undefined") {
+    handleEmbed();
+  } else {
+    document.addEventListener("DOMContentLoaded", handleEmbed);
+  }
+
+  function handleEmbed() {
     const iframe = document.querySelector("iframe");
     const container = document.querySelector(".loading-container");
     const notification = document.querySelector(".loading-notification");
@@ -153,7 +160,7 @@
 	link.href = e.data.url;
       }
     });
-  });
+  }
 
   function updateTheme(iframe) {
     if (document.body.getAttribute('data-md-color-scheme') == 'chicago-light') {
