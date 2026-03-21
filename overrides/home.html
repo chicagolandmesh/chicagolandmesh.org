@@ -1,145 +1,191 @@
 {% extends "main.html" %}
 
-{% block htmltitle %}
-  <title>Chicagoland Mesh</title>
-{% endblock %}
-
 {% block styles %}
-<link rel="stylesheet" href="assets/stylesheets/image-gallery.css">
-<!--<style>
-    .widget-2vZvsN.widget-theme-dark {
-      overflow: unset;
-    }
-  </style>-->
 {{ super() }}
+  <!-- home page -->
+  <style>
+    .background-color {
+      background: linear-gradient(
+        to bottom,
+        var(--md-primary-fg-color),
+        rgb(63, 148, 217) 99%,
+        var(--md-default-bg-color) 99%
+      );
+    }
+    .mdx-container {
+      padding-top: px2rem(20px);
+    }
+    .md-main__inner {
+      max-width: 60%;
+    }
+    @media only screen {
+      .md-main__inner {
+        max-width: 100%;
+      }
+      .md-ellipsis {
+        font-weight: bold;
+      }
+    }
+  </style>
+
+  <!-- prevent header from swapping to alternative title -->
+  <style>
+    .md-header__title--active .md-header__topic {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .md-header__title--active .md-header__topic + .md-header__topic {
+      opacity: 0;
+    }
+  </style>
+
+  <!-- image slides -->
+  <link rel="stylesheet" href="https://unpkg.com/react-image-gallery@1.3.0/styles/css/image-gallery.css"/>
+
+  <!-- image slides overrides -->
+  <style>
+    /* moved index down to prevent overlapping header */
+    .image-gallery-icon {
+      z-index: 1;
+    }
+    .image-gallery-bullets {
+      z-index: 1;
+    }
+    /* limit size on desktop */
+    .image-gallery-content .image-gallery-slide .image-gallery-image {
+      height: 80vh;
+      max-width: 100%;
+    }
+    /* limit size on mobile */
+    @media only screen and (max-width: 767px) {
+      .image-gallery-content .image-gallery-slide .image-gallery-image {
+        height: 40vh;
+        max-width: 100%;
+      }
+    }
+  </style>
 {% endblock %}
 
 {% block tabs %}
 {{ super() }}
-<style>
-  .background-color {
-    background: linear-gradient(to bottom, var(--md-primary-fg-color), rgb(63, 148, 217) 99%, var(--md-default-bg-color) 99%);
-  }
-
-  .mdx-container {
-    padding-top: px2rem(20px);
-  }
-
-  .md-main__inner {
-    max-width: 60%;
-  }
-  @media only screen {
-  .md-main__inner {
-    max-width: 100%;
-  }
-
-  .md-ellipsis {
-    font-weight: bold;
-  }
-}
-</style>
-<div class="background-color">
-  <section class="mdx-container">
-    <div class="md-grid md-typeset">
-      <div class="mdx-gallery">
-        <div style="margin: 5%; margin-bottom: 10%" class="mdx-hero__content">
-          <h1>Welcome to Chicagoland Mesh!</h1>
-          <p>{{ config.site_description }}</p>
-          <a href="/about" title="About" class="md-button md-button--primary">
-            Learn more
-          </a>
-          <a href="/guides/getting-started/" title="Guides" class="md-button">
-            Getting started
-          </a>
+  <div class="background-color">
+    <section class="mdx-container">
+      <div class="md-grid md-typeset">
+        <div class="mdx-gallery">
+          <div style="margin: 5%; margin-bottom: 10%" class="mdx-hero__content">
+            <h1>Welcome to Chicagoland Mesh!</h1>
+            <p>{{ config.site_description }}</p>
+            <a href="/about" title="About" class="md-button md-button--primary">
+              Learn more
+            </a>
+            <a href="/guides/getting-started/" title="Guides" class="md-button">
+              Getting started
+            </a>
+          </div>
         </div>
       </div>
-  </section>
-</div>
+    </section>
+  </div>
 {% endblock %}
 
 {% block content %}
-<!-- slideshow -->
-<section>
-  <noscript>
-    <p style="text-align:center">Enable JavaScript to view slideshow.</p>
-  </noscript>
-  <div style="
-    display:flex;
-    justify-content:center;
-    " id="image-slides"></div>
+  <!-- image slides -->
+  <section>
+    <noscript>
+      <p style="text-align: center">Enable JavaScript to view slideshow.</p>
+    </noscript>
+    <div style="display: flex; justify-content: center" id="image-slides"></div>
+    <div style="text-align: center; margin-top: 10px">
+      <a href="/gallery" title="" class="md-button md-button--primary">
+        View more
+      </a>
+    </div>
+  </section>
 
-  <div style="
-      text-align: center;
-      margin-top:10px;
-    ">
-    <a href="/gallery" title="" class="md-button md-button--primary">
-      View more
-    </a>
-  </div>
-</section>
-
-<!-- discord -->
-<section style="
+  <!-- discord info -->
+  <section style="
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin: 5% 0% 5% 0%;
   ">
-  <div>
     <div>
-      <h1 style="margin-bottom:10px">Join our Discord server</h1>
-      <p style="
-        margin-bottom: 20px;
-        max-width: 20em;
-        ">
-        Want to participate? Have ideas? Need help? Join the over <span id="count">1,500</span> members and counting!
-      </p>
+      <div>
+        <h1 style="margin-bottom: 10px">Join our Discord server</h1>
+        <p style="margin-bottom: 20px; max-width: 20em">
+          Want to participate? Have ideas? Need help? Join the over
+          <span id="count">1,500</span> members and counting!
+        </p>
+      </div>
+      <iframe
+        src="https://discord.com/widget?id=1218078395565608990"
+        width="450"
+        height="600"
+        allowtransparency="true"
+        frameborder="0"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        style="
+          margin-bottom: 1.5rem;
+          border-radius: 10px;
+          box-shadow: 0 7px 12px 5px rgb(0 0 0 / 0.2);
+        "
+      ></iframe>
     </div>
-    <iframe 
-      src="https://discord.com/widget?id=1218078395565608990"
-      width="450"
-      height="600"
-      allowtransparency="true"
-      frameborder="0"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-      style="margin-bottom: 1.5rem; border-radius: 10px; box-shadow:0 7px 12px 5px rgb(0 0 0 / 0.2);"
-    ></iframe>
-  </div>
-  <div style="max-width: 50vh">
-    <img style="width: 100%; height: auto; border-radius: 10px; box-shadow:0 7px 12px 5px rgb(0 0 0 / 0.2);" src="assets/images/nodes.png"></img>
-  </div>
-</section>
-{% endblock %}
+    <div style="max-width: 28em">
+      <img src="assets/images/nodes.png" style="
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 7px 12px 5px rgb(0 0 0 / 0.2);
+      "/>
+    </div>
+  </section>
 
-{% block scripts %}
-<!-- react for image slides -->
-<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-<!-- image slides -->
-<script src="https://unpkg.com/react-image-gallery@1.3.0/build/image-gallery.js"></script>
-<script>
-  var images = [
-    {original: 'assets/images/gallery/image01.jpg'},
-    {original: 'assets/images/gallery/image02.jpg'},
-    {original: 'assets/images/gallery/image03.jpg'},
-    {original: 'assets/images/gallery/image04.jpg'},
-    {original: 'assets/images/gallery/image05.jpg'}
-  ];
-  ReactDOM.render(
-    React.createElement(ImageGallery.default, {
-      items: images,
-      autoPlay: true,
-      showBullets: true,
-      showThumbnails: false,
-      slideDuration: 800,
-      slideInterval: 5000,
-      showFullscreenButton: false,
-      showPlayButton: false,
-      showNav: true
-    }),
-    document.getElementById('image-slides')
-  );
-</script>
-{{ super() }}
+  <!-- image slides scripts -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react-image-gallery@1.3.0/build/image-gallery.js"></script>
+  <script>
+    function loadImageGallery() {
+      var images = [
+        { original: "assets/images/gallery/image01.jpg" },
+        { original: "assets/images/gallery/image02.jpg" },
+        { original: "assets/images/gallery/image03.jpg" },
+        { original: "assets/images/gallery/image04.jpg" },
+        { original: "assets/images/gallery/image05.jpg" },
+      ];
+      ReactDOM.render(
+        React.createElement(ImageGallery.default, {
+          items: images,
+          autoPlay: true,
+          showBullets: true,
+          showThumbnails: false,
+          slideDuration: 800,
+          slideInterval: 5000,
+          showFullscreenButton: false,
+          showPlayButton: false,
+          showNav: true,
+        }),
+        document.getElementById("image-slides"),
+      );
+    }
+
+    function init() {
+      // wait until React and ReactDOM are available because sometimes instant
+      // navigation will load this before
+      if (window.React && window.ReactDOM && window.ImageGallery) {
+        loadImageGallery();
+      } else {
+        setTimeout(init, 50);
+      }
+    }
+
+    if (typeof document$ !== "undefined") {
+      init();
+    } else {
+      document.addEventListener("DOMContentLoaded", init);
+    }
+  </script>
 {% endblock %}
