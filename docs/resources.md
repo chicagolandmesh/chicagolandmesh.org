@@ -11,41 +11,32 @@ tags:
 
 <div class="grid cards" markdown>
 
--   [Chicagoland Mesh Github](https://github.com/chicagolandmesh/chicagolandmesh.org)
+- [Chicagoland Mesh Github](https://github.com/chicagolandmesh/chicagolandmesh.org)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/chicagolandmesh/chicagolandmesh.org)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/chicagolandmesh/chicagolandmesh.org)
+- [Official Meshtastic Website](https://meshtastic.org/)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshtastic.org/)
 
--   [Official Meshtastic Website](https://meshtastic.org/)
+- [Awesome Meshtastic Github](https://github.com/ShakataGaNai/awesome-meshtastic/)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/ShakataGaNai/awesome-meshtastic/)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://meshtastic.org/)
+- [Meshtastic Local Groups](https://meshtastic.org/docs/community/local-groups/)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/673/allowJPG/noanimate/http://meshtastic.org/docs/community/local-groups/)
 
--   [Awesome Meshtastic Github](https://github.com/ShakataGaNai/awesome-meshtastic/)
+- [TC2-BBS-Mesh](https://github.com/TheCommsChannel/TC2-BBS-mesh)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/TheCommsChannel/TC2-BBS-mesh)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/ShakataGaNai/awesome-meshtastic/)
+- [meshing-around BBS bot](https://github.com/SpudGunMan/meshing-around)
+  ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/SpudGunMan/meshing-around)
 
--   [Meshtastic Local Groups](https://meshtastic.org/docs/community/local-groups/)
+- [Meshtastic Antenna Reports](https://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://meshtastic.org/docs/community/local-groups/)
+- [Meshtastic SAME EAS Alerter](https://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
+  ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
 
--   [TC2-BBS-Mesh](https://github.com/TheCommsChannel/TC2-BBS-mesh)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/TheCommsChannel/TC2-BBS-mesh)
-
--   [meshing-around BBS bot](https://github.com/SpudGunMan/meshing-around)
-
-    ![Link preview](https://image.thum.io/get/width/700/http://github.com/SpudGunMan/meshing-around)
-
--   [Meshtastic Antenna Reports](https://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/RicInNewMexico/Meshtastic-Antenna-Reports)
-
--   [Meshtastic SAME EAS Alerter](https://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
-
-    ![Link preview](https://image.thum.io/get/width/700/http://github.com/RCGV1/Meshtastic-SAME-EAS-Alerter)
-
--   [Meshtastic Site Planner](https://site.meshtastic.org)
-
-    ![Link preview](https://image.thum.io/get/width/700/http://site.meshtastic.org)
+- [Meshtastic Site Planner](https://site.meshtastic.org)
+  ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://site.meshtastic.org)
 
 </div>
 
@@ -54,21 +45,17 @@ tags:
 
 <div class="grid cards" markdown>
 
--   [MQTT MeshMap](https://meshmap.net/)
+- [MQTT MeshMap](https://meshmap.net/)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshmap.net/)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://meshmap.net/)
+- [Liam Cottle's MQTT MeshMap](https://meshtastic.liamcottle.net/)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshtastic.liamcottle.net/)
 
--   [Liam Cottle's MQTT MeshMap](https://meshtastic.liamcottle.net/)
+- [meshtastic-mqtt-discord-bridge](https://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://meshtastic.liamcottle.net/)
-
--   [meshtastic-mqtt-discord-bridge](https://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/daviesgeek/meshtastic-mqtt-discord-bridge?tab=readme-ov-file)
-
--   [MeshView](https://github.com/pablorevilla-meshtastic/meshview)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://github.com/pablorevilla-meshtastic/meshview)
+- [MeshView](https://github.com/pablorevilla-meshtastic/meshview)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/pablorevilla-meshtastic/meshview)
 
 </div>
 
@@ -77,20 +64,16 @@ tags:
 
 <div class="grid cards" markdown>
 
--   [MeshSense](https://affirmatech.com/meshsense)
+- [MeshSense](https://affirmatech.com/meshsense)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://affirmatech.com/meshsense)
 
-    ![Link preivew](https://image.thum.io/get/width/700/http://affirmatech.com/meshsense)
+- [Liam Cottle's MeshTXT](https://meshtxt.liamcottle.net/)
+  ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshtxt.liamcottle.net/)
 
--   [Liam Cottle's MeshTXT](https://meshtxt.liamcottle.net/)
+- [HeyWhatsThat](https://www.heywhatsthat.com/)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://www.heywhatsthat.com/)
 
-    ![Link Preview](https://image.thum.io/get/width/700/http://meshtxt.liamcottle.net/)
-
--   [HeyWhatsThat](https://www.heywhatsthat.com/)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://www.heywhatsthat.com/)
-
--   [HeyWhatsThat Path Profiler](https://www.heywhatsthat.com/profiler.html)
-
-    ![Link preivew](https://image.thum.io/get/width/700/http://www.heywhatsthat.com/profiler.html)
+- [HeyWhatsThat Path Profiler](https://www.heywhatsthat.com/profiler.html)
+  ![Link preivew](https://image.thum.io/get/width/700/maxAge/673/allowJPG/noanimate/http://www.heywhatsthat.com/profiler.html)
 
 </div>

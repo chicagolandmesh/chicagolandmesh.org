@@ -2,6 +2,7 @@
 data/
 dist/
 
+.cache/
 __pycache__/
 venv/
 javascript/map/node_modules/

@@ -16,6 +16,7 @@ clean:
 	rm -rf $(MAP_SPRITES)
 	rm -rf $(MAP_JS_DIR)
 	rm -f $(MAP_CSS_DIR)/map.*.css
+	rm -rf .cache
 	rm -rf venv
 	rm -rf javascript/map/node_modules
 	rm -rf __pycache__

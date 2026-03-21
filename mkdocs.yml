@@ -44,11 +44,10 @@ hooks:
 plugins:
   - tags
   - search
+  - privacy
   - glightbox
   - minify:
       minify_html: true
-  # TODO: privacy plugin doesn't work with resources.md
-  # - privacy
   # TODO: build guides
   # - git-authors
   # - git-revision-date-localized

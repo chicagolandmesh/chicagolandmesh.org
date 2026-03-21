@@ -47,6 +47,10 @@ chicagolandmesh.org {
 			handle @fingerprinted {
 				header Cache-Control "public, max-age=31536000, immutable"
 			}
+
+			handle /assets/external/* {
+				header Cache-Control "public, max-age=31536000, immutable"
+			}
 		}
 
 		header Cache-Control "public, max-age=3600, must-revalidate"

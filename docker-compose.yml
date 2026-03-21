@@ -15,7 +15,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: 1000:1000
     command: >
       serve
       --watch /docs/docs
@@ -28,6 +27,7 @@ services:
       - ./overrides:/docs/overrides
       - ./mkdocs.yml:/docs/mkdocs.yml
       - ./mkdocs_hooks.py:/docs/mkdocs_hooks.py
+      - ./.cache:/docs/.cache # privacy plugin cache
     labels:
       caddy: ${DEV_BASE_URL}
       caddy.handle: /*
