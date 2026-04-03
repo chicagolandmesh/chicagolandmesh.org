@@ -1,0 +1,140 @@
+{% extends "main.html" %}
+
+{% block styles %}
+{{ super() }}
+  <link rel="stylesheet" href="{{ config.extra.map_css_bundle | url }}">
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+  <script src="{{ config.extra.map_js_bundle | url }}"></script>
+{% endblock %}
+
+{% block content %}
+  <!-- if page loaded from instant navigation plugin, reload to page because the
+  js bundle will error if loaded twice in same session -->
+  <script>
+    if (typeof document$ !== "undefined") {
+      window.location.reload();
+    }
+  </script>
+
+  <noscript>
+    <p style="text-align: center; margin-top: 2rem;">Enable javascript to use map.</p>
+  </noscript>
+  <div id="map"></div>
+
+  <!-- if page loaded from instant navigation plugin, set modal hidden because
+  css bundle doesn't load fast enough -->
+  <style>
+    .hidden {
+      opacity: 0;
+    }
+  </style>
+
+  <div class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2>Enter Node Information</h2>
+      <form id="node-form">
+        <div>
+          <label for="nodeTitle">Name</label>
+          <input class="form-input" type="text" minlength="1" maxlength="50" id="nodeTitle" name="name" placeholder="Anonymous if empty" aria-describedby="nodeTitleHelp">
+          <div id="nodeTitleHelp" class="form-text">Node name that will show up for other users. Will be <i>Anonymous</i> if left empty.</div>
+        </div>
+        <div>
+          <label for="nodeElevation">Elevation</label>
+          <input class="form-input" type="number" id="nodeElevation" name="elevation" placeholder="Feet from ground level">
+          <div id="nodeElevationHelp" class="form-text">The elevation in feet that the node is from ground level.</div>
+        </div>
+        <div>
+          <label for="nodeFrequency">Frequency</label>
+          <select class="form-input" id="nodeFrequency" name="frequency" aria-describedby="nodeFrequencyHelp" required>
+            <option value="915">915 MHz</option>
+            <option value="868">868 MHz</option>
+            <option value="433">433 MHz</option>
+          </select>
+          <div id="nodeFrequencyHelp" class="form-text">The <a href="https://meshtastic.org/docs/overview/radio-settings/" target="_blank">frequency</a> your node is set to use.</div>
+        </div>
+        <div>
+          <label for="nodeRole">Role</label>
+          <select class="form-input" id="nodeRole" name="role" aria-describedby="nodeRoleHelp" required>
+            <option value="fixed">Fixed</option>
+            <option value="portable">Portable</option>
+            <option value="router">Router</option>
+            <option value="repeater">Repeater</option>
+          </select><br>
+          <div id="nodeRoleHelp" class="form-text">Select the correct role of your node.</div>
+        </div>
+        <div>
+          <input type="checkbox" id="usernamePrivacy" name="privacy" aria-describedby="usernamePrivacyHelp" style="margin-right: 0.25rem;">
+          <input type="hidden" value="off" name="privacy">
+          <label for="usernamePrivacy" style="margin-bottom: 0;">Keep Discord username hidden?</label>
+          <div id="usernamePrivacyHelp" class="form-text" style="margin-top:0;">By default usernames are only shown for logged in users. If set, will hide your username from all of your nodes on the map.</div>
+        </div>
+        <div>
+          <input type="checkbox" id="nodeMQTT" name="mqttUplink" aria-describedby="nodeMQTTHelp" style="margin-right: 0.25rem;">
+          <input type="hidden" value="off" name="mqttUplink">
+          <label for="nodeMQTT" style="margin-bottom: 0;">Using the Chicago MQTT root topic?</label>
+          <div id="nodeMQTTHelp" class="form-text" style="margin-top:0;">Is your node set to uplink the primary channel to <a href="/guides/mqtt/#mqtt-settings" target="_blank"><i>mqtt.chimesh.org</i></a> on the topic <i>msh/US/IL/Chi</i>?</div>
+        </div>
+        <div style="margin: 0; margin-top: 4px;">
+          <button type="button" class="form-button">Cancel</button>
+          <button type="submit" class="form-button blue">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2>Change Node Information</h2>
+      <form id="node-update-form">
+        <div>
+          <label for="nodeUpdateTitle">Name</label>
+          <input class="form-input" type="text" minlength="1" maxlength="50" id="nodeUpdateTitle" name="name" placeholder="Anonymous if empty" aria-describedby="nodeUpdateTitleHelp">
+          <div id="nodeUpdateTitleHelp" class="form-text">Node name that will show up for other users. Will be <i>Anonymous</i> if left empty.</div>
+        </div>
+        <div>
+          <label for="nodeUpdateElevation">Elevation</label>
+          <input class="form-input" type="number" id="nodeUpdateElevation" name="elevation" placeholder="Feet from ground level">
+          <div id="nodeUpdateElevationHelp" class="form-text">The elevation in feet that the node is from ground level.</div>
+        </div>
+        <div>
+          <label for="nodeUpdateFrequency">Frequency</label>
+          <select class="form-input" id="nodeUpdateFrequency" name="frequency" aria-describedby="nodeFrequencyHelp" required>
+            <option value="915">915 MHz</option>
+            <option value="868">868 MHz</option>
+            <option value="433">433 MHz</option>
+          </select>
+          <div id="nodeUpdateFrequencyHelp" class="form-text">The <a href="https://meshtastic.org/docs/overview/radio-settings/" target="_blank">frequency</a> your node is set to use.</div>
+        </div>
+        <div>
+          <label for="nodeUpdateRole">Role</label>
+          <select class="form-input" id="nodeUpdateRole" name="role" aria-describedby="nodeUpdateRoleHelp" required>
+            <option value="fixed">Fixed</option>
+            <option value="portable">Portable</option>
+            <option value="router">Router</option>
+            <option value="repeater">Repeater</option>
+          </select><br>
+          <div id="nodeUpdateRoleHelp" class="form-text">Select the correct role of your node.</div>
+        </div>
+        <div>
+          <input type="checkbox" id="updateUsernamePrivacy" name="privacy" aria-describedby="updateUsernamePrivacyHelp" style="margin-right: 0.25rem;">
+          <input type="hidden" value="off" name="privacy">
+          <label for="updateUsernamePrivacy" style="margin-bottom: 0;">Keep Discord username hidden?</label>
+          <div id="updateUsernamePrivacyHelp" class="form-text" style="margin-top:0;">By default usernames are only shown for logged in users. If set, will hide your username from all of your nodes on the map.</div>
+        </div>
+        <div>
+          <input type="checkbox" id="nodeUpdateMQTT" name="mqttUplink" aria-describedby="nodeUpdateMQTTHelp" style="margin-right: 0.25rem;">
+          <input type="hidden" value="off" name="mqttUplink">
+          <label for="nodeUpdateMQTT" style="margin-bottom: 0;">Using the Chicago MQTT root topic?</label>
+          <div id="nodeUpdateMQTTHelp" class="form-text" style="margin-top:0;">Is your node set to uplink the primary channel to <a href="/guides/mqtt/#mqtt-settings" target="_blank"><i>mqtt.chimesh.org</i></a> on the topic <i>msh/US/IL/Chi</i>?</div>
+        </div>
+        <div style="margin: 0; margin-top: 4px;">
+          <button type="button" class="form-button">Cancel</button>
+          <button type="submit" class="form-button blue">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

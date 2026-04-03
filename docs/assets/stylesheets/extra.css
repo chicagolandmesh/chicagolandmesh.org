@@ -1,0 +1,82 @@
+[data-md-color-scheme="slate"] {
+    --md-primary-fg-color:  #111317;
+    --md-primary-bg-color:  hsla(0, 0%, 100%, 1);
+    /*--md-footer-bg-color:   #242526;*/
+    --md-typeset-a-color: #337ab7;
+    /*--md-accent-fg-color: #B3DDF2;*/
+    --md-accent-fg-color: red;
+}
+
+[data-md-color-scheme="chicago-light"] {
+    --md-primary-fg-color:  #B3DDF2;
+    --md-accent-fg-color: red;
+    /*--md-typeset-a-color: #B3DDF2;*/
+    --md-typeset-a-color: #74c3eb;
+    --md-primary-bg-color:  hsla(0, 0%, 100%, 1);
+}
+
+.md-header__topic {
+    color: #ff2424;
+}
+
+/* reduce top page margin */
+.md-main__inner.md-grid {
+    margin-top: 0.75rem;
+}
+
+/* add slight space to bottom of content */
+.md-content__inner.md-typeset {
+    margin-bottom: 2.5em;
+}
+
+/* add slight rounding to images and add space to top */
+.glightbox img {
+    border-radius: 10px;
+    margin-top: 0.5rem;
+}
+
+/* fix glich on mobile where headerlink adds extra white space */
+.headerlink {
+    display: inline !important;
+}
+
+/* remove space from top of image captions */
+.md-typeset figcaption {
+    margin-top: -0.5em;
+    margin-bottom: 0.25em;
+}
+
+/* reduce header margin */
+.md-typeset h1 {
+    margin-bottom: 0.75em;
+}
+.md-typeset h2 {
+    margin-top: 1.2em;
+}
+
+.md-header__button.md-logo {
+    margin: 0;
+    padding: 0;
+}
+
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+    height: 1.6rem;
+    width: 1.6rem;
+}
+
+.md-header__title {
+    font-size: 1rem;
+}
+
+.md-nav__title {
+    color: red !important;
+}
+
+.md-tabs__link {
+    color: var(--md-default-fg-color--light);
+}
+
+/* prevent bouncing effect when scrolling out of bounds */
+html {
+    overscroll-behavior-y: none;
+}

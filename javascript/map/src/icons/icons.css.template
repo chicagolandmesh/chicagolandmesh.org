@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "{{FONT_FAMILY}}";
+  src: url("{{URL_DATA}}");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.maplibregl-ctrl button.maplibregl-ctrl-login .maplibregl-ctrl-icon:before{
+  font-family: maplibregl-icons-custom;
+  content:"\e81f";
+  font-size: 20px;
+}
+
+.maplibregl-ctrl button.maplibregl-ctrl-logout .maplibregl-ctrl-icon:before{
+  font-family: maplibregl-icons-custom;
+  content:"\e820";
+  font-size: 20px;
+}
+
+.maplibregl-ctrl button.maplibregl-ctrl-home .maplibregl-ctrl-icon:before{
+  font-family: maplibregl-icons-custom;
+  content:"\e81e";
+  font-size: 22px;
+  line-height: 1;
+}
+
+.maplibregl-ctrl button.maplibregl-ctrl-marker-add .maplibregl-ctrl-icon:before{
+  font-family: maplibregl-icons-custom;
+  content:"\e81d";
+}
+
+.maplibregl-ctrl button.maplibregl-ctrl-help .maplibregl-ctrl-icon:before{
+  font-family: maplibregl-icons-custom;
+  content:"\e821";
+}

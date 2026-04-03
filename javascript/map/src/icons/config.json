@@ -1,0 +1,72 @@
+{
+  "name": "fontello",
+  "css_prefix_text": "ml-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "aa71e336cd0a924a442c88240b1d8f12",
+      "css": "maplibregl-ctrl-marker-add",
+      "code": 59421,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M375 479.2A104.2 104.2 0 0 0 479.2 375 104.2 104.2 0 0 0 375 270.8 104.2 104.2 0 0 0 270.8 375 104.2 104.2 0 0 0 375 479.2M375 83.3C535.8 83.3 666.7 213.7 666.7 375 666.7 593.8 375 916.7 375 916.7 375 916.7 83.3 593.8 83.3 375A291.7 291.7 0 0 1 375 83.3M625 708.3H750V583.3H833.3V708.3H958.3V791.7H833.3V916.7H750V791.7H625V708.3Z",
+        "width": 1000
+      },
+      "search": [
+        "maplibregl-ctrl-marker-add"
+      ]
+    },
+    {
+      "uid": "ce3cf091d6ebd004dd0b52d24074e6e3",
+      "css": "maplibregl-ctrl-help",
+      "code": 59425,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "1a705895771b4eb1adde1b3c1e4c375e",
+      "css": "maplibregl-ctrl-home-1",
+      "code": 59422,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M500 125L83.3 500H208.3V833.3H791.7V500H916.7L500 125M500 320.8C587.5 320.8 658.3 391.7 658.3 479.2 658.3 604.2 500 750 500 750 500 750 341.7 604.2 341.7 479.2 341.7 391.7 412.5 320.8 500 320.8M500 416.7A62.5 62.5 0 0 0 437.5 479.2 62.5 62.5 0 0 0 500 541.7 62.5 62.5 0 0 0 562.5 479.2 62.5 62.5 0 0 0 500 416.7Z",
+        "width": 1000
+      },
+      "search": [
+        "maplibregl-ctrl-home"
+      ]
+    },
+    {
+      "uid": "970f49a720ed74b043bf1e6626bd0f39",
+      "css": "maplibregl-ctrl-login-1",
+      "code": 59423,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M458.3 291.7L400 350 508.3 458.3H83.3V541.7H508.3L400 650 458.3 708.3 666.7 500 458.3 291.7M833.3 791.7H500V875H833.3C879.2 875 916.7 837.5 916.7 791.7V208.3C916.7 162.5 879.2 125 833.3 125H500V208.3H833.3V791.7Z",
+        "width": 1000
+      },
+      "search": [
+        "maplibregl-ctrl-login"
+      ]
+    },
+    {
+      "uid": "1b356dc91d86ab9c683ec038f926d460",
+      "css": "maplibregl-ctrl-logout-1",
+      "code": 59424,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M708.3 291.7L649.6 350.4 757.1 458.3H333.3V541.7H757.1L649.6 649.2 708.3 708.3 916.7 500M166.7 208.3H500V125H166.7C120.8 125 83.3 162.5 83.3 208.3V791.7C83.3 837.5 120.8 875 166.7 875H500V791.7H166.7V208.3Z",
+        "width": 1000
+      },
+      "search": [
+        "maplibregl-ctrl-logout"
+      ]
+    }
+  ]
+}
