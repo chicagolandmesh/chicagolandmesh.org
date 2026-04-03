@@ -91,24 +91,27 @@ about keeping a LoRa antenna attached.
    feel free to use the adhesive backing to secure to the side of the enclosure
 4. Connect the LoRa Antenna jumper from the enclosure to the LoRa connector on
    the Wiseblock Module.
-5. Connect the battery plug to the BATT connector on the Wiseblock. DOUBLE-CHECK
-   POLARITY MATCHES WHAT IS PRINTED ON THE BOARD.
+5. Connect the battery plug to the BATT connector on the Wiseblock.
+   <br>
+   **DOUBLE-CHECK POLARITY MATCHES WHAT IS PRINTED ON THE BOARD.**
 6. At this stage, I spread a bit of dielectric grease around the rubber gasket,
    but this is an optional step.
 7. Connect the solar plug from the lid of the enclosure to the SOLAR connector
-   on the Wiseblock. 8OUBLE-CHECK POLARITY MATCHES WHAT IS PRINTED ON THE BOARD.
-9. Ensure the rubber gasket is properly seated in the channel on the enclosure
+   on the Wiseblock.
+   <br>
+   **DOUBLE-CHECK POLARITY MATCHES WHAT IS PRINTED ON THE BOARD.**
+8. Ensure the rubber gasket is properly seated in the channel on the enclosure
    and close the lid. Secure the lid to the enclosure body with the provided
    screws. Start on a corner and snug each screw, alternating sides to ensure
    even clamping on the gasket (Use a "Star" pattern). Once each screw is
    snugged, re-tighten each screw, repeating the same pattern. No need to
    tighten too much here, just ensure enough camping so the gasket can seal
    properly.
-10. Alright! Your node is now connected and enclosed. Now would be a good time
-    to ensure you can connect to the node via BLE still.
-11. Pick a good spot and go hang your node! The options here are endless, so
+9. Alright! Your node is now connected and enclosed. Now would be a good time to
+   ensure you can connect to the node via BLE still.
+10. Pick a good spot and go hang your node! The options here are endless, so
     I'll let you figure out the best way to secure the enclosure and antenna.
-12. Once your node is hung, and your ANTENNA IS CONNECTED, you can enable TX in
+11. Once your node is hung, and your **ANTENNA IS CONNECTED**, you can enable TX in
     the Meshtastic LoRa settings and enjoy the use of your node!
 
 [RAKwireless WisBlock Meshtastic Starter Kit US915 SKU 116016]:<https://store.rokland.com/products/rak-wireless-wisblock-meshtastic-starter-kit?variant=40074367860819>
