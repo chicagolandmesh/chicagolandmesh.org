@@ -7,8 +7,7 @@ tags:
 
 ## Rak Wiseblock 4631 - nRF52840 Based Node
 
-<!-- html here so I can re-size the image -->
-<img src="https://i.imgur.com/2EcITSg.png" alt="Meshtastic Solar Node" width="400"/>
+![Meshtastic Solar Node](../../../assets/images/builds/solar-rak-wiseblock-4631.png){ width=400 }
 
 ### Description
 
