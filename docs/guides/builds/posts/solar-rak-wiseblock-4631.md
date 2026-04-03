@@ -3,6 +3,8 @@ date:
   created: 2025-04-03
 categories:
   - fixed
+authors:
+  - dillon-conner
 ---
 
 # Rak Wiseblock 4631 - nRF52840 Based Node
