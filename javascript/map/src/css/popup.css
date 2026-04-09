@@ -1,0 +1,50 @@
+/* styles for map popup */
+.maplibregl-popup-content {
+  padding: 0;
+  opacity: 0.95;
+}
+@media (max-width: 600px) {
+    .maplibregl-popup-spacer {
+        height: 50px;
+        pointer-events: none;
+    }
+}
+.popup-header {
+  font-size: medium;
+  word-wrap: break-word;
+  padding: 0.5rem;
+  padding-bottom: 0;
+}
+.popup-content {
+  font-size: medium;
+  padding: 0.35rem 0.5rem;
+}
+.popup-footer {
+  font-size: 0.65rem;
+  padding: 0.35rem 0.5rem;
+}
+.popup-buttons {
+  padding: 0.25rem 0.4rem;
+  display: flex;
+  align-items: center;
+  fill: var(--md-default-fg-color);
+}
+.popup-buttons button {
+  display: flex;
+  cursor: pointer;
+  width: 22px;
+  margin: 0 3px 0 3px;
+}
+.popup-buttons button:disabled,
+.popup-buttons button:disabled:hover {
+  fill: gray !important;
+  cursor: not-allowed;
+}
+#popup-edit-button:hover,
+#popup-move-button:hover {
+  fill: orange;
+}
+.popup-edit-button-enabled,
+#popup-delete-button:hover {
+  fill: red;
+}

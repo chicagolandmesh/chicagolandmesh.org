@@ -1,0 +1,74 @@
+{#-
+  Custom footer navigation that stays within the same logical section.
+-#}
+{% import "partials/language.html" as lang with context %}
+
+{% macro nav_key(node) -%}
+  {%- set parts = node.url.strip('/').split('/') if node and node.url else [] -%}
+  {{- parts[0] -}}
+{%- endmacro %}
+
+{% macro nav_label(node) -%}
+  {%- set parts = node.url.strip('/').split('/') if node and node.url else [] -%}
+  {{- parts[-2] | replace("-", " ") | title -}}
+{%- endmacro %}
+
+{% set current_key = nav_key(page) | trim %}
+{% set previous_page = page.previous_page if page.previous_page and (nav_key(page.previous_page) | trim) == current_key else none %}
+{% set next_page = page.next_page if page.next_page and (nav_key(page.next_page) | trim) == current_key else none %}
+
+<footer class="md-footer">
+  {% if "navigation.footer" in features %}
+    {% if previous_page or next_page %}
+      {% if page.meta and page.meta.hide %}
+        {% set hidden = "hidden" if "footer" in page.meta.hide %}
+      {% endif %}
+      <nav class="md-footer__inner md-grid" aria-label="{{ lang.t('footer') }}" {{ hidden }}>
+        {% if previous_page %}
+          {% set direction = lang.t("footer.previous") %}
+          {% set label = nav_label(previous_page) | trim %}
+          <a href="{{ previous_page.url | url }}" class="md-footer__link md-footer__link--prev" aria-label="{{ direction }} in {{ label }}: {{ previous_page.title | e }}">
+            <div class="md-footer__button md-icon">
+              {% set icon = config.theme.icon.previous or "material/arrow-left" %}
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                {{ direction }} in {{ label }}
+              </span>
+              <div class="md-ellipsis">
+                {{ previous_page.title }}
+              </div>
+            </div>
+          </a>
+        {% endif %}
+        {% if next_page %}
+          {% set direction = lang.t("footer.next") %}
+          {% set label = nav_label(next_page) | trim %}
+          <a href="{{ next_page.url | url }}" class="md-footer__link md-footer__link--next" aria-label="{{ direction }} in {{ label }}: {{ next_page.title | e }}">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                {{ direction }} in {{ label }}
+              </span>
+              <div class="md-ellipsis">
+                {{ next_page.title }}
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              {% set icon = config.theme.icon.next or "material/arrow-right" %}
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </div>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      {% include "partials/copyright.html" %}
+      {% if config.extra.social %}
+        {% include "partials/social.html" %}
+      {% endif %}
+    </div>
+  </div>
+</footer>

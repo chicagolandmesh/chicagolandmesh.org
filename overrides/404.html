@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+{% block htmltitle %}
+  <title>404 Not Found - Chicagoland Mesh</title>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <style>
+    @media screen and (min-width: 76.25em) {
+      .md-sidebar--primary {
+        display: none;
+      }
+    }
+    .md-content {
+      text-align: center;
+    }
+    .md-header--shadow {
+      box-shadow: unset;
+    }
+    .md-sidebar.md-sidebar--secondary {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <h1>404 Not Found</h1>
+  <p>Try navigating using the heading tabs, or just search 👆</p>
+{% endblock %}

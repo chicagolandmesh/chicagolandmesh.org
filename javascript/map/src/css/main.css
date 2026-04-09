@@ -1,0 +1,36 @@
+@import "maplibre-theme/classic.css";
+@import "controls.css";
+@import "popup.css";
+@import "banner.css";
+@import "modal.css";
+
+html, body {
+  overflow: hidden;
+}
+
+/* set map to full height and width of page */
+#map {
+  height: 100%;
+  width: 100%;
+}
+.md-main {
+  position: relative;
+}
+.md-main__inner.md-grid {
+  margin-top: 0 !important;
+  margin: 0;
+  position: absolute;
+  max-width: 100%;
+  width: 100%;
+}
+.md-content {
+  height: 100%;
+}
+.md-content__inner {
+  margin: 0;
+  padding-top: 0;
+  height: 100%;
+}
+.md-content__inner:before {
+  display: none;
+}
