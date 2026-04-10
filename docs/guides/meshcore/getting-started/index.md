@@ -44,7 +44,7 @@ tags:
 
 !!! tip "Next Steps"
 
-    View the [Configuring Meshtastic](configure.md) page to configure your node.
+    View the [Configuring Meshcore](configure.md) page to configure your node.
 
 ## Using MeshCore Client Apps
 
