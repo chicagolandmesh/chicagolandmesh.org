@@ -6,6 +6,7 @@ dist/
 __pycache__/
 venv/
 javascript/map/node_modules/
+api/hashicon/node_modules/
 api/map/tmp/
 api/map/bin/
 

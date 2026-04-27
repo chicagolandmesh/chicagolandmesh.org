@@ -13,7 +13,7 @@ RUN apk add --no-cache \
 COPY package*.json .
 RUN npm ci --omit=dev
 
-COPY server.js .
+COPY *.js .
 
 
 FROM node:18-alpine
@@ -25,10 +25,11 @@ RUN apk add --no-cache \
     pango \
     jpeg \
     giflib \
-    librsvg
+    librsvg \
+    font-noto
 
 COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/server.js .
+COPY --from=build /usr/src/app/*.js .
 
 EXPOSE 3000
 CMD ["node", "server.js"]

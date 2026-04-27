@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordapp/twemoji": "^16.0.1",
     "@emeraldpay/hashicon": "^0.5.2",
+    "@twemoji/api": "^17.0.2",
     "canvas": "^2.11.2",
     "express": "^4.19.2"
   }
