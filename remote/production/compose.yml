@@ -19,6 +19,9 @@ services:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
       - DISCORD_INVITE_URL=${DISCORD_INVITE_URL}
       - MESHVIEW_ADDR=${MESHVIEW_ADDR}
+      - CORESCOPE_ADDR=${CORESCOPE_ADDR}
+      - MESHCORE_LIVE_MAP_ADDR=${MESHCORE_LIVE_MAP_ADDR}
+      - MQTT_ADDR=${MQTT_ADDR}
     networks:
       - main
     restart: unless-stopped

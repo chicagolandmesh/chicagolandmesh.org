@@ -83,6 +83,16 @@ chicagolandmesh.org {
 		reverse_proxy {env.MESHVIEW_ADDR}
 	}
 
+	@corescope host corescope.chicagolandmesh.org
+	handle @corescope {
+		reverse_proxy {env.CORESCOPE_ADDR}
+	}
+
+	@live host live.chicagolandmesh.org
+	handle @live {
+		reverse_proxy {env.MESHCORE_LIVE_MAP_ADDR}
+	}
+
 	handle {
 		abort
 	}
@@ -97,5 +107,15 @@ chimesh.org {
 *.chimesh.org {
 	import logging
 
-	redir https://{labels.2}.chicagolandmesh.org{uri} permanent
+	@mqtt {
+		host mqtt.chimesh.org
+		header Upgrade websocket
+	}
+	handle @mqtt {
+		reverse_proxy {env.MQTT_ADDR}
+	}
+
+	handle {
+		redir https://{labels.2}.chicagolandmesh.org{uri} permanent
+	}
 }
