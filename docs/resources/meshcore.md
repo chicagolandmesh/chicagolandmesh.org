@@ -18,11 +18,6 @@ tags:
 
     ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshcore.io/)
 
--   [:material-access-point-network:{ .lg .top } __MeshCore Home UK__](https://meshcore.co.uk/)
-
-    Official MeshCore domain for UK - [migrated to MeshCore.io](https://www.reddit.com/r/meshcore/comments/1sae3pg/comment/odvglnw/).
-
-    ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshcore.co.uk/)
 
 -   [:fontawesome-brands-github:{ .lg .top } __MeshCore GitHub__](https://github.com/meshcore-dev/MeshCore)
 
@@ -81,4 +76,7 @@ tags:
 -   [Official MeshCore Map GitHub](https://github.com/meshcore-dev/map.meshcore.io)
     ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/meshcore-dev/map.meshcore.io)
 
+-   [MeshOS Keygen](https://meshoskey.com/)
+    ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshoskey.com/)
+   
 </div>
