@@ -26,7 +26,7 @@ tags:
 
 ## Software Installation and Device Role Selection
 
-1. Visit the [Meshcore Web Flasher](https://flasher.meshcore.io) in your web browser
+1. Visit the [MeshCore Web Flasher](https://flasher.meshcore.io) in your web browser
 2. Connect your device via USB to your computer
 3. Choose your device role by selecting the appropriate firmware type:
     - **Companion Firmware** (BLE or USB): Recommended for your first node. Provides full messaging capabilities and connects to mobile apps
@@ -48,7 +48,7 @@ tags:
 
 ## Using MeshCore Client Apps
 
-After setting up your Meshcore device with Companion firmware, you'll need a client app to send and receive messages. Meshcore offers several client options depending on your device and preferences.
+After setting up your MeshCore device with Companion firmware, you'll need a client app to send and receive messages. MeshCore offers several client options depending on your device and preferences.
 
 ### Mobile Apps
 
@@ -88,7 +88,7 @@ Once connected to your client app:
 
 ## Getting Help
 
-If you need assistance with the Meshcore:
+If you need assistance with the MeshCore:
 
 1. **Community Resources**: Check our [community resources](../../../resources/index.md) and [Discord](https://chicagolandmesh.org/discord) channels
 2. **Documentation**: Review the [MeshCore project documentation](https://docs.meshcore.io/)
@@ -101,7 +101,8 @@ If you need assistance with the Meshcore:
 
 ## Next Steps
 
-Once you have your Meshcore device connected:
+Once you have your MeshCore device connected:
 
 - Check out [Configure](configure.md) page
+- Check out [Configure MQTT](mqtt.md) page
 - Check out [Mistakes to Avoid](avoid-mistakes.md) page
