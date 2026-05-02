@@ -32,7 +32,7 @@ Use this section to choose how you want to browse the site: start with community
 
     ---
 
-    Open MeshCore guides and onboarding notes as this protocol section grows.
+    Open MeshCore guides covering Getting Started, Choosing a node role, and MQTT Observer setup.
 
     [:fontawesome-solid-angle-right: Open](meshcore/index.md)
 
