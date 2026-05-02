@@ -9,7 +9,7 @@ tags:
 
 ## What is a MeshCore Observer?
 
-A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](https://corescope.chimesh.org). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
+A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](https://chimesh.org/corescope), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
 
 !!! note
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
@@ -22,7 +22,7 @@ There are two ways to run an Observer:
 
 ### Step 1: Download the Firmware
 
-Use the LetsMesh onboarding page to find and download the correct firmware for your device variant: [https://analyzer.letsmesh.net/observer/onboard](https://analyzer.letsmesh.net/observer/onboard)
+Use the [LetsMesh Onboarding page](https://analyzer.letsmesh.net/observer/onboard) to find and download the correct firmware for your device variant. On the firmware page, select **observer-uplink-native-dev** in the version dropdown. You can also browse available builds directly from the [Nightly Observer Firmware Builds](https://files.gessaman.com/meshcore-observer/1.15.0-experimental-mqtt-observer-firmwares/).
 
 !!! note
     Files labeled **-merged** are for **fresh installs only** and will completely erase your flash. If you are updating from an existing MeshCore version, download the non-merged variant.
@@ -54,34 +54,84 @@ Use the LetsMesh onboarding page to find and download the correct firmware for y
     - Reopen the companion app
     - Confirm the firmware version under Remote Management
 
+!!! note
+    Your node's `IP address` may be set by your router's DHCP server to a diferent IP if you already connected your node to Wi-Fi.  Check your DHCP server to see what your node's local IP address is.    
+
 ### Step 3: Apply ChiMesh Observer Settings
 
 Once your firmware is installed, open the **Command Line** under Remote Management and enter the following configuration:
 
+---
+
+**Required commands:**
+
 ```
 set timezone America/Chicago
-set repeat off                # <-- dedicated observers only, skip if this node also repeats
+```
+```
 set path.hash.mode 2
+```
+```
 set advert.interval 240
-set flood.advert.interval 168 # <-- dedicated observer; use 72 or 48 if also acting as a repeater
+```
+```
 set mqtt.iata ORD
+```
+```
 set mqtt1.preset analyzer-us
-set mqtt2.preset analyzer-eu
-set mqtt3.preset chimesh
-set mqtt.owner your-primary-companion-device-pub.key # <-- optional but encouraged
+```
+```
+set mqtt2.preset chimesh
+```
+```
 set mqtt.rx on
+```
+```
 set mqtt.tx advert
+```
+```
 set wifi.ssid your-wifi-network
+```
+```
 set wifi.pwd your-wifi-password
+```
+```
 set bridge.enabled on
+```
+
+---
+
+**If this node also acts as a repeater:**
+```
+set flood.advert.interval 72
+```
+```
 reboot
+```
+
+**If this node is a dedicated observer only (does NOT repeat):**
+```
+set repeat off
+```
+```
+set flood.advert.interval 168
+```
+```
+reboot
+```
+
+---
+
+**Optional (but encouraged) — set to your companion device's public key:**
+```
+set mqtt.owner your-primary-companion-device-pub.key
 ```
 
 !!! note
     Replace `your-primary-companion-device-pub.key` with your companion device's actual public key. Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials, **do not wrap them in quotes**.
 
 !!! warning
-    `set repeat off` is for **dedicated observers only**. If this node is also serving as a mesh repeater, omit that line and consider using a lower `flood.advert.interval` value (72 or 48).
+    `set repeat off` is for **dedicated observers only**. If this node is also serving as a mesh repeater, make sure you run the `set repeat on` command and consider using a lower `flood.advert.interval` value (72 or 48).
 
 ---
 
@@ -98,7 +148,7 @@ reboot
 
 ### Step 1: Get Compatible Firmware
 
-Your node needs firmware that includes **packet logging** support. Download the appropriate version for your device from the [MeshCore Web Flasher](https://flasher.meshcore.io/) using the **Custom** option, or grab a pre-built packet-logging build for your variant.
+Your node needs firmware that includes **packet logging** support. Download the appropriate version for your device from the [LetsMesh Observer Firmware](https://analyzer.letsmesh.net/observer/onboard) website using the **latest version**, or grab a pre-built packet-logging build for your variant.
 
 ### Step 2: Connect and Run the Install Script
 
@@ -110,6 +160,8 @@ curl -fsSL https://raw.githubusercontent.com/Cisien/meshcoretomqtt/main/install.
 
 When asked whether to enable the LetsMesh Packet Analyzer, enter `y`.
 
+During installation, make sure to use the `chimesh` preset.
+
 !!! note
     This script is designed for **Repeater and Room Server** nodes only. For more details on configuration options, see the [meshcoretomqtt README](https://github.com/Cisien/meshcoretomqtt).
 
@@ -118,7 +170,7 @@ When asked whether to enable the LetsMesh Packet Analyzer, enter `y`.
 
 ### Step 3: ChiMesh MQTT
 
-The install script will configure the standard MQTT uplink. After setup, your observer data will flow to ChiMesh and appear on [CoreScope](https://corescope.chimesh.org) within a few minutes of your first advertisement packet being heard.
+The install script will configure the standard MQTT uplink. After setup, your observer data will flow to ChiMesh and appear on [CoreScope](https://chimesh.org/corescope), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098) within a few minutes of your first advertisement packet being heard.
 
 !!! note
     It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
@@ -127,7 +179,7 @@ The install script will configure the standard MQTT uplink. After setup, your ob
 
 ## Additional Notes
 - These settings are also required for upcoming ChiMesh(Core) services as they are announced
-- `set mqtt3.preset chimesh` is what connects your observer to the ChiMesh network specifically
+- `set mqtt2.preset chimesh` is what connects your observer to the ChiMesh network specifically
 - The `mqtt.owner` field is optional but highly encouraged, it links your observer to your primary companion device
 
 Thank you for supporting [ChiMesh.org](https://chimesh.org) - we hope to see you on MeshCore MQTT soon!
