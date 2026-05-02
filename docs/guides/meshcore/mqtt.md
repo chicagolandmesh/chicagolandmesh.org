@@ -9,7 +9,7 @@ tags:
 
 ## What is a MeshCore Observer?
 
-A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](https://chimesh.org/corescope), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
+A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](/corescope), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
 
 !!! note
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
@@ -170,7 +170,7 @@ During installation, make sure to use the `chimesh` preset.
 
 ### Step 3: ChiMesh MQTT
 
-The install script will configure the standard MQTT uplink. After setup, your observer data will flow to ChiMesh and appear on [CoreScope](https://chimesh.org/corescope), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098) within a few minutes of your first advertisement packet being heard.
+The install script will configure the standard MQTT uplink. After setup, your observer data will flow to ChiMesh and appear on [CoreScope](/corescope), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098) within a few minutes of your first advertisement packet being heard.
 
 !!! note
     It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
