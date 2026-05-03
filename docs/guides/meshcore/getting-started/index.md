@@ -9,7 +9,7 @@ tags:
 
 ## Hardware Requirements
 
-- **MeshCore-compatible device**: Check the [MeshCore documentation](https://docs.meshcore.io/faq/#121-hardware) and [MeshCore.io](https://meshcore.io/#hardware) for supported hardware
+- **MeshCore-compatible device**: Check the [RF Index website](https://www.rfindex.com/mesh/devices?firmware=MeshCore) and [MeshCore.io](https://meshcore.io/#hardware) for an up-to-date list of supported hardware
 - **Antenna**: A suitable antenna for your frequency band (915MHz for US operations)
 - **USB cable**: For device programming and power
 - **Power solution**: Battery pack, solar panel, or wall adapter depending on your deployment
