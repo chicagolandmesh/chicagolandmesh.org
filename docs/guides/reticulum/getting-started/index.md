@@ -325,8 +325,9 @@ It connects to your running `rnsd` daemon automatically.
 ---
 
 ## Next Steps
-
 Once Reticulum is running and you can see active interfaces in `rnstatus`:
 
 - Check out [Configure](configure.md) to set up radio parameters, tune interfaces, and explore advanced options
 - Check out [Mistakes to Avoid](avoid-mistakes.md) for common pitfalls and how to sidestep them
+- Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for community help and support
+- Ask in the [Reticulum channel on the ChiMesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) if you have questions or get stuck
