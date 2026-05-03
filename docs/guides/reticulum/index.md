@@ -18,7 +18,7 @@ This section contains documentation that is specific to Reticulum hardware, inst
 
     ---
 
-    Flash a node, connect to it, and walk through the first setup steps.
+    Go from zero to connected via TCP, a flashed node, or both.
 
     [:fontawesome-solid-angle-right: Open](getting-started/index.md)
 
