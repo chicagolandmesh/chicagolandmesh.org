@@ -24,6 +24,12 @@ tags:
 
     ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/meshcore-dev/MeshCore)
 
+-   [:fontawesome-brands-github:{ .lg .top } __Awesome MeshCore__](https://github.com/samuk/awesome-meshcore)
+
+    GitHub Repo with very useful and up to date MeshCore tools.
+
+    ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/samuk/awesome-meshcore)    
+
 </div>
 
 
@@ -89,9 +95,6 @@ tags:
 ## Other
 
 <div class="grid cards small" markdown>
-
--   [List of Other MeshCore Projects](https://github.com/samuk/awesome-meshcore)
-    ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/samuk/awesome-meshcore)
 
 -   [MeshOS KeyGen](https://meshoskey.com/)
     ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshoskey.com/)
