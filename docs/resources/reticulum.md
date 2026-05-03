@@ -16,12 +16,12 @@ tags:
 
     Official Reticulum project site and documentation entry point.
 
-    ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://reticulum.network/)
+    ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://reticulum.network/)
 
 -   [:fontawesome-brands-github:{ .lg .top } __Reticulum GitHub__](https://github.com/markqvist/Reticulum)
 
     Browse the LXMF and Reticulum ecosystem source repositories.
 
-    ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/markqvist/Reticulum)
+    ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/markqvist/Reticulum)
 
 </div>
