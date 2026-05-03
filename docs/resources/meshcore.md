@@ -96,9 +96,6 @@ tags:
 
 <div class="grid cards small" markdown>
 
--   [List of Other MeshCore Projects](https://github.com/samuk/awesome-meshcore)
-    ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/samuk/awesome-meshcore)
-
 -   [MeshOS KeyGen](https://meshoskey.com/)
     ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshoskey.com/)
 
