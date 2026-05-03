@@ -12,7 +12,7 @@ hide:
 
 ## What is Chicagoland Mesh?
 
-We are a growing community of people working together to create an off-grid, decentralized, and resilient communications network using inexpensive LoRa devices. Operating within the unlicensed 915 MHz ISM band, these devices are typically loaded with either Meshtastic or MeshCore firmware, enabling users to communicate without using traditional networks.
+We are a growing community of people working together to create an off-grid, decentralized, and resilient communications network using inexpensive LoRa devices. Operating within the unlicensed 915 MHz ISM band, these devices are typically loaded with either MeshCore or Meshtastic firmware, enabling users to communicate without using traditional networks.
 
 The FCC allows people to operate on ISM frequencies without having any form of FCC-affiliated license (such as that required for Ham/Amateur Radio). However, the 902-928 MHz range in particular is special, because transmissions under 1 watt over those frequencies can be encrypted, meaning your private messages will remain secure from prying eyes.
 
