@@ -26,6 +26,10 @@ tags:
 
 ## Software Installation and Device Role Selection
 
+!!! info "Setting Up an MQTT Observer Node?"
+
+    If you plan to configure your node as an MQTT observer (bridge to the internet), read the [Setup MQTT](../mqtt.md) guide before reading the steps below.
+
 1. Visit the [MeshCore Web Flasher](https://flasher.meshcore.io) in your web browser
 2. Connect your device via USB to your computer
 3. Choose your device role by selecting the appropriate firmware type:
@@ -40,11 +44,14 @@ tags:
 
 !!! tip "Role Selection"
 
-    Start with **Companion** firmware for your first node. You can always reflash with different firmware later as you learn more about your local mesh network.
+    - **Mobile/companion nodes**: Flash **Companion** firmware and disable repeat (`set repeat off`)
+    - **Infrastructure/well-placed nodes**: Flash **Repeater** firmware and enable repeat (`set repeat on`)
+
+    You can always reflash with different firmware later as you learn more about your local mesh network.
 
 !!! tip "Next Steps"
 
-    View the [Configuring Meshcore](configure.md) page to configure your node.
+    View the [Configuring MeshCore](configure.md) page to configure your node.
 
 ## Using MeshCore Client Apps
 
@@ -76,7 +83,7 @@ After setting up your MeshCore device with Companion firmware, you'll need a cli
 
 Once connected to your client app:
 
-- **Send messages**: Type and send text messages to other Meshcore users
+- **Send messages**: Type and send text messages to other MeshCore users
 - **View contacts**: See discovered nodes and their last seen times  
 - **Join channels**: Connect to public channels for group communications
 - **Manage settings**: Configure your node remotely through the app
