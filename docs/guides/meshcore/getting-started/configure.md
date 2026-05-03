@@ -33,8 +33,6 @@ Configure your device using the **USA/Canada (Recommended)** preset, which inclu
 | TX Power | `22 dBm` |
 | Airtime Factor | `1` |
 
----
-
 ## Required Commands
 
 ```bash
@@ -48,8 +46,6 @@ set path.hash.mode 2
 ```bash
 set advert.interval 240
 ```
-
----
 
 ## Node Role
 
@@ -96,15 +92,15 @@ key can send and receive messages in that channel.
 ### How Channel Names Become Secret Keys
 
 When you create or join a channel by name, MeshCore automatically derives a secret
-key from that name using a **cryptographic hash function**. This means:
+key from that name using a cryptographic hash function. This means:
 
 - The channel name is run through a one-way algorithm that always produces the
   same fixed length key for a given name
 - Anyone who enters the same channel name on their device gets the **identical
   secret key**, no manual key sharing required
-- The process is deterministic: `#chicago` will always generate
-  `c1c289b131e5222370cbc2048445844b`, on every device, every time
-- You cannot reverse the key back to the channel name (one way)
+- `#chicago` will always generate `c1c289b131e5222370cbc2048445844b`, on every
+  device, every time
+- You cannot reverse the key back to the channel name
 
 This is why sharing a channel name is equivalent to sharing access, the name
 **is** the key, just in human readable form.
