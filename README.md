@@ -4,7 +4,7 @@ This repository contains the source code for ChicagolandMesh.org, the official w
 
 ## About Chicagoland Mesh
 
-We are a local community interested in decentralized networking technologies, utilizing the [Meshtastic](https://meshtastic.org/), [MeshCore](https://meshcore.io/), and [Reticulum](https://reticulum.network/) open-source mesh networking protocols, to build decentralized communication networks across the Chicagoland area.
+We are a local community interested in decentralized networking technologies, utilizing the [MeshCore](https://meshcore.io/), [Meshtastic](https://meshtastic.org/), and [Reticulum](https://reticulum.network/) open-source mesh networking protocols, to build decentralized communication networks across the Chicagoland area.
 
 ## Contributing
 
