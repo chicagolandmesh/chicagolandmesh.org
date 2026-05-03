@@ -29,13 +29,13 @@ Check out these links to explore more about the broader Chicagoland Mesh communi
 
     [:fontawesome-solid-angle-right: Join](https://chicagolandmesh.org/discord)
 
--   :material-map-search:{ .lg .top } __MeshView__
+-   :material-map-search:{ .lg .top } __MQTT Analyzers__
 
     ---
 
     Inspect the live node map, traffic, stats, and related network views.
 
-    [:fontawesome-solid-angle-right: Open](../meshview/index.md)
+    [:fontawesome-solid-angle-right: Open](../corescope/index.md)
 
 -   :material-map-marker-radius:{ .lg .top } __Community Map__
 
