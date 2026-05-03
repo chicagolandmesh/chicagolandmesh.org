@@ -184,7 +184,7 @@ UDP interfaces handle automatic discovery and linking between Reticulum nodes on
 
 ## RNode (LoRa Radio) Interfaces
 
-RNode is the firmware that turns supported LoRa hardware into a Reticulum radio interface. Once your device is flashed (see [Getting Started](getting-started.md)), you add an interface block pointing to its serial port and set the radio parameters for your region and use case.
+RNode is the firmware that turns supported LoRa hardware into a Reticulum radio interface. Once your device is flashed (see [Getting Started](index.md)), you add an interface block pointing to its serial port and set the radio parameters for your region and use case.
 
 ### Basic RNode Interface
 
