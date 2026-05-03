@@ -10,7 +10,7 @@ tags:
 ## Initial Configuration
 
 1. Power on your device after flashing
-2. Visit the [Meshcore Configuration Tool](https://config.meshcore.io) in your web browser
+2. Visit the [MeshCore Configuration Tool](https://config.meshcore.io) in your web browser
 3. Connect to your device using one of the available methods:
     - USB serial connection (recommended for initial setup)
     - Bluetooth pairing (if using BLE companion firmware)
