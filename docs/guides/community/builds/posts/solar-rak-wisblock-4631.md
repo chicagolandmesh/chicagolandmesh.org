@@ -7,9 +7,9 @@ authors:
   - dillon-conner
 ---
 
-# Rak Wiseblock 4631 - nRF52840 Based Node
+# Rak Wisblock 4631 - nRF52840 Based Node
 
-![Meshtastic Solar Node](../assets/solar-rak-wiseblock-4631.png){ width=400 }
+![Meshtastic Solar Node](../assets/solar-rak-wisblock-4631.png){ width=400 }
 
 ## Description
 

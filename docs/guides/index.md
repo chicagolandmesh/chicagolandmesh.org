@@ -20,14 +20,6 @@ Use this section to choose how you want to browse the site: start with community
 
     [:fontawesome-solid-angle-right: Open](community/index.md)
 
--   :custom-meshtastic:{ .lg .top style="padding: 1px;" } __Meshtastic__
-
-    ---
-
-    Open Meshtastic guides covering setup, MQTT, local channel notes, and related documentation.
-
-    [:fontawesome-solid-angle-right: Open](meshtastic/index.md)
-
 -   :material-access-point-network:{ .lg .top } __MeshCore__
 
     ---
@@ -35,6 +27,14 @@ Use this section to choose how you want to browse the site: start with community
     Open MeshCore guides covering getting started, choosing a node role, and MQTT observer setup.
 
     [:fontawesome-solid-angle-right: Open](meshcore/index.md)
+
+-   :custom-meshtastic:{ .lg .top style="padding: 1px;" } __Meshtastic__
+
+    ---
+
+    Open Meshtastic guides covering setup, MQTT, local channel notes, and related documentation.
+
+    [:fontawesome-solid-angle-right: Open](meshtastic/index.md)
 
 -   :material-lan:{ .lg .top } __Reticulum__
 
