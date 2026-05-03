@@ -14,6 +14,9 @@ A MeshCore Observer is a MeshCore node (repeater, room server, or companion devi
 !!! note
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
 
+!!! warning
+    The **Room Server** role is not recommended for most deployments. Only use it if your node is placed in a difficult indoor location inside a large building where repeater mode is not suitable. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://ChiMesh.org/discord) before proceeding.    
+
 ## Choose Your Setup Method
 
 There are two ways to run an Observer:
