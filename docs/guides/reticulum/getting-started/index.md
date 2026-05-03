@@ -309,9 +309,10 @@ It connects to your running `rnsd` daemon automatically.
 ## Getting Help
 
 1. **Reticulum Community**: Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for community support
-2. **Documentation**: [reticulum.network/manual](https://reticulum.network/manual/)
-3. **Source Code**: [github.com/markqvist/Reticulum](https://github.com/markqvist/Reticulum)
-4. **RNode Firmware Source**: [github.com/markqvist/RNode_Firmware](https://github.com/markqvist/RNode_Firmware)
+2. **ChiMesh Discord**: Join the [Chicagoland Mesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) for local community support
+3. **Documentation**: [reticulum.network/manual](https://reticulum.network/manual/)
+4. **Source Code**: [github.com/markqvist/Reticulum](https://github.com/markqvist/Reticulum)
+5. **RNode Firmware Source**: [github.com/markqvist/RNode_Firmware](https://github.com/markqvist/RNode_Firmware)
 
 ---
 
