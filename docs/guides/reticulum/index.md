@@ -10,7 +10,7 @@ tags:
 
 # Reticulum
 
-This section is reserved for Reticulum-specific guides, resources, and discovery tools.
+This section contains documentation that is specific to Reticulum hardware, instructions, and tools.
 
 <div class="grid cards" markdown>
 
@@ -18,7 +18,7 @@ This section is reserved for Reticulum-specific guides, resources, and discovery
 
     ---
 
-    Start the Reticulum section with onboarding notes, first steps, and setup placeholders.
+    Flash a node, connect to it, and walk through the first setup steps.
 
     [:fontawesome-solid-angle-right: Open](getting-started/index.md)
 
@@ -26,7 +26,7 @@ This section is reserved for Reticulum-specific guides, resources, and discovery
 
     ---
 
-    Browse Reticulum-specific references, documentation, and discovery tools.
+    Browse Reticulum references, documentation, and tools.
 
     [:fontawesome-solid-angle-right: Open](../../resources/reticulum.md)
 
