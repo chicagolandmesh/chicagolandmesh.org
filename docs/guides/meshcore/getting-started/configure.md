@@ -22,14 +22,70 @@ tags:
 
 ## Radio Settings
 
-Configure your device for the using the **"USA/Canada (Recommended)"** preset, which includes the following settings:
+Configure your device using the **USA/Canada (Recommended)** preset, which includes the following settings:
 
-- **Frequency**: `910.525 MHz`
-- **Bandwidth**: `62.5 kHz`
-- **Spreading Factor**: `7`
-- **Coding Rate**: `5`
-- **TX Power**: `22 dBm`
-- **Airtime Factor**: `1`
+| Setting | Value |
+|---|---|
+| Frequency | `910.525 MHz` |
+| Bandwidth | `62.5 kHz` |
+| Spreading Factor | `7` |
+| Coding Rate | `5` |
+| TX Power | `22 dBm` |
+| Airtime Factor | `1` |
+
+---
+
+## Required Commands
+
+```bash
+set timezone America/Chicago
+```
+
+```bash
+set path.hash.mode 2
+```
+
+```bash
+set advert.interval 240
+```
+
+---
+
+## Node Role
+
+Choose the configuration that matches your node's role.
+
+### Companion Node
+
+A companion node travels with you and does **not** repeat traffic.
+
+```bash
+set repeat off
+```
+
+```bash
+set flood.advert.interval 168
+```
+
+```bash
+reboot
+```
+
+### Infrastructure / Well-Placed Node
+
+An infrastructure or well-placed node repeats traffic to extend network coverage.
+
+```bash
+set repeat on
+```
+
+```bash
+set flood.advert.interval 72
+```
+
+```bash
+reboot
+```
 
 ## Channels
 
