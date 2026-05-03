@@ -514,7 +514,7 @@ Here is a complete config for a node running an RNode for local radio coverage, 
 ---
 
 ## Next Steps
-
 - See [Mistakes to Avoid](avoid-mistakes.md) for common configuration pitfalls
 - See the [Reticulum Manual](https://reticulum.network/manual/) for the full interface and parameter reference
 - Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for community help and configuration tips
+- Ask in the [Reticulum channel on the ChiMesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) if you have questions or get stuck
