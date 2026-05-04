@@ -5,17 +5,6 @@ tags:
   - MeshCore
 ---
 
-## Getting Started: What to Deploy
-
-If you're new to ChiMesh and not sure what to set up, the **ideal starting deployment** is:
-
-- A **repeater on your roof** (or as high as you can get it) to maximize line-of-sight coverage
-- A **companion node** for day-to-day messaging indoors
-
-Line of sight is king in LoRa mesh networking. Walls, floors, and buildings dramatically reduce range. A rooftop repeater gets you above the obstructions and provides a strong signal path to your companion indoors, as well as connecting you to the broader mesh. This matters especially in dense urban environments where buildings block signals that would otherwise reach you easily in the suburbs.
-
----
-
 #### Do NOT power on your node without an antenna!
    Very self-explanatory, just don't try it! It can damage your node's LoRa chip permanently.
 
