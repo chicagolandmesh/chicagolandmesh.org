@@ -5,6 +5,17 @@ tags:
   - MeshCore
 ---
 
+## Getting Started: What to Deploy
+
+If you're new to ChiMesh and not sure what to set up, the **ideal starting deployment** is:
+
+- A **repeater on your roof** (or as high as you can get it) to maximize line-of-sight coverage
+- A **companion node** for day-to-day messaging indoors
+
+Line of sight is king in LoRa mesh networking. Walls, floors, and buildings dramatically reduce range. A rooftop repeater gets you above the obstructions and provides a strong signal path to your companion indoors, as well as connecting you to the broader mesh. This matters especially in dense urban environments where buildings block signals that would otherwise reach you easily in the suburbs.
+
+---
+
 #### Do NOT power on your node without an antenna!
    Very self-explanatory, just don't try it! It can damage your node's LoRa chip permanently.
 
@@ -32,4 +43,10 @@ tags:
    If you are deploying an infrastructure node, we strongly recommend setting up the admin password so you can control your node through another node wirelessly. Instructions for this are available [here](https://docs.meshcore.io/faq/#31-q-how-do-you-configure-a-repeater-or-a-room-server). The guest password should either be left blank or set to `hello`.
 
 #### Do not use the Room Server role unless absolutely necessary
-   The `Room Server` role should be reserved for nodes with poor placement, for example, inside of an Apartment building.  Room Server nodes store messages like an old school BBS system. If you are deploying a stationary node on a building, please use the `Repeater` role as it will route packets much better than `Room Server`. If you're unsure which role to choose, please join our [Discord](https://ChiMesh.org/discord) and ask!
+   The `Room Server` role should be reserved for nodes with poor placement, for example, inside of an apartment building where repeater mode simply isn't workable. Room Servers store messages like an old-school BBS system, which sounds useful but comes with a significant limitation: **they only work reliably when all users are within 1–2 hops of the room server**. If you are deploying a stationary node on a building, please use the `Repeater` role, it will route packets much better than `Room Server`. If you're unsure which role to choose, please join our [Discord](https://ChiMesh.org/discord) and ask!
+
+#### Watch out for "with display" vs. "without display" firmware builds
+   Some devices have separate firmware builds depending on whether they have a physical display. This is usually obvious when flashing, but it matters for one important reason: the **default BLE PIN is different** between the two variants. If you're setting up a companion node and can't pair via Bluetooth, double-check that you flashed the correct build for your hardware.
+
+#### Do NOT flash the sensor firmware
+   If sensor firmware appears as an option for your device, **do not use it** for a general mesh node. Sensor firmware is a *starting point for developers*, to use it properly, you need to fork the codebase, add your own custom sensor telemetry collection logic, and build your own firmware from source. Out of the box, it will not behave like a normal mesh node. Stick to the standard repeater or companion firmware unless you know exactly what you're doing.
