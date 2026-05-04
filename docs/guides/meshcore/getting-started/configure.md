@@ -7,6 +7,17 @@ tags:
 
 # Configuring MeshCore
 
+## Getting Started: What to Deploy
+
+If you're new to ChiMesh and not sure what to set up, the **ideal starting deployment** is:
+
+- A **repeater on your roof** (or as high as you can get it) to maximize line-of-sight coverage
+- A **companion node** for day-to-day messaging indoors and outdoors
+
+Line of sight is king in LoRa mesh networking. Walls, floors, and buildings dramatically reduce range. A rooftop repeater gets you above the obstructions and provides a strong signal path to your companion indoors, as well as connecting you to the broader mesh. This matters especially in dense urban environments where buildings block signals that would otherwise reach you more easily in the suburbs.
+
+---
+
 ## Companion vs. Repeater/Room Server
 
 How you configure your node depends heavily on its **role**:
@@ -132,12 +143,12 @@ The following channels are commonly used in the MeshCore community. Hash channel
 | `#chat` | `d0bdd6d71538138ed979eec00d98ad97` |
 | `#chicago` | `c1c289b131e5222370cbc2048445844b` |
 | `#chimesh` | `869d8ae6f43e99f7ef463027f916f1fc` |
+| `#weather` | `88f502554fee92a1625cfb311546e7cb` |
 | `#emergency` | `e1ad578d25108e344808f30dfdaaf926` |
 | `#hamradio` | `83c8b01997654265938da8765cbc7db9` |
 | `#jokes` | `abe610d61dee508c0ac18793c36c41c3` |
 | `#sports` | `e8ee81f3aabf105d9ba2d2d4bd94fe4a` |
 | `#test` | `9cd8fcf22a47333b591d96a2b848b73f` |
-| `#weather` | `88f502554fee92a1625cfb311546e7cb` |
 
 !!! tip "Chicago / ChiMesh Community"
     If you're part of the Chicagoland mesh network, start with **`#chicago`** and **`#chimesh`** to connect with local operators. **`#emergency`** is also recommended so you're reachable during urgent situations.
