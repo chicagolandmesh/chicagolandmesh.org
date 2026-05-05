@@ -130,7 +130,7 @@ This is why sharing a hash channel name is equivalent to sharing access, the nam
 1. Open the MeshCore app menu
 2. Navigate to **Add Channel → Scan QR Code** (or enter the secret key manually)
 3. Enter the channel name or paste the secret key
-4. Tap **Add** — your device will derive or store the key and join the channel
+4. Tap **Add**, your device will derive or store the key and join the channel
 
 ### Popular Community Channels
 
