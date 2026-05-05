@@ -7,16 +7,14 @@ tags:
 
 # Configuring MeshCore
 
-## Getting Started: What to Deploy
+## What to Deploy
 
 If you're new to ChiMesh and not sure what to set up, the **ideal starting deployment** is:
 
-- A **repeater on your roof** (or as high as you can get it) to maximize line-of-sight coverage
-- A **companion node** for day-to-day messaging indoors and outdoors
+- A **repeater on your roof** (or as high as you can get it) to maximize line of sight coverage
+- A **companion node** for day to day messaging indoors and outdoors
 
 Line of sight is king in LoRa mesh networking. Walls, floors, and buildings dramatically reduce range. A rooftop repeater gets you above the obstructions and provides a strong signal path to your companion indoors, as well as connecting you to the broader mesh. This matters especially in dense urban environments where buildings block signals that would otherwise reach you more easily in the suburbs.
-
----
 
 ## Companion vs. Repeater/Room Server
 
@@ -25,9 +23,7 @@ How you configure your node depends heavily on its **role**:
 - **Companion nodes** are configured entirely through the MeshCore companion app over Bluetooth. There is no USB configuration step, and there is no CLI available during normal use. Most of the settings below apply only to repeaters and room servers.
 - **Repeater and Room Server nodes** are typically configured via USB serial connection using the [MeshCore Configuration Tool](https://config.meshcore.io), especially for initial setup. CLI commands are available through the Remote Management interface.
 
-If you're setting up a companion, skip the USB and CLI sections below — they don't apply to you.
-
----
+If you're setting up a companion, skip the USB and CLI sections below.
 
 ## Initial Configuration
 
@@ -57,51 +53,31 @@ Configure your device using the **USA/Canada (Recommended)** preset, which inclu
 
 ## Required Commands
 
-!!! note "Repeater and Room Server nodes only"
-    The commands below are entered via the CLI (Command Line Interface) under Remote Management. **These commands do not apply to companion nodes.** Companions have no periodic adverts, and path hash mode is configured through the **Experimental Settings** menu in the companion app.
-
-```bash
-set path.hash.mode 2
-```
-
-```bash
-set advert.interval 240
-```
-
-```bash
-set timezone America/Chicago
-```
-
-!!! note
-    `set timezone` only applies to the **MQTT observer firmware**. It has no effect on mainline MeshCore firmware or the LetsMesh firmware used with mctomqtt. If you are not running MQTT observer firmware, you can skip this command.
-
-## Node Role
-
-Choose the configuration that matches your node's role.
-
 ### Companion Node
 
 A companion node travels with you and does **not** repeat traffic. Companions are configured through the companion app UI, the CLI commands used for repeaters are **not available** on companion nodes during normal use.
 
 For companions, **path hash mode** is found under the **Experimental Settings** menu in the app, and there are no periodic advertisement intervals to configure.
 
-### Infrastructure / Well-Placed Node
+### Repeater Node
 
-An infrastructure or well-placed node repeats traffic to extend network coverage.
+An infrastructure or well placed node repeats traffic to extend network coverage.
 
-```bash
+```
+set path.hash.mode 2
+```
+```
 set repeat on
 ```
-
-```bash
+```
+set advert.interval 240
+```
+```
 set flood.advert.interval 72
 ```
-
-```bash
+```
 reboot
 ```
-
----
 
 ## Channels
 
@@ -156,7 +132,7 @@ The following channels are commonly used in the MeshCore community. Hash channel
 !!! tip "Testing your connection"
     When you first come online and want to check if you're being heard, **use the `#test` channel** rather than `Public`. Sending "can you hear me?" or "Test" to `Public` will spam people's nodes with unnecessary messages and reduce network performance.
 
-    For a more reliable connectivity check, use the **[ChiMesh Healthcheck app](#)** (link coming soon). It automatically detects your signal and reports back how many observers heard your message — giving you a real picture of your coverage without needing anyone else to respond.
+    For a more reliable connectivity check, use the **[ChiMesh Health Check App](#)** (link coming soon). It automatically detects your signal and reports back how many observers heard your message. This giving you a picture of your coverage without needing anyone else to respond.
 
 !!! info "Channel vs. Default Channel"
     Your device always has a default channel based on its radio preset. Named channels are **additional** layers, you can monitor multiple channels simultaneously depending on your firmware and hardware.
