@@ -15,11 +15,19 @@ A MeshCore Observer is a MeshCore node (repeater, room server, or companion devi
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
 
 !!! warning
-    The **Room Server** role is not recommended for most deployments. Only use it if your node is placed in a difficult indoor location inside a large building where repeater mode is not suitable. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://ChiMesh.org/discord) before proceeding.    
+    The **Room Server** role is not recommended for most deployments. Only use it if your node is placed in a difficult indoor location inside a large building where repeater mode is not suitable. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://ChiMesh.org/discord) before proceeding.
 
 ## Choose Your Setup Method
 
-There are two ways to run an Observer:
+There are three ways to run an Observer:
+
+| Method | Best for |
+|---|---|
+| [Native Observer Firmware](#method-1-native-observer-firmware) | Devices that support the MQTT observer firmware natively |
+| [Computer Bridge (mctomqtt)](#method-2-computer-bridge-usb-raspberry-pi) | Repeater or Room Server connected to a Raspberry Pi or Linux device via USB |
+| [Companion Bridge](#method-3-companion-bridge) | Companion nodes, uses different bridge software configured via the LetsMesh "Become an Observer" page |
+
+---
 
 ## Method 1: Native Observer Firmware
 
@@ -58,15 +66,11 @@ Use the [LetsMesh Onboarding page](https://analyzer.letsmesh.net/observer/onboar
     - Confirm the firmware version under Remote Management
 
 !!! note
-    Your node's `IP address` may be set by your router's DHCP server to a diferent IP if you already connected your node to Wi-Fi.  Check your DHCP server to see what your node's local IP address is.    
+    Your node's IP address may be set by your router's DHCP server to a different IP if you already connected your node to Wi-Fi. Check your DHCP server to see what your node's local IP address is.
 
 ### Step 3: Apply ChiMesh Observer Settings
 
-Once your firmware is installed, open the **Command Line** under Remote Management and enter the following configuration:
-
----
-
-**Required commands:**
+Once your firmware is installed, open the **Command Line** under Remote Management and enter the following commands:
 
 ```
 set timezone America/Chicago
@@ -86,6 +90,22 @@ set mqtt1.preset analyzer-us
 ```
 set mqtt2.preset chimesh
 ```
+
+!!! tip "If the chimesh preset isn't working, set the connection details manually:"
+    Your firmware may not have presets yet. If this is the case, use the following commands to set up MQTT manually. Run `get mqtt2.diag` to verify the connection after setup.
+    ```
+    set mqtt2.server wss://mqtt.chimesh.org
+    ```
+    ```
+    set mqtt2.port 443
+    ```
+    ```
+    set mqtt2.audience mqtt.chimesh.org
+    ```
+    ```
+    set mqtt2.preset custom
+    ```
+
 ```
 set mqtt.rx on
 ```
@@ -98,54 +118,43 @@ set wifi.ssid your-wifi-network
 ```
 set wifi.pwd your-wifi-password
 ```
+
+!!! note
+    Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials, **do not wrap them in quotes**.
+
 ```
 set bridge.enabled on
 ```
-
----
-
-**If this node also acts as a repeater:**
 ```
 set flood.advert.interval 72
 ```
+
+!!! tip "If this node is a dedicated observer only (does NOT repeat):"
+    Turning repeat off is for dedicated observers only. If this node is also serving as a mesh repeater, make sure you run the `set repeat on` command and consider using a lower flood.advert.interval value (72 or 48).
+    ```
+    set repeat off
+    ```
+    ```
+    set flood.advert.interval 168
+    ```
+
+!!! example "Optional (but encouraged), set to your companion device's public key:"
+    Replace `your-primary-companion-device-pub.key` with your companion device's actual public key.
+    ```
+    set mqtt.owner your-primary-companion-device-pub.key
+    ```
+  
 ```
 reboot
 ```
-
-**If this node is a dedicated observer only (does NOT repeat):**
-```
-set repeat off
-```
-```
-set flood.advert.interval 168
-```
-```
-reboot
-```
-
----
-
-**Optional (but encouraged) — set to your companion device's public key:**
-```
-set mqtt.owner your-primary-companion-device-pub.key
-```
-
-!!! note
-    Replace `your-primary-companion-device-pub.key` with your companion device's actual public key. Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials, **do not wrap them in quotes**.
-
-!!! warning
-    `set repeat off` is for **dedicated observers only**. If this node is also serving as a mesh repeater, make sure you run the `set repeat on` command and consider using a lower `flood.advert.interval` value (72 or 48).
 
 ---
 
 ## Method 2: Computer Bridge (USB + Raspberry Pi)
 
-!!! warning
-    The **Room Server** role is not recommended for most deployments. Only use it if your node is placed in a difficult indoor location inside a large building where repeater mode is not suitable. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://ChiMesh.org/discord) before proceeding.
-
 ### Requirements
 
-- Any supported MeshCore repeater **or room server** node with **existing firmware**
+- Any supported MeshCore repeater or room server node with **existing firmware**
 - A Linux device (Raspberry Pi or similar) with internet access
 - USB connection between the node and the Linux device
 
@@ -161,28 +170,80 @@ With your node connected to your Linux device via USB, run the following from yo
 curl -fsSL https://raw.githubusercontent.com/Cisien/meshcoretomqtt/main/install.sh | bash
 ```
 
-When asked whether to enable the LetsMesh Packet Analyzer, enter `y`.
-
-During installation, make sure to use the `chimesh` preset.
+When prompted by the install script, **select the LetsMesh and ChiMesh presets**.
 
 !!! note
-    This script is designed for **Repeater and Room Server** nodes only. For more details on configuration options, see the [meshcoretomqtt README](https://github.com/Cisien/meshcoretomqtt).
-
-!!! note
-    During setup, you will be asked to enter an **IATA airport code** for your region. For the Chicago area, use `ORD`. Make sure to use the correct IATA code, it is not the same as an ICAO code. A quick search for your nearest major airport will confirm it.
-
-### Step 3: ChiMesh MQTT
-
-The install script will configure the standard MQTT uplink. After setup, your observer data will flow to ChiMesh and appear on [CoreScope](../../corescope/index.md), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1499968458815705098) within a few minutes of your first advertisement packet being heard.
+    During setup, you will be asked to enter an **IATA airport code** for your region. For the Chicago area, use `ORD`. Make sure to use the correct IATA code, it is not the same as an ICAO code.
 
 !!! note
     It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
 
 ---
 
+## Method 3: Companion Bridge
+
+Unlike repeater or room server nodes, companion observers don't require special firmware. Your standard MeshCore companion build supports packet logging. This method uses **different bridge software** than mctomqtt and runs on a macOS or Linux device connected to your companion via USB, BLE, or Wi-Fi.
+
+### Requirements
+
+- A macOS or Linux device (e.g., Raspberry Pi) with internet connectivity
+- A MeshCore companion device accessible via USB, BLE, or Wi-Fi
+
+### Step 1: Install Node.js LTS
+
+First, install NVM (Node Version Manager):
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+```
+
+Close and reopen your terminal, or run the following to activate it immediately:
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+```
+
+Then install Node.js LTS:
+
+```bash
+nvm install --lts
+```
+
+### Step 2: Run the Install Script
+
+From your macOS or Linux machine, run:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/agessaman/meshcore-packet-capture/main/install.sh)
+```
+
+!!! note
+    `meshcore-packet-capture` is for **companion nodes only**. If you have a repeater or room server, use [Method 2](#method-2-computer-bridge-usb-raspberry-pi) instead.
+
+The installer will set up packet capture support for BLE, TCP, and Wi-Fi connections to your companion device.
+
+### Step 3: Configure ChiMesh MQTT
+
+The companion bridge does not currently support preset-based configuration. Enter the following connection details manually when prompted, or in the bridge configuration:
+
+| Setting | Value |
+|---|---|
+| Server | `wss://mqtt.chimesh.org` |
+| Port | `443` |
+| Audience | `mqtt.chimesh.org` |
+
+!!! note
+    It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
+
+For more details, see the [meshcore-packet-capture README](https://github.com/agessaman/meshcore-packet-capture). For help, reach out on the [MeshCore Discord](https://meshcore.gg/).
+
+---
+
 ## Additional Notes
-- These settings are also required for upcoming ChiMesh(Core) services as they are announced
-- `set mqtt2.preset chimesh` is what connects your observer to the ChiMesh network specifically
+- These settings are required to appear on ChiMesh(Core) services
+- `set mqtt2.preset chimesh` is what connects your observer to the ChiMesh network specifically while `set mqtt1.preset analyzer-us` is what connects your observer to the global [LetsMesh analyzer](https://analyzer.letsmesh.net) and the [official MeshCore map](https://map.meshcore.io)
 - The `mqtt.owner` field is optional but highly encouraged, it links your observer to your primary companion device
 
-Thank you for supporting [ChiMesh.org](https://chimesh.org) - we hope to see you on MeshCore MQTT soon!
+Thank you for supporting [ChiMesh.org](https://chimesh.org), we hope to see you on MeshCore MQTT soon!
