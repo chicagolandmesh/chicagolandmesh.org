@@ -40,6 +40,10 @@ chicagolandmesh.org {
 	}
 
 	handle {
+		# Keep old links active: https://www.seeedstudio.com/blog/2026/03/17/meshtastic-node-guide/#:~:text=Chicagoland%20Mesh
+		@old_path path_regexp old ^/guides/getting-started(?:/(.*))?$
+		redir @old_path /guides/meshtastic/getting-started/{re.old.1} permanent
+
 		handle /assets/* {
 			header Cache-Control "public, max-age=86400, stale-while-revalidate=604800"
 
