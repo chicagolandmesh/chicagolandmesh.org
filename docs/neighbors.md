@@ -30,6 +30,9 @@ tags:
 -   [__Michigan Mesh Network__](https://michmesh.com/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://michmesh.com)
 
+-   [__Missouri Mesh__](https://missourimesh.org/)
+    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://missourimesh.org)
+
 -   [__NWI Mesh Net__](https://nwimesh.net/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://nwimesh.net)
 
