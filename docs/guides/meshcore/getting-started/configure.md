@@ -25,7 +25,7 @@ How you configure your node depends heavily on its **role**:
 
 If you're setting up a companion, skip the USB and CLI sections below.
 
-## Initial Configuration (Repeaters and Room Servers)
+## Initial Configuration
 
 This section covers configuration via the [MeshCore Configuration Tool](https://config.meshcore.io) web interface, which applies to repeaters and room servers. Companion nodes are configured through the MeshCore app instead and do not need these steps.
 

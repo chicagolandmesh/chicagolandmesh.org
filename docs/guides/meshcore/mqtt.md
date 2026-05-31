@@ -9,7 +9,7 @@ tags:
 
 ## What is a MeshCore Observer?
 
-A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](../../corescope/index.md), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1508951592492073111). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
+A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](../../corescope/index.md), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1510490462283370758). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
 
 !!! note
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
