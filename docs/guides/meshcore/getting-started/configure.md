@@ -27,15 +27,15 @@ If you're setting up a companion, skip the USB and CLI sections below.
 
 ## Initial Configuration
 
+This section covers configuration via the [MeshCore Configuration Tool](https://config.meshcore.io) web interface, which applies to repeaters and room servers. Companion nodes are configured through the MeshCore app instead and do not need these steps.
+
 1. Power on your device after flashing
 2. Visit the [MeshCore Configuration Tool](https://config.meshcore.io) in your web browser
-3. Connect to your device using one of the available methods:
-    - USB serial connection (recommended for initial setup of repeaters/room servers)
-    - Bluetooth pairing (if using BLE companion firmware)
+3. Connect to your device via USB serial connection
 4. Configure basic settings through the web interface:
     - Set your node name (consider adding "ChiMesh.org" to help identify our community)
     - Location (optional)
-    - Change the admin password
+    - Set an admin password so you can manage your node remotely over the mesh
     - Go to "Radio Settings" and set "Preset" to "USA/Canada (Recommended)"
 
 ## Radio Settings
@@ -50,6 +50,10 @@ Configure your device using the **USA/Canada (Recommended)** preset, which inclu
 | Coding Rate | `5` |
 | TX Power | `22 dBm` |
 | Airtime Factor | `1` |
+
+**Coding Rate (CR)** controls how many forward error correction bits are packed into each transmission. It is the only radio parameter that can differ between nodes and still allow them to communicate with the rest of the mesh. A higher CR improves reliability but uses more airtime.
+
+If you are running a repeater and your nearest repeater neighbors are at the edge of your range, consider temporarily raising the CR to `8` to improve link reliability. As repeater density in your area grows, bring it back down to `5` to reduce airtime and keep the channel clear for other traffic.
 
 ## Required Commands
 
@@ -135,7 +139,7 @@ The following channels are commonly used in the MeshCore community. Hash channel
     For a more reliable connectivity check, use the **[ChiMesh Health Check App](#)** (link coming soon). It automatically detects your signal and reports back how many observers heard your message. This giving you a picture of your coverage without needing anyone else to respond.
 
 !!! info "Channel vs. Default Channel"
-    Your device always has a default channel based on its radio preset. Named channels are **additional** layers, you can monitor multiple channels simultaneously depending on your firmware and hardware.
+    Your companion device will always have the default Public channel active. Named channels are additional layers on top of this. The number of channels you can monitor at once depends on your hardware's storage capabilities. The MeshCore app will show the maximum number of channels your device supports (40 for most devices).
 
 !!! info "Preset Selection"
     When configuring your MeshCore device, look for the `USA/Canada` preset in your configuration interface. This preset automatically applies all the correct radio parameters for optimal performance in North America.

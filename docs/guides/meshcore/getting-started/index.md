@@ -68,7 +68,7 @@ After setting up your MeshCore device with Companion firmware, you'll need a cli
 
 1. **For BLE Companion firmware**: Use Bluetooth pairing with mobile apps
 2. **For USB Companion firmware**: Use web clients with USB serial connection
-3. **Default Bluetooth pairing code**: `123456` (if prompted)
+3. **Default Bluetooth pairing code**: For devices **without a display**, the default pairing code is `123456`. For devices **with a display**, a random PIN is shown on the screen at pairing time. See [Mistakes to Avoid](avoid-mistakes.md) for a note on why flashing the correct display/no-display firmware build matters here.
 
 ### Basic Usage
 

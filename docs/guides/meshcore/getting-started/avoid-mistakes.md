@@ -9,7 +9,7 @@ tags:
    Very self-explanatory, just don't try it! It can damage your node's LoRa chip permanently.
 
 #### Mount antennas upright and minimize cable length between the node and antenna.
-   Having your antenna in a vertical position at the highest possible level is the best case. Also, small adjustments such as keeping the cable connecting the antenna to the node as short as possible will help. Keeping the cable vertical and not bent will ensure you get the best connection possible; antennas with a hinge typically perform worse while bent.
+   Having your antenna in a vertical position at the highest possible level is the best case. Also, small adjustments such as keeping the cable connecting the antenna to the node as short as possible will help. Keeping the cable vertical and not bent will ensure you get the best connection possible; antennas with a hinge typically perform worse while bent. If you do need to separate the antenna from the node with a longer run of coax, keep in mind that most coax has significant signal loss over distance. Do your research and buy the best coax you can afford.
 
 <style>
   .glightbox {
