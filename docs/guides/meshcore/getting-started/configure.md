@@ -141,6 +141,7 @@ The following channels are commonly used in the MeshCore community. Hash channel
 |---|---|
 | `#sports` | `e8ee81f3aabf105d9ba2d2d4bd94fe4a` |
 | `#cubs` | `567f84d8cd91406e7d84f962dc810522` |
+| `#whitesox` | `adeb8f2ea5cca1624bbeb684821dc846` |
 | `#bears` | `e328bd6007f137d540491e0b98c0ef49` |
 | `#bulls` | `1e223bd0935a1983832435b8b876f97d` |
 | `#blackhawks` | `8f84f0a243ad2854c923d154d9c7fbe5` |
@@ -153,6 +154,7 @@ The following channels are commonly used in the MeshCore community. Hash channel
 | `#test` | `9cd8fcf22a47333b591d96a2b848b73f` |
 | `#testing` | `cde5e82cf515647dcb547a79a4f065d1` |
 | `#healthcheck` | `3ae59c2cda86744c75e68b3975a902ae` |
+| `#wardriving` | `e3c26491e9cd321e3a6be50d57d54acf` |
 
 !!! tip "Chicago / ChiMesh Community"
     If you're part of the Chicagoland mesh network, start with **`#chicago`** and **`#chimesh`** to connect with local operators. **`#emergency`** is also recommended so you're reachable during urgent situations.
