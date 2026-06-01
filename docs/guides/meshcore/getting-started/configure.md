@@ -136,8 +136,6 @@ The following channels are commonly used in the MeshCore community. Hash channel
 !!! tip "Testing your connection"
     When you first come online and want to check if you're being heard, **use the `#test` channel** rather than `Public`. Sending "can you hear me?" or "Test" to `Public` will spam people's nodes with unnecessary messages and reduce network performance.
 
-    For a more reliable connectivity check, use the **[ChiMesh Health Check App](#)** (link coming soon). It automatically detects your signal and reports back how many observers heard your message. This giving you a picture of your coverage without needing anyone else to respond.
-
 !!! info "Channel vs. Default Channel"
     Your companion device will always have the default Public channel active. Named channels are additional layers on top of this. The number of channels you can monitor at once depends on your hardware's storage capabilities. The MeshCore app will show the maximum number of channels your device supports (40 for most devices).
 
