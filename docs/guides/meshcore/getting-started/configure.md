@@ -113,22 +113,46 @@ This is why sharing a hash channel name is equivalent to sharing access, the nam
 4. Tap **Add**, your device will derive or store the key and join the channel
 
 ### Popular Community Channels
-
 The following channels are commonly used in the MeshCore community. Hash channels can be added by entering the channel name (MeshCore will derive the key automatically) or by entering the secret key directly.
 
+#### General
 | Channel Name | Secret Key |
 |---|---|
 | `Public` | `8b3387e9c5cdea6ac9e5edbaa115cd72` |
 | `#public` | `8b4b705b080c0d943b1c80f6b3ef6b6d` |
 | `#chat` | `d0bdd6d71538138ed979eec00d98ad97` |
+| `#emergency` | `e1ad578d25108e344808f30dfdaaf926` |
+
+#### Chicagoland
+| Channel Name | Secret Key |
+|---|---|
 | `#chicago` | `c1c289b131e5222370cbc2048445844b` |
 | `#chimesh` | `869d8ae6f43e99f7ef463027f916f1fc` |
-| `#weather` | `88f502554fee92a1625cfb311546e7cb` |
-| `#emergency` | `e1ad578d25108e344808f30dfdaaf926` |
+
+#### Interests
+| Channel Name | Secret Key |
+|---|---|
 | `#hamradio` | `83c8b01997654265938da8765cbc7db9` |
 | `#jokes` | `abe610d61dee508c0ac18793c36c41c3` |
+| `#weather` | `88f502554fee92a1625cfb311546e7cb` |
+
+#### Chicago Sports
+| Channel Name | Secret Key |
+|---|---|
 | `#sports` | `e8ee81f3aabf105d9ba2d2d4bd94fe4a` |
+| `#cubs` | `567f84d8cd91406e7d84f962dc810522` |
+| `#bears` | `e328bd6007f137d540491e0b98c0ef49` |
+| `#bulls` | `1e223bd0935a1983832435b8b876f97d` |
+| `#blackhawks` | `8f84f0a243ad2854c923d154d9c7fbe5` |
+| `#sky` | `caa8572648096df8de3f4aafb0677f04` |
+
+#### Utility & Testing
+| Channel Name | Secret Key |
+|---|---|
+| `#bot` | `eb50a1bcb3e4e5d7bf69a57c9dada211` |
 | `#test` | `9cd8fcf22a47333b591d96a2b848b73f` |
+| `#testing` | `cde5e82cf515647dcb547a79a4f065d1` |
+| `#healthcheck` | `3ae59c2cda86744c75e68b3975a902ae` |
 
 !!! tip "Chicago / ChiMesh Community"
     If you're part of the Chicagoland mesh network, start with **`#chicago`** and **`#chimesh`** to connect with local operators. **`#emergency`** is also recommended so you're reachable during urgent situations.
