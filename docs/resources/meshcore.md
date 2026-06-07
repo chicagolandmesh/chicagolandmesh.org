@@ -39,6 +39,9 @@ tags:
 
 -   [Official MeshCore Flasher](https://flasher.meshcore.io)
     ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://flasher.meshcore.io)
+    
+-   [MeshCore MQTT Observer Flasher](https://observer.gessaman.com)
+    ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://observer.gessaman.com)    
 
 -   [MeshCore Analyzer](https://analyzer.letsmesh.net)
     ![Link preivew](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://analyzer.letsmesh.net)
