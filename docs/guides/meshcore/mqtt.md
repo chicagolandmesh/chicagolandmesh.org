@@ -14,11 +14,8 @@ A MeshCore Observer is a MeshCore node (repeater, room server, or companion devi
 !!! note
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
 
-!!! success "Use Repeater mode whenever possible"
-    **Repeater** is the recommended role for the vast majority of observer deployments. It participates actively in the mesh, improving coverage for everyone while still reporting data. Only consider Room Server if your node is in a difficult indoor location inside a large building where repeater mode is genuinely not suitable, and even then, ask first.
-
-!!! warning "Room Server is rarely the right choice"
-    Do **not** use Room Server unless you have a specific reason. It limits mesh participation and provides no benefit over Repeater in most scenarios. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://ChiMesh.org/discord) before proceeding.
+!!! warning "Use Repeater mode whenever possible"
+    Do **not** use Room Server unless you have a specific reason. It limits mesh participation and provides no benefit over Repeater in most scenarios. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://chimesh.org/discord) before proceeding.
 
 ## Choose Your Setup Method
 
@@ -47,32 +44,31 @@ Use the [MeshCore MQTT Observer Flasher](https://observer.gessaman.com/) to find
 
 If you already have MeshCore running, you can update wirelessly using the companion app and a web browser instead of the web flasher and USB:
 
-!!! warning "OTA update, download the correct file first"
-    Before starting the OTA process, visit the [MeshCore MQTT Observer Flasher](https://observer.gessaman.com/), select your device, and use the **Download** button to download the **app firmware** option. This variant does **not** erase your flash and is safe for updating an existing install. Do not use a merged file, it will wipe all your settings.
-
-1. **Open Remote Management**
+1. **Download the App Firmware**
+    - Before starting the OTA process, visit the [MeshCore Observer Flasher](https://observer.gessaman.com/)
+    - Select your device, and use the **Download** button to download the **app firmware** option
+    !!! warning "Do not use a merged file"
+        This variant does **not** erase your flash and is safe for updating an existing install. Do not use a merged file, it will wipe all your settings.
+2. **Open Remote Management**
     - Open the MeshCore companion app
     - Select your node from the contacts list or map
     - Scroll down and tap **Remote Management**
     - Enter the **admin** password when prompted
-2. **Launch the Command Line**
+3. **Launch the Command Line**
     - Tap **Command Line** in the middle of the bottom footer
     - Enter `start ota`
     - Click Enter on your keyboard
-3. **Navigate to the OTA Upload Page**
-    - If your node is already connected to Wi-Fi, it will stay on your existing network, no new hotspot will be created
-    - Check your router's DHCP table to find the IP address assigned to your node
-    - Open a browser and go to `http://<node-ip>/update` (e.g. `http://192.168.1.42/update`)
+4. **Navigate to the OTA Upload Page**
     - If your node is **not** connected to Wi-Fi, it will broadcast a `MeshCore-OTA` hotspot instead, connect to that and go to `http://192.168.4.1/update`
-4. **Upload the Firmware**
+    - If your node is already connected to Wi-Fi, it will stay on your existing network:
+        - Check your node's display for the IP address or if your node does not have a screen, check your router's DHCP table to find the IP address assigned to your node
+        - Open a browser and go to `http://<node-ip>/update` (e.g. `http://192.168.1.42/update`)
+5. **Upload the Firmware**
     - Select and upload your downloaded `.bin` file
     - Wait for the update to complete
-5. **Verify the Update**
+6. **Verify the Update**
     - Reopen the companion app
     - Confirm the firmware version under Remote Management
-
-!!! note
-    Your node's IP address may be set by your router's DHCP server to a different IP if you already connected your node to Wi-Fi. Check your DHCP server to see what your node's local IP address is.
 
 ### Step 2: Apply ChiMesh Observer Settings
 
@@ -98,19 +94,19 @@ set mqtt2.preset chimesh
 ```
 
 !!! tip "If the chimesh preset isn't working, set the connection details manually:"
-    Your firmware may not have presets yet. If this is the case, use the following commands to set up MQTT manually. Run `get mqtt2.diag` to verify the connection after setup.
-```
+    If your firmware version does not have presets or you wish to manually configure the connection details, use the following commands. Run `get mqtt2.diag` to verify the connection after setup.
+    ```
     set mqtt2.server wss://mqtt.chimesh.org
-```
-```
+    ```
+    ```
     set mqtt2.port 443
-```
-```
+    ```
+    ```
     set mqtt2.audience mqtt.chimesh.org
-```
-```
+    ```
+    ```
     set mqtt2.preset custom
-```
+    ```
 
 ```
 set mqtt.rx on
@@ -126,7 +122,7 @@ set wifi.pwd your-wifi-password
 ```
 
 !!! note
-    Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials, **do not wrap them in quotes**.
+    Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials. **Do not wrap them in quotes**.
 
 ```
 set bridge.enabled on
@@ -137,18 +133,18 @@ set flood.advert.interval 72
 
 !!! tip "If this node is a dedicated observer only (does NOT repeat):"
     Turning repeat off is for dedicated observers only. If this node is also serving as a mesh repeater, make sure you run the `set repeat on` command and consider using a lower flood.advert.interval value (72 or 48).
-```
+    ```
     set repeat off
-```
-```
+    ```
+    ```
     set flood.advert.interval 168
-```
+    ```
 
 !!! example "Optional (but encouraged), set to your companion device's public key:"
-    Replace `your-primary-companion-device-pub.key` with your companion device's actual public key.
-```
-    set mqtt.owner your-primary-companion-device-pub.key
-```
+    Replace `your-primary-companion-device-pub-key` with your companion device's actual public key. This helps to correlate repeaters with their owner for better analytics in the [analyzers](/corescope/).
+    ```
+    set mqtt.owner your-primary-companion-device-pub-key
+    ```
 
 ```
 reboot
@@ -166,7 +162,7 @@ reboot
 
 ### Step 1: Get Compatible Firmware
 
-Your node needs firmware that includes **packet logging** support. Use the [MeshCore MQTT Observer Flasher](https://observer.gessaman.com/) to find and flash the appropriate firmware for your device variant.
+Your node needs firmware that includes **packet logging** support. Use the [MeshCore Observer Flasher](https://observer.gessaman.com/) to find and flash the appropriate firmware for your device variant.
 
 ### Step 2: Connect and Run the Install Script
 
