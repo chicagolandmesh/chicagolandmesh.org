@@ -14,8 +14,8 @@ A MeshCore Observer is a MeshCore node (repeater, room server, or companion devi
 !!! note
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
 
-!!! warning
-    The **Room Server** role is not recommended for most deployments. Only use it if your node is placed in a difficult indoor location inside a large building where repeater mode is not suitable. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://ChiMesh.org/discord) before proceeding.
+!!! warning "Use Repeater mode whenever possible"
+    Do **not** use Room Server unless you have a specific reason. It limits mesh participation and provides no benefit over Repeater in most scenarios. If you are unsure which role is right for your setup, ask in the [ChiMesh Discord](https://chimesh.org/discord) before proceeding.
 
 ## Choose Your Setup Method
 
@@ -25,50 +25,52 @@ There are three ways to run an Observer:
 |---|---|
 | [Native Observer Firmware](#method-1-native-observer-firmware) | Devices that support the MQTT observer firmware natively |
 | [Computer Bridge (mctomqtt)](#method-2-computer-bridge-usb-raspberry-pi) | Repeater or Room Server connected to a Raspberry Pi or Linux device via USB |
-| [Companion Bridge](#method-3-companion-bridge) | Companion nodes, uses different bridge software configured via the LetsMesh "Become an Observer" page |
+| [Companion Bridge](#method-3-companion-bridge) | Companion nodes, uses different bridge software configured via the Observer Flasher |
 
 ---
 
 ## Method 1: Native Observer Firmware
 
-### Step 1: Download the Firmware
+### Step 1: Download and Flash the Firmware
 
-Use the [LetsMesh Onboarding page](https://analyzer.letsmesh.net/observer/onboard) to find and download the correct firmware for your device variant. On the firmware page, select **observer-uplink-native-dev** in the version dropdown. You can also browse available builds directly from the [Nightly Observer Firmware Builds](https://files.gessaman.com/meshcore-observer/1.15.0-experimental-mqtt-observer-firmwares/).
+#### Fresh Install
 
-!!! note
-    Files labeled **-merged** are for **fresh installs only** and will completely erase your flash. If you are updating from an existing MeshCore version, download the non-merged variant.
+Use the [MeshCore MQTT Observer Flasher](https://observer.gessaman.com/) to find, download, and flash the correct firmware for your device. This is an online flasher, select your device variant and follow the prompts to flash directly from your browser.
 
-### Step 2: Flash the Firmware
+!!! danger "Merged files will erase everything on your device"
+    Files labeled **-merged** perform a **full flash erase** and are for **fresh installs only**. Flashing a merged file onto a device that already has MeshCore will wipe all settings, keys, and configuration. If you are updating an existing install, always select the **non-merged** variant.
 
-**Fresh install:** Use the [MeshCore Web Flasher](https://flasher.meshcore.dev/) and select **Custom** to upload your downloaded file.
+#### Updating via OTA
 
-**Updating via OTA:** If you already have MeshCore running, you can update wirelessly using the companion app:
+If you already have MeshCore running, you can update wirelessly using the companion app and a web browser instead of the web flasher and USB:
 
-1. **Connect to the Device**
-    - Open the MeshCore companion app
-    - Select your device to be updated
-    - Log in with the **admin** password
+1. **Download the App Firmware**
+    - Before starting the OTA process, visit the [MeshCore Observer Flasher](https://observer.gessaman.com/)
+    - Select your device, and use the **Download** button to download the **app firmware** option
+    !!! warning "Do not use a merged file"
+        This variant does **not** erase your flash and is safe for updating an existing install. Do not use a merged file, it will wipe all your settings.
 2. **Open Remote Management**
-    - Tap the **···** menu (top right)
-    - Choose **Remote Management**
+    - Open the MeshCore companion app
+    - Select your node from the contacts list or map
+    - Scroll down and tap **Remote Management**
+    - Enter the **admin** password when prompted
 3. **Launch the Command Line**
-    - Scroll to the bottom
-    - Tap **Command Line**
+    - Tap **Command Line** in the middle of the bottom footer
     - Enter `start ota`
-4. **Connect to the OTA Network**
-    - On your phone or computer, join the Wi-Fi network: `MeshCore-OTA`
+    - Click Enter on your keyboard
+4. **Navigate to the OTA Upload Page**
+    - If your node is **not** connected to Wi-Fi, it will broadcast a `MeshCore-OTA` hotspot instead, connect to that and go to `http://192.168.4.1/update`
+    - If your node is already connected to Wi-Fi, it will stay on your existing network:
+        - Check your node's display for the IP address or if your node does not have a screen, check your router's DHCP table to find the IP address assigned to your node
+        - Open a browser and go to `http://<node-ip>/update` (e.g. `http://192.168.1.42/update`)
 5. **Upload the Firmware**
-    - Open a browser and go to `http://192.168.4.1/update`
     - Select and upload your downloaded `.bin` file
     - Wait for the update to complete
 6. **Verify the Update**
     - Reopen the companion app
     - Confirm the firmware version under Remote Management
 
-!!! note
-    Your node's IP address may be set by your router's DHCP server to a different IP if you already connected your node to Wi-Fi. Check your DHCP server to see what your node's local IP address is.
-
-### Step 3: Apply ChiMesh Observer Settings
+### Step 2: Apply ChiMesh Observer Settings
 
 Once your firmware is installed, open the **Command Line** under Remote Management and enter the following commands:
 
@@ -92,7 +94,7 @@ set mqtt2.preset chimesh
 ```
 
 !!! tip "If the chimesh preset isn't working, set the connection details manually:"
-    Your firmware may not have presets yet. If this is the case, use the following commands to set up MQTT manually. Run `get mqtt2.diag` to verify the connection after setup.
+    If your firmware version does not have presets or you wish to manually configure the connection details, use the following commands. Run `get mqtt2.diag` to verify the connection after setup.
     ```
     set mqtt2.server wss://mqtt.chimesh.org
     ```
@@ -120,7 +122,7 @@ set wifi.pwd your-wifi-password
 ```
 
 !!! note
-    Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials, **do not wrap them in quotes**.
+    Replace `your-wifi-network` and `your-wifi-password` with your real Wi-Fi credentials. **Do not wrap them in quotes**.
 
 ```
 set bridge.enabled on
@@ -139,11 +141,11 @@ set flood.advert.interval 72
     ```
 
 !!! example "Optional (but encouraged), set to your companion device's public key:"
-    Replace `your-primary-companion-device-pub.key` with your companion device's actual public key.
+    Replace `your-primary-companion-device-pub-key` with your companion device's actual public key. This helps to correlate repeaters with their owner for better analytics in the [analyzers](/corescope/).
     ```
-    set mqtt.owner your-primary-companion-device-pub.key
+    set mqtt.owner your-primary-companion-device-pub-key
     ```
-  
+
 ```
 reboot
 ```
@@ -160,7 +162,7 @@ reboot
 
 ### Step 1: Get Compatible Firmware
 
-Your node needs firmware that includes **packet logging** support. Download the appropriate version for your device from the [LetsMesh Observer Firmware](https://analyzer.letsmesh.net/observer/onboard) website using the **latest version**, or grab a pre-built packet-logging build for your variant.
+Your node needs firmware that includes **packet logging** support. Use the [MeshCore Observer Flasher](https://observer.gessaman.com/) to find and flash the appropriate firmware for your device variant.
 
 ### Step 2: Connect and Run the Install Script
 
@@ -237,11 +239,12 @@ The companion bridge does not currently support preset-based configuration. Ente
 !!! note
     It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
 
-For more details, see the [meshcore-packet-capture README](https://github.com/agessaman/meshcore-packet-capture). For help, reach out on the [MeshCore Discord](https://meshcore.gg/).
+For more details, see the [meshcore-packet-capture README](https://github.com/agessaman/meshcore-packet-capture). For help, reach out on the [ChiMesh Discord](https://chimesh.org/discord) or the [MeshCore Discord](https://meshcore.gg/).
 
 ---
 
 ## Additional Notes
+
 - These settings are required to appear on ChiMesh(Core) services
 - `set mqtt2.preset chimesh` is what connects your observer to the ChiMesh network specifically while `set mqtt1.preset analyzer-us` is what connects your observer to the global [LetsMesh analyzer](https://analyzer.letsmesh.net) and the [official MeshCore map](https://map.meshcore.io)
 - The `mqtt.owner` field is optional but highly encouraged, it links your observer to your primary companion device
