@@ -57,6 +57,7 @@ MAP_CSS_DIR   := $(MAP_ASSET_DIR)/stylesheets
 SITE_OUTPUT := dist
 
 $(MAP_MIDWEST_PM) $(MAP_GLOBE_PM):
+	@PATH="$(PATH):$$(go env GOPATH)/bin" # set path for go-pmtiles if GOBIN not set
 	@echo 'Pulling map tiles...'
 	@go install github.com/protomaps/go-pmtiles@latest
 	@mkdir -p $(MAP_TILES_DIR)
