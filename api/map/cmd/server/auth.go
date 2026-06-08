@@ -19,7 +19,7 @@ func (server *server) loginHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{
 		Name:     "state",
 		Value:    state,
-		Path:     "/api/",
+		Path:     "/api/map/",
 		MaxAge:   10 * 60,
 		Expires:  time.Now().Add(10 * time.Minute),
 		HttpOnly: true,
@@ -35,7 +35,7 @@ func (server *server) logoutHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{
 		Name:     "token",
 		Value:    "",
-		Path:     "/api/",
+		Path:     "/api/map/",
 		MaxAge:   -1,
 		Expires:  time.Unix(0, 0),
 		HttpOnly: true,

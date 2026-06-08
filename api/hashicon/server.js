@@ -7,6 +7,8 @@ const { labelFromName, colorFromName, readTwemojiSvg } = require("./utils.js");
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.set("etag", false);
+
 app.use(async (req, res, next) => {
   const start = Date.now();
   res.on("finish", () => console.log(JSON.stringify({
@@ -22,7 +24,9 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.get("/meshcore/:name", async (req, res) => {
+const router = express.Router();
+
+router.get("/meshcore/:name", async (req, res) => {
   const name = req.params.name;
 
   const canvasSize = 512;
@@ -66,10 +70,11 @@ app.get("/meshcore/:name", async (req, res) => {
 
   const buffer = canvas.toBuffer("image/png");
   res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
   res.send(buffer);
 });
 
-app.get("/:id", (req, res) => {
+router.get("/meshtastic/:id", (req, res) => {
   const id = req.params.id[0] == "!" ? parseInt(req.params.id.slice(1), 16) : req.params.id;
 
   const canvasSize = 512;
@@ -84,8 +89,11 @@ app.get("/:id", (req, res) => {
 
   const buffer = canvas.toBuffer("image/png");
   res.setHeader("Content-Type", "image/png");
+  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
   res.send(buffer);
 });
+
+app.use("/v1", router);
 
 const server = app.listen(port, () => {
   console.log(`running hashicon server on port ${port}`);

@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/chicagolandmesh/chicagolandmesh.org/api/internal/models"
-	"github.com/chicagolandmesh/chicagolandmesh.org/api/internal/validator"
+	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/models"
+	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/validator"
 )
 
 type nodeResponse struct {

@@ -72,8 +72,8 @@ services:
       - REDIRECT_URL=${DEV_DISCORD_CALLBACK_URL}
     labels:
       caddy: ${DEV_BASE_URL}
-      caddy.handle: /api/*
-      caddy.handle.reverse_proxy: "{{upstreams 8080}}"
+      caddy.handle_path: /api/map/*
+      caddy.handle_path.reverse_proxy: "{{upstreams 8080}}"
     restart: unless-stopped
 
   pmtiles:

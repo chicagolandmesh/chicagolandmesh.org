@@ -2,7 +2,7 @@ import { addBanner } from "./banner.js";
 import { capitalize, getHTTPStatusText } from "./utils.js";
 
 export async function apiGetLocations() {
-  const response = await apiRequest("GET", "/api/me/locations", {
+  const response = await apiRequest("GET", "/api/map/me/locations", {
     errorMessage: "Failed to get node locations",
     errorMessageLength: 10000,
   });
@@ -10,7 +10,7 @@ export async function apiGetLocations() {
 }
 
 export async function apiDeleteNode(id) {
-  await apiRequest("DELETE", `/api/nodes/${id}`, {
+  await apiRequest("DELETE", `/api/map/nodes/${id}`, {
     errorMessage: "Failed to delete node",
     errorMessageLength: 10000,
   });
@@ -25,7 +25,7 @@ export async function apiCreateNode(form) {
     }
   }
 
-  const response = await apiRequest("POST", "/api/nodes", {
+  const response = await apiRequest("POST", "/api/map/nodes", {
     body: new URLSearchParams(data),
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     errorMessage: "Failed to create node",
@@ -43,7 +43,7 @@ export async function apiCheckAuth() {
   };
 
   try {
-    const response = await apiRequest("GET", "/api/me");
+    const response = await apiRequest("GET", "/api/map/me");
     if (response.ok) {
       const data = await response.json();
       auth.isAuthenticated = true;
@@ -60,7 +60,7 @@ export async function apiCheckAuth() {
 }
 
 export async function apiGetNodes() {
-  const response = await apiRequest("GET", "/api/nodes", {
+  const response = await apiRequest("GET", "/api/map/nodes", {
     errorMessage: "Failed getting nodes",
   });
   return await response.json();
@@ -75,7 +75,7 @@ export async function apiUpdateNode(id, form) {
     }
   }
 
-  const response = await apiRequest("PUT", `/api/nodes/${id}`, {
+  const response = await apiRequest("PUT", `/api/map/nodes/${id}`, {
     body: new URLSearchParams(data),
     errorMessage: "Failed to update node",
     errorMessageLength: 10000,
@@ -85,7 +85,7 @@ export async function apiUpdateNode(id, form) {
 }
 
 export async function apiUpdateCoordinates(id, { lng, lat }) {
-  const response = await apiRequest("PATCH", `/api/nodes/${id}`, {
+  const response = await apiRequest("PATCH", `/api/map/nodes/${id}`, {
     body: JSON.stringify({ longitude: lng, latitude: lat }),
     headers: { "Content-Type": "application/json" },
     errorMessage: "Failed to update coordinates",
@@ -95,7 +95,7 @@ export async function apiUpdateCoordinates(id, { lng, lat }) {
 }
 
 export async function apiLogout() {
-  await apiRequest("GET", "/api/logout", {
+  await apiRequest("GET", "/api/map/logout", {
     errorMessage: "Failed to logout",
     errorMessageLength: 5000,
   });

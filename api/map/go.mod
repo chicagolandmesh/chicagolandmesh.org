@@ -1,4 +1,4 @@
-module github.com/chicagolandmesh/chicagolandmesh.org/api
+module github.com/chicagolandmesh/chicagolandmesh.org/api/map
 
 go 1.24.0
 

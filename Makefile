@@ -128,8 +128,8 @@ build/site: build/map dist/index.html
 
 PROD_HOST := xenspec@chicagolandmesh.org
 
-.PHONY: deploy/hashicon
-deploy/hashicon:
+.PHONY: deploy/api/hashicon
+deploy/api/hashicon:
 	docker buildx build -t hashicon -o type=docker,dest=- api/hashicon \
 	  | ssh $(PROD_HOST) 'docker load'
 
@@ -138,8 +138,8 @@ deploy/pmtiles:
 	rsync -vcP ./$(MAP_MIDWEST_PM) $(PROD_HOST):~/data/
 	rsync -vcP ./$(MAP_GLOBE_PM) $(PROD_HOST):~/data/
 
-.PHONY: deploy/api
-deploy/api:
+.PHONY: deploy/api/map
+deploy/api/map:
 	docker buildx build -t map-api -o type=docker,dest=- api/map \
 	  | ssh $(PROD_HOST) 'docker load'
 
@@ -158,7 +158,7 @@ deploy/config:
 	rsync -vP ./remote/production/compose.yml $(PROD_HOST):~
 
 .PHONY: deploy
-deploy: deploy/hashicon build/pmtiles deploy/pmtiles deploy/api build/site deploy/site deploy/caddy deploy/config
+deploy: deploy/api/hashicon build/pmtiles deploy/pmtiles deploy/api/map build/site deploy/site deploy/caddy deploy/config
 	ssh -t $(PROD_HOST) '\
 	    docker compose up -d && \
 		docker compose logs -f --tail 10 \

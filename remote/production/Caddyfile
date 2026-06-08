@@ -21,18 +21,25 @@ chicagolandmesh.org {
 		file_server
 	}
 
-	handle /api/* {
+	handle_path /api/map/* {
 		reverse_proxy map-api:8080
+	}
+
+	handle_path /api/icon/* {
+		reverse_proxy hashicon:3000
+	}
+
+	# Preserve old icon api paths
+	handle_path /hashicon/meshcore/* {
+		redir * /api/icon/v1/meshcore{uri} permanent
+	}
+	handle_path /hashicon/* {
+		redir * /api/icon/v1/meshtastic{uri} permanent
 	}
 
 	handle_path /tiles/* {
 		header Cache-Control "public, max-age=31536000, immutable"
 		reverse_proxy pmtiles:8080
-	}
-
-	handle_path /hashicon/* {
-		header Cache-Control "no-cache"
-		reverse_proxy hashicon:3000
 	}
 
 	handle /discord {

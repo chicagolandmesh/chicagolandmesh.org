@@ -292,7 +292,7 @@ class NodeManagerControl {
   }
 
   _handleLogin() {
-    window.open("/api/login", "_self");
+    window.open("/api/map/login", "_self");
   }
 
   _handleLogout() {

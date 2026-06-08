@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chicagolandmesh/chicagolandmesh.org/api/internal/models"
+	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/models"
 )
 
 func (server *server) discordCallbackHandler(w http.ResponseWriter, r *http.Request) {
@@ -86,7 +86,7 @@ func (server *server) discordCallbackHandler(w http.ResponseWriter, r *http.Requ
 	http.SetCookie(w, &http.Cookie{
 		Name:     "token",
 		Value:    token,
-		Path:     "/api/",
+		Path:     "/api/map/",
 		Expires:  tokenExpiration,
 		HttpOnly: true,
 		Secure:   server.config.secure,
@@ -95,7 +95,7 @@ func (server *server) discordCallbackHandler(w http.ResponseWriter, r *http.Requ
 	http.SetCookie(w, &http.Cookie{
 		Name:     "state",
 		Value:    "",
-		Path:     "/api/",
+		Path:     "/api/map/",
 		MaxAge:   -1,
 		Expires:  time.Unix(0, 0),
 		HttpOnly: true,

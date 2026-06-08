@@ -299,7 +299,7 @@ export class NodeManager {
       return `<hr style="margin:0">
 
       <div class="popup-footer">
-        <i>Your node? <a href="/api/login">Login</a> to edit</i>
+        <i>Your node? <a href="/api/map/login">Login</a> to edit</i>
       </div>`;
     } else {
       return "";

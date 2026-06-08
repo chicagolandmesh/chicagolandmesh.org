@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/chicagolandmesh/chicagolandmesh.org/api/internal/models"
-	"github.com/chicagolandmesh/chicagolandmesh.org/api/migrations"
+	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/models"
+	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/migrations"
 
 	"github.com/DeRuina/timberjack"
 	"github.com/golang-migrate/migrate/v4"
