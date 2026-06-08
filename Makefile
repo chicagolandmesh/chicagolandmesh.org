@@ -17,6 +17,10 @@ dev/site:
 	@touch docs/assets/stylesheets/map.dev.css
 	docker compose up mkdocs caddy
 
+.PHONY: dev/hashicon
+dev/hashicon:
+	docker compose up hashicon caddy
+
 .PHONY: clean
 clean:
 	docker compose down --rmi local

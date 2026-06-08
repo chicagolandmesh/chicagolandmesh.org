@@ -103,3 +103,13 @@ services:
   #     caddy.handle_path.reverse_proxy: "{{upstreams 3000}}"
   #     caddy.handle_path.reverse_proxy.header_up: X-Rewrite-URL "/tiles{uri}"
   #   restart: unless-stopped
+
+  hashicon:
+    build: ./api/hashicon/
+    expose:
+      - 3000
+    labels:
+      caddy: ${DEV_BASE_URL}
+      caddy.handle_path: /api/icon/*
+      caddy.handle_path.reverse_proxy: "{{upstreams 3000}}"
+    restart: unless-stopped
