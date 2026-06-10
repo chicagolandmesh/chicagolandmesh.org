@@ -5,6 +5,7 @@ networks:
 services:
   caddy:
     image: caddy-cloudflare
+    user: 1000:1000
     ports:
       - 80:80
       - 443:443
