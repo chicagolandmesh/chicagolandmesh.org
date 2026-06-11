@@ -128,9 +128,9 @@ async function apiRequest(method, url, options) {
   } catch (error) {
     if (errorMessage) {
       if (error.data?.error) {
-        error.message = Object.entries(error.data.errors)
+        error.message = Object.entries(error.data.error)
           .map(([key, value]) => capitalize(key) + " " + value)
-          .join("<br>");
+          .join("\n");
       }
 
       addBanner(errorMessage, error.message, {

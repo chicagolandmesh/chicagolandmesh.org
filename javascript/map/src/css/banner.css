@@ -25,6 +25,7 @@
   line-height: 1rem;
   z-index: 1;
   position: relative;
+  white-space: pre-line;
 }
 @media (max-width: 600px) {
   #helper-banner {
