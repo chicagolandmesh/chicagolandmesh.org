@@ -623,7 +623,7 @@ export class NodeManager {
         frequencyInput == node.frequency &&
         elevationInput == node.elevation &&
         roleInput == node.role &&
-        privacyInput == node.privacy &&
+        privacyInput == node.owner.privacy &&
         mqttUplinkInput == node.mqttUplink
       ) return;
 
