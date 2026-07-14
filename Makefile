@@ -31,7 +31,7 @@ clean:
 	rm -rf $(MAP_JS_DIR)
 	rm -f $(MAP_CSS_DIR)/map.*.css
 	rm -rf .cache
-	rm -rf venv
+	rm -rf .venv
 	rm -rf javascript/map/node_modules
 	rm -rf __pycache__
 	rm -rf api/map/bin
@@ -113,15 +113,15 @@ build/map/css: javascript/map/node_modules $(wildcard javascript/map/src/css/*.c
 .PHONY: build/map
 build/map: build/map/js build/map/css build/map/assets
 
-venv/bin/activate:
+.venv/bin/activate:
 	@echo 'Setting up virtual python environment...'
-	python3 -m venv venv \
-	&& . venv/bin/activate \
+	python3 -m venv .venv \
+	&& source .venv/bin/activate \
 	&& pip install mkdocs-material mkdocs-glightbox mkdocs-minify-plugin
 
-dist/index.html: venv/bin/activate $(wildcard docs/**/*) $(wildcard overrides/**/*) mkdocs.yml
+dist/index.html: .venv/bin/activate $(wildcard docs/**/*) $(wildcard overrides/**/*) mkdocs.yml
 	@echo 'Building site...'
-	. venv/bin/activate \
+	source .venv/bin/activate \
     && mkdocs build -d $(SITE_OUTPUT)
 
 .PHONY: build/site
