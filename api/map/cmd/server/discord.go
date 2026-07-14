@@ -53,7 +53,7 @@ func (server *server) discordCallbackHandler(w http.ResponseWriter, r *http.Requ
 			server.redirectDiscordError(w, r, discordErr)
 			return
 		}
-		server.error(w, r, "failed to access token from discord", err)
+		server.error(w, r, "failed to get access token from discord", err)
 		return
 	}
 
