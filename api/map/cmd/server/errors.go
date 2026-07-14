@@ -44,9 +44,8 @@ func clientError(w http.ResponseWriter, status int) {
 }
 
 func (server *server) error(w http.ResponseWriter, r *http.Request, msg string, err error) {
-	var apiErr apiError
-	if errors.As(err, &apiErr) && apiErr.StatusCode != http.StatusInternalServerError {
-		clientError(w, apiErr.StatusCode)
+	if err, ok := errors.AsType[apiError](err); ok && err.StatusCode != http.StatusInternalServerError {
+		clientError(w, err.StatusCode)
 		return
 	}
 

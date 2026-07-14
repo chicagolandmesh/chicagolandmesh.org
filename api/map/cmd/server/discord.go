@@ -49,8 +49,7 @@ func (server *server) discordCallbackHandler(w http.ResponseWriter, r *http.Requ
 
 	accessToken, err := getDiscordAccessToken(server.config.clientID, server.config.clientSecret, server.config.redirectURL, code)
 	if err != nil {
-		var discordErr discordError
-		if errors.As(err, &discordErr) && discordErr.StatusCode == 400 {
+		if discordErr, ok := errors.AsType[discordError](err); ok && discordErr.StatusCode == 400 {
 			server.redirectDiscordError(w, r, discordErr)
 			return
 		}

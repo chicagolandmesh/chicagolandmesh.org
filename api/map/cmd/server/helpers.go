@@ -115,8 +115,7 @@ func (server *server) decode(w http.ResponseWriter, r *http.Request, dst any) er
 	case "application/json":
 		err := json.NewDecoder(r.Body).Decode(dst)
 		if err != nil {
-			var invalidUnmarshalError *json.InvalidUnmarshalError
-			if errors.As(err, &invalidUnmarshalError) {
+			if _, ok := errors.AsType[*json.InvalidUnmarshalError](err); ok {
 				return apiError{
 					StatusCode: http.StatusInternalServerError,
 					Message:    "failed to decode request",
