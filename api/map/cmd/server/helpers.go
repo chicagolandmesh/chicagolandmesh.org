@@ -168,11 +168,10 @@ func writeJSON(w http.ResponseWriter, status int, v any) error {
 		return err
 	}
 
-	w.Header().Set("Content-Length", strconv.Itoa(len(raw)+1))
+	w.Header().Set("Content-Length", strconv.Itoa(len(raw)))
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	w.Write(raw)
-	w.Write([]byte("\n"))
 
 	return nil
 }
