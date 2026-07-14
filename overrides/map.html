@@ -3,11 +3,158 @@
 {% block styles %}
 {{ super() }}
   <link rel="stylesheet" href="{{ config.extra.map_css_bundle | url }}">
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.6.1/dist/css/tom-select.css" rel="stylesheet">
 {% endblock %}
 
 {% block scripts %}
 {{ super() }}
   <script src="{{ config.extra.map_js_bundle | url }}"></script>
+
+  <!-- custom select inputs -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.1/dist/js/tom-select.complete.min.js"></script>
+  <script type="module">
+    const settingsDropdownSearch = {
+      plugins: ["dropdown_input", "restore_on_backspace"],
+      refreshThrottle: 0,
+      maxOptions: null,
+      sortField: {field:"text",direction:"asc"},
+      onItemAdd: function() {
+        this.blur();
+      },
+      onDropdownOpen: function() {
+        this.control_input.placeholder = "Type to search...";
+      }
+    }
+
+    const settingsSelectSearch = {
+      plugins: ["restore_on_backspace"],
+      refreshThrottle: 0,
+      maxOptions: null,
+      sortField: {field:"text",direction:"asc"},
+      onItemAdd: function() {
+        this.blur();
+      },
+      onType: function() {
+        this.clear();
+      }
+    }
+
+    const settingsSelect = {
+      plugins: ["no_backspace_delete"],
+      maxOptions: null,
+      sortField: {field:"text",direction:"asc"},
+      onInitialize: function() {
+        this.control_input.readOnly = true;
+      }
+    }
+
+    new TomSelect("#nodePower", settingsSelect);
+    new TomSelect("#nodeDevice", settingsDropdownSearch);
+    new TomSelect("#nodeProtocol", settingsSelect);
+    new TomSelect("#meshcoreFrequency", settingsSelect);
+    new TomSelect("#meshcoreRole", settingsSelect);
+    new TomSelect("#meshtasticFrequency", settingsSelect);
+    new TomSelect("#meshtasticRole", settingsSelect);
+    new TomSelect("#reticulumRole", settingsSelect);
+  </script>
+
+  <!-- hide and disable protocol specific fields based on the selected protocol -->
+  <script type="module">
+    function showOptions(protocol) {
+      document.querySelectorAll(`.${protocol}Option`).forEach((group) => {
+        group.classList.remove("form-hidden");
+        group.querySelectorAll("select, input").forEach((element) => {
+          element.disabled = false;
+        });
+      });
+    }
+
+    function hideOptions(protocol) {
+      document.querySelectorAll(`.${protocol}Option`).forEach(group => {
+        group.classList.add("form-hidden");
+        group.querySelectorAll("select, input").forEach(element => {
+          element.disabled = true;
+        });
+      });
+    }
+
+    function handleProtocolChange() {
+      const protocols = ["meshcore", "meshtastic", "reticulum"];
+
+      showOptions(this.value);
+
+      for (const protocol of protocols) {
+        if (protocol !== this.value) {
+          hideOptions(protocol);
+        }
+      }
+
+      for (const el of document.querySelectorAll("#node-form select, #node-form input")) {
+        if (el.tomselect) el.tomselect.sync();
+      }
+    }
+
+    document.querySelector("#nodeProtocol").addEventListener("change", handleProtocolChange);
+  </script>
+
+  <!-- custom frequency input mask -->
+  <script src="https://unpkg.com/imask@7.6.1/dist/imask.min.js"></script>
+  <script type="module">
+    const input = document.getElementById("reticulumFrequency");
+    const mask = IMask(input, {
+      mask: Number,
+      scale: 3,
+      min: 0,
+      max: 1000,
+      radix: '.',
+      normalizeZeros: true,
+      padFractionalZeros: true,
+    });
+
+    let digits = '';
+
+    input.addEventListener('keydown', (e) => {
+      if (/^\d$/.test(e.key)) {
+        e.preventDefault();
+
+        digits += e.key;
+
+        const value = Number(digits) / 1000;
+
+        if (value <= 1000) {
+          mask.typedValue = value;
+        } else {
+          digits = digits.slice(0, -1);
+        }
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+
+        digits = digits.slice(0, -1);
+        mask.typedValue = digits ? Number(digits) / 1000 : '';
+      }
+    });
+  </script>
+
+  <!-- set form device options from api -->
+  <script type="module">
+    fetch("/api/map/devices").then(response => {
+      return response.json();
+    }).then(data => {
+      // used by popup code:
+      window.deviceNames = new Map(Object.entries(data));
+
+      const select = document.querySelector("#nodeDevice");
+
+      for (const [slug, name] of Object.entries(data)) {
+        const option = document.createElement("option");
+        option.value = slug;
+        option.text = name;
+        select.appendChild(option);
+      }
+
+      select.tomselect.sync();
+    });
+  </script>
 {% endblock %}
 
 {% block content %}
@@ -37,100 +184,152 @@
       <h2>Enter Node Information</h2>
       <form id="node-form">
         <div>
-          <label for="nodeTitle">Name</label>
-          <input class="form-input" type="text" minlength="1" maxlength="50" id="nodeTitle" name="name" placeholder="Anonymous if empty" aria-describedby="nodeTitleHelp">
+          <label for="nodeTitle">Name <small>(optional)</small></label>
+          <input id="nodeTitle" class="form-input" type="text" name="name" placeholder="Anonymous if empty" aria-describedby="nodeTitleHelp" minlength="1" maxlength="50">
           <div id="nodeTitleHelp" class="form-text">Node name that will show up for other users. Will be <i>Anonymous</i> if left empty.</div>
         </div>
+
         <div>
-          <label for="nodeElevation">Elevation</label>
-          <input class="form-input" type="number" id="nodeElevation" name="elevation" placeholder="Feet from ground level">
+          <label for="nodePublicKey">Public Key <small>(optional)</small></label>
+          <input id="nodePublicKey" class="form-input" type="text" name="publicKey" placeholder="64 character hex string" aria-describedby="nodePublicKeyHelp" minlength="64" maxlength="64">
+          <div id="nodePublicKeyHelp" class="form-text">Public key your node uses for identity and encryption.</div>
+        </div>
+
+        <div>
+          <label for="nodeElevation">Elevation <small>(optional)</small></label>
+          <input id="nodeElevation" class="form-input" type="number" name="elevation" inputmode="decimal" placeholder="Feet from ground level" aria-describedby="nodeElevationHelp" min="0">
           <div id="nodeElevationHelp" class="form-text">The elevation in feet that the node is from ground level.</div>
         </div>
-        <div>
-          <label for="nodeFrequency">Frequency</label>
-          <select class="form-input" id="nodeFrequency" name="frequency" aria-describedby="nodeFrequencyHelp" required>
-            <option value="915">915 MHz</option>
-            <option value="868">868 MHz</option>
-            <option value="433">433 MHz</option>
-          </select>
-          <div id="nodeFrequencyHelp" class="form-text">The <a href="https://meshtastic.org/docs/overview/radio-settings/" target="_blank">frequency</a> your node is set to use.</div>
-        </div>
-        <div>
-          <label for="nodeRole">Role</label>
-          <select class="form-input" id="nodeRole" name="role" aria-describedby="nodeRoleHelp" required>
-            <option value="fixed">Fixed</option>
-            <option value="portable">Portable</option>
-            <option value="router">Router</option>
-            <option value="repeater">Repeater</option>
-          </select><br>
-          <div id="nodeRoleHelp" class="form-text">Select the correct role of your node.</div>
-        </div>
-        <div>
-          <input type="checkbox" id="usernamePrivacy" name="privacy" aria-describedby="usernamePrivacyHelp" style="margin-right: 0.25rem;">
-          <input type="hidden" value="off" name="privacy">
-          <label for="usernamePrivacy" style="margin-bottom: 0;">Keep Discord username hidden?</label>
-          <div id="usernamePrivacyHelp" class="form-text" style="margin-top:0;">By default usernames are only shown for logged in users. If set, will hide your username from all of your nodes on the map.</div>
-        </div>
-        <div>
-          <input type="checkbox" id="nodeMQTT" name="mqttUplink" aria-describedby="nodeMQTTHelp" style="margin-right: 0.25rem;">
-          <input type="hidden" value="off" name="mqttUplink">
-          <label for="nodeMQTT" style="margin-bottom: 0;">Using the Chicago MQTT root topic?</label>
-          <div id="nodeMQTTHelp" class="form-text" style="margin-top:0;">Is your node set to uplink the primary channel to <a href="/protocols/meshtastic/mqtt/#mqtt-settings" target="_blank"><i>mqtt.chimesh.org</i></a> on the topic <i>msh/US/IL/Chi</i>?</div>
-        </div>
-        <div style="margin: 0; margin-top: 4px;">
-          <button type="button" class="form-button">Cancel</button>
-          <button type="submit" class="form-button blue">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
-  <div class="modal-overlay hidden">
-    <div class="modal-content">
-      <h2>Change Node Information</h2>
-      <form id="node-update-form">
         <div>
-          <label for="nodeUpdateTitle">Name</label>
-          <input class="form-input" type="text" minlength="1" maxlength="50" id="nodeUpdateTitle" name="name" placeholder="Anonymous if empty" aria-describedby="nodeUpdateTitleHelp">
-          <div id="nodeUpdateTitleHelp" class="form-text">Node name that will show up for other users. Will be <i>Anonymous</i> if left empty.</div>
-        </div>
-        <div>
-          <label for="nodeUpdateElevation">Elevation</label>
-          <input class="form-input" type="number" id="nodeUpdateElevation" name="elevation" placeholder="Feet from ground level">
-          <div id="nodeUpdateElevationHelp" class="form-text">The elevation in feet that the node is from ground level.</div>
-        </div>
-        <div>
-          <label for="nodeUpdateFrequency">Frequency</label>
-          <select class="form-input" id="nodeUpdateFrequency" name="frequency" aria-describedby="nodeFrequencyHelp" required>
-            <option value="915">915 MHz</option>
-            <option value="868">868 MHz</option>
-            <option value="433">433 MHz</option>
+          <label for="nodePower">Power <small>(optional)</small></label>
+          <select id="nodePower" name="power" aria-describedby="nodePowerHelp">
+            <option value="" selected disabled hidden>Select a power source...</option>
+            <option value="hardwired">Hardwired</option>
+            <option value="portable">Portable (battery operated)</option>
+            <option value="solar">Solar</option>
           </select>
-          <div id="nodeUpdateFrequencyHelp" class="form-text">The <a href="https://meshtastic.org/docs/overview/radio-settings/" target="_blank">frequency</a> your node is set to use.</div>
+          <div id="nodePowerHelp" class="form-text">The type of power source your node uses.</div>
         </div>
+
         <div>
-          <label for="nodeUpdateRole">Role</label>
-          <select class="form-input" id="nodeUpdateRole" name="role" aria-describedby="nodeUpdateRoleHelp" required>
-            <option value="fixed">Fixed</option>
-            <option value="portable">Portable</option>
-            <option value="router">Router</option>
+          <label for="nodeDevice">Device <small>(optional)</small></label>
+          <select id="nodeDevice" name="device" aria-describedby="nodeDeviceHelp">
+            <option value="" selected disabled hidden>Select a device...</option>
+          </select>
+          <div id="nodeDeviceHelp" class="form-text">The device model of your node.</div>
+        </div>
+
+        <div>
+          <label for="nodeProtocol">Protocol</label>
+          <select id="nodeProtocol" name="protocol" aria-describedby="nodeProtocolHelp" required>
+            <option value="" selected disabled hidden>Select a protocol...</option>
+            <option value="meshcore">MeshCore</option>
+            <option value="meshtastic">Meshtastic</option>
+            <option value="reticulum">Reticulum</option>
+          </select>
+          <div id="nodeProtocolHelp" class="form-text">The firmware your node is loaded with.</div>
+        </div>
+
+        <!-- MeshCore specific options -->
+        <div class="meshcoreOption form-hidden">
+          <label for="meshcoreFrequency">Frequency</label>
+          <select id="meshcoreFrequency" name="frequency" aria-describedby="meshcoreFrequencyHelp" required>
+            <option value="" disabled hidden>Select a frequency...</option>
+            <option value="910.525" selected>910.525 MHz (USA/Canada)</option>
+          </select>
+          <div id="meshcoreFrequencyHelp" class="form-text">The <a href="https://docs.meshcore.io/faq/?h=#23-q-what-frequencies-are-supported-by-meshcore" target="_blank">frequency</a> your node is set to use.</div>
+        </div>
+        <div class="meshcoreOption form-hidden">
+          <label for="meshcoreRole">Role</label>
+          <select id="meshcoreRole" name="role" aria-describedby="meshcoreRoleHelp" required>
+            <option value="" selected disabled hidden>Select a role...</option>
+            <option value="companion">Companion</option>
             <option value="repeater">Repeater</option>
-          </select><br>
-          <div id="nodeUpdateRoleHelp" class="form-text">Select the correct role of your node.</div>
+            <option value="room">Room Server</option>
+            <option value="sensor">Sensor Server</option>
+            <option value="kiss">KISS Modem</option>
+          </select>
+          <div id="meshcoreRoleHelp" class="form-text">Select the correct role of your node.</div>
         </div>
+        <div class="meshcoreOption form-hidden">
+          <input id="meshcoreMqttUplink" class="form-checkbox" type="checkbox" name="mqttUplink" aria-describedby="meshcoreMqttUplinkHelp">
+          <input type="hidden" name="mqttUplink" value="off">
+          <label for="meshcoreMqttUplink">Is set as an observer to uplink to MQTT?</label>
+          <div id="meshcoreMqttUplinkHelp" class="form-text">Is your node using observer firmware and set to uplink packets to <a href="/guides/meshcore/mqtt/" target="_blank"><i>mqtt.chimesh.org</i></a>?</div>
+        </div>
+
+        <!-- Meshtastic specific options -->
+        <div class="meshtasticOption form-hidden">
+          <label for="meshtasticFrequency">Frequency</label>
+          <select id="meshtasticFrequency" name="frequency" aria-describedby="meshtasticFrequencyHelp" required>
+            <option value="" selected disabled hidden>Select a frequency...</option>
+            <option value="906.875">906.875 MHz (LONG_FAST)</option>
+            <option value="913.125">913.125 MHz (MEDIUM_FAST)</option>
+          </select>
+          <div id="meshtasticFrequencyHelp" class="form-text">The <a href="https://meshtastic.org/docs/overview/radio-settings/" target="_blank">frequency</a> your node is set to use.</div>
+        </div>
+        <div class="meshtasticOption form-hidden">
+          <label for="meshtasticRole">Role</label>
+          <select id="meshtasticRole" name="role" aria-describedby="meshtasticRoleHelp" required>
+            <option value="" selected disabled hidden>Select a role...</option>
+            <option value="client">CLIENT</option>
+            <option value="client_mute">CLIENT_MUTE</option>
+            <option value="client_hidden">CLIENT_HIDDEN</option>
+            <option value="client_base">CLIENT_BASE</option>
+            <option value="tracker">TRACKER</option>
+            <option value="lost_and_found">LOST_AND_FOUND</option>
+            <option value="sensor">SENSOR</option>
+            <option value="tak">TAK</option>
+            <option value="tak_tracker">TAK_TRACKER</option>
+            <option value="repeater">REPEATER</option>
+            <option value="router">ROUTER</option>
+            <option value="router_late">ROUTER_LATE</option>
+          </select>
+          <div id="meshtasticRoleHelp" class="form-text">Select the correct <a href="https://meshtastic.org/docs/configuration/radio/device/#device-config-values" target="_blank">role</a> of your node.</div>
+        </div>
+        <div class="meshtasticOption form-hidden">
+          <input id="meshtasticMqttUplink" class="form-checkbox" type="checkbox" name="mqttUplink" aria-describedby="meshtasticMqttUplinkHelp">
+          <input type="hidden" name="mqttUplink" value="off">
+          <label for="meshtasticMqttUplink">Using the Chicago MQTT root topic?</label>
+          <div id="meshtasticMqttUplinkHelp" class="form-text">Is your node set to uplink the primary channel to <a href="/guides/meshtastic/mqtt/#mqtt-settings" target="_blank"><i>mqtt.chimesh.org</i></a> on the topic <i>msh/US/IL/Chi</i>?</div>
+        </div>
+
+        <!-- Reticulum specific options -->
+        <div class="reticulumOption form-hidden">
+          <label for="reticulumFrequency">Frequency</label>
+          <input id="reticulumFrequency" class="form-input" type="text" name="frequency" inputmode="decimal" placeholder="MHz in format 123.456" aria-describedby="reticulumFrequencyHelp" required
+            pattern="^[0-9]+\.[0-9]{3}$"
+            max="999"
+            title="Must contain decimal with 3 digits xxx.xxx">
+          <div id="reticulumFrequencyHelp" class="form-text">The <a href="/guides/reticulum/getting-started/configure/#preset-configurations" target="_blank">frequency</a> your node is set to use.</div>
+        </div>
+        <div class="reticulumOption form-hidden">
+          <label for="reticulumRole">Role</label>
+          <select id="reticulumRole" name="role" aria-dcribedby="reticulumRoleHelp" required>
+            <option value="" selected disabled hidden>Select a role...</option>
+            <option value="rnode">RNode</option>
+            <option value="ax25">AX.25 KISS</option>
+            <option value="tnc">TNC KISS</option>
+            <option value="generic">Generic Radio</option>
+          </select>
+          <div id="reticulumRoleHelp" class="form-text">Select the correct role of your node.</div>
+        </div>
+        <div class="reticulumOption form-hidden">
+          <input id="reticulumMqttUplink" class="form-checkbox" type="checkbox" name="mqttUplink" aria-describedby="reticulumMqttUplinkHelp">
+          <input type="hidden" name="mqttUplink" value="off">
+          <label for="reticulumMqttUplink">Is set to relay through RNS relay server?</label>
+          <div id="reticulumMqttUplinkHelp" class="form-text">Is your node relaying through <a href="/guides/reticulum/relay/" target="_blank"><i>rns.chimesh.org</i></a>?</div>
+        </div>
+
         <div>
-          <input type="checkbox" id="updateUsernamePrivacy" name="privacy" aria-describedby="updateUsernamePrivacyHelp" style="margin-right: 0.25rem;">
-          <input type="hidden" value="off" name="privacy">
-          <label for="updateUsernamePrivacy" style="margin-bottom: 0;">Keep Discord username hidden?</label>
-          <div id="updateUsernamePrivacyHelp" class="form-text" style="margin-top:0;">By default usernames are only shown for logged in users. If set, will hide your username from all of your nodes on the map.</div>
+          <input id="usernamePrivacy" class="form-checkbox" type="checkbox" name="privacy" aria-describedby="usernamePrivacyHelp">
+          <input type="hidden" name="privacy" value="off">
+          <label for="usernamePrivacy">Keep Discord username hidden?</label>
+          <div id="usernamePrivacyHelp" class="form-text">By default usernames are only shown for logged in users. If set, will hide your username from all of your nodes on the map.</div>
         </div>
-        <div>
-          <input type="checkbox" id="nodeUpdateMQTT" name="mqttUplink" aria-describedby="nodeUpdateMQTTHelp" style="margin-right: 0.25rem;">
-          <input type="hidden" value="off" name="mqttUplink">
-          <label for="nodeUpdateMQTT" style="margin-bottom: 0;">Using the Chicago MQTT root topic?</label>
-          <div id="nodeUpdateMQTTHelp" class="form-text" style="margin-top:0;">Is your node set to uplink the primary channel to <a href="/protocols/meshtastic/mqtt/#mqtt-settings" target="_blank"><i>mqtt.chimesh.org</i></a> on the topic <i>msh/US/IL/Chi</i>?</div>
-        </div>
-        <div style="margin: 0; margin-top: 4px;">
+
+        <div class="form-footer">
           <button type="button" class="form-button">Cancel</button>
           <button type="submit" class="form-button blue">Submit</button>
         </div>

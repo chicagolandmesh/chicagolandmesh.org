@@ -7,18 +7,23 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/data"
 	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/models"
 	"github.com/chicagolandmesh/chicagolandmesh.org/api/map/internal/validator"
 )
 
 type nodeResponse struct {
 	ID         string        `json:"id"`
-	LngLat     [2]float64    `json:"lngLat"`
 	Name       string        `json:"name"`
 	Owner      *userResponse `json:"owner,omitempty"`
-	Role       string        `json:"role"`
+	PublicKey  *string       `json:"publicKey"`
+	LngLat     [2]float64    `json:"lngLat"`
 	Elevation  *int          `json:"elevation"`
-	Frequency  int           `json:"frequency"`
+	Frequency  float64       `json:"frequency"`
+	Power      *string       `json:"power"`
+	Device     *string       `json:"device"`
+	Protocol   string        `json:"protocol"`
+	Role       string        `json:"role"`
 	MqttUplink bool          `json:"mqttUplink"`
 	CreatedAt  string        `json:"createdAt"`
 	UpdatedAt  *string       `json:"updatedAt"`
@@ -27,11 +32,15 @@ type nodeResponse struct {
 func newNodeResponse(node models.Node, owner models.User, userID int, isAuthenticated bool) nodeResponse {
 	response := nodeResponse{
 		ID:         node.ID,
-		LngLat:     [2]float64{node.Longitude, node.Latitude},
 		Name:       "Anonymous",
-		Role:       node.Role,
-		Frequency:  node.Frequency,
+		PublicKey:  node.PublicKey,
+		LngLat:     [2]float64{node.Longitude, node.Latitude},
 		Elevation:  node.Elevation,
+		Frequency:  node.Frequency,
+		Power:      node.Power,
+		Device:     node.Device,
+		Protocol:   node.Protocol,
+		Role:       node.Role,
 		MqttUplink: node.MqttUplink,
 		CreatedAt:  node.CreatedAt.Round(time.Hour).Format(time.RFC3339),
 	}
@@ -110,22 +119,30 @@ func (server *server) getPersonalNodesHandler(w http.ResponseWriter, r *http.Req
 
 type nodeRequest struct {
 	Name       *string  `json:"name"       form:"name"`
+	PublicKey  *string  `json:"publicKey"  form:"publicKey"`
 	Latitude   *float64 `json:"latitude"   form:"latitude"`
 	Longitude  *float64 `json:"longitude"  form:"longitude"`
-	Role       *string  `json:"role"       form:"role"`
 	Elevation  *int     `json:"elevation"  form:"elevation"`
-	Frequency  *int     `json:"frequency"  form:"frequency"`
+	Power      *string  `json:"power"      form:"power"`
+	Device     *string  `json:"device"     form:"device"`
+	Protocol   *string  `json:"protocol"   form:"protocol"`
+	Role       *string  `json:"role"       form:"role"`
+	Frequency  *float64 `json:"frequency"  form:"frequency"`
 	MqttUplink *bool    `json:"mqttUplink" form:"mqttUplink"`
 }
 
 func (nr nodeRequest) toParams() models.NodeParams {
 	return models.NodeParams{
 		Name:       nr.Name,
+		PublicKey:  nr.PublicKey,
 		Latitude:   nr.Latitude,
 		Longitude:  nr.Longitude,
-		Role:       nr.Role,
 		Elevation:  nr.Elevation,
 		Frequency:  nr.Frequency,
+		Power:      nr.Power,
+		Device:     nr.Device,
+		Protocol:   nr.Protocol,
+		Role:       nr.Role,
 		MqttUplink: nr.MqttUplink,
 	}
 }
@@ -133,16 +150,32 @@ func (nr nodeRequest) toParams() models.NodeParams {
 func (nr nodeRequest) Validate(method string) (bool, map[string][]string) {
 	v := validator.New()
 
-	v.Field("name").String(nr.Name).Optional().NotBlank().Max(50)
-	v.Field("elevation").Int(nr.Elevation).Optional().NotNegative()
-
 	isNotPatch := method != http.MethodPatch
 
+	v.Field("name").String(nr.Name).Optional().NotBlank().Max(50)
+	v.Field("publicKey").String(nr.PublicKey).Optional().Equal(64)
 	v.Field("latitude").Float(nr.Latitude).RequiredIf(isNotPatch).Within(-90, 90)
 	v.Field("longitude").Float(nr.Longitude).RequiredIf(isNotPatch).Within(-180, 180)
-	v.Field("role").String(nr.Role).RequiredIf(isNotPatch).OneOf("fixed", "portable", "router", "repeater")
-	v.Field("frequency").Int(nr.Frequency).RequiredIf(isNotPatch).OneOf(915, 868, 433)
+	v.Field("elevation").Int(nr.Elevation).Optional().NotNegative()
+	v.Field("power").String(nr.Power).Optional().OneOf("hardwired", "portable", "solar")
+	v.Field("device").String(nr.Device).Optional().OneOf(data.GetDeviceSlugs()...)
+	v.Field("protocol").String(nr.Protocol).RequiredIf(isNotPatch).OneOf("meshcore", "meshtastic", "reticulum")
 	v.Field("mqttUplink").Bool(nr.MqttUplink).RequiredIf(isNotPatch)
+
+	switch fromPtr(nr.Protocol) {
+	case "meshcore":
+		v.Field("frequency").Float(nr.Frequency).Required().MustBe(910.525)
+		v.Field("role").String(nr.Role).Required().OneOf("companion", "repeater", "room", "sensor", "kiss")
+	case "meshtastic":
+		v.Field("frequency").Float(nr.Frequency).Required().OneOf(906.875, 913.125)
+		v.Field("role").String(nr.Role).Required().OneOf("client", "client_mute", "client_hidden", "client_base", "tracker", "lost_and_found", "sensor", "tak", "tak_tracker", "repeater", "router", "router_late")
+	case "reticulum":
+		v.Field("frequency").Float(nr.Frequency).Required().Within(0, 1000)
+		v.Field("role").String(nr.Role).Required().OneOf("rnode", "ax25", "tnc", "generic")
+	default: // if no protocol but has role or frequency, return error
+		v.Field("frequency").Float(nr.Frequency).Optional().DependsOn("protocol", nr.Protocol).DependsOn("role", nr.Role)
+		v.Field("role").String(nr.Role).Optional().DependsOn("protocol", nr.Protocol).DependsOn("frequency", nr.Frequency)
+	}
 
 	return v.Valid(), v.Errors()
 }

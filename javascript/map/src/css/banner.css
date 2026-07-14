@@ -1,16 +1,19 @@
 /* styles for map banner */
 #helper-banner {
-  z-index: 2;
+  z-index: 3;
   position: relative;
   margin-right: auto;
   margin-left: auto;
   max-width: 24.4rem;
   margin-top: 10px !important;
+  font: var(--ml-font), "maplibregl-icons-custom";
   font-size: 0.75rem;
   opacity: 0;
   transition: opacity ease-in-out 0.2s;
   padding: 1px;
+  overflow: hidden;
 }
+
 #helper-banner button {
   position: absolute;
   top: 0px;
@@ -19,6 +22,7 @@
   font-size: 1rem;
   z-index: 2;
 }
+
 #helper-banner p {
   color: var(--md-default-fg-color);
   margin: 0.35rem;
@@ -27,17 +31,19 @@
   position: relative;
   white-space: pre-line;
 }
+
 @media (max-width: 600px) {
   #helper-banner {
     margin: 0 56px;
   }
 }
+
 .fill {
-  background-color: #fe00001f;
   position: absolute;
   width: 0%;
   height: 100%;
 }
+
 @keyframes fill {
   from {
     width: 0%;
@@ -45,4 +51,134 @@
   to {
     width: 100%;
   }
+}
+
+
+/* help banner pagination */
+:root {
+  --pagination-color: #0d6efd;
+  --pagination-background-color: #fff;
+  --pagination-border-color: #dee2e6;
+  --pagination-active-color: #fff;
+  --pagination-active-background-color: #0d6efd;
+  --pagination-active-border-color: #0d6efd;
+  --pagination-disabled-color: rgba(33, 37, 41, 0.75);
+  --pagination-disabled-background-color: #e9ecef;
+  --pagination-disabled-border-color: #dee2e6;
+  --pagination-hover-color: #0a58ca;
+  --pagination-hover-background-color: #f8f9fa;
+  --pagination-hover-border-color: #dee2e6;
+}
+
+.dark {
+  --pagination-color: #6ea8fe;
+  --pagination-background-color: #212529;
+  --pagination-border-color: #495057;
+  --pagination-active-color: #fff;
+  --pagination-active-background-color: #0d6efd;
+  --pagination-active-border-color: #0d6efd;
+  --pagination-disabled-color: rgba(222, 226, 230, 0.75);
+  --pagination-disabled-background-color: #343a40;
+  --pagination-disabled-border-color: #495057;
+  --pagination-hover-color: #8bb9fe;
+  --pagination-hover-background-color: #2b3035;
+  --pagination-hover-border-color: #495057;
+}
+
+.helper-pagination {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.pagination {
+  display: flex !important;
+  list-style: none !important;
+  margin: 0.35rem !important;
+}
+
+.page-item {
+  margin: 0 !important;
+  user-select: none;
+}
+
+.page-item:first-child .page-link {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+}
+
+.pagination .page-link {
+  position: relative;
+  display: block;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: var(--pagination-color);
+  background-color: var(--pagination-background-color);
+  border: 1px solid var(--pagination-border-color);
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.pagination .page-link:hover {
+  z-index: 2;
+  color: var(--pagination-hover-color);
+  background-color: var(--pagination-hover-background-color);
+  border-color: var(--pagination-hover-border-color);
+}
+
+.pagination .active > .page-link,
+.page-link.active {
+  z-index: 3;
+  color: var(--pagination-active-color);
+  background-color: var(--pagination-active-background-color);
+  border-color: var(--pagination-active-border-color);
+}
+
+.pagination .disabled > .page-link,
+.page-link.disabled {
+  color: var(--pagination-disabled-color);
+  background-color: var(--pagination-disabled-background-color);
+  border-color: var(--pagination-disabled-border-color);
+  pointer-events: none;
+}
+
+
+/* legend dots */
+.dot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin: 0 4px 1px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.dot.green {
+  background-color: #1fd85a;
+}
+
+.dot.blue {
+  background-color: #164a88;
+}
+
+.dot.white {
+  background-color: #ffffff;
+  border-color: #000000;
 }

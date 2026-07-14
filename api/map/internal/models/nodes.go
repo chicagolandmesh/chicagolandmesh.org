@@ -15,11 +15,15 @@ type Node struct {
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 	Name       *string
+	PublicKey  *string
 	Latitude   float64
 	Longitude  float64
-	Role       string
 	Elevation  *int
-	Frequency  int
+	Frequency  float64
+	Power      *string
+	Device     *string
+	Protocol   string
+	Role       string
 	MqttUplink bool
 }
 
@@ -30,11 +34,15 @@ func (n *Node) Pointers() []any {
 		&n.CreatedAt,
 		&n.UpdatedAt,
 		&n.Name,
+		&n.PublicKey,
 		&n.Latitude,
 		&n.Longitude,
-		&n.Role,
 		&n.Elevation,
 		&n.Frequency,
+		&n.Power,
+		&n.Device,
+		&n.Protocol,
+		&n.Role,
 		&n.MqttUplink,
 	}
 }
@@ -52,11 +60,15 @@ func (m *NodeModel) WithTx(ctx context.Context) *NodeModel {
 
 type NodeParams struct {
 	Name       *string
+	PublicKey  *string
 	Latitude   *float64
 	Longitude  *float64
-	Role       *string
 	Elevation  *int
-	Frequency  *int
+	Frequency  *float64
+	Power      *string
+	Device     *string
+	Protocol   *string
+	Role       *string
 	MqttUplink *bool
 }
 
@@ -67,8 +79,8 @@ type InsertNodeParams struct {
 
 func (m *NodeModel) Insert(arg InsertNodeParams) (Node, error) {
 	stmt := `
-		INSERT INTO nodes (id, user_id, created_at, updated_at, name, latitude, longitude, role, elevation, frequency, mqtt_uplink)
-		VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
+		INSERT INTO nodes (id, user_id, created_at, updated_at, name, public_key, latitude, longitude, elevation, frequency, power, device, protocol, role, mqtt_uplink)
+		VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15)
 		RETURNING *
 	`
 
@@ -80,11 +92,15 @@ func (m *NodeModel) Insert(arg InsertNodeParams) (Node, error) {
 		now, // created_at
 		now, // updated_at
 		arg.Name,
+		arg.PublicKey,
 		arg.Latitude,
 		arg.Longitude,
-		arg.Role,
 		arg.Elevation,
 		arg.Frequency,
+		arg.Power,
+		arg.Device,
+		arg.Protocol,
+		arg.Role,
 		arg.MqttUplink,
 	}
 
@@ -198,24 +214,32 @@ func (m *NodeModel) Update(arg UpdateNodeParams) (Node, error) {
 	stmt := `
 		UPDATE nodes
 		SET name = ?1,
-			latitude = ?2,
-			longitude = ?3,
-			role = ?4,
+			public_key = ?2,
+			latitude = ?3,
+			longitude = ?4,
 			elevation = ?5,
 			frequency = ?6,
-			mqtt_uplink = ?7,
-			updated_at = ?8
-		WHERE id = ?9
+			power = ?7,
+			device = ?8,
+			protocol = ?9,
+			role = ?10,
+			mqtt_uplink = ?11,
+			updated_at = ?12
+		WHERE id = ?13
 		RETURNING *
 	`
 
 	args := []any{
 		arg.Name,
+		arg.PublicKey,
 		arg.Latitude,
 		arg.Longitude,
-		arg.Role,
 		arg.Elevation,
 		arg.Frequency,
+		arg.Power,
+		arg.Device,
+		arg.Protocol,
+		arg.Role,
 		arg.MqttUplink,
 		time.Now(),
 		arg.NodeID,
@@ -256,13 +280,18 @@ type PatchNodeParams struct {
 	NodeParams
 }
 
+// TODO: support patching in null values
 func (p PatchNodeParams) atLeastOne() bool {
 	return p.Name != nil ||
+		p.PublicKey != nil ||
 		p.Latitude != nil ||
 		p.Longitude != nil ||
-		p.Role != nil ||
 		p.Elevation != nil ||
 		p.Frequency != nil ||
+		p.Power != nil ||
+		p.Device != nil ||
+		p.Protocol != nil ||
+		p.Role != nil ||
 		p.MqttUplink != nil
 }
 
@@ -274,24 +303,32 @@ func (m *NodeModel) Patch(arg PatchNodeParams) (Node, error) {
 	stmt := `
 		UPDATE nodes
 		SET name = coalesce(?1, name),
-			latitude = coalesce(?2, latitude),
-			longitude = coalesce(?3, longitude),
-			role = coalesce(?4, role),
+			public_key = coalesce(?2, public_key),
+			latitude = coalesce(?3, latitude),
+			longitude = coalesce(?4, longitude),
 			elevation = coalesce(?5, elevation),
 			frequency = coalesce(?6, frequency),
-			mqtt_uplink = coalesce(?7, mqtt_uplink),
-			updated_at = ?8
-		WHERE id = ?9
+			power = coalesce(?7, power),
+			device = coalesce(?8, device),
+			protocol = coalesce(?9, protocol),
+			role = coalesce(?10, role),
+			mqtt_uplink = coalesce(?11, mqtt_uplink),
+			updated_at = ?12
+		WHERE id = ?13
 		RETURNING *
 	`
 
 	args := []any{
 		arg.Name,
+		arg.PublicKey,
 		arg.Latitude,
 		arg.Longitude,
-		arg.Role,
 		arg.Elevation,
 		arg.Frequency,
+		arg.Power,
+		arg.Device,
+		arg.Protocol,
+		arg.Role,
 		arg.MqttUplink,
 		time.Now(),
 		arg.NodeID,

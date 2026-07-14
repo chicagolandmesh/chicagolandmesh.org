@@ -1,6 +1,8 @@
 package validator
+
 import (
 	"fmt"
+	"reflect"
 	"strings"
 )
 
@@ -30,4 +32,18 @@ func formatOrList[T any](vals []T) string {
 	last := fmt.Sprint(vals[count-1])
 
 	return strings.Join(first, ", ") + ", or " + last
+}
+
+func isNil(v any) bool {
+    if v == nil {
+        return true
+    }
+
+    rv := reflect.ValueOf(v)
+    switch rv.Kind() {
+    case reflect.Pointer, reflect.Map, reflect.Slice, reflect.Interface, reflect.Func, reflect.Chan:
+        return rv.IsNil()
+    }
+
+    return false
 }

@@ -13,31 +13,35 @@
   overflow-y: auto;
   transition: opacity 0.2s;
 }
+
 .modal-content {
-  border: 1px solid #495057;
+  border: 1px solid var(--ts-border-color);
   border-radius: 0.375rem;
   padding: 1rem;
   margin: 0.5rem;
   background-color: var(--md-admonition-bg-color);
   max-width: 25rem;
-  margin-top: 2rem;
 }
+
 @media (max-width: 576px) {
   .modal-content {
     margin-top: 0.5rem;
   }
 }
+
 .modal-content label {
   outline: revert;
   color: var(--md-default-fg-color);
   display: inline-block;
   margin-bottom: 8px;
 }
+
 .modal-content > h2 {
   color: var(--md-default-fg-color);
   margin: 0 0 0.5rem !important;
   font-weight: 400;
 }
+
 .close {
   float: right;
   font-size: 20px;
@@ -46,15 +50,18 @@
   line-height: 0.5;
   padding: 0.25rem;
 }
+
 .hidden {
   opacity: 0;
   pointer-events: none;
 }
+
 .form-text {
   margin-top: 0.25rem;
   font-size: 0.875em;
   color: var(--md-default-fg-color--light);
 }
+
 .form-input {
   width: 100%;
   padding: 0.375em 0.75em;
@@ -68,15 +75,65 @@
   transition:
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
-  outline: revert;
+  outline: none;
+  appearance: none;
 }
+
+.form-input.focus-visible,
+.form-checkbox:focus,
+.ts-wrapper.dropdown-active .ts-control {
+  border-color: var(--ts-border-color-active) !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+  outline: 0;
+  --ts-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2386b7fe'/%3e%3c/svg%3e");
+}
+
+select.form-input {
+  color: var(--md-default-fg-color);
+}
+
+input::placeholder,
+select.form-input:invalid {
+  color: #757575;
+}
+
+#node-form select,
+#node-form .ts-wrapper .ts-control {
+  background-image: var(--select-background-img);
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+#node-form .ts-wrapper.dropdown-active .ts-control {
+  background-image: var(--select-background-img-flipped);
+}
+
 .form-input option {
   color: var(--md-default-fg-color);
   background-color: var(--md-admonition-bg-color);
 }
-.modal-content > form > div {
+
+.form-checkbox {
+  margin-right: 0.375rem;
+}
+
+.form-checkbox ~ label {
+  margin-bottom: 0;
+}
+
+.form-checkbox ~ .form-text {
+  margin-top: 0;
+}
+
+.form-hidden {
+  display: none;
+}
+
+.modal-content > form > div:not(:last-of-type) {
   margin-bottom: 0.5rem;
 }
+
 .form-button {
   padding: 0.375em 0.75em;
   font-size: 1em;
@@ -88,12 +145,142 @@
   border-radius: 0.375rem;
   cursor: pointer;
 }
+
 .form-button:hover {
   background-color: #5c636a;
 }
+
+.form-button:disabled {
+  background-color: #495057;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .blue {
   background-color: #0d6efd;
 }
-.blue:hover {
+
+.blue:hover:enabled {
   background-color: #0b5ed7;
+}
+
+.form-footer {
+  padding-top: 0.25em;
+  display: flex;
+  gap: 0.5em;
+}
+
+#node-form label {
+  user-select: none;
+}
+
+
+/* checkbox switch */
+.form-checkbox:checked {
+  --ts-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  background-position: right center;
+  background-color: #0d6efd;
+  border-color: #0d6efd !important;
+}
+
+.form-checkbox {
+  --ts-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2873, 80, 87, 1%29'/%3e%3c/svg%3e");
+  font-size: inherit;
+  height: 1em;
+  width: 2em;
+  border-radius: 2em;
+  margin-top: 0.25em;
+  margin-left: 0;
+  float: left;
+  vertical-align: top;
+  appearance: none;
+  background-color: var(--md-accent-fg-color--transparent);
+  background-image: var(--ts-form-switch-bg);
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid var(--ts-border-color);
+  transition:
+    background-position 0.15s,
+    background-color 0.15s ease-in-out;
+}
+
+
+/* theme tweaks for tom select library */
+:root {
+  --ts-background-color: rgb(238, 240, 254);
+  --ts-background-color-active: rgb(212, 218, 255);
+  --ts-border-color: #495057;
+  --ts-border-color-secondary: #d0d0d0;
+  --ts-border-color-active: #86b7fe;
+  --select-background-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000000de' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --select-background-img-flipped: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000000de' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 11 6-6 6 6'/%3e%3c/svg%3e");
+}
+
+.dark ~ .modal-overlay {
+  --ts-background-color: rgb(37 41 61);
+  --ts-background-color-active: #121d4d;
+  --ts-border-color-secondary: #495057;
+  --ts-border-color-active: rgb(163 199 250);
+  --select-background-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e9e2e2d1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --select-background-img-flipped: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e9e2e2d1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 11 6-6 6 6'/%3e%3c/svg%3e");
+}
+
+.ts-wrapper .ts-control {
+  color: var(--md-typeset-color);
+  background-color: var(--ts-background-color) !important;
+  border: 1px solid var(--ts-border-color);
+  border-radius: 0.375rem;
+  font-size: 1em;
+  line-height: 1em;
+  padding: 0.5em 0.75em;
+  cursor: text !important;
+  min-height: 2.25em;
+}
+
+.ts-wrapper > .ts-control > input {
+  color: var(--md-typeset-color);
+  font-size: 1em;
+  cursor: text !important;
+  max-height: 1.125em !important;
+}
+
+.ts-wrapper > .ts-control > .item {
+  line-height: 1.2em;
+}
+
+.ts-wrapper .ts-dropdown {
+  color: var(--md-typeset-color);
+  background-color: var(--ts-background-color);
+  border: 1px solid var(--ts-border-color);
+  border-radius: 0.375rem;
+  font-size: 1em;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.ts-wrapper .ts-dropdown .active {
+  background-color: var(--ts-background-color-active);
+  color: var(--md-typeset-color);
+}
+
+.ts-wrapper .ts-dropdown .option,
+.ts-wrapper .ts-dropdown .no-results {
+  padding: 0.38em 0.5em;
+}
+
+.ts-wrapper .ts-dropdown .no-results {
+  text-align: center;
+  color: #757575;
+}
+
+.ts-dropdown.plugin-dropdown_input .dropdown-input {
+  border-color: var(--ts-border-color-secondary);
+  border-radius: 0;
+  font-size: 1em;
+}
+
+/* always show placeholder because dropdown_input plugin hides it when dropdown open */
+.plugin-dropdown_input.dropdown-active:not(:has(.item)) .items-placeholder {
+  display: block !important;
 }

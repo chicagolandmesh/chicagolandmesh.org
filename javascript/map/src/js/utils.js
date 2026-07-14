@@ -110,3 +110,16 @@ export function getHTTPStatusText(code) {
   };
   return statusMessages[code] || "Unknown";
 }
+
+export function formatDate(date) {
+  return new Date(date).toLocaleDateString("en-US", { dateStyle: "long" })
+}
+
+export function uppercase(str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
+}
+
+export function withFallback(value, fallback = `<i style="opacity:0.6;">unset</i>`) {
+  if (!value) return fallback;
+  return value
+}
