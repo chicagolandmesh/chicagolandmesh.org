@@ -43,18 +43,17 @@ export async function apiCheckAuth() {
   };
 
   try {
-    const response = await apiRequest("GET", "/api/map/me");
+    const response = await apiRequest("GET", "/api/map/me", {
+      errorMessage: "Failed checking authentication",
+      errorCondition: err => err.status !== 401,
+    });
     if (response.ok) {
       const data = await response.json();
       auth.isAuthenticated = true;
       auth.userId = data.user.id;
       auth.expiresAt = data.expires_at;
     }
-  } catch (error) {
-    if (error.status !== 401) {
-      console.error(error);
-    }
-  }
+  } catch (_) {}
 
   return auth;
 }
@@ -102,7 +101,7 @@ export async function apiLogout() {
 }
 
 async function apiRequest(method, url, options) {
-  const { body, headers, errorMessage, errorMessageLength } = options || {};
+  const { body, headers, errorMessage, errorMessageLength, errorCondition } = options || {};
 
   try {
     const response = await fetch(url, {
@@ -126,7 +125,7 @@ async function apiRequest(method, url, options) {
 
     return response;
   } catch (error) {
-    if (errorMessage) {
+    if (errorMessage && (!errorCondition || errorCondition(error))) {
       if (error.data?.error) {
         error.message = Object.entries(error.data.error)
           .map(([key, value]) => capitalize(key) + " " + value)
