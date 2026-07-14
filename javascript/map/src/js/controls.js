@@ -90,19 +90,30 @@ class HelperControl {
   _controlContainer = null;
   _helpButton = null;
   _helpTitle = "Self-Reported Node Map";
-  _helpMessage = `This map shows all the self-reported nodes in the
-    Chicagoland area. If you would like, add your node(s) to this map, whether
-    or not you are sharing your location via MQTT. This will help others
-    easily identify you without the need for MQTT. Log in on the left panel to
-    add your node and to view the owners of other nodes.`;
+  _helpMessages = [
+    `This map shows all the self-reported nodes in the Chicagoland area. If you would like, add your node(s) to this map, whether or not you are sharing your location via MQTT. This will help others easily identify you without the need for MQTT.`,
+    `Each node is represented by the following legend:\n<span class="dot blue"></span>MeshCore node\n<span class="dot green"></span>Meshtastic node\n<span class="dot white"></span>Reticulum node`,
+    `Log in on the left panel with  to add your node and to view the owners of other nodes. Use  to add your node and  to go through all your nodes. You can reopen this help menu at any time with .`
+  ]
+  _pageNumber = 0;
+  _bannerEl = null;
 
   onAdd(map) {
     this._map = map;
     this._controlContainer = this._createContainer();
     this._setupUI();
-    this._showWelcomeBanner();
     this._addEventListeners();
+    this._showWelcomeBanner();
     return this._controlContainer;
+  }
+
+  onRemove() {
+    this._removeEventListeners();
+    if (this._controlContainer && this._controlContainer.parentNode) {
+      this._controlContainer.parentNode.removeChild(this._controlContainer);
+    }
+    this._map = null;
+    this._controlContainer = null;
   }
 
   _createContainer() {
@@ -126,38 +137,23 @@ class HelperControl {
     icon.setAttribute("aria-hidden", "true");
     button.appendChild(icon);
 
-    button.addEventListener("click", this._onClick);
-
     this._helpButton = button;
     this._controlContainer.appendChild(button);
   }
 
   _addEventListeners() {
-    document.addEventListener("banneropen", this._handleBannerChange);
-    document.addEventListener("bannerclose", this._handleBannerChange);
-  }
-
-  onRemove() {
-    this._removeEventListeners();
-    if (this._controlContainer && this._controlContainer.parentNode) {
-      this._controlContainer.parentNode.removeChild(this._controlContainer);
-    }
-    this._map = null;
-    this._controlContainer = null;
+    this._helpButton.addEventListener("click", this._toggleBanner);
+    document.addEventListener("banneropen", this._updateLabel);
+    document.addEventListener("bannerclose", this._updateLabel);
   }
 
   _removeEventListeners() {
-    document.removeEventListener("banneropen", this._handleBannerChange);
-    document.removeEventListener("bannerclose", this._handleBannerChange);
+    this._helpButton.removeEventListener("click", this._toggleBanner);
+    document.removeEventListener("banneropen", this._updateLabel);
+    document.removeEventListener("bannerclose", this._updateLabel);
   }
 
-  _showWelcomeBanner() {
-    if (!localStorage.getItem("mapWelcomeBannerHidden")) {
-      this._addBanner();
-    }
-  }
-
-  _onClick = () => {
+  _toggleBanner = () => {
     if (this._isBannerOpen()) {
       this._removeBanner();
     } else {
@@ -165,36 +161,231 @@ class HelperControl {
     }
   };
 
+  _updateLabel = () => {
+    const label = this._isBannerOpen()
+      ? "Hide the help banner"
+      : "Show the help banner";
+    console.log("updating", label)
+
+    this._helpButton.setAttribute("aria-label", label);
+    this._helpButton.setAttribute("title", label);
+  };
+
+  _showWelcomeBanner() {
+    if (!localStorage.getItem("mapWelcomeBannerHidden")) {
+      this._addBanner();
+    }
+  }
+
+  _setWelcomeBannerHidden() {
+    localStorage.setItem("mapWelcomeBannerHidden", true);
+  };
+
   _isBannerOpen() {
     const banner = document.getElementById("helper-banner");
-    return banner && banner.querySelector("p").innerText == this._helpTitle;
+    const hasTitle = banner?.querySelector("p").innerText == this._helpTitle;
+    return banner && hasTitle;
   }
 
   _addBanner() {
-    addBanner(this._helpTitle, this._helpMessage, {
+    this._bannerEl = addBanner(this._helpTitle, this._helpMessages[this._pageNumber], {
       close: true,
       closeHandler: this._handleBannerClose,
       html: this._pageNumber === 1
     });
+
+    if (this._bannerEl) {
+      this._renderPagination();
+      this._addPaginationHandlers();
+    }
   }
 
   _removeBanner() {
     removeBanner();
-    this._onBannerClose();
+    this._handleBannerClose();
   }
 
-  _onBannerClose = () => {
-    localStorage.setItem("mapWelcomeBannerHidden", true);
-  };
+  _handleBannerClose = () => {
+    this._bannerEl = null;
+    this._setWelcomeBannerHidden();
+  }
 
-  _handleBannerChange = () => {
-    this._updateLabel();
-  };
+  _renderPagination() {
+    const bannerEl = this._bannerEl;
+    const messageEl = bannerEl.querySelector(".helper-message");
 
-  _updateLabel() {
-    const label = this._isBannerOpen() ? "Hide the help banner" : "Show the help banner";
-    this._helpButton.setAttribute("aria-label", label);
-    this._helpButton.setAttribute("title", label);
+    let paginationEl = bannerEl.querySelector(".helper-pagination");
+    if (!paginationEl) {
+      paginationEl = document.createElement("div");
+      paginationEl.innerHTML = `
+        <nav aria-label="...">
+          <ul class="pagination pagination-sm">
+            <li class="page-item disabled"><a class="page-link">Previous</a></li>
+            <li class="page-item"><a class="page-link">Next</a></li>
+          </ul>
+        </nav>
+      `
+      paginationEl.classList.add("helper-pagination");
+
+      const nextBtn = paginationEl.querySelector("li:last-of-type");
+      for (const i in this._helpMessages) {
+        const pageItem = document.createElement("li");
+        pageItem.classList.add("page-item");
+
+        const pageLink = document.createElement("a");
+        pageLink.classList.add("page-link");
+        pageLink.innerText = parseInt(i) + 1;
+
+        pageItem.appendChild(pageLink);
+
+        nextBtn.before(pageItem);
+      }
+
+      // TODO:
+      // const resizeObserver = new ResizeObserver(() => {
+      //   this._renderPagination();
+      // });
+      // resizeObserver.observe(bannerEl);
+    }
+
+    const paginationBtns = paginationEl.querySelectorAll("li");
+    const pages = [...paginationBtns].slice(1, -1);
+    const nextBtn = paginationBtns[paginationBtns.length - 1];
+    const previousBtn = paginationBtns[0];
+
+    previousBtn.classList.toggle("disabled", this._pageNumber === 0);
+    nextBtn.classList.toggle("disabled", this._pageNumber === pages.length - 1);
+
+    pages.forEach((page, pageNumber) => {
+      page.classList.toggle("active", pageNumber === this._pageNumber);
+    });
+
+    const range = document.createRange();
+    range.selectNodeContents(messageEl);
+    const rects = [...range.getClientRects()];
+
+    bannerEl.append(paginationEl);
+
+    const paginationWidth = paginationEl.clientWidth;
+    const paragraphWidth = messageEl.clientWidth;
+    const paginationSpace = paragraphWidth - paginationWidth;
+    const paginationHeight = paginationEl.clientHeight;
+
+    function getLastLineWidth() {
+      const maxBottom = Math.max(...rects.map(r => r.bottom));
+
+      const lastLine = rects.filter(r => Math.abs(r.bottom - maxBottom) < 2.5);
+      const left = Math.min(...lastLine.map(r => r.left));
+      const right = Math.max(...lastLine.map(r => r.right));
+
+      return right - left;
+    }
+    const lastLineWidth = getLastLineWidth();
+
+    function getSecondToLastLineWidth() {
+      const bottoms = [...new Set(rects.map(r => r.bottom))].sort((a, b) => b - a);
+      const secondMaxBottom = bottoms[1];
+
+      const secondToLastLine = rects.filter(r => Math.abs(r.bottom - secondMaxBottom) < 2.5);
+      const left = Math.min(...secondToLastLine.map(r => r.left));
+      const right = Math.max(...secondToLastLine.map(r => r.right));
+
+      return right - left;
+    }
+    const secondLastLineWidth = getSecondToLastLineWidth();
+
+    function balanceLastLine(el, maxWidth) {
+      const words = el.textContent.trim().split(/\s+/);
+
+      for (let i = words.length - 1; i > 0; i--) {
+        el.innerText =
+          words.slice(0, i).join(" ") +
+          "\n" +
+          words.slice(i).join(" ");
+
+        const range = document.createRange();
+        range.selectNodeContents(el);
+
+        const rects = Array.from(range.getClientRects());
+        const secondLastWidth = rects[rects.length - 3].width;
+
+        if (secondLastWidth <= maxWidth) {
+          return;
+        }
+      }
+    }
+
+    if (paginationSpace < paginationWidth) {
+      messageEl.style.marginBottom = `${paginationHeight}px`;
+    }
+
+    if (lastLineWidth < paginationSpace) {
+      messageEl.style.marginBottom = `${paginationHeight / 2}px`;
+      if (lastLineWidth < paginationSpace && secondLastLineWidth < paginationSpace) {
+        messageEl.style.marginBottom = "";
+      }
+
+    } else if (lastLineWidth - paginationSpace < paginationSpace) {
+      if (messageEl.querySelector("span, a, strong, em, b, i") !== null) {
+        messageEl.style.marginBottom = `${paginationHeight}px`;
+        return
+      }
+      balanceLastLine(messageEl, paginationSpace);
+      messageEl.style.marginBottom = "";
+    }
+  }
+
+  _setMessage() {
+    const messageEl = this._bannerEl.querySelector(".helper-message");
+    const message = this._helpMessages[this._pageNumber];
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(message, "text/html");
+    messageEl.replaceChildren(...doc.body.childNodes);
+  }
+
+  _addPaginationHandlers() {
+    const paginationEl = this._bannerEl.querySelector(".helper-pagination");
+    const nextBtn = paginationEl.querySelector("li:last-of-type");
+    const previousBtn = paginationEl.querySelector("li:first-of-type");
+
+    nextBtn.addEventListener("click", this._handleNextPage);
+    previousBtn.addEventListener("click", this._handlePreviousPage);
+
+    const pageLinks = paginationEl.querySelectorAll(".page-link");
+    for (const [i, link] of [...pageLinks].slice(1, pageLinks.length - 1).entries()) {
+      link.addEventListener("click", (e) => this._handleSpecificPage(e, i));
+    }
+  }
+
+  _handleSpecificPage = (e, pageNumber) => {
+    e.stopPropagation();
+    if (pageNumber == this._pageNumber) {
+      return
+    }
+    this._pageNumber = pageNumber;
+    this._setMessage();
+    this._renderPagination();
+  }
+
+  _handleNextPage = (e) => {
+    e.stopPropagation();
+    if (this._pageNumber >= this._helpMessages.length - 1) {
+      return;
+    }
+    this._pageNumber += 1;
+    this._setMessage();
+    this._renderPagination();
+  }
+
+  _handlePreviousPage = (e) => {
+    e.stopPropagation();
+    if (this._pageNumber <= 0) {
+      return;
+    }
+    this._pageNumber -= 1;
+    this._setMessage();
+    this._renderPagination();
   }
 }
 
