@@ -18,6 +18,14 @@ import (
 	"github.com/phuslu/log"
 )
 
+func fromPtr[T any](ptr *T) T {
+	var zero T
+	if ptr == nil {
+		return zero
+	}
+	return *ptr
+}
+
 func errorsIsMany(err error, errs ...error) bool {
 	for _, e := range errs {
 		if errors.Is(err, e) {

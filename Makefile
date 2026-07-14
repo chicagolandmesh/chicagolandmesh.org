@@ -36,6 +36,8 @@ clean:
 	rm -rf __pycache__
 	rm -rf api/map/bin
 	rm -rf api/map/tmp
+	rm -rf api/map/.venv
+	rm -rf api/map/internal/data/devices.json
 
 # ============================================================================ #
 # BUILD
@@ -72,7 +74,8 @@ build/pmtiles: $(MAP_MIDWEST_PM) $(MAP_GLOBE_PM)
 build/api:
 	@echo 'Building api/map...'
 	cd api/map \
-	&& CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o ./bin/api ./cmd/server
+	&& go generate ./... \
+	&& CGO_ENABLED=1 go build -o ./bin/api ./cmd/server
 
 $(MAP_FONTS) $(MAP_SPRITES):
 	@echo 'Pulling map assets...'
@@ -135,7 +138,7 @@ PROD_HOST := xenspec@chicagolandmesh.org
 
 .PHONY: deploy/api/hashicon
 deploy/api/hashicon:
-	docker buildx build -t hashicon -o type=docker,dest=- api/hashicon \
+	docker buildx build --platform linux/amd64 -t hashicon -o type=docker,dest=- api/hashicon \
 	  | ssh $(PROD_HOST) 'docker load'
 
 .PHONY: deploy/pmtiles
@@ -145,7 +148,7 @@ deploy/pmtiles:
 
 .PHONY: deploy/api/map
 deploy/api/map:
-	docker buildx build -t map-api -o type=docker,dest=- api/map \
+	docker buildx build --platform linux/amd64 -t map-api -o type=docker,dest=- api/map \
 	  | ssh $(PROD_HOST) 'docker load'
 
 .PHONY: deploy/site

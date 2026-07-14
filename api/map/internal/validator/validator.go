@@ -76,9 +76,23 @@ func (v *StringValue) RequiredIf(condition bool) *StringValue {
 	return v.Optional()
 }
 
+func (v *StringValue) DependsOn(field string, value any) *StringValue {
+	if v.value != nil && isNil(value) {
+		v.validator.AddError(v.field, fmt.Sprintf("must have %s field", field))
+	}
+	return v
+}
+
 func (v *StringValue) NotBlank() *StringValue {
 	if v.value != nil && strings.TrimSpace(*v.value) == "" {
 		v.validator.AddError(v.field, "must not be blank")
+	}
+	return v
+}
+
+func (v *StringValue) Equal(count int) *StringValue {
+	if v.value != nil && utf8.RuneCountInString(*v.value) != count {
+		v.validator.AddError(v.field, fmt.Sprintf("must be %d character%s", count, plural(count, "", "s")))
 	}
 	return v
 }
@@ -137,6 +151,13 @@ func (v *NumberValue[T]) RequiredIf(condition bool) *NumberValue[T] {
 	return v.Optional()
 }
 
+func (v *NumberValue[T]) DependsOn(field string, value any) *NumberValue[T] {
+	if v.value != nil && isNil(value) {
+		v.validator.AddError(v.field, fmt.Sprintf("must have %s field", field))
+	}
+	return v
+}
+
 func (v *NumberValue[T]) Within(min, max T) *NumberValue[T] {
 	if v.value != nil && (*v.value < min || *v.value > max) {
 		v.validator.AddError(v.field, fmt.Sprintf("must be between %v and %v", min, max))
@@ -146,7 +167,7 @@ func (v *NumberValue[T]) Within(min, max T) *NumberValue[T] {
 
 func (v *NumberValue[T]) NotNegative() *NumberValue[T] {
 	if v.value != nil && *v.value < 0 {
-		v.validator.AddError(v.field, fmt.Sprintf("must not be negative"))
+		v.validator.AddError(v.field, "must not be negative")
 	}
 	return v
 }
@@ -154,6 +175,13 @@ func (v *NumberValue[T]) NotNegative() *NumberValue[T] {
 func (v *NumberValue[T]) OneOf(vals ...T) *NumberValue[T] {
 	if v.value != nil && !slices.Contains(vals, *v.value) {
 		v.validator.AddError(v.field, fmt.Sprintf("must contain either %s", formatOrList(vals)))
+	}
+	return v
+}
+
+func (v *NumberValue[T]) MustBe(value T) *NumberValue[T] {
+	if v.value != nil && *v.value != value {
+		v.validator.AddError(v.field, fmt.Sprintf("must be %v", value))
 	}
 	return v
 }

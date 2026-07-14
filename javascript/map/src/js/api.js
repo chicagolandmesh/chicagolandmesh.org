@@ -16,18 +16,25 @@ export async function apiDeleteNode(id) {
   });
 }
 
-export async function apiCreateNode(form) {
+function parseNodeForm(form) {
   const data = new FormData(form);
 
-  for (const [key, value] of [...data.entries()]) {
+  // must remove empty values from the form to represent them as null in backend
+  for (const key of [...data.keys()]) {
+    const value = data.get(key);
     if (value === "" || value === null) {
       data.delete(key);
     }
   }
 
+  return data
+}
+
+export async function apiCreateNode(form) {
+  const data = parseNodeForm(form);
+
   const response = await apiRequest("POST", "/api/map/nodes", {
     body: new URLSearchParams(data),
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
     errorMessage: "Failed to create node",
     errorMessageLength: 10000,
   });
@@ -66,13 +73,7 @@ export async function apiGetNodes() {
 }
 
 export async function apiUpdateNode(id, form) {
-  const data = new FormData(form);
-
-  for (const [key, value] of [...data.entries()]) {
-    if (value === "" || value === null) {
-      data.delete(key);
-    }
-  }
+  const data = parseNodeForm(form);
 
   const response = await apiRequest("PUT", `/api/map/nodes/${id}`, {
     body: new URLSearchParams(data),

@@ -570,7 +570,7 @@ class NodeManagerControl {
   _setNodeCreateUI() {
     addBanner(
       "Create Mode Enabled",
-      "Create a new node by clicking on the map then filling out its information.",
+      "Create a new node by clicking on the map then filling out its information. Click  again to cancel.",
       { lock: true },
     );
 
@@ -658,6 +658,7 @@ class NodeManagerControl {
       this._nodeManager.setPopup(node.id);
 
       this._form.reset();
+      this._form.querySelector("#nodeProtocol").dispatchEvent(new Event("change"));
 
       addBanner("Success", `Created node '${node.name}'`, {
         color: "#008000",

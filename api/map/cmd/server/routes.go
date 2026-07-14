@@ -11,6 +11,7 @@ func (server *server) routes() http.Handler {
 
 	mux.HandleFunc("/", server.notFound)
 	mux.HandleFunc("GET /health", server.healthCheckHandler)
+	mux.HandleFunc("GET /devices", server.getDeviceListHandler)
 
 	dynamic := alice.New(server.noCache, server.checkAuthentication)
 

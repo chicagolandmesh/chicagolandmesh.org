@@ -2,13 +2,14 @@ import maplibregl from "maplibre-gl";
 
 import { apiGetNodes, apiUpdateCoordinates, apiUpdateNode, apiDeleteNode, apiGetLocations } from "./api.js";
 import { addBanner, removeBanner } from "./banner.js";
-import { getFlyToOptions, isMobile } from "./utils.js";
+import { formatDate, getFlyToOptions, isMobile, uppercase, withFallback } from "./utils.js";
 import { auth } from "./auth.js";
 import { ConvertLngToDMS, ConvertLatToDMS } from "./utils.js";
 
 export class NodeManager {
   _map = null;
   _nodes = null;
+  _isSetting = null;
   _geojson = null;
 
   _popup = null;
@@ -46,7 +47,7 @@ export class NodeManager {
         type: "Feature",
         properties: {
           id: node.id,
-          role: node.role,
+          protocol: node.protocol,
         },
         geometry: {
           type: "Point",
@@ -77,14 +78,16 @@ export class NodeManager {
         ],
         "circle-color": [
           "case",
-          ["==", ["get", "role"], "fixed"], "#3fb1ce", // light blue
-          ["==", ["get", "role"], "portable"], "#ff0000", // red
-          ["==", ["get", "role"], "repeater"], "#ffa500", // orange
-          ["==", ["get", "role"], "router"], "#008000", // green
-          "#000000", // black
+          ["==", ["get", "protocol"], "meshcore"], "#164a88",
+          ["==", ["get", "protocol"], "meshtastic"], "#1fd85a",
+          ["==", ["get", "protocol"], "reticulum"], "#ffffff",
+          "#000000",
         ],
         "circle-stroke-width": 2,
-        "circle-stroke-color": "#ffffff",
+        "circle-stroke-color": [
+          "case", ["==", ["get", "protocol"], "reticulum"], "#000000",
+          "#ffffff",
+        ],
       },
     });
   }
@@ -98,7 +101,7 @@ export class NodeManager {
       type: "Feature",
       properties: {
         id: node.id,
-        role: node.role,
+        protocol: node.protocol,
       },
       geometry: {
         type: "Point",
@@ -135,7 +138,7 @@ export class NodeManager {
       type: "Feature",
       properties: {
         id: node.id,
-        role: node.role,
+        protocol: node.protocol,
       },
       geometry: {
         type: "Point",
@@ -145,7 +148,7 @@ export class NodeManager {
     this._source.setData(this._geojson);
 
     if (this._popup) {
-      this._popup.setHTML(this._createNodeHTML(node));
+      this._popup.setDOMContent(this._createNodeDOM(node));
       this._setPopupButtons(this._popup);
     }
 
@@ -185,12 +188,12 @@ export class NodeManager {
     }
 
     const popup = new maplibregl.Popup({
-      maxWidth: "210px",
+      maxWidth: "9.6rem",
       focusAfterOpen: false,
       offset: 10,
     })
       .setLngLat(altLngLat || node.lngLat)
-      .setHTML(this._createNodeHTML(node))
+      .setDOMContent(this._createNodeDOM(node))
       .addTo(this._map);
     this._popup = popup;
 
@@ -228,20 +231,74 @@ export class NodeManager {
     }
   }
 
-  _createNodeHTML(node) {
+  _createNodeDOM(node) {
     const name = node.name || "Anonymous";
-    const owner =
-      node.owner != null
-        ? `<a href="https://discord.com/users/${node.owner.id}" target="_blank">${node.owner.username}</a>`
-        : auth.isAuthenticated
-          ? "<i>hidden</i>"
-          : "";
-    const elevation =
-      node.elevation == null ? `<em>unset</em>` : `${node.elevation} ft`;
-    const updatedAt =
-      node.updatedAt == null
-        ? ``
-        : `<br><em>Updated at ${new Date(node.updatedAt).toLocaleDateString("en-US", { dateStyle: "long" })}</em>`;
+
+    function formatOwner(owner) {
+      if (!owner) {
+        return auth.isAuthenticated ? "<i>hidden</i>" : "";
+      }
+      return `<a href="https://discord.com/users/${owner.id}" target="_blank">${owner.username}</a>`
+    }
+
+    function formatProtocol(protocol) {
+      switch (protocol) {
+        case "meshcore":
+          return "MeshCore";
+        case "meshtastic":
+          return "Meshtastic";
+        case "reticulum":
+          return "Reticulum";
+      }
+    }
+
+    function formatRole(role) {
+      switch (role) {
+        case "kiss":
+          return "KISS Modem";
+        case "rnode":
+          return "RNode";
+        case "generic":
+          return "Generic Radio";
+        case "ax25":
+          return "AX.25 KISS";
+        case "tnc":
+          return "TNC KISS";
+        default:
+          return uppercase(role);
+      }
+    }
+
+    function formatElevation(elevation) {
+      if (!elevation) return null;
+      return `${elevation} ft`;
+    }
+
+    function setPublicKey(popup, publicKey) {
+      if (!publicKey) return;
+
+      const publicKeyEl = popup.querySelector("[data-action='copy']");
+
+      const link = document.createElement("a");
+      link.title = publicKey;
+      link.style.cursor = "pointer";
+      link.textContent = `${publicKey.slice(0, 12)}...${publicKey.slice(-12)}`;
+      publicKeyEl.replaceChildren(link);
+
+      publicKeyEl?.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        navigator.clipboard.writeText(publicKey);
+
+        addBanner("Success", "Copied to clipboard!", {
+          duration: 2000,
+          close: true,
+          color: "#008000",
+          stack: true
+        });
+      });
+    }
+
     const footer = this._createPopupFooterHTML(node?.owner?.id);
 
     const popup = document.createElement("div");
@@ -252,17 +309,48 @@ export class NodeManager {
       </header>
 
       <div class="popup-content">
-        ${owner ? `<span>Owner: ${owner}</span><br>` : ``}
-        <span>Role: ${node.role}</span><br>
-        <span>Elevation: ${elevation}</span><br>
-        <span>Frequency: ${node.frequency} MHz</span><br>
-        <span>Using MQTT: ${node.mqttUplink}</span>
+        <table>
+          ${node.owner ? `<tr><td>Owner:</td><td>${formatOwner(node.owner)}</td></tr>` : ``}
+          <tr>
+            <td>Public Key:</td>
+            <td data-action="copy"><i style="opacity:0.6;">unset</i></td>
+          </tr>
+          <tr>
+            <td>Device:</td>
+            <td>${withFallback(window.deviceNames.get(node.device))}
+          </td>
+          </tr>
+          <tr>
+            <td>Protocol:</td>
+            <td>${formatProtocol(node.protocol)}</td>
+          </tr>
+          <tr>
+            <td>Power:</td>
+            <td>${withFallback(uppercase(node.power))}</td>
+          </tr>
+          <tr>
+            <td>Role:</td>
+            <td>${formatRole(node.role)}</td>
+          </tr>
+          <tr>
+            <td>Elevation:</td>
+            <td>${withFallback(formatElevation(node.elevation))}</td>
+          </tr>
+          <tr>
+            <td>Frequency:</td>
+            <td>${node.frequency} MHz</td>
+          </tr>
+          <tr>
+            <td>${node.protocol == "reticulum" ? "Relay" : "MQTT"}:</td>
+            <td>${node.mqttUplink ? `<span style="color: #10c743;">Connected</span>` : `<span style="color: #ff2c2c;">Disconnected</span>`}</td>
+          </tr>
+        </table>
       </div>
 
       <div class="popup-content">
-        <small>
-          <em>Created on ${new Date(node.createdAt).toLocaleDateString("en-US", { dateStyle: "long" })}</em>
-          ${updatedAt}
+        <small style="font-size: 0.75em; white-space: nowrap;">
+          <em>Created on ${formatDate(node.createdAt)}</em>
+          ${node.updatedAt ? `<br><em>Updated on ${formatDate(node.updatedAt)}</em>` : ""}
         </small>
       </div>
 
@@ -271,7 +359,9 @@ export class NodeManager {
 
     popup.querySelector("header span b").innerText = name;
 
-    return popup.outerHTML;
+    setPublicKey(popup, node.publicKey);
+
+    return popup;
   }
 
   _createPopupFooterHTML(nodeUserId) {
@@ -310,7 +400,7 @@ export class NodeManager {
     const nodeId = this._selectedNodeId;
     if (nodeId && this._popup) {
       const node = this._nodes.get(nodeId);
-      this._popup.setHTML(this._createNodeHTML(node));
+      this._popup.setDOMContent(this._createNodeDOM(node));
     }
   }
 
@@ -589,44 +679,98 @@ export class NodeManager {
   _handleEditNodeButton = () => {
     const node = this._nodes.get(this._selectedNodeId);
 
-    const form = document.getElementById("node-update-form");
+    // TODO: store in the class
+    const form = document.getElementById("node-form");
     const modal = form.closest(".modal-overlay");
+    const submitButton = form.querySelector(".form-button[type='submit']");
+    const closeButton = form.querySelector(".form-button[type='button']");
 
-    if (node.name != "Anonymous") form.querySelector(".form-input[name='name']").value = node.name;
-    form.querySelector(".form-input[name='frequency']").value = node.frequency;
-    if (node.elevation) form.querySelector(".form-input[name='elevation']").value = node.elevation;
-    form.querySelector(".form-input[name='role']").value = node.role;
-    form.querySelector("input[name='mqttUplink']").checked = node.mqttUplink;
-    form.querySelector("input[name='privacy']").checked = node.owner.privacy;
+    function setForm() {
+      if (node.name != "Anonymous") form.querySelector("input[name='name']").value = node.name;
+      if (node.publicKey) form.querySelector("input[name='publicKey']").value = node.publicKey;
+      if (node.elevation) form.querySelector("input[name='elevation']").value = node.elevation;
+      form.querySelector("select[name='power']").value = node.power;
+      form.querySelector("select[name='device']").value = node.device;
+      form.querySelector("select[name='protocol']").value = node.protocol;
+      form.querySelector(`#${node.protocol}Frequency`).value = node.frequency;
+      form.querySelector(`#${node.protocol}Role`).value = node.role;
+      form.querySelector(`#${node.protocol}MqttUplink`).checked = node.mqttUplink;
+      form.querySelector("input[name='privacy']").checked = node.owner.privacy;
 
-    modal.classList.remove("hidden");
+      for (const el of form.querySelectorAll("select, input")) {
+        if (el.tomselect) el.tomselect.sync();
+      }
 
-    function closeModal(modal) {
+      submitButton.disabled = true;
+      updateProtocolVisibility();
+
+      form.addEventListener("input", handleChange);
+      form.addEventListener("submit", handleSubmit);
+      closeButton.addEventListener("click", handleClose);
+    }
+
+    function resetForm() {
+      form.reset();
+      for (const el of form.querySelectorAll("select, input")) {
+        if (el.tomselect) el.tomselect.sync();
+      }
+
+      submitButton.disabled = false;
+      updateProtocolVisibility();
+
+      form.removeEventListener("input", handleChange);
+      form.removeEventListener("submit", handleSubmit);
+      closeButton.removeEventListener("click", handleClose);
+    }
+
+    function openModal() {
+      modal.classList.remove("hidden");
+    }
+
+    function closeModal() {
       modal.classList.add("hidden");
     }
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    // trigger change event so ui unhides itself using js embeded in page html
+    function updateProtocolVisibility() {
+      const select = form.querySelector("#nodeProtocol")
+      select.dispatchEvent(new Event("change"));
+    }
 
-      // if no change, dont submit
-      const nameInput = form.querySelector(".form-input[name='name']").value;
-      const frequencyInput = isNaN(parseInt(form.querySelector(".form-input[name='frequency']").value))
-        ? null
-        : parseInt(form.querySelector(".form-input[name='frequency']").value);
-      const elevationInput = isNaN(parseInt(form.querySelector(".form-input[name='elevation']").value))
-        ? null
-        : parseInt(form.querySelector(".form-input[name='elevation']").value);
-      const roleInput = form.querySelector(".form-input[name='role']").value;
+    const handleChange = () => {
+      const nameInput = form.querySelector("input[name='name']").value;
+      const publicKeyInput = form.querySelector("input[name='publicKey']").value || null;
+      const elevationValue = parseInt(form.querySelector("input[name='elevation']").value)
+      const elevationInput = isNaN(elevationValue) ? null : elevationValue;
+      const powerInput = form.querySelector("select[name='power']").value;
+      const deviceInput = form.querySelector("select[name='device']").value;
+      const protocolInput = form.querySelector("select[name='protocol']").value;
+      const frequencyValue = parseFloat(form.querySelector(`#${protocolInput}Frequency`).value)
+      const frequencyInput = isNaN(frequencyValue) ? null : frequencyValue;
+      const roleInput = form.querySelector(`#${protocolInput}Role`).value;
+      const mqttUplinkInput = form.querySelector(`#${protocolInput}MqttUplink`).checked;
       const privacyInput = form.querySelector("input[name='privacy']").checked;
-      const mqttUplinkInput = form.querySelector("input[name='mqttUplink']").checked;
-      if (
-        ((node.name == "Anonymous" && nameInput == "") || nameInput == node.name) &&
-        frequencyInput == node.frequency &&
+
+      const noChange = ((node.name == "Anonymous" && nameInput == "") || nameInput == node.name) &&
+        publicKeyInput == node.publicKey &&
         elevationInput == node.elevation &&
+        powerInput == node.power &&
+        deviceInput == node.device &&
+        protocolInput == node.protocol &&
+        frequencyInput == node.frequency &&
         roleInput == node.role &&
-        privacyInput == node.owner.privacy &&
-        mqttUplinkInput == node.mqttUplink
-      ) return;
+        mqttUplinkInput == node.mqttUplink &&
+        privacyInput == node.owner.privacy
+
+      if (noChange) {
+        submitButton.disabled = true;
+      } else {
+        submitButton.disabled = false;
+      }
+    }
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
       let longitude = form.querySelector("input[name='longitude']");
       if (!longitude) {
@@ -656,25 +800,16 @@ export class NodeManager {
         });
       });
 
-      form.reset();
+      handleClose();
+    }
 
-      closeModal(modal);
+    const handleClose = () => {
+      closeModal();
+      resetForm();
+    }
 
-      // hack to quickly remove forms event listeners
-      const clone = form.cloneNode(true);
-      form.parentNode.replaceChild(clone, form);
-    });
-
-    const formCloseButton = form.querySelector(".form-button[type='button']");
-    formCloseButton.addEventListener("click", () => {
-      closeModal(modal);
-
-      form.reset();
-
-      // hack to quickly remove forms event listeners
-      const clone = form.cloneNode(true);
-      form.parentNode.replaceChild(clone, form);
-    });
+    setForm();
+    openModal();
   };
 
   _handleDeleteNodeButton = () => {
