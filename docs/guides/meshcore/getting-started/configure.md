@@ -155,6 +155,7 @@ The following channels are commonly used in the MeshCore community. Hash channel
 | `#testing` | `cde5e82cf515647dcb547a79a4f065d1` |
 | `#healthcheck` | `3ae59c2cda86744c75e68b3975a902ae` |
 | `#wardriving` | `e3c26491e9cd321e3a6be50d57d54acf` |
+| `#chimesh-observer-alert` | `5223d5371c7c13c349341d5f9537a555` |
 
 !!! tip "Chicago / ChiMesh Community"
     If you're part of the Chicagoland mesh network, start with **`#chicago`** and **`#chimesh`** to connect with local operators. **`#emergency`** is also recommended so you're reachable during urgent situations.
