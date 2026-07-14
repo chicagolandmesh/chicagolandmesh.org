@@ -50,3 +50,26 @@ export function getStyle(theme) {
     glyphs: `${window.location.origin}/assets/fonts/{fontstack}/{range}.pbf`,
   };
 }
+
+export function watchTheme(map) {
+  let currentColorScheme = getColorScheme();
+
+  if (currentColorScheme === "dark") {
+    document.querySelector("#map").classList.add("dark");
+  }
+
+  const observer = new MutationObserver(() => {
+    const newColorScheme = getColorScheme();
+
+    if (newColorScheme !== currentColorScheme) {
+      currentColorScheme = newColorScheme;
+      map.setStyle(getStyle(newColorScheme));
+      document.querySelector("#map").classList.toggle("dark", newColorScheme === "dark");
+    }
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["data-md-color-scheme"],
+  });
+}

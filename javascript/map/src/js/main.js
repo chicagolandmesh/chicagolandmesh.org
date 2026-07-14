@@ -2,7 +2,7 @@ import maplibregl from "maplibre-gl";
 
 import { hasWebGL, setWebGLWarning } from "./utils.js";
 import { addControls } from "./controls.js";
-import { getColorScheme, getStyle } from "./style.js";
+import { watchTheme, getStyle } from "./style.js";
 import { NodeManager } from "./node.js";
 import { addBanner } from "./banner.js";
 
@@ -27,13 +27,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     attributionControl: false,
     doubleClickZoom: false,
   });
-  map.touchZoomRotate.disableRotation();
 
+  map.touchZoomRotate.disableRotation();
   map.on("style.load", () => {
     map.setProjection({ type: "globe" });
     nodeManager.setNodes();
   });
-
   watchTheme(map);
 
   const nodeManager = new NodeManager(map);
@@ -114,27 +113,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 });
-
-function watchTheme(map) {
-  let lastColorScheme = getColorScheme();
-
-  if (lastColorScheme === "dark") {
-    document.querySelector("#map").classList.add("dark");
-  }
-
-  const observer = new MutationObserver(() => {
-    const colorScheme = getColorScheme();
-
-    if (colorScheme !== lastColorScheme) {
-      lastColorScheme = colorScheme;
-
-      map.setStyle(getStyle(colorScheme));
-      document.querySelector("#map").classList.toggle("dark", colorScheme === "dark");
-    }
-  });
-
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["data-md-color-scheme"],
-  });
-}
