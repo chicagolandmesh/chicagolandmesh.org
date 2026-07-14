@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"strconv"
 	"time"
@@ -295,6 +296,10 @@ func (server *server) patchNodeHandler(w http.ResponseWriter, r *http.Request) {
 		NodeParams: request.toParams(),
 	})
 	if err != nil {
+		if errors.Is(err, models.ErrNoFields) {
+			clientError(w, http.StatusBadRequest)
+			return
+		}
 		server.error(w, r, "failed to patch node", err)
 		return
 	}
