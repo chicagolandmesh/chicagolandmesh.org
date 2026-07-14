@@ -56,7 +56,7 @@ services:
 
   map-api:
     image: cosmtrek/air
-    command: -build.cmd="go build -o ./tmp/main ./cmd/server"
+    command: -build.cmd="go build -o ./tmp/main ./cmd/server" -build.include_ext "go,sql"
     working_dir: /code
     expose:
       - 8080
