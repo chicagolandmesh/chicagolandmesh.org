@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (params.has("error") && params.has("error_description")) {
     addBanner("Encountered error on login", params.get("error_description"), {
       close: true,
-      color: "#ff2424d9",
+      color: "#ff2424",
+      stack: true
     });
     window.history.replaceState({}, document.title, window.location.pathname);
   }

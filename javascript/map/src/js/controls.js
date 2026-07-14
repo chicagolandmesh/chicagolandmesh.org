@@ -173,7 +173,8 @@ class HelperControl {
   _addBanner() {
     addBanner(this._helpTitle, this._helpMessage, {
       close: true,
-      customCloseHandler: this._onBannerClose
+      closeHandler: this._handleBannerClose,
+      html: this._pageNumber === 1
     });
   }
 
@@ -467,11 +468,12 @@ class NodeManagerControl {
 
       this._form.reset();
 
-      addBanner(
-        "Success",
-        `Created node '${node.name}'`,
-        { color: "#008000", duration: 10000, close: true }
-      );
+      addBanner("Success", `Created node '${node.name}'`, {
+        color: "#008000",
+        close: true,
+        duration: 10000,
+        stack: true
+      });
     });
 
     this._hideNodeForm();

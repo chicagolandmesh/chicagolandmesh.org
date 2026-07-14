@@ -134,8 +134,9 @@ async function apiRequest(method, url, options) {
 
       addBanner(errorMessage, error.message, {
         duration: errorMessageLength,
-        color: "#e54e33",
+        color: "#ff2424",
         close: true,
+        stack: true
       });
     }
     throw error;

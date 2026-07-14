@@ -511,7 +511,7 @@ export class NodeManager {
       {
         lock: true,
         close: true,
-        customCloseHandler: () => {
+        closeHandler: () => {
           // reset location of node and popup
           this._geojson.features[this._index].geometry.coordinates = node.lngLat;
           this._source.setData(this._geojson);
@@ -559,6 +559,7 @@ export class NodeManager {
             color: "#008000",
             close: "true",
             duration: 5000,
+            stack: true
           });
         })
         .catch(() => {
@@ -651,6 +652,7 @@ export class NodeManager {
           color: "#008000",
           close: true,
           duration: 5000,
+          stack: true
         });
       });
 
@@ -688,6 +690,7 @@ export class NodeManager {
         color: "#008000",
         duration: 5000,
         close: true,
+        stack: true
       });
     });
   };
