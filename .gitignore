@@ -1,15 +1,15 @@
-.env
-data/
-dist/
+# config, runtime data, & build output
+/.env
+/data/
+/dist/
 
+# environments & caches
 .cache/
 __pycache__/
 venv/
-javascript/map/node_modules/
-api/hashicon/node_modules/
-api/map/tmp/
-api/map/bin/
+node_modules/
 
+# map assets
 docs/assets/javascripts/
 docs/assets/stylesheets/map.*.css
 docs/assets/fonts/
