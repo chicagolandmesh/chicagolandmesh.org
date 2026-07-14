@@ -118,7 +118,7 @@ export class NodeManager {
   }
 
   updateNode(nodeId, node) {
-    // TEMP: update privacy setting of every node owned by owner as
+    // HACK: update privacy setting of every node owned by owner as
     // it is a global setting but set on each node individually
     if (node.owner.privacy != this._nodes.get(nodeId).privacy) {
       for (const n of this._nodes.values()) {
