@@ -29,6 +29,12 @@ chicagolandmesh.org {
 		reverse_proxy hashicon:3000
 	}
 
+	@plausible path /assets/javascripts/analytics.js /api/event
+	handle @plausible {
+		rewrite /assets/javascripts/analytics.js {env.PLAUSIBLE_JS}
+		reverse_proxy {env.PLAUSIBLE_ADDR}
+	}
+
 	# Preserve old icon api paths
 	handle_path /hashicon/meshcore/* {
 		redir * /api/icon/v1/meshcore{uri} permanent
@@ -82,6 +88,11 @@ chicagolandmesh.org {
 	@www host www.chicagolandmesh.org
 	handle @www {
 		redir https://chicagolandmesh.org{uri} permanent
+	}
+
+	@plausible host analytics.chicagolandmesh.org
+	handle @plausible {
+		reverse_proxy {env.PLAUSIBLE_ADDR}
 	}
 
 	@meshview host meshview.chicagolandmesh.org
