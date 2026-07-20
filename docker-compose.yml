@@ -67,8 +67,8 @@ services:
       - LOG_PATH=/code/tmp/map.log
       - DSN=/code/tmp/data.db
       - TOKEN_SECRET=${DEV_TOKEN_SECRET}
-      - CLIENT_ID=${DISCORD_CLIENT_ID}
-      - CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
+      - CLIENT_ID=${DEV_DISCORD_CLIENT_ID}
+      - CLIENT_SECRET=${DEV_DISCORD_CLIENT_SECRET}
       - REDIRECT_URL=${DEV_DISCORD_CALLBACK_URL}
     labels:
       caddy: ${DEV_BASE_URL}
