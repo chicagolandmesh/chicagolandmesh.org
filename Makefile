@@ -4,7 +4,7 @@
 
 .PHONY: dev
 dev: build/pmtiles build/map/assets
-	@if [[ ! -e ".env" ]]; then cp .example.env .env; fi
+	@if [[ ! -e ".env" ]]; then cp .env.example .env; fi
 	docker compose up -d
 	docker compose logs -f
 
@@ -164,6 +164,7 @@ deploy/caddy:
 deploy/config:
 	rsync -vP ./remote/production/Caddyfile $(PROD_HOST):~
 	rsync -vP ./remote/production/compose.yml $(PROD_HOST):~
+	rsync --ignore-existing -vP ./remote/production/.env.example $(PROD_HOST):~/.env
 
 .PHONY: deploy
 deploy: deploy/api/hashicon build/pmtiles deploy/pmtiles deploy/api/map build/site deploy/site deploy/caddy deploy/config
