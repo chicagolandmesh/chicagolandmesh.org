@@ -2,6 +2,10 @@ networks:
   main:
     enable_ipv6: true
 
+volumes:
+  caddy_data:
+  caddy_config:
+
 services:
   caddy:
     image: caddy-cloudflare
@@ -11,11 +15,11 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./config/caddy:/etc/caddy
       - ./site:/srv
       - ./logs:/logs
-      - ./data:/data
-      - ./conf:/config
+      - caddy_data:/data/caddy
+      - caddy_config:/config/caddy
     environment:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
       - DISCORD_INVITE_URL=${DISCORD_INVITE_URL}
