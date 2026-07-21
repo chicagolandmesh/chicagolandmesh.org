@@ -162,7 +162,8 @@ deploy/caddy:
 
 .PHONY: deploy/config
 deploy/config:
-	rsync -vP ./remote/production/Caddyfile $(PROD_HOST):~
+	ssh $(PROD_HOST) 'mkdir -p ~/config/caddy' \
+	&& rsync -vP ./remote/production/Caddyfile $(PROD_HOST):~/config/caddy/
 	rsync -vP ./remote/production/compose.yml $(PROD_HOST):~
 	rsync --ignore-existing -vP ./remote/production/.env.example $(PROD_HOST):~/.env
 
