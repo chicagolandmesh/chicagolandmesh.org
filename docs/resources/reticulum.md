@@ -10,7 +10,7 @@ tags:
 
 # Reticulum Resources
 
-<div class="grid cards" markdown>
+<div class="grid cards small" markdown>
 
 -   [:material-lan:{ .lg .top } __Reticulum Home__](https://reticulum.network/)
 
@@ -23,5 +23,11 @@ tags:
     Browse the LXMF and Reticulum ecosystem source repositories.
 
     ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/markqvist/Reticulum)
+
+-   [:fontawesome-brands-github:{ .lg .top } Awesome Reticulum](https://github.com/lorien/awesome-reticulum)
+
+    Up to date GitHub repository with useful apps and tools.
+
+    ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/lorien/awesome-reticulum)
 
 </div>
