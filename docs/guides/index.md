@@ -1,6 +1,5 @@
 ---
-hide: 
-  - navigation
+hide:
   - toc
 tags:
   - Info
@@ -40,7 +39,7 @@ Use this section to choose how you want to browse the site: start with community
 
     ---
 
-    Open Reticulum guides, references, and protocol-specific documentation.
+    Open Reticulum guides, covering installation, configuration, RNS and other Reticulum services.
 
     [:fontawesome-solid-angle-right: Open](reticulum/index.md)
 

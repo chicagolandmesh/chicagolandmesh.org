@@ -25,7 +25,7 @@ Before getting started, it helps to know how you plan to connect to the Reticulu
 - **Local UDP**: Useful for automatically linking devices on the same LAN without needing to know anyone's IP address.
 - **Serial or I2C**: For embedded setups or connecting directly to another device over a physical link.
 
-You can use more than one at a time. A common setup is an RNode for local off-grid communication plus a TCP link to a community node for wider reach.
+You can use more than one at a time. A common setup is an RNode for local off-grid communication plus a TCP link to the ChiMesh relay for wider reach.
 
 !!! info "No Radio Hardware? No Problem"
 
@@ -88,151 +88,84 @@ rnsd --version
 
 ---
 
-## Step 2: Connect an Interface
+## Step 2: Flash your device with Reticulum Firmware
 
-Pick the path that matches your setup. You can always add more interfaces later.
+### Hardware Requirements
 
-=== "RNode (LoRa)"
+- **RNode-compatible device**: Any of the following work:
+    - Heltec LoRa32 v3 or v4
+    - LilyGO T-Beam or T-LoRa
+    - RAK4631 (WisBlock)
+    - Any SX1262 or SX1276 board with [RNode firmware](https://github.com/markqvist/rnode_firmware)
+- **Antenna**: 915 MHz for North America
+- **USB cable**: Data-capable, not charge-only
 
-    ### Hardware Requirements
+!!! warning "Antenna Safety"
 
-    - **RNode-compatible device**: Any of the following work:
-        - LilyGO T-Beam (good starting point, includes GPS and battery management)
-        - LilyGO T3S3 / TTGO LoRa32
-        - Heltec LoRa32 v2 / v3
-        - RAK4631 (WisBlock)
-        - Homebrew RNode (ESP32 or ATmega1284p based)
-        - Full list at [unsigned.io/rnode](https://unsigned.io/rnode/)
-    - **Antenna**: 915 MHz for the US, 868 MHz for EU
-    - **USB cable**: Data-capable, not charge-only
+    **Always connect your antenna BEFORE powering on your device.** Running without an antenna will permanently damage the RF hardware.
 
-    !!! warning "Antenna Safety"
+!!! warning "Frequency Compliance"
 
-        **Always connect your antenna BEFORE powering on your device.** Running without an antenna will permanently damage the RF hardware.
+    The Chicagoland Reticulum network operates at **914.875 MHz**. Using the wrong frequency means you will not be able to hear other nodes.
 
-    !!! warning "Frequency Compliance"
+### Find Your Serial Port
 
-        In the United States use **915 MHz**. In Europe use **868 MHz**. Using the wrong band may violate local regulations.
+Plug your device in via USB, then find the port it is on:
 
-    ### Find Your Serial Port
-
-    Plug your device in via USB, then find the port it is on:
-
-    === "Linux"
-
-        ```bash
-        ls /dev/ttyUSB* /dev/ttyACM*
-        ```
-
-        Common results: `/dev/ttyUSB0`, `/dev/ttyACM0`
-
-    === "macOS"
-
-        ```bash
-        ls /dev/cu.*
-        ```
-
-        Common results: `/dev/cu.usbserial-*`, `/dev/cu.SLAB_USBtoUART`
-
-    === "Windows"
-
-        Open **Device Manager** and look under **Ports (COM & LPT)**. Look for `Silicon Labs CP210x` or `CH340` and note the COM number (e.g., `COM5`).
-
-    !!! tip "Permission Errors on Linux"
-
-        If you get a `Permission denied` error, add your user to the `dialout` group:
-
-        ```bash
-        sudo usermod -a -G dialout $USER
-        ```
-
-        Log out and back in for it to take effect.
-
-    ### Flash the Firmware
+=== "Linux"
 
     ```bash
-    rnodeconf /dev/ttyUSB0 --autoinstall
+    ls /dev/ttyUSB* /dev/ttyACM*
     ```
 
-    Replace `/dev/ttyUSB0` with your actual port. The tool detects your device, downloads the right firmware, flashes it, and verifies the result.
+    Common results: `/dev/ttyUSB0`, `/dev/ttyACM0`
 
-    !!! info "Manual Firmware Selection"
-
-        If auto-detection fails, run `rnodeconf --list` to see supported targets, then:
-
-        ```bash
-        rnodeconf /dev/ttyUSB0 --install-firmware --target <target-name>
-        ```
-
-    ### Verify the Flash
+=== "macOS"
 
     ```bash
-    rnodeconf /dev/ttyUSB0 --info
+    ls /dev/cu.*
     ```
 
-    You should see the firmware version, device model, and radio parameters. Your RNode is ready. Continue to Step 3.
+    Common results: `/dev/cu.usbserial-*`, `/dev/cu.SLAB_USBtoUART`
 
-=== "TCP (Internet or LAN)"
+=== "Windows"
 
-    TCP interfaces let you connect to other Reticulum nodes over any IP network, whether that is the internet, your home LAN, or a VPN. No radio hardware required.
+    Open **Device Manager** and look under **Ports (COM & LPT)**. Note the COM number (e.g., `COM5`).
 
-    ### Connect to the Community Testnet
+!!! tip "Permission Errors on Linux"
 
-    The easiest way to get started is connecting to a public Reticulum node. Run `rnsd` once first to generate your config file, then open `~/.reticulum/config` and add an interface block:
+    If you get a `Permission denied` error, add your user to the `dialout` group:
 
-    ```toml
-    [[Reticulum Testnet Amsterdam]]
-      type = TCPClientInterface
-      interface_enabled = True
-      target_host = amsterdam.connect.reticulum.network
-      target_port = 4965
+    ```bash
+    sudo usermod -a -G dialout $USER
     ```
 
-    Other available testnet nodes:
+    Log out and back in for it to take effect.
 
-    | Host | Port |
-    |---|---|
-    | `amsterdam.connect.reticulum.network` | `4965` |
-    | `betavpn.connect.reticulum.network` | `4965` |
-    | `reticulum.betavpn.ca` | `4242` |
+### Flash the Firmware
 
-    Save the file and restart `rnsd`. You will be connected to the wider Reticulum network over TCP.
+```bash
+rnodeconf /dev/ttyACM0 --autoinstall
+```
 
-    !!! tip "Connecting to a Local Node"
+Replace `/dev/ttyACM0` with your actual port. The tool detects your device, downloads the right firmware, flashes it, and verifies the result.
 
-        If someone on your local network is already running Reticulum, you can connect to them by using their local IP instead:
+!!! info "Manual Firmware Selection"
 
-        ```toml
-        [[Local Node]]
-          type = TCPClientInterface
-          interface_enabled = True
-          target_host = 192.168.1.100
-          target_port = 4242
-        ```
+    If auto-detection fails, run `rnodeconf --list` to see supported targets, then:
 
-=== "UDP (Local Network)"
-
-    UDP interfaces are useful for automatic discovery of other Reticulum nodes on the same LAN without needing to know anyone's IP address in advance.
-
-    Add the following to `~/.reticulum/config`:
-
-    ```toml
-    [[Local UDP]]
-      type = UDPInterface
-      interface_enabled = True
-      listen_ip = 0.0.0.0
-      listen_port = 4242
-      forward_ip = 255.255.255.255
-      forward_port = 4242
+    ```bash
+    rnodeconf /dev/ttyACM0 --install-firmware --target <target-name>
     ```
 
-    Any Reticulum node on the same network segment with a matching UDP interface will automatically discover yours and start exchanging announces.
+### Verify the Flash
 
-    !!! info "Broadcast Limitations"
+```bash
+rnodeconf /dev/ttyACM0 --info
+```
 
-        UDP broadcast only works within a single network segment. It will not cross routers or work over the internet. For wider connectivity, combine it with a TCP interface.
+You should see the firmware version, device model, and radio parameters. Your RNode is ready. Continue to Step 3.
 
----
 
 ## Step 3: Start the Daemon
 
@@ -248,8 +181,12 @@ The first time it runs, Reticulum generates your cryptographic identity and writ
 To run it in the background:
 
 ```bash
-rnsd --daemon
+rnsd &
 ```
+
+!!! tip "Running as a System Service"
+
+    Check out the [offical documentation](https://reticulum.network/manual/using.html#reticulum-as-a-system-service) for an example on how to start `rnsd` automatically at boot time.
 
 ### Verify Your Interfaces
 
@@ -257,59 +194,125 @@ rnsd --daemon
 rnstatus
 ```
 
-Your interfaces should show as `UP`. If you are on TCP and the testnet is reachable you will see packet counts climbing within a few seconds. With an RNode, counts will climb if other nodes are within radio range on the same frequency.
+Your interfaces should show as `UP`. If you are on TCP and the ChiMesh relay is reachable you will see packet counts climbing within a few seconds. With an RNode, counts will climb if other nodes are within radio range on the same frequency and parameters.
 
-!!! tip "Finding Your Address"
+!!! tip "Next Steps"
 
-    Your identity hash is what other users need to reach you. Get it with:
-
-    ```bash
-    rnid
-    ```
+    View the [Configuring](configure.md) page to learn how to configure TCP and RNode interfaces.
 
 ---
 
 ## Step 4: Install a Messaging App
 
-Reticulum is a transport layer, so you need an application on top of it to actually communicate.
+Reticulum is a transport layer, so you need an application on top of it to actually communicate. Several options are available depending on your platform and preferences.
 
-### Nomad Network
+### Nomad Network (Terminal, Linux/macOS/Windows)
 
-[Nomad Network](https://github.com/markqvist/NomadNet) is the main terminal-based platform for Reticulum. It provides direct messaging, a node board, and a distributed page and file system.
+[Nomad Network](https://github.com/markqvist/NomadNet) is the main terminal-based platform for Reticulum. It provides direct messaging, a node board, and a distributed page and file system. This is a great starting point on a desktop or server.
 
 ```bash
 pip install nomadnet
 nomadnet
 ```
 
-It connects to your running `rnsd` daemon automatically.
+It connects to your running `rnsd` daemon automatically. Once inside, press ++ctrl+n++ to open the Network pane and browse nodes that have announced themselves. Press ++ctrl+m++ to open messaging and start a conversation.
 
-### Sideband
+!!! tip "Running Nomad Network headlessly"
 
-[Sideband](https://github.com/markqvist/Sideband) is a graphical messaging app for Android, Linux, macOS, and Windows. It is the better choice if you prefer a proper GUI or want to use your phone.
+    You can run Nomad Network in daemon mode on a server or Raspberry Pi to keep your node active and reachable even when you are not at a terminal:
 
-- **Android**: [Google Play](https://play.google.com/store/apps/details?id=io.unsigned.sideband) or direct APK
-- **Linux/macOS/Windows**:
+    ```bash
+    nomadnet --daemon
+    ```
+
+### Sideband (GUI, Linux/macOS/Windows/Android/iOS)
+
+[Sideband](https://github.com/markqvist/Sideband) is a graphical messaging app available across all major platforms. It is the best choice if you want a proper GUI or want to use your phone.
+
+=== "Android"
+
+    Install Sideband from [Google Play](https://play.google.com/store/apps/details?id=io.unsigned.sideband) or download the APK directly from the [Sideband releases page](https://github.com/markqvist/Sideband/releases).
+
+    Once installed, open the app and go to **Settings → Connectivity**. Add the ChiMesh relay:
+
+    - **Type**: TCP
+    - **Host**: `rns.chimesh.org`
+    - **Port**: `4242`
+
+    !!! tip "Sideband + RNode on Android"
+
+        Sideband can connect directly to an RNode over USB or Bluetooth without needing a separate computer running `rnsd`. Combined with an Android phone this gives you a fully self-contained off-grid communicator.
+
+=== "iOS (Retichat)"
+
+    **Retichat** is the recommended Reticulum messaging app for iOS. Download it from the [Apple App Store](https://apps.apple.com/us/app/retichat/id6762225314).
+
+    Once installed, open the app and navigate to **Settings → Transport**. Add the ChiMesh relay as a TCP interface:
+
+    - **Host**: `rns.chimesh.org`
+    - **Port**: `4242`
+
+    Retichat supports direct messaging, group channels, and announces. It can also connect to a local `rnsd` instance on the same network if you prefer to run your own transport node.
+
+=== "Linux / macOS / Windows"
 
     ```bash
     pip install sbapp
     sbapp
     ```
 
-!!! tip "Sideband + RNode on Android"
+    In the app, go to **Settings → Connectivity** and add a TCP interface pointing to ChiMesh:
 
-    Sideband can connect directly to an RNode over USB or Bluetooth without needing a separate computer running `rnsd`. Combined with an Android phone this gives you a fully self-contained off-grid communicator.
+    - **Host**: `rns.chimesh.org`
+    - **Port**: `4242`
 
-!!! tip "Sideband without Radio Hardware"
+### Reticulum MeshChat (Web UI)
 
-    No RNode? Sideband can connect through your running `rnsd` instance on the same machine, which handles the TCP connection on its behalf. You do not need radio hardware to use it.
+[Reticulum MeshChat](https://github.com/liamcottle/reticulum-meshchat) by Liam Cottle is a web-based chat interface for Reticulum that runs in your browser. It is a great option if you prefer a clean, modern UI without installing a native app and already have `rnsd` running on a machine on your network.
+
+#### Install
+
+```bash
+pip install reticulum-meshchat
+```
+
+Or run it via Docker:
+
+```bash
+docker run -d \
+  -p 8000:8000 \
+  -v ~/.reticulum:/root/.reticulum \
+  liamcottle/reticulum-meshchat
+```
+
+#### Run
+
+```bash
+reticulum-meshchat
+```
+
+Then open your browser to `http://localhost:8000`. MeshChat connects to your running `rnsd` daemon automatically and provides a real-time chat interface with channel and direct messaging support.
+
+!!! tip "Accessing MeshChat from other devices"
+
+    If you run MeshChat on a server or Raspberry Pi on your LAN, you can access it from any browser on the same network by navigating to `http://<server-ip>:8000`.
+
+### Other Clients
+
+| App | Platform | Notes |
+|---|---|---|
+| [Nomad Network](https://github.com/markqvist/NomadNet) | Linux, macOS, Windows (terminal) | Full-featured terminal client with messaging, boards, and distributed pages |
+| [Sideband](https://github.com/markqvist/Sideband) | Android, iOS, Linux, macOS, Windows | Best graphical client; supports RNode over USB/Bluetooth on Android |
+| [Retichat](https://apps.apple.com/us/app/retichat/id6762225314) | iOS | Recommended iOS client |
+| [Reticulum MeshChat](https://github.com/liamcottle/reticulum-meshchat) | Web (any browser) | Modern web UI by Liam Cottle; runs alongside `rnsd` |
+| [LXMF Tools](https://github.com/markqvist/lxmf) | Linux, macOS, Windows (CLI) | Command-line tools for sending and receiving LXMF messages |
 
 ---
 
 ## Getting Help
 
-1. **Reticulum Community**: Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for community support
-2. **ChiMesh Discord**: Join the [Chicagoland Mesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) for local community support
+1. **Discord**: Join the [Chicagoland Mesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) for local community support
+2. **Reticulum Community**: Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for broader community support
 3. **Documentation**: [reticulum.network/manual](https://reticulum.network/manual/)
 4. **Source Code**: [github.com/markqvist/Reticulum](https://github.com/markqvist/Reticulum)
 5. **RNode Firmware Source**: [github.com/markqvist/RNode_Firmware](https://github.com/markqvist/RNode_Firmware)
@@ -321,14 +324,12 @@ It connects to your running `rnsd` daemon automatically.
 - **FCC Part 15**: Unlicensed LoRa operation in the US is permitted under Part 15 within power and duty cycle limits
 - **Amateur Radio (Part 97)**: Licensed amateur operators can run higher power on additional frequencies, but must transmit identification and cannot use encryption for control signals
 - **Encryption**: Reticulum encrypts all traffic by default. This is fine under Part 15. Under Part 97, check your regional rules on encrypted communications before operating
-- **RF Exposure**: Keep a safe distance from high-gain directional antennas, especially at elevated power levels
 
 ---
 
 ## Next Steps
-Once Reticulum is running and you can see active interfaces in `rnstatus`:
 
 - Check out [Configure](configure.md) to set up radio parameters, tune interfaces, and explore advanced options
 - Check out [Mistakes to Avoid](avoid-mistakes.md) for common pitfalls and how to sidestep them
-- Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for community help and support
-- Ask in the [Reticulum channel on the ChiMesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) if you have questions or get stuck
+- Join the [Reticulum channel on the ChiMesh Discord](https://discord.com/channels/1218078395565608990/1349623850148823084) if you have questions or get stuck
+- Join the [Reticulum Matrix room](https://matrix.to/#/#reticulum:matrix.org) for broader community help
