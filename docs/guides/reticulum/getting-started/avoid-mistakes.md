@@ -16,6 +16,10 @@ A collection of common pitfalls that trip people up when getting started with Re
 
 Seriously, do not do this. Transmitting into an open connector reflects RF energy back into the radio chip and can kill it permanently. Always attach your antenna before plugging in power, even for a quick test.
 
+#### Antenna Height Matters
+
+Antenna elevation is one of the biggest factors in how well a mesh network performs. LoRa signals travel line-of-sight, so the higher your antenna, the farther your signal reaches and the more nodes you can connect with. Even a modest elevation gain like a rooftop, upper floor window, or attic can dramatically extend your range. If you can get a node onto a tall building or any elevated structure, please do. Every high-mounted node makes the network better for everyone.
+
 #### Make sure your antenna is for the right frequency band
 
 A 915 MHz antenna will not work well on 868 MHz and vice versa. Running the wrong antenna raises your SWR, wastes transmit power, reduces range, and in bad cases can stress the RF hardware. Check the band printed on your antenna before connecting it and make sure it matches the frequency you have set in your config.
