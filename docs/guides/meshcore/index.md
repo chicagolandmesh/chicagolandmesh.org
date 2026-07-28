@@ -1,6 +1,5 @@
 ---
 hide:
-  - navigation
   - toc
 tags:
   - Info
@@ -20,6 +19,14 @@ This section contains documentation that is specific to MeshCore hardware, firmw
     Get started with MeshCore, learn the first steps, and begin configuring your node to connect with the local mesh.
 
     [:fontawesome-solid-angle-right: Open](getting-started/index.md)
+
+-   :material-cog:{ .lg .top } __Configuring__
+
+    ---
+
+    Configure your node to align with the local Chicagoland Mesh parameters.
+
+    [:fontawesome-solid-angle-right: Open](getting-started/configure.md)
 
 -   :material-radar:{ .lg .top } __MQTT__
 

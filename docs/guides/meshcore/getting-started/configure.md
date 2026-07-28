@@ -123,11 +123,15 @@ The following channels are commonly used in the MeshCore community. Hash channel
 | `#chat` | `d0bdd6d71538138ed979eec00d98ad97` |
 | `#emergency` | `e1ad578d25108e344808f30dfdaaf926` |
 
+!!! warning "`#public` is not the same as `Public`"
+    `#public` is a separate hash channel, not the default public channel. If you're looking for the general public channel, use **`Public`** instead.
+
 #### Chicagoland
 | Channel Name | Secret Key |
 |---|---|
 | `#chicago` | `c1c289b131e5222370cbc2048445844b` |
 | `#chimesh` | `869d8ae6f43e99f7ef463027f916f1fc` |
+| `#suburbs` | `428a0416c430927e63d01a5da35839f0` |
 
 #### Interests
 | Channel Name | Secret Key |
@@ -152,7 +156,6 @@ The following channels are commonly used in the MeshCore community. Hash channel
 |---|---|
 | `#bot` | `eb50a1bcb3e4e5d7bf69a57c9dada211` |
 | `#test` | `9cd8fcf22a47333b591d96a2b848b73f` |
-| `#testing` | `cde5e82cf515647dcb547a79a4f065d1` |
 | `#healthcheck` | `3ae59c2cda86744c75e68b3975a902ae` |
 | `#wardriving` | `e3c26491e9cd321e3a6be50d57d54acf` |
 | `#chimesh-observer-alert` | `5223d5371c7c13c349341d5f9537a555` |
