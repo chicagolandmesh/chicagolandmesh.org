@@ -8,6 +8,10 @@ tags:
 #### Do NOT power on your node without an antenna!
    Very self-explanatory, just don't try it! It can damage your node's LoRa chip permanently.
 
+#### Antenna Height Matters
+
+Antenna elevation is one of the biggest factors in how well a mesh network performs. LoRa signals travel line-of-sight, so the higher your antenna, the farther your signal reaches and the more nodes you can connect with. Even a modest elevation gain like a rooftop, upper floor window, or attic can dramatically extend your range. If you can get a node onto a tall building or any elevated structure, please do. Every high-mounted node makes the network better for everyone.
+
 #### Mount antennas upright and minimize cable length between the node and antenna.
    Having your antenna in a vertical position at the highest possible level is the best case. Also, small adjustments such as keeping the cable connecting the antenna to the node as short as possible will help. Keeping the cable vertical and not bent will ensure you get the best connection possible; antennas with a hinge typically perform worse while bent. If you do need to separate the antenna from the node with a longer run of coax, keep in mind that most coax has significant signal loss over distance. Do your research and buy the best coax you can afford.
 

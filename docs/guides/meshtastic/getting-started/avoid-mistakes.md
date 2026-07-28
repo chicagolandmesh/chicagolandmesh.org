@@ -8,6 +8,10 @@ tags:
 #### Do NOT power on your node without an antenna!
    Very self-explanatory, just don't try it! It can damage your node's LoRa chip permanently.
 
+#### Antenna Height Matters
+
+Antenna elevation is one of the biggest factors in how well a mesh network performs. LoRa signals travel line-of-sight, so the higher your antenna, the farther your signal reaches and the more nodes you can connect with. Even a modest elevation gain like a rooftop, upper floor window, or attic can dramatically extend your range. If you can get a node onto a tall building or any elevated structure, please do. Every high-mounted node makes the network better for everyone.
+
 #### Avoid MQTT Downlink
    When you turn on MQTT Downlink it will flood the local mesh with packets from MQTT, greatly reducing network preformance. In addition, you are defeating the purpose of having an off-grid mesh network. It will publish every message sent from uplink back onto all the nodes which makes them potentially unusable. Please only keep uplink enabled on the Primary channel!
 
