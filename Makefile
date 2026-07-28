@@ -121,12 +121,12 @@ build/map: build/map/js build/map/css build/map/assets
 	@echo 'Setting up virtual python environment...'
 	python3 -m venv .venv \
 	&& source .venv/bin/activate \
-	&& pip install mkdocs-material mkdocs-glightbox mkdocs-minify-plugin
+	&& pip install mkdocs-material mkdocs-glightbox mkdocs-minify-plugin 'mkdocs-material[imaging]'
 
 dist/index.html: .venv/bin/activate $(wildcard docs/**/*) $(wildcard overrides/**/*) mkdocs.yml
 	@echo 'Building site...'
 	source .venv/bin/activate \
-    && mkdocs build -d $(SITE_OUTPUT)
+    && CI=true mkdocs build -d $(SITE_OUTPUT)
 
 .PHONY: build/site
 build/site: build/map dist/index.html
