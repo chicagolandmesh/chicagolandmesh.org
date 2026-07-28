@@ -69,8 +69,7 @@ nav:
       - Stats: meshview/stats.md
       - Top Traffic: meshview/top.md
       - View Externally: https://meshview.chicagolandmesh.org
-  # TODO: gallery
-  # - Gallery: gallery/index.md
+  - Gallery: gallery.md
   - Neighboring Networks: neighbors.md
   - Contact: contact.md
 

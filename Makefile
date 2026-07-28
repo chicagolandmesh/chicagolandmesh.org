@@ -38,6 +38,7 @@ clean:
 	rm -rf api/map/tmp
 	rm -rf api/map/.venv
 	rm -rf api/map/internal/data/devices.json
+	rm -rf docs/assets/images/gallery/preview
 
 # ============================================================================ #
 # BUILD
