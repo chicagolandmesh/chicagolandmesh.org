@@ -35,7 +35,7 @@ Check out these links to explore more about the broader Chicagoland Mesh communi
 
     Inspect the live node map, traffic, stats, and related network views.
 
-    [:fontawesome-solid-angle-right: Open](../corescope/index.md)
+    [:fontawesome-solid-angle-right: Open](../analyzers/index.md)
 
 -   :material-map-marker-radius:{ .lg .top } __Community Map__
 
