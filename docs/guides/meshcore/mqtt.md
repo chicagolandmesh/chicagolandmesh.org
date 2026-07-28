@@ -11,7 +11,7 @@ tags:
 
 A MeshCore Observer is a MeshCore node (repeater, room server, or companion device) that listens to nearby mesh traffic and reports what it hears to an MQTT broker over the internet. ChiMesh uses observer data to power network analysis, coverage mapping, and reliability reporting across the Chicagoland area via [CoreScope](../../corescope/index.md), [Chicagoland MeshCore Live Map](https://live.chimesh.org), and the [ChiMesh Discord MeshCore MQTT Feed](https://discord.com/channels/1218078395565608990/1510490462283370758). Observers can be configured to share only advertisement packets, enough to appear on the node map, without exposing the contents of other traffic. You can stop sharing data at any time.
 
-!!! note
+!!! info "Hardware Requirements"
     Observer firmware is only available for **supported devices**. Check that your hardware is compatible before proceeding. Not all MeshCore devices support the packet logging firmware required for this setup.
 
 !!! warning "Use Repeater mode whenever possible"
@@ -19,13 +19,14 @@ A MeshCore Observer is a MeshCore node (repeater, room server, or companion devi
 
 ## Choose Your Setup Method
 
-There are three ways to run an Observer:
+There are four ways to run an Observer:
 
 | Method | Best for |
 |---|---|
 | [Native Observer Firmware](#method-1-native-observer-firmware) | Devices that support the MQTT observer firmware natively |
 | [Computer Bridge (mctomqtt)](#method-2-computer-bridge-usb-raspberry-pi) | Repeater or Room Server connected to a Raspberry Pi or Linux device via USB |
 | [Companion Bridge](#method-3-companion-bridge) | Companion nodes, uses different bridge software configured via the Observer Flasher |
+| [openHop Repeater](#method-4-openhop-repeater-advanced) | **Advanced users** — Raspberry Pi or Linux SBC running the openHop Repeater daemon |
 
 ---
 
@@ -41,6 +42,9 @@ Use the [MeshCore MQTT Observer Flasher](https://observer.gessaman.com/) to find
     Files labeled **-merged** perform a **full flash erase** and are for **fresh installs only**. Flashing a merged file onto a device that already has MeshCore will wipe all settings, keys, and configuration. If you are updating an existing install, always select the **non-merged** variant.
 
 #### Updating via OTA
+
+!!! tip "You can also update using the OTA update command"
+    From the Command Line under Remote Management, run `ota update` to trigger an over-the-air update directly without needing the steps below.
 
 If you already have MeshCore running, you can update wirelessly using the companion app and a web browser instead of the web flasher and USB:
 
@@ -130,6 +134,9 @@ set bridge.enabled on
 ```
 set flood.advert.interval 72
 ```
+```
+set radio.watchdog 60
+```
 
 !!! tip "If this node is a dedicated observer only (does NOT repeat):"
     Turning repeat off is for dedicated observers only. If this node is also serving as a mesh repeater, make sure you run the `set repeat on` command and consider using a lower flood.advert.interval value (72 or 48).
@@ -141,13 +148,56 @@ set flood.advert.interval 72
     ```
 
 !!! example "Optional (but encouraged), set to your companion device's public key:"
-    Replace `your-primary-companion-device-pub-key` with your companion device's actual public key. This helps to correlate repeaters with their owner for better analytics in the [analyzers](/corescope/).
+    Replace `your-primary-companion-device-pub-key` with your companion device's actual public key. This helps to correlate repeaters with their owner for better analytics in the [analyzers](../../corescope/index.md).
     ```
     set mqtt.owner your-primary-companion-device-pub-key
     ```
 
 ```
 reboot
+```
+
+### Step 3: Configure Observer Alerts (Optional)
+
+!!! note
+    Observer alerts require **firmware version 1.16 or later**, available from [observer.gessaman.com](https://observer.gessaman.com/). Full alert documentation is at [observer.gessaman.com/docs](https://observer.gessaman.com/docs?doc=ALERTS.md).
+
+The ESP32-native MQTT observer firmware can alert you over the LoRa network if it encounters Wi-Fi or broker connectivity issues. Alerts are sent as flooded channel messages to either a hashtag channel or a private channel of your choosing.
+
+#### Choose an Alert Channel
+
+If you choose to use the shared hashtag channel `#chimesh-observer-alert`, no setup required on the channel itself. Set your companion to receive messages on `#chimesh-observer-alert`.
+
+If you prefer to use your own private channel, create a private channel via the mobile app, then use the share option on the channel to copy the secret hex key to your clipboard. Save the secret somewhere safe (e.g. a password manager) in case you need to restore it later or add it to a new companion device.
+
+#### Configure Alerts
+
+From the Command Line, run the commands for whichever channel option you chose:
+
+**If using the ChiMesh hashtag channel (recommended):**
+```
+set alert.hashtag #chimesh-observer-alert
+```
+
+**If using your own private channel:**
+```
+set alert.psk <secretkey>
+```
+
+Then, regardless of which option you chose:
+```
+set alert.wifi 10
+```
+```
+set alert.mqtt 30
+```
+```
+set alert on
+```
+
+Once configured, use the `alert test` command to immediately send a test message and confirm your companion can receive alerts from the firmware:
+```
+alert test
 ```
 
 ---
@@ -228,18 +278,111 @@ The installer will set up packet capture support for BLE, TCP, and Wi-Fi connect
 
 ### Step 3: Configure ChiMesh MQTT
 
-The companion bridge does not currently support preset-based configuration. Enter the following connection details manually when prompted, or in the bridge configuration:
+When prompted during setup, select `chimesh` from the available presets. The installer will configure the connection details automatically.
 
-| Setting | Value |
-|---|---|
-| Server | `wss://mqtt.chimesh.org` |
-| Port | `443` |
-| Audience | `mqtt.chimesh.org` |
+For more details, see the [meshcore-packet-capture README](https://github.com/agessaman/meshcore-packet-capture). For help, reach out on the [ChiMesh Discord](https://chimesh.org/discord) or the [MeshCore Discord](https://meshcore.gg/).
+
+!!! tip "If the chimesh preset isn't working, set the connection details manually:"
+    - Server:  `wss://mqtt.chimesh.org`
+    - Port: `443`
+    - Audience: `mqtt.chimesh.org`
 
 !!! note
     It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
 
-For more details, see the [meshcore-packet-capture README](https://github.com/agessaman/meshcore-packet-capture). For help, reach out on the [ChiMesh Discord](https://chimesh.org/discord) or the [MeshCore Discord](https://meshcore.gg/).
+---
+
+## Method 4: openHop Repeater (Advanced)
+
+!!! warning "This method is for advanced users"
+    openHop Repeater requires Linux command-line familiarity, manual YAML configuration, and hardware setup. If you are not comfortable with these, use one of the methods above instead. For help, ask in the [ChiMesh Discord](https://chimesh.org/discord) before proceeding.
+
+[openHop Repeater](https://docs.openhop.dev/projects/openhop-repeater/what-is-openhop-repeater/) is a Python-based MeshCore repeater daemon that runs on Linux and publishes to MQTT natively through its `config.yaml`. It supports direct SPI LoRa HATs, USB modem boards (ESP32/nRF52 running openHop Modem firmware), and TCP-connected modems, and can operate as a dedicated observer that uploads packet activity and mesh health to MQTT without needing the standard MeshCore firmware or any bridge script.
+
+### Requirements
+
+- A Raspberry Pi or other Linux SBC with internet access
+- A supported LoRa radio
+    - SPI HAT (e.g., Waveshare SX1262 HAT, meshadv, meshadv-mini) connected directly to the Pi
+    - ESP32 or nRF52 board flashed with [openHop Modem firmware](https://flasher.openhop.dev/) connected over USB-CDC or TCP
+    - CH341 USB-to-SPI adapter wired to an SX1262 module (e.g., for Proxmox LXC deployments)
+
+### Step 1: Install openHop Repeater
+
+```bash
+git clone https://github.com/openhop-dev/openhop_repeater.git
+cd openhop_repeater
+sudo bash ./manage.sh install
+```
+
+The installer will create the config directory at `/etc/openhop_repeater/`, install the application to `/opt/openhop_repeater/`, launch an interactive setup wizard for radio hardware selection, and install and enable the `openhop-repeater` systemd service.
+
+Follow the wizard prompts to select your hardware type and radio preset. For USB modem boards, select the `pymc_usb modem (USB-CDC)` option. For Wi-Fi or Ethernet modems, select `pymc_tcp modem`. For a direct SPI HAT, select `sx1262`.
+
+### Step 2: Configure ChiMesh MQTT
+
+Open `/etc/openhop_repeater/config.yaml` and update the `mqtt_brokers` section:
+
+```yaml
+mqtt_brokers:
+  iata_code: "ORD"
+  status_interval: 300
+  owner: ""
+  brokers:
+    - preset: letsmesh
+
+    - name: chimesh
+      enabled: true
+      host: mqtt.chimesh.org
+      port: 443
+      transport: websockets
+      audience: mqtt.chimesh.org
+      use_jwt_auth: true
+      tls:
+        enabled: true
+```
+
+!!! note
+    Replace `iata_code` with the appropriate IATA airport code for your area. For the Chicago area, use `ORD`.
+
+!!! example "Optional (but encouraged), set your owner public key:"
+    The `owner` field links your observer to your primary companion device for better analytics in the [analyzers](../..//analyzers/index.md). Replace the empty string with your companion device's public key.
+    ```yaml
+    mqtt_brokers:
+      owner: "your-primary-companion-device-pub-key"
+    ```
+
+### Step 3: Apply ChiMesh Mesh Settings
+
+In the same `config.yaml`, set the following under the `mesh` section:
+
+```yaml
+mesh:
+  unscoped_flood_allow: true
+  path_hash_mode: 2
+  loop_detect: minimal
+```
+
+And under `repeater`, set a reasonable advert interval:
+
+```yaml
+repeater:
+  send_advert_interval_hours: 4
+```
+
+### Step 4: Restart and Verify
+
+```bash
+sudo systemctl restart openhop-repeater
+sudo journalctl -u openhop-repeater -f
+```
+
+The web dashboard is available at `http://<repeater-ip>:8000` and shows connection status, packet history, and MQTT broker state.
+
+!!! note
+    It may take up to **5 minutes** after your observer first connects before it appears in the Observers list. Your node must have an advertisement heard before it will show up in the map or dropdown, but packet data will still be recorded in the meantime.
+
+For full configuration options, see the [openHop Repeater Configuration Reference](https://docs.openhop.dev/projects/openhop-repeater/config-file/). For help, reach out on the [Discord](https://chicagolandmesh.org/discord).
 
 ---
 
@@ -249,4 +392,4 @@ For more details, see the [meshcore-packet-capture README](https://github.com/ag
 - `set mqtt2.preset chimesh` is what connects your observer to the ChiMesh network specifically while `set mqtt1.preset analyzer-us` is what connects your observer to the global [LetsMesh analyzer](https://analyzer.letsmesh.net) and the [official MeshCore map](https://map.meshcore.io)
 - The `mqtt.owner` field is optional but highly encouraged, it links your observer to your primary companion device
 
-Thank you for supporting [ChiMesh.org](https://chimesh.org), we hope to see you on MeshCore MQTT soon!
+Thank you for supporting [ChiMesh.org](https://chimesh.org), we hope to see you on MeshCore MQTT!

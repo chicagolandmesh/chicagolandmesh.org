@@ -41,7 +41,13 @@ tags:
     - Flash the firmware directly through your browser
 
 !!! info "Setting Up an MQTT Observer Node?"
-    MQTT helps forward node traffic to the internet. This helps us visualize the network through our [analyzers](../../../corescope/index.md). If you plan to configure your node as an MQTT observer, read the [Setup MQTT](../mqtt.md) guide.
+    MQTT helps forward node traffic to the internet. This helps us visualize the network through our [analyzers](../../../analyzers/index.md). If you plan to configure your node as an MQTT observer, read the [Setup MQTT](../mqtt.md) guide.
+
+!!! warning "nRF52 Node Users"
+    If you are installing firmware on an nRF52-based device (RAK4631, XIAO nRF52840, T1000-E, ProMicro NRF52840, etc.), **read the [OTAFIX Bootloader](../advanced-firmware.md#otafix-bootloader-nrf52-devices) section before proceeding**. Installing the OTAFIX bootloader first will save you significant trouble with OTA updates and failed flashes.
+
+!!! tip "Planning a Solar ESP Node?"
+    If you are setting up a solar-powered ESP32 node, check out [EasySkyMesh](../advanced-firmware.md#easyskymesh-power-saving-firmware) before choosing your firmware. Its PowerSaving builds are purpose-built for low-power deployments and will dramatically extend your battery life.
 
 !!! tip "Next Steps"
     View the [Configuring MeshCore](configure.md) page to configure your node.
@@ -100,6 +106,6 @@ If you need assistance with the MeshCore:
 
 Once you have your MeshCore device connected:
 
-- Check out [Configure](configure.md) page
-- Check out [Configure MQTT](../mqtt.md) page
+- Check out [Configuring](configure.md) page
+- Check out [Setup MQTT](../mqtt.md) page
 - Check out [Mistakes to Avoid](avoid-mistakes.md) page

@@ -23,8 +23,9 @@ nav:
       - guides/meshcore/index.md
       - Getting Started:
         - guides/meshcore/getting-started/index.md
-        - Configuring MeshCore: guides/meshcore/getting-started/configure.md
+        - Configuring: guides/meshcore/getting-started/configure.md
         - Mistakes to Avoid: guides/meshcore/getting-started/avoid-mistakes.md
+      - Advanced Firmware: guides/meshcore/advanced-firmware.md
       - Setup MQTT: guides/meshcore/mqtt.md
     - Meshtastic:
       - guides/meshtastic/index.md
