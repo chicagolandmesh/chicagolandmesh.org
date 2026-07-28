@@ -30,7 +30,7 @@ nav:
       - guides/meshtastic/index.md
       - Getting Started:
         - guides/meshtastic/getting-started/index.md
-        - Configuring Meshtastic: guides/meshtastic/getting-started/configure.md
+        - Configuring: guides/meshtastic/getting-started/configure.md
         - Mistakes to Avoid: guides/meshtastic/getting-started/avoid-mistakes.md
       - Setup MQTT: guides/meshtastic/mqtt.md
       - Local Channel: guides/meshtastic/local-channel.md
