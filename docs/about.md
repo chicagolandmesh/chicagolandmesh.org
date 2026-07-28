@@ -12,7 +12,7 @@ hide:
 
 ## What is Chicagoland Mesh?
 
-We are a growing community of people working together to create an off-grid, decentralized, and resilient communications network using inexpensive LoRa devices. Operating within the unlicensed 915 MHz ISM band, these devices are typically loaded with either MeshCore or Meshtastic firmware, enabling users to communicate without using traditional networks.
+We are a growing community building an off-grid, decentralized, and resilient communications network using inexpensive LoRa devices. Founded March 2024, Chicagoland Mesh utilizes MeshCore, Meshtastic, and Reticulum protocols to build a mesh network. The devices we use are called "nodes" and can be placed anywhere to expand the coverage of the network. Operating within the unlicensed 915 MHz ISM band, these devices let you communicate without any traditional network infrastructure.
 
 The FCC allows people to operate on ISM frequencies without having any form of FCC-affiliated license (such as that required for Ham/Amateur Radio). However, the 902-928 MHz range in particular is special, because transmissions under 1 watt over those frequencies can be encrypted, meaning your private messages will remain secure from prying eyes.
 
@@ -25,39 +25,58 @@ The purpose of Chicagoland Mesh is to expand coverage in our area and build out 
 
 ## What is MeshCore?
 
-[MeshCore](https://meshcore.io) is a similar project to Meshtastic that aimed to address some of the shortcomings Meshtastic had in larger networks. As networks grew, some areas began to notice issues with message delivery reliability. This is because Meshtastic was designed to be more peer-to-peer, which meant that by default all client nodes would repeat messages (thereby flooding the mesh network). However, this, coupled with the automatic sending of telemetry data, meant that the mesh network was oftentimes flooded with traffic, causing a lot of packets/messages to get dropped.
+[MeshCore](https://meshcore.io) is a LoRa mesh protocol built to address the reliability issues that come up in large, dense networks. Rather than having every device repeat every message (which floods the network), MeshCore relies on dedicated repeater infrastructure.
 
-MeshCore addresses this by relying on more defined repeater infrastructure. Messages are sent from 'companion' nodes, which typically come in the form of standalone or BLE-connected devices that you use through your phone. Once they are sent, they go through a network of dedicated 'repeater' nodes, until they finally reach the recipient node. An initial message is sent in 'flood' mode, meaning all repeaters will repeat the message until the message reaches its destination. Once it is received, the repeater path it took will be retained on the device that sent the message, which enables future messages to be repeated only by repeaters defined on the path.
-
-Notably, the Pacific Northwest and various other US mesh groups switched over to MeshCore, For example the PNW group has seen messages sent from Vancouver with a received destination as far south as Eugene, Oregon! You can see real time nationwide network activity [here](https://analyzer.letsmesh.net/map).
+Messages come from lightweight *companion* nodes connected via BLE to your phone, then travel through a network of dedicated *repeater* nodes to reach their destination. The first message floods the network to discover a path. After that, your device remembers the route and uses it directly, which cuts down on congestion significantly.
 
 - Dedicated repeater infrastructure for improved reliability
-- Encrypted communication
+- Smaller packet sizes that reduce collisions on busy networks
 - Path-based routing after initial flood discovery
-- Send and receive text messages between members of the mesh
+- Encrypted communication
 - BLE-connected or standalone companion node support
 
 ## What is Meshtastic?
 
-[Meshtastic®](https://meshtastic.org) is a community project that allows anybody to communicate over LoRa radios, serving as a decentralized communications platform. Learn more about the inner workings through the [documentation](https://meshtastic.org/docs/overview).
+[Meshtastic®](https://meshtastic.org) is a community-driven LoRa mesh platform that has been in development since 2019. It works in a peer-to-peer fashion where all nodes can repeat messages, making it self-contained and independent of any existing infrastructure. Learn more through the [documentation](https://meshtastic.org/docs/overview).
 
-- Decentralized communication - no dedicated router required
+- Decentralized with no dedicated repeater infrastructure required
 - Encrypted communication
 - Excellent battery life
-- Send and receive text messages between members of the mesh
-- Optional GPS based location features
+- GPS-based location and passive telemetry support
+- Large, established ecosystem
 
-## Meshtastic or MeshCore: What Should I Use?
+## What is Reticulum?
 
-Meshtastic began development in 2019, whereas MeshCore launched in 2025, giving Meshtastic a significant head start in network development and community adoption. That said, if you are in a large city like Chicago, MeshCore is probably the better pick. High traffic urban meshes benefit a lot from MeshCore's improved message delivery reliability, and the infrastructure density of a city like Chicago means you can actually take full advantage of what it has to offer. MeshCore also uses smaller packet sizes than Meshtastic, which improves overall performance and reduces collisions on busy networks, making it especially well suited for dense urban environments.
-Meshtastic is still the go-to for camping trips, rural areas, or small group meshes where you can't count on any pre-existing infrastructure. Its more established ecosystem and self-contained nature make it great for off-grid use. One other thing worth knowing is that MeshCore requires users to explicitly request telemetry data like temperature and node position. So if your use case involves passively tracking locations or pulling sensor readings on a regular basis, Meshtastic is probably still the better fit for that.
+[Reticulum](https://reticulum.network) is a cryptography-based networking stack built for resilient, decentralized communication across a wide variety of transport layers including LoRa, WiFi, and serial links. Unlike MeshCore or Meshtastic, Reticulum is a full networking layer rather than a messaging-focused app, which makes it better suited for more advanced use cases like running applications, hosting services, or bridging different network types.
 
-Hopefully this provides some insight on what mesh network fits better for your use cases. If you are still on the fence, feel free to host both firmware on separate devices, or look into using a firmware like [LunarCore](https://github.com/STCisGOOD/lunarcore), which enables you to use both protocols on certain supported boards.
+If you want to go beyond simple text messaging, Reticulum paired with tools like [Nomad Network](https://github.com/markqvist/NomadNet) opens up a broader decentralized communication ecosystem.
+
+## Which Should I Use?
+
+Chicagoland Mesh supports MeshCore, Meshtastic, and Reticulum equally. There is no wrong choice, and running more than one is something we actively encourage. If you are able and willing, running MeshCore and Meshtastic on separate dedicated nodes is a great way to contribute to both networks at once and strengthen overall coverage in the area. Reticulum is recommended for advanced users who want to go deeper than messaging and experiment with off-grid networking at a lower level.
+
+| | MeshCore | Meshtastic | Reticulum |
+|---|---|---|---|
+| **Best for** | Dense urban areas | Small groups and rural | Advanced multi-transport |
+| **Infrastructure** | Dedicated repeaters | Peer-to-peer | Diverse |
+| **Telemetry** | On request | Passive/automatic | User-defined |
+| **Maturity** | Newer (2024) | Established (2020) | Established (2016) |
+
+If you are in a large city like Chicago, MeshCore is the stronger choice. High-traffic urban environments benefit a lot from its dedicated repeater model and smaller packet sizes, which reduce collisions and improve delivery reliability across a dense network.
+
+For camping trips, rural use, or small group meshes, Meshtastic is the better fit. Its peer-to-peer design works well even with no pre-existing infrastructure, and its passive location tracking and telemetry features are useful for those situations.
+
+Reticulum is worth looking into if you want to go beyond messaging and build more sophisticated off-grid network applications. Hardware is inexpensive, so running all three on separate nodes is very doable if you want to participate in everything the network has to offer.
+
+You can also check out [LunarCore](https://github.com/STCisGOOD/lunarcore) for boards that support running both MeshCore and Meshtastic at the same time.
 
 ## Getting Started
 
 1. Join [our Discord](https://chicagolandmesh.org/discord)
-2. Purchase [supported hardware](https://www.rfindex.com/mesh/devices) and [antenna](https://www.rfindex.com/mesh/antennas)
-3. Flash your hardware with the [MeshCore](https://flasher.meshcore.dev) or [Meshtastic](https://flasher.meshtastic.org) firmware
-4. Download the corresponding app for your firmware, then connect to your node (MeshCore: [iOS](https://apps.apple.com/us/app/meshcore/id6742354151) or [Android](https://play.google.com/store/apps/details?id=com.liamcottle.meshcore.android); Meshtastic: [iOS](https://apps.apple.com/us/app/meshtastic/id1586432531) or [Android](https://play.google.com/store/apps/details?id=com.geeksville.mesh)).
-5. Read the [getting started](guides/index.md) page for your respective protocol for more information
+2. Purchase [supported hardware](https://www.rfindex.com/mesh/devices) and an [antenna](https://www.rfindex.com/mesh/antennas) and mount it as high as you can
+3. Flash your hardware with [MeshCore](https://flasher.meshcore.dev), [Meshtastic](https://flasher.meshtastic.org), or [Reticulum](https://liamcottle.github.io/rnode-flasher/) firmware
+4. Download the app and connect to your node:
+    - **MeshCore:** [iOS](https://apps.apple.com/us/app/meshcore/id6742354151) · [Android](https://play.google.com/store/apps/details?id=com.liamcottle.meshcore.android)
+    - **Meshtastic:** [iOS](https://apps.apple.com/us/app/meshtastic/id1586432531) · [Android](https://play.google.com/store/apps/details?id=com.geeksville.mesh)
+    - **Reticulum:** [RNS software](https://reticulum.network/manual/software.html)
+5. Read the [getting started guide](guides/index.md) for your chosen protocol
