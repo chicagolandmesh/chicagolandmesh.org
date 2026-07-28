@@ -38,8 +38,9 @@ nav:
       - guides/reticulum/index.md
       - Getting Started:
         - guides/reticulum/getting-started/index.md
-        - Configuring Reticulum: guides/reticulum/getting-started/configure.md
+        - Configuring: guides/reticulum/getting-started/configure.md
         - Mistakes to Avoid: guides/reticulum/getting-started/avoid-mistakes.md
+      - Relay Setup: guides/reticulum/relay.md
   - Resources:
     - resources/index.md
     - Community: resources/community.md
