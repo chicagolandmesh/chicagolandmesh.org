@@ -62,6 +62,7 @@ nav:
       - Traces: corescope/traces.md
       - Observers: corescope/observers.md
       - Analytics: corescope/analytics.md
+      - View Externally: https://corescope.chicagolandmesh.org
     - Meshtastic:
       - meshview/index.md
       - Nodes: meshview/nodelist.md
