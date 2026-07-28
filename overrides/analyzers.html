@@ -1,0 +1,194 @@
+{% extends "main.html" %}
+
+{% block styles %}
+{{ super() }}
+  <style>
+    .analyzers-picker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 3rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    .analyzer-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--md-default-fg-color);
+      margin: 0 0 0.5rem;
+      line-height: 1.2;
+    }
+
+    .analyzer-subtitle {
+      font-size: 1rem;
+      color: var(--md-default-fg-color--light);
+      margin: 0 0 2.5rem;
+    }
+
+    .analyzer-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      width: 100%;
+      max-width: 780px;
+    }
+
+    .analyzer-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--md-default-bg-color--light);
+      border: 1px solid var(--md-default-fg-color--lightest);
+      border-radius: 14px;
+      padding: 2rem 2rem 1.75rem;
+      flex: 1 1 300px;
+      max-width: 340px;
+      text-decoration: none !important;
+      color: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease;
+    }
+
+    .analyzer-card:hover {
+      border-color: var(--md-accent-fg-color);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18);
+      transform: translateY(-4px);
+      color: inherit;
+      text-decoration: none !important;
+    }
+
+    .analyzer-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      flex-shrink: 0;
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .analyzer-icon--meshcore   {
+      background: rgba(0, 174, 239, 0.13);
+    }
+    .analyzer-icon--meshtastic {
+      background: rgba(102, 204, 102, 0.13);
+    }
+
+    .analyzer-icon img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .analyzer-protocol {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 0.4rem;
+    }
+
+    .analyzer-protocol--meshtastic {
+      color: #2fc476;
+    }
+    .analyzer-protocol--meshcore {
+      color: #0099d4;
+    }
+
+    .analyzer-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--md-default-fg-color);
+      margin-bottom: 0.85rem;
+      line-height: 1.2;
+    }
+
+    .analyzer-card__desc {
+      font-size: 0.9rem;
+      color: var(--md-default-fg-color--light);
+      line-height: 1.55;
+      margin-bottom: 1.75rem;
+      flex-grow: 1;
+    }
+
+    .analyzer-card__btn {
+      display: block;
+      width: 100%;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: var(--md-accent-fg-color);
+      color: #fff !important;
+      text-decoration: none !important;
+      white-space: nowrap;
+      transition: filter 0.15s ease, transform 0.15s ease;
+      box-sizing: border-box;
+    }
+
+    .analyzer-card:hover .analyzer-card__btn {
+      filter: brightness(1.1);
+    }
+
+    @media (min-width: 600px) {
+      .analyzer-card {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: 340px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .analyzer-heading {
+        font-size: 2.2rem;
+      }
+      .analyzer-cards   {
+        gap: 2rem;
+        max-width: 840px;
+      }
+      .analyzer-card {
+        padding: 2.25rem 2.25rem 2rem;
+      }
+    }
+
+    @media (max-width: 599px) {
+      .analyzers-picker {
+        padding: 2rem 1rem 3rem;
+      }
+      .analyzer-heading {
+        font-size: 1.6rem;
+      }
+      .analyzer-card {
+        flex: 1 1 100%;
+        max-width: 420px;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="analyzers-picker">
+    <p class="analyzer-heading">Network Analyzers</p>
+    <p class="analyzer-subtitle">Select a tool to monitor and explore the network</p>
+    <div class="analyzer-cards">
+      <a class="analyzer-card" href="/corescope/">
+        <div class="analyzer-icon analyzer-icon--meshcore">
+          <img src="../assets/images/meshcore-logo.png" alt="MeshCore" />
+        </div>
+        <div class="analyzer-protocol analyzer-protocol--meshcore">MeshCore</div>
+        <div class="analyzer-name">CoreScope</div>
+      </a>
+      <a class="analyzer-card" href="/meshview/">
+        <div class="analyzer-icon analyzer-icon--meshtastic">
+          <img src="../assets/images/meshtastic-logo-512x512.png" alt="Meshtastic" />
+        </div>
+        <div class="analyzer-protocol analyzer-protocol--meshtastic">Meshtastic</div>
+        <div class="analyzer-name">MeshView</div>
+      </a>
+    </div>
+  </div>
+{% endblock %}
