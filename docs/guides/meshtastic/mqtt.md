@@ -6,56 +6,70 @@ tags:
   - Meshtastic
 ---
 
-# Setting up MQTT for your node
-
 ## What is MQTT?
-MQTT stands for Message Queuing Telemetry Transport. It is a protocol that has been integrated into Meshtastic to allow nodes to relay messages over the internet. This allows nodes to bridge where physically they couldn't have. 
+
+MQTT stands for Message Queuing Telemetry Transport. It is a protocol that has been integrated into Meshtastic to allow nodes to relay messages over the internet, bridging gaps where a physical connection would otherwise not be possible.
 
 <figure markdown="span">
   ![MQTT Example](../../assets/images/mqtt-example.webp){ data=round }
   <figcaption><a href="https://meshtastic.org/docs/software/integrations/mqtt/">Image source</a></figcaption>
 </figure>
 
+---
+
 ## MQTT Settings
-Enabling MQTT will allow you to appear on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.net) and [Chicagoland(MeshView)](https://chicagolandmesh.org/meshview).
 
-1. Go to your MQTT settings and select enable.
-2. Use `mqtt.chimesh.org` for MQTT server address
-3. Use `meshdev` for MQTT username
-4. Use `large4cats` for MQTT password
+Enabling MQTT will allow your node to appear on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.net), and [Chicagoland MeshView](https://chicagolandmesh.org/analyzers).
 
-    <br>
+1. Go to your MQTT settings and select **Enable**.
+
+2. Set the following connection details:
+
+    | Field | Value |
+    |---|---|
+    | MQTT Server Address | `mqtt.chimesh.org` |
+    | Username | `meshdev` |
+    | Password | `large4cats` |
+
     ![MQTT Settings Example](../../assets/images/mqtt1.png)
-    <br>
-    <br>
 
-5. Enable MQTT encryption
-6. Make sure JSON and TLS are disabled
-7. Set your root topic to `msh/US/IL/Chi`
+3. **Enable** MQTT encryption.
 
-    !!! note
+4. Ensure **JSON** and **TLS** are both disabled.
 
-        Root topic input is case sensitive, also make sure not to leave a space before or after the root topic input.
+5. Set your root topic to `msh/US/IL/Chi`.
 
-8. If you are using Wi-Fi, set Proxy to Client off, if you are using a phone, turn on Proxy to Client
+    !!! warning
+        The root topic field is case-sensitive. Do not include any leading or trailing spaces.
 
-    <br>
+6. Configure the **Proxy to Client** setting based on your connection type:
+    - **Wi-Fi** — Set Proxy to Client to `Off`
+    - **Phone/Bluetooth** — Set Proxy to Client to `On`
+
     ![MQTT Settings Example](../../assets/images/mqtt2.png)
-    <br>
-    <br>
 
-9. Go to channel settings and then primary channel
-10. Set the pre-Shared key to `AQ==`
-11. Leave the name blank
-12. Enable MQTT uplink and disable downlink
-    - This is set to send messages recieved to MQTT but prevents your node from getting messages from MQTT. Read more about this in the [optional settings](#optional-settings).
-13. Enable Map Reporting, set Map Publish Interval to 3600 (seconds), and set your desired Position Precision
+7. Go to **Channel Settings**, then open the **Primary Channel** and configure the following:
 
-    <br>
+    | Field | Value |
+    |---|---|
+    | Pre-shared Key | `AQ==` |
+    | Name | *(leave blank)* |
+    | MQTT Uplink | `Enabled` |
+    | MQTT Downlink | `Disabled` |
+
+    !!! info
+        Uplink sends messages received by your node to MQTT. Disabling downlink prevents your node from receiving messages back from MQTT. See [Optional Settings](#optional-settings) for more detail.
+
+8. Enable **Map Reporting**, set the Map Publish Interval to `3600` seconds, and choose your desired Position Precision.
+
     ![MQTT Settings Example](../../assets/images/mqtt3.png)
 
-### Optional Settings
+---
 
-1. If you are using a mobile device, Make sure to enable Connect to mesh
-2. The uplink and downlink settings can be changed to your preference if you want to contact others through MQTT. These instructions were created for the standard set by us
-3. We recommend having at least uplink enabled on the primary channel and device position enabled so you get on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.net) and [Chicagoland(MeshView)](https://chicagolandmesh.org/meshview)
+## Optional Settings
+
+1. If you are using a mobile device, make sure **Connect to Mesh** is enabled.
+
+2. The uplink and downlink settings can be adjusted to your preference if you want to communicate with others through MQTT. The instructions above reflect the configuration standard we recommend.
+
+3. We recommend having at least **uplink enabled** on the primary channel with **device position enabled**, so your node appears on [Liam Cottle MeshMap](https://meshtastic.liamcottle.net/), [Global MeshMap](https://meshmap.net), and [Chicagoland MeshView](../../meshview/index.md).

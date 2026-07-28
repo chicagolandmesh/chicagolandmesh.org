@@ -1,6 +1,5 @@
 ---
 hide:
-  - navigation
   - toc
 tags:
   - Info
@@ -21,6 +20,14 @@ This section contains documentation that is specific to Meshtastic hardware, fir
 
     [:fontawesome-solid-angle-right: Open](getting-started/index.md)
 
+-   :material-cog:{ .lg .top } __Configuring__
+
+    ---
+
+    Configure your node to align with the local Chicagoland Mesh parameters and learn how to add the Chicago Channel.
+
+    [:fontawesome-solid-angle-right: Open](getting-started/configure.md)    
+
 -   :material-radar:{ .lg .top } __MQTT__
 
     ---
@@ -28,14 +35,6 @@ This section contains documentation that is specific to Meshtastic hardware, fir
     Configure MQTT connectivity to help visualize the network across the mesh.
 
     [:fontawesome-solid-angle-right: Open](mqtt.md)
-
--   :material-lock:{ .lg .top } __Local Channel__
-
-    ---
-
-    Join the Chicagoland shared channel with the current channel configuration.
-
-    [:fontawesome-solid-angle-right: Open](local-channel.md)
 
 -   :material-bookshelf:{ .lg .top } __Resources__
 
