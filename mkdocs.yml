@@ -81,6 +81,11 @@ plugins:
   - search
   - privacy
   - glightbox
+  - optimize:
+      optimize: !ENV [CI, false]
+      optimize_include:
+        - guides/community/builds/assets/*
+        - assets/images/*
   - minify:
       minify_html: true
       htmlmin_opts:
