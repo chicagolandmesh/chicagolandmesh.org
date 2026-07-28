@@ -52,6 +52,7 @@ nav:
   # - News: news.md
   - Map: map.md
   - Analyzers:
+    - analyzers/index.md
     - MeshCore:
       - corescope/index.md
       - Packets: corescope/packets.md
