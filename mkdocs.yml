@@ -7,7 +7,7 @@ site_description: >-
 site_url: https://chicagolandmesh.org
 
 copyright: >-
-  Copyright &copy; 2026 Chicagoland Mesh <u><a href="https://github.com/chicagolandmesh/chicagolandmesh.org">Contributors</a></u><br>
+  Copyright &copy; 2024–2026 Chicagoland Mesh <u><a href="https://github.com/chicagolandmesh/chicagolandmesh.org">Contributors</a></u><br>
   <p style="margin:0">Chicagoland Mesh is not affilated with <u><a href="https://meshtastic.org" target="_blank" rel="noreferrer noopener">Meshtastic®</a></u>, nor endorsed by <u><a href="https://meshtastic.org/docs/legal/licensing-and-trademark" target="_blank" rel="noreferrer noopener">Meshtastic LLC</a></u>.</p>
 
 nav:
@@ -141,7 +141,7 @@ theme:
     repo: "fontawesome/brands/github"
   palette:
     - media: "(prefers-color-scheme)"
-      scheme: slate
+      scheme: chicago-dark
       primary: custom
       accent: custom
       toggle:
@@ -155,7 +155,7 @@ theme:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+      scheme: chicago-dark
       primary: custom
       accent: custom
       toggle:

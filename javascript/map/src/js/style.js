@@ -2,7 +2,7 @@ import { layers, namedFlavor } from "@protomaps/basemaps";
 
 export function getColorScheme() {
   const theme =
-    document.body.getAttribute("data-md-color-scheme") == "slate"
+    document.body.getAttribute("data-md-color-scheme") == "chicago-dark"
       ? "dark"
       : "light";
 

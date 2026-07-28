@@ -21,7 +21,7 @@ Use this page to check out our community resources, or jump into a protocol-spec
 
     [:fontawesome-solid-angle-right: Open](community.md)
 
--   :material-access-point-network:{ .lg .top } __MeshCore__
+-   :custom-meshcore-logo:{ .lg .top } __MeshCore__
 
     ---
 
@@ -29,7 +29,7 @@ Use this page to check out our community resources, or jump into a protocol-spec
 
     [:fontawesome-solid-angle-right: Open](meshcore.md)
 
--   :custom-meshtastic:{ .lg .top style="padding: 1px;" } __Meshtastic__
+-   :custom-meshtastic-logo:{ .lg .top style="padding: 1px;" } __Meshtastic__
 
     ---
 

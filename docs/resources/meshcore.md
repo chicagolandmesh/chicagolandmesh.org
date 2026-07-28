@@ -12,7 +12,7 @@ tags:
 
 <div class="grid cards small" markdown>
 
--   [:material-access-point-network:{ .lg .top } __MeshCore Home__](https://meshcore.io/)
+-   [:custom-meshcore-logo:{ .lg .top } __MeshCore Home__](https://meshcore.io/)
 
     Official MeshCore project site and primary entry point.
 

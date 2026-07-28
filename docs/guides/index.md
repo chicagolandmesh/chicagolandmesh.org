@@ -19,7 +19,7 @@ Use this section to choose how you want to browse the site: start with community
 
     [:fontawesome-solid-angle-right: Open](community/index.md)
 
--   :material-access-point-network:{ .lg .top } __MeshCore__
+-   :custom-meshcore-logo:{ .lg .top } __MeshCore__
 
     ---
 
@@ -27,7 +27,7 @@ Use this section to choose how you want to browse the site: start with community
 
     [:fontawesome-solid-angle-right: Open](meshcore/index.md)
 
--   :custom-meshtastic:{ .lg .top style="padding: 1px;" } __Meshtastic__
+-   :custom-meshtastic-logo:{ .lg .top style="padding: 1px;" } __Meshtastic__
 
     ---
 
