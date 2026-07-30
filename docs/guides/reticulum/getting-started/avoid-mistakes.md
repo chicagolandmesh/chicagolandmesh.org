@@ -24,7 +24,7 @@ Antenna elevation is one of the biggest factors in how well a mesh network perfo
 
 A 915 MHz antenna will not work well on 868 MHz and vice versa. Running the wrong antenna raises your SWR, wastes transmit power, reduces range, and in bad cases can stress the RF hardware. Check the band printed on your antenna before connecting it and make sure it matches the frequency you have set in your config.
 
-#### Avoid the stock antennas that come with Lilygo and Heltec devices
+#### Avoid the stock antennas that come with LILYGO and Heltec devices
 
 The small stub antennas bundled with boards like the T-Beam and LoRa32 are generally poor performers. Their SWR is high and they lose a surprising amount of signal compared to a proper antenna. If you want to compare SWR ratings across different antenna options, the [Meshtastic antenna reports repository](https://github.com/meshtastic/antenna-reports) has measured data on a wide range of antennas that can be useful as a reference. Just keep in mind it is a Meshtastic project so some of the context will not apply directly to Reticulum.
 
