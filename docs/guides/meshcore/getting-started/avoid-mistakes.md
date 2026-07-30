@@ -29,8 +29,8 @@ Antenna elevation is one of the biggest factors in how well a mesh network perfo
 #### Pay attention to SMA cables
    When you are purchasing SMA cables and adapters make sure you check the gender of the antenna and cables you're going to use. Mismatched connectors may cause permanent damage to your node, possibly leaving it unusable.
 
-#### Avoid using stock Lilygo or Heltec antenna
-   Using the stock antennas from Lilygo and Heltec devices will result in a massive performance loss because of their very high [SWR](https://en.wikipedia.org/wiki/Standing_wave_ratio). The lower SWR the better. We recommend checking out this [GitHub repository](https://www.rfindex.com/mesh/antennas) for choosing the best antenna for your node.
+#### Avoid using stock LILYGO or Heltec antenna
+   Using the stock antennas from LILYGO and Heltec devices will result in a massive performance loss because of their very high [SWR](https://en.wikipedia.org/wiki/Standing_wave_ratio). The lower SWR the better. We recommend checking out this [GitHub repository](https://www.rfindex.com/mesh/antennas) for choosing the best antenna for your node.
 
 #### Set up an admin password on Repeater and Room Server nodes
    If you are deploying an infrastructure node, we strongly recommend setting up the admin password so you can control your node through another node wirelessly. Instructions for this are available [here](https://docs.meshcore.io/faq/#31-q-how-do-you-configure-a-repeater-or-a-room-server). The guest password should either be left blank or set to `hello`.
