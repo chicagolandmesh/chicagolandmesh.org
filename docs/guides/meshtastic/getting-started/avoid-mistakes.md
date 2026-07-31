@@ -32,8 +32,8 @@ Antenna elevation is one of the biggest factors in how well a mesh network perfo
 #### Pay attention to SMA cables
    When you are purchasing SMA cables and adapters make sure you check the gender of the antenna and cables you're going to use. Mismatched connectors may cause permanent damage to your node, possibly leaving it unusable.
 
-#### Avoid using stock LILYGO or Heltec antenna
-   Using the stock antennas from LILYGO and Heltec devices will result in a massive performance loss because of their very high [SWR](https://en.wikipedia.org/wiki/Standing_wave_ratio). The lower SWR the better. We recommend checking out this [GitHub repository](https://github.com/meshtastic/antenna-reports) for choosing the best antenna for your node.
+#### Avoid using stock LilyGo or Heltec antenna
+   Using the stock antennas from LilyGo and Heltec devices will result in a massive performance loss because of their very high [SWR](https://en.wikipedia.org/wiki/Standing_wave_ratio). The lower SWR the better. We recommend checking out this [GitHub repository](https://github.com/meshtastic/antenna-reports) for choosing the best antenna for your node.
 
 #### Set up an admin channel for remote nodes
    If you are deploying a node that won't be easily accessible, we recommend setting up the admin channel so you can control your node through another node wirelessly. Instructions for this are available [here](https://meshtastic.org/docs/configuration/remote-admin/).
