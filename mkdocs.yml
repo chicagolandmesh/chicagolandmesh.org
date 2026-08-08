@@ -88,7 +88,8 @@ plugins:
   - optimize:
       optimize: !ENV [CI, false]
       optimize_include:
-        - guides/community/builds/assets/*
+        # FIX: optimize plugin breaks links to assets in builds
+        # - guides/community/builds/assets/*
         - assets/images/*
   - minify:
       minify_html: true
