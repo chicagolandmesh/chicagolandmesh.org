@@ -137,6 +137,9 @@ set flood.advert.interval 72
 ```
 set radio.watchdog 60
 ```
+```
+set mqtt.neighbors on
+```
 
 !!! tip "If this node is a dedicated observer only (does NOT repeat):"
     Turning repeat off is for dedicated observers only. If this node is also serving as a mesh repeater, make sure you run the `set repeat on` command and consider using a lower flood.advert.interval value (72 or 48).
