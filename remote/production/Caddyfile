@@ -137,3 +137,8 @@ chimesh.org {
 		redir https://{labels.2}.chicagolandmesh.org{uri} permanent
 	}
 }
+
+# drop connections for any host not explicitly defined above
+http:// {
+	abort
+}
