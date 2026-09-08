@@ -103,6 +103,13 @@ chicagolandmesh.org {
 
 	@corescope host corescope.chicagolandmesh.org
 	handle @corescope {
+		handle_path /basemaps/* {
+			uri query key {env.CARTO_API_KEY}
+			reverse_proxy https://basemaps.cartocdn.com {
+				header_down -*
+				header_down Cache-Control "public, max-age=31536000, immutable"
+			}
+		}
 		reverse_proxy {env.CORESCOPE_ADDR}
 	}
 
