@@ -49,7 +49,7 @@ Configure your device using the **USA/Canada (Recommended)** preset, which inclu
 | Spreading Factor | `7` |
 | Coding Rate | `5` |
 | TX Power | `22 dBm` |
-| Airtime Factor | `1` |
+| Path Hash Size | `3-byte` |
 
 **Coding Rate (CR)** controls how many forward error correction bits are packed into each transmission. It is the only radio parameter that can differ between nodes and still allow them to communicate with the rest of the mesh. A higher CR improves reliability but uses more airtime.
 
@@ -60,8 +60,6 @@ If you are running a repeater and your nearest repeater neighbors are at the edg
 ### Companion Node
 
 A companion node travels with you and does **not** repeat traffic. Companions are configured through the companion app UI, the CLI commands used for repeaters are **not available** on companion nodes during normal use.
-
-For companions, **path hash mode** is found under the **Experimental Settings** menu in the app, and there are no periodic advertisement intervals to configure.
 
 ### Repeater Node
 
