@@ -35,6 +35,7 @@ nav:
         - Mistakes to Avoid: guides/meshtastic/getting-started/avoid-mistakes.md
       - Setup MQTT: guides/meshtastic/mqtt.md
       - Local Channel: guides/meshtastic/local-channel.md
+      - Backup and Restore: guides/meshtastic/backup-and-restore.md
     - Reticulum:
       - guides/reticulum/index.md
       - Getting Started:

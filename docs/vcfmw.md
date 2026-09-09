@@ -119,7 +119,7 @@ VCFMW will not use the normal Meshtastic `LongFast` radio preset. A crowded indo
 
 !!! tip "Back Up Your Current Settings"
 
-    Before changing your Meshtastic configuration for VCFMW, consider backing up your current configuration so you can easily restore your normal settings after the event.
+    Before changing your Meshtastic configuration for VCFMW, consider backing up your current configuration so you can easily restore your normal settings after the event. Need help? Follow the [Backup and Restore guide](guides/meshtastic/backup-and-restore.md).
 
 Make sure to update or flash your node to a current Meshtastic firmware release, then:
 
