@@ -20,9 +20,13 @@ The purpose of Chicagoland Mesh is to expand coverage in our area and build out 
 
 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
 
-  <img src="assets/images/node.jpg" alt="Community Node" style="width: 500px; max-width: 100%; height: auto;">
+  <img src="assets/images/node.jpg"
+       alt="Community Node"
+       style="width: 500px; height: 500px; object-fit: cover;">
 
-  <img src="assets/images/nodes.png" alt="Community Node Map" style="width: 500px; max-width: 100%; height: auto;">
+  <img src="assets/images/nodes.png"
+       alt="Community Node Map"
+       style="width: 500px; height: 500px; object-fit: cover;">
 
 </div>
 
