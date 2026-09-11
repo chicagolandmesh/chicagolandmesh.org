@@ -135,12 +135,12 @@ Make sure to update or flash your node to a current Meshtastic firmware release,
 7. Set `ShortTurbo` as your Primary channel
 8. Add the following event channels:
 
-    | Channel | Type | Meshtastic Radio Name | PSK | Color in Discord MQTT Feed | MQTT Uplink | MQTT Downlink |
+    | Channel | Type | Meshtastic Channel Name | PSK | Color in Discord MQTT Feed | MQTT Uplink | MQTT Downlink |
     |---|---|---|---|---|---|---|
-    | ShortTurbo | Primary | `ShortTurbo` | Default | Default | Enabled | Disabled |
-    | VCFMW | Secondary | `vcfmw` | `eHZLbks0OTNkSzFGMTltUg==` | Teal | Enabled | Disabled |
-    | Buy, Sell, Trade | Secondary | `buysell` | `8J7cEeOAQmRi3a929zqbQw==` | Dark Blue | Enabled | Disabled |
-    | Video Games | Secondary | `videogames` | `sNUcrAq53nDDW6NvXa1bFw==` | Gold | Enabled | Disabled |
+    | ShortTurbo | Primary | `ShortTurbo` | Default | Green | Enabled | Disabled |
+    | VCFMW | Secondary | `vcfmw` | `eHZLbks0OTNkSzFGMTltUg==` | Blue | Enabled | Disabled |
+    | Buy, Sell, Trade | Secondary | `buysell` | `8J7cEeOAQmRi3a929zqbQw==` | Yellow | Enabled | Disabled |
+    | Video Games | Secondary | `videogames` | `sNUcrAq53nDDW6NvXa1bFw==` | Purple | Enabled | Disabled |
     | Retro Computing | Secondary | `retrocomp` | `jQWkWI1DHXVEHcShL2ldmA==` | Orange | Enabled | Disabled |
     | Meetups | Secondary | `meetups` | `PoKsjkEBbGl1PNHFYNJ3yQ==` | Red | Enabled | Disabled |
 
