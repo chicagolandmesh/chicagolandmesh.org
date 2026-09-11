@@ -18,11 +18,11 @@ The FCC allows people to operate on ISM frequencies without having any form of F
 
 The purpose of Chicagoland Mesh is to expand coverage in our area and build out mesh networks to make them more usable. We currently have a number of nodes located in downtown Chicago and on top of other buildings out in the suburbs. We are always looking to expand our coverage and rely on ourselves and others who can get nodes in elevated places to join us in building our off-grid communications network.
 
-<div style="display: flex; justify-content: center; gap: 20px; align-items: center; flex-wrap: wrap;">
+<div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
 
-  <img src="../assets/images/node.jpg" alt="Community Node" style="width: 500px; max-width: 100%; height: auto;">
+  <img src="/assets/images/node.jpg" alt="Community Node" style="width: 500px; max-width: 100%; height: auto;">
 
-  <img src="../assets/images/nodes.png" alt="Community Nodes" style="width: 500px; max-width: 100%; height: auto;">
+  <img src="/assets/images/nodes.png" alt="Community Nodes" style="width: 500px; max-width: 100%; height: auto;">
 
 </div>
 
