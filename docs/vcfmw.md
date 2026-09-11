@@ -89,7 +89,7 @@ If something is not working, ask in Discord or find somebody from Chicagoland Me
 
 It would be nice to have one strategically placed **MeshCore observer repeater** and one strategically placed **Meshtastic Router** available during event to help provide consistent coverage throughout the convention center. Ideally, the repeaters should be mounted as high as possible in the main show room with reliable power for the duration of the event. A Station G2, Station G3, or another solid repeater platform would be a good fit.
 
-We only want to coordinate **one event repeater/router per protocol**. Too many in the same area can create unnecessary traffic and make things worse instead of better. If you are interested in hosting one, please reach out in the **[VCFMW MeshCore discussion channel](https://discord.com/channels/1218078395565608990/1545105751771709481)** so we can decide who will host it and where it will be placed.
+We only want to coordinate **one event repeater/router per protocol**. Too many in the same area can create unnecessary traffic and make things worse instead of better. If you are interested in hosting one, please reach out in the **[VCFMW MeshCore discussion channel](https://discord.com/channels/1218078395565608990/1545105751771709481)** or the **[VCFMW Meshtastic discussion channel](https://discord.com/channels/1218078395565608990/1545105867844624465)** so we can decide who will host them and where they will be placed.
 
 Attendees do not need to set their personal nodes to Repeater. Normal companion nodes should stay as companions.
 
