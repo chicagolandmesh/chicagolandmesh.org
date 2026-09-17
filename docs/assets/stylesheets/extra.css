@@ -182,16 +182,6 @@ body[data-md-color-scheme="chicago-light"] .md-nav--lifted>.md-nav__list>.md-nav
 
 .md-tabs__item.md-tabs__item--active .md-tabs__link {
   color: var(--md-typeset-a-color) !important;
-}
-.md-tabs__item--active .md-tabs__link::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0.2rem;
-  right: 0.2rem;
-  height: 2px;
-  background-color: var(--md-typeset-a-color) !important;
-}
 
 /* search box */
 .md-search__form {
