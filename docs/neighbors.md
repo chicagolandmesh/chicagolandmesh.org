@@ -13,8 +13,8 @@ tags:
 -   [__Bloomington Indiana Mesh__](https://btownmesh.org/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/wait/10/http://btownmesh.org)
 
--   [__Central Illinois Mesh__](https://discord.gg/XXpMeCAJye)
-    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://discord.gg/XXpMeCAJye)
+-   [__Central Illinois Mesh__](https://cimesh.org/)
+    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://cimesh.org)
 
 -   [__Central Indiana Mesh Network__](https://www.cimesh.net/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/wait/10/http://cimesh.net)
@@ -26,13 +26,13 @@ tags:
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://iowamesh.org)
 
 -   [__MadMesh__](https://madmesh.net/)
-    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://madmesh.net/)
+    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://madmesh.net)
 
 -   [__Meshconsin__](https://meshconsin.org/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshconsin.org)
 
 -   [__MeshSTL__](https://meshstl.org/)
-    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshstl.org/)
+    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://meshstl.org)
 
 -   [__Michigan Mesh Network__](https://michmesh.com/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://michmesh.com)
