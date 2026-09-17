@@ -56,23 +56,43 @@
   <iframe
     id="corescope"
     onload="this"
-    src="https://corescope.chicagolandmesh.org/#/{{ page.url | replace('corescope', '') | trim('/') }}"
+    src="https://corescope.chicagolandmesh.org/#/{{ page.url | replace('corescope', '') | trim('/') | default('home', True) }}?embed=1"
   ></iframe>
 
   <script>
+    // handle mkdocs instant loading feature
     if (typeof document$ !== "undefined") {
-      handleExternalLink();
+      handleEmbed();
     } else {
-      document.addEventListener("DOMContentLoaded", handleExternalLink);
+      document.addEventListener("DOMContentLoaded", handleEmbed);
     }
 
-    function handleExternalLink() {
+    function handleEmbed() {
+      const iframe = document.querySelector("#corescope");
+
+      iframe.addEventListener("load", () => {
+        updateTheme(iframe);
+        new MutationObserver(() => updateTheme(iframe)).observe(document.body, {
+          attributes: true,
+          attributeFilter: ["data-md-color-scheme"],
+        });
+      });
+
       const link = document.querySelector('a[href="https://corescope.chicagolandmesh.org"]');
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("viewBox", "0 0 24 24");
       svg.innerHTML = `<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" />`;
       link.appendChild(svg);
       link.setAttribute("target", "_blank");
+      link.href = iframe.src.replace("?embed=1", "");
+    }
+
+    function updateTheme(iframe) {
+      if (document.body.getAttribute("data-md-color-scheme") == "chicago-light") {
+        iframe.contentWindow.postMessage("updateThemeLight", "*");
+      } else {
+        iframe.contentWindow.postMessage("updateThemeDark", "*");
+      }
     }
   </script>
 {% endblock %}
