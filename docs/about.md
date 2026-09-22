@@ -68,7 +68,7 @@ For camping trips, rural use, or small group meshes, Meshtastic is the better fi
 
 Reticulum is worth looking into if you want to go beyond messaging and build more sophisticated off-grid network applications. Hardware is inexpensive, so running all three on separate nodes is very doable if you want to participate in everything the network has to offer.
 
-You can also check out [LunarCore](https://github.com/STCisGOOD/lunarcore) for boards that support running both MeshCore and Meshtastic at the same time.
+You can also check out [Launcher Project](https://github.com/bmorcelli/Launcher) for boards that support running both MeshCore and Meshtastic.
 
 ## Getting Started
 
