@@ -1,8 +1,9 @@
 import logging
 import os
 from pathlib import Path
-
 from PIL import Image
+import requests
+import time
 
 log = logging.getLogger("mkdocs")
 
@@ -53,8 +54,40 @@ def handle_gallery_generation():
             log.info(f"Generated gallery image preview [{i+1}/{len(files)}]: {preview_path}/{file}")
 
 
+def handle_discord_member_count(config):
+    cache_file = ".cache/discord"
+
+    if os.path.isfile(cache_file):
+        with open(cache_file, "r") as f:
+            count = int(f.readline())
+            recieved_at = int(f.readline())
+            if recieved_at + 604800 > time.time(): # within 7 days
+                config.extra["discord_member_count"] = count
+                return
+
+    log.info("Fetching discord server count...")
+
+    invite_code = os.environ.get("DEV_DISCORD_INVITE_CODE")
+    if not invite_code:
+        log.fatal("Missing DEV_DISCORD_INVITE_CODE environment variable")
+        raise SystemExit(1)
+
+    response = requests.get(f"https://discord.com/api/v10/invites/{invite_code}")
+    if response.status_code == 200:
+        data = response.json()
+        count = (data["profile"]["member_count"] // 100) * 100
+        config.extra["discord_member_count"] = count
+    else:
+        log.fatal(f"Failed to get discord server count: {response.status_code}")
+        raise SystemExit(1)
+
+    with open(cache_file, "w") as f:
+        f.write(f"{count}\n{int(time.time())}")
+
+
 def on_config(config):
     handle_map_injection(config)
     handle_gallery_generation()
     handle_privacy_plugin_timeout()
+    handle_discord_member_count(config)
     return config

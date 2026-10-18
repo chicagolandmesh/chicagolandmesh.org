@@ -28,6 +28,8 @@ services:
       - ./mkdocs.yml:/docs/mkdocs.yml
       - ./mkdocs_hooks.py:/docs/mkdocs_hooks.py
       - ./.cache:/docs/.cache # privacy plugin cache
+    environment:
+      - DEV_DISCORD_INVITE_CODE=${DEV_DISCORD_INVITE_CODE}
     labels:
       caddy: ${DEV_BASE_URL}
       caddy.handle: /*

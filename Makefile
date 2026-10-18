@@ -59,6 +59,12 @@ MAP_CSS_DIR   := $(MAP_ASSET_DIR)/stylesheets
 
 SITE_OUTPUT := dist
 
+# import dev environment variables (needed to get DEV_DISCORD_INVITE_CODE for mkdocs)
+ifneq ($(wildcard .env),)
+    include .env
+    export
+endif
+
 $(MAP_MIDWEST_PM) $(MAP_GLOBE_PM):
 	@PATH="$(PATH):$$(go env GOPATH)/bin" # set path for go-pmtiles if GOBIN not set
 	@echo 'Pulling map tiles...'
