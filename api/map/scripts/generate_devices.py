@@ -59,6 +59,8 @@ def normalize_display_name(name):
     name = re.sub(r"^(RAK WisBlock) / WisMesh \(RAK 4631\)$", r"\1 4631", name)
     name = re.sub(r"^(Heltec) MeshSolar / (MeshTower)$", r"\1 \2", name)
     name = re.sub(r"^RAK (RAK.*)$", r"\1", name)
+    name = re.sub(r"^LilyGo T-Echo-Card$", "LilyGo T-Echo Card", name)
+    name = re.sub(r"^UnitEng/BQ Voyage (.*)$", r"UnitEng \1", name)
     return name
 
 
