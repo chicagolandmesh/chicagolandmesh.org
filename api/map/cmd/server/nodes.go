@@ -167,7 +167,7 @@ func (nr nodeRequest) Validate(method string) (bool, map[string][]string) {
 		v.Field("frequency").Float(nr.Frequency).Required().MustBe(910.525)
 		v.Field("role").String(nr.Role).Required().OneOf("companion", "repeater", "room", "sensor", "kiss")
 	case "meshtastic":
-		v.Field("frequency").Float(nr.Frequency).Required().OneOf(906.875, 913.125)
+		v.Field("frequency").Float(nr.Frequency).Required().OneOf(906.875, 908.750, 913.125)
 		v.Field("role").String(nr.Role).Required().OneOf("client", "client_mute", "client_hidden", "client_base", "tracker", "lost_and_found", "sensor", "tak", "tak_tracker", "repeater", "router", "router_late")
 	case "reticulum":
 		v.Field("frequency").Float(nr.Frequency).Required().Within(0, 1000)
