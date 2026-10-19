@@ -13,8 +13,8 @@ tags:
 -   [__Bloomington Indiana Mesh__](https://btownmesh.org/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/wait/10/http://btownmesh.org)
 
--   [__Central Illinois Mesh__](https://discord.gg/XXpMeCAJye)
-    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://discord.gg/XXpMeCAJye)
+-   [__Central Illinois Mesh__](https://cimesh.org/)
+    ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://cimesh.org)
 
 -   [__Central Indiana Mesh Network__](https://www.cimesh.net/)
     ![Link preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/wait/10/http://cimesh.net)
