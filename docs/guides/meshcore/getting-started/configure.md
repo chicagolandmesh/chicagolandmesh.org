@@ -110,7 +110,9 @@ This is why sharing a hash channel name is equivalent to sharing access, the nam
 3. Enter the channel name or paste the secret key
 4. Tap **Add**, your device will derive or store the key and join the channel
 
+
 ### Popular Community Channels
+
 The following channels are commonly used in the MeshCore community. Hash channels can be added by entering the channel name (MeshCore will derive the key automatically) or by entering the secret key directly.
 
 #### General
@@ -124,12 +126,91 @@ The following channels are commonly used in the MeshCore community. Hash channel
 !!! warning "`#public` is not the same as `Public`"
     `#public` is a separate hash channel, not the default public channel. If you're looking for the general public channel, use **`Public`** instead.
 
-#### Chicagoland
+#### Chicagoland Mesh
 | Channel Name | Secret Key |
 |---|---|
-| `#chicago` | `c1c289b131e5222370cbc2048445844b` |
 | `#chimesh` | `869d8ae6f43e99f7ef463027f916f1fc` |
+| `#chicago` | `c1c289b131e5222370cbc2048445844b` |
+| `#chiburbs` | `ffddd5192d876065d28a42b497b4e791` |
+
+#### Suburban Regional Channels
+| Channel Name | Secret Key |
+|---|---|
 | `#suburbs` | `428a0416c430927e63d01a5da35839f0` |
+| `#northburbs` | `8335ac4590c5e47efc45d0f95a433416` |
+| `#nshore` | `5e4dc642ec1c7567f58e8356201de580` |
+| `#neburbs` | `17f8d36fd0c91a6008288b4326b08926` |
+| `#nwburbs` | `988239d85dac1c5f3805976b4fae1e17` |
+| `#westburbs` | `61cf1c9e7fccc2df4704864ccf8fe306` |
+| `#swburbs` | `b9aa614333e2383a86ed37ad6526e709` |
+| `#sburbs` | `082d9d3715d0e3653d80b084ee38679a` |
+| `#seburbs` | `2a9cace768a60a58c08ee6f759d9c114` |
+| `#farwestburbs` | `80cd1dba03cd70ac219407d31350c6c2` |
+| `#farnorthburbs` | `0d2351fe272dff112e1c0980f813424d` |
+| `#farsouthburbs` | `ace50fc831bccd92f26c1529e3adc4d5` |
+
+#### County Channels
+| Channel Name | Secret Key |
+|---|---|
+| `#cookcounty` | `0325125fe35567cc44bacf6bed8747fb` |
+| `#dupage` | `29893bd700fc28e878e3faf033aa0d1a` |
+| `#lakecounty` | `aa0d82401f5248f1402efab7cfa8743e` |
+| `#mchenry` | `8cabc659654f9b371b9f10dd536a92d2` |
+| `#willcounty` | `5ac5b043654b75ef16862c62bb583ac7` |
+| `#kanecounty` | `35c830c021c8267cbcaf78328a71ca13` |
+
+#### Major Suburb Channels
+| Channel Name | Secret Key |
+|---|---|
+| `#ohare` | `75171a1192199de69a1cb68538489713` |
+| `#schaumburg` | `03506f1f6255407bfd51739824f990fa` |
+| `#palatine` | `2c2ef48c1034ceb82d4e7456dc5d692e` |
+| `#arlingtonheights` | `51a3252d4a107edfcfb7daf71dbc7302` |
+| `#desplaines` | `6cc55a6ffadb9102dee1fb20cf3a8501` |
+| `#parkridge` | `63b43e6ae3a60bd7695a1e19de92428e` |
+| `#evanston` | `da0851fb40af46f0971b706deec90265` |
+| `#skokie` | `b3cdbec50e68a2c6245dcf513082ee4d` |
+| `#oakpark` | `cf7f4fce87765243fe99b69a16ae959e` |
+| `#naperville` | `3405955be42130e6338bde9dda18cc3b` |
+| `#aurora` | `93a0a08ff5e86e68b230c2e132207a99` |
+| `#joliet` | `f1fc221b83ba81e4114618ab863ece8a` |
+| `#orlandpark` | `16944fdecdc038ff77981a3b66f2eeb9` |
+| `#tinleypark` | `b0a2b9789509e6d29cfa97007c15f58c` |
+| `#calumet` | `6341c757a8ce2bd3e2fad5d37d8f3dbe` |
+
+#### Chicago Citywide Regions
+| Channel Name | Secret Key |
+|---|---|
+| `#downtown` | `31aaffc36782c7761c8d93dd06686510` |
+| `#loop` | `d41673eb4bae7c3955eb55928783a515` |
+| `#southloop` | `6acb46b1e07ea6056ab5b4615212872b` |
+| `#westloop` | `72a79d0a6e492381ce453f075df3a629` |
+| `#rivernorth` | `92fd3daf899e3c62c366c564c4cb6e11` |
+| `#streeterville` | `7a0dc413b942fa7b47c06c15311bb154` |
+| `#northside` | `b9053b9857296c9d1dfd5f965f377a5f` |
+| `#southside` | `d340bf424024085c02a4f7bc685894d2` |
+| `#westside` | `5127c8d00849a07ccefc637d2b8240f3` |
+| `#farnorthside` | `713ac0d13c5d4a3b23e81c2e67c8d061` |
+| `#northwestside` | `9ac489ff2888fbc97c33d6306f051fed` |
+| `#southwestside` | `58eef26ba16e46fc2e6145d380db595d` |
+
+#### Chicago Neighborhood Channels
+| Channel Name | Secret Key |
+|---|---|
+| `#rogerspark` | `c9e39971ac4f87a14fbc87da700333ec` |
+| `#edgewater` | `b86cfccf50667c18a4b48c594b63e818` |
+| `#uptown` | `7aaddabc2da74d9ed96bc7e8afca2865` |
+| `#lakeview` | `5f4d004f197b5f9c405b215a46f85351` |
+| `#lincolnsquare` | `c04b65a0b106e4c8a04d0353ac1418d8` |
+| `#lincolnpark` | `1ad0f01425fde9010a0adf6c2e86aa6e` |
+| `#logansquare` | `f86bb01d438b9aa41e5b10f78d790f6a` |
+| `#wickerpark` | `2ae7ad0c9e7128635dbf4549befaf8dd` |
+| `#pilsen` | `d415c8dcd0375b543edeb8251143bc5c` |
+| `#bridgeport` | `f4b709be70846add2fcccc714df68bc1` |
+| `#hydepark` | `33ac60900b41276707b74b37a240c222` |
+| `#bronzeville` | `4774acf59e75d2323316a0d657351819` |
+| `#chatham` | `990bd6e3162c7e1947a0d25fd58afaa9` |
+| `#englewood` | `57cefd0b689344f2bf3d21f8c8fc577f` |
 
 #### Interests
 | Channel Name | Secret Key |
@@ -148,6 +229,16 @@ The following channels are commonly used in the MeshCore community. Hash channel
 | `#bulls` | `1e223bd0935a1983832435b8b876f97d` |
 | `#blackhawks` | `8f84f0a243ad2854c923d154d9c7fbe5` |
 | `#sky` | `caa8572648096df8de3f4aafb0677f04` |
+
+#### Chicago Topical Channels
+| Channel Name | Secret Key |
+|---|---|
+| `#chicagoweather` | `c06411af759fc5d9d2d20629a31687ca` |
+| `#chicagotraffic` | `93c7e543cf5a2c658dc81e9a1655400c` |
+| `#chicagoevents` | `12535a3f2b86d9164f1d849feb26ea5d` |
+| `#chicagotransit` | `3c1ebfb8d64affbcb375e6f31c5fcc48` |
+| `#chicagomesh` | `67d450fe27ca22c062d33d1f7311a8e4` |
+| `#chicagotech` | `9d7b23a57de521d424b41c130cc45bce` |
 
 #### Utility & Testing
 | Channel Name | Secret Key |
