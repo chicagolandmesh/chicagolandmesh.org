@@ -376,6 +376,15 @@
       border-color: var(--md-typeset-a-color);
       background-color: var(--md-typeset-a-color);
     }
+
+    /* swap the map preview with the active theme */
+    .map-preview-light, .map-preview-dark {
+      display: none !important;
+    }
+    [data-md-color-scheme="chicago-light"] .map-preview-light,
+    [data-md-color-scheme="chicago-dark"] .map-preview-dark {
+      display: block !important;
+    }
   </style>
 
   <!-- fix margining -->
@@ -539,7 +548,8 @@
       </div>
       <div class="map-section-preview">
         <a href="/map/">
-          <img src="assets/images/nodes.png" alt="Node map preview" />
+          <img class="map-preview-dark" src="assets/images/map-dark.png" alt="Node map preview" />
+          <img class="map-preview-light" src="assets/images/map-light.png" alt="Node map preview" />
         </a>
       </div>
     </div>
