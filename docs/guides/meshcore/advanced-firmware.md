@@ -26,6 +26,28 @@ tags:
 !!! info "Feature Suggestions"
     You can request specific features or ask for pre-built binaries for your board in the [EasySkyMesh Discussions](https://github.com/IoTThinks/EasySkyMesh/discussions/categories/ideas).
 
+## Faro: On-Device UI for the T-Deck
+
+[Faro](https://github.com/radek-sixi/sixi-tdeck-plus) is a community UI layer for MeshCore companion firmware on the LilyGo T-Deck and T-Deck Plus. It adds a touch, keyboard and trackball interface, so the radio can be used without a phone while the MeshCore app over Bluetooth and TCP clients over Wi-Fi keep working.
+
+### What It Offers
+
+- **Standalone operation**: chats and channels, contacts, discovery, trace path and diagnostics on the device screen
+- **Maps from the SD card** on the T-Deck and T-Deck Plus
+- **Radio regions** that apply power and duty-cycle limits on the device
+- **No protocol changes**: built on unmodified upstream MeshCore `companion-v1.18.0`, Apache-2.0 licensed
+
+### Flashing Faro
+
+1. Download the binary for your board from the [Faro releases page](https://github.com/radek-sixi/sixi-tdeck-plus/releases)
+2. Flash `faro-<board>-<version>-merged.bin` at `0x0` for a first install, or `faro-<board>-<version>-app.bin` at `0x10000` to update an existing Faro or MeshCore install
+3. Check the download against `SHA256SUMS` before flashing
+
+Detailed steps, including how to enter download mode on the T-Deck, are in the [Faro flashing guide](https://github.com/radek-sixi/sixi-tdeck-plus/blob/main/docs/FLASHING.md).
+
+!!! info "Pre-1.0 software"
+    Faro is at 0.10.1. Back up the device flash before the first install; the backup contains the node's private key.
+
 ## OTAFIX Bootloader (nRF52 Devices)
 
 [Adafruit_nRF52_Bootloader_OTAFIX](https://github.com/oltaco/Adafruit_nRF52_Bootloader_OTAFIX) is an enhanced bootloader for nRF52840-based MeshCore devices (RAK4631, Heltec T114, XIAO nRF52840, T1000-E, ProMicro NRF52840, and others). It fixes common OTA update issues and improves DFU reliability.
