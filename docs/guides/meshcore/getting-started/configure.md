@@ -110,7 +110,9 @@ This is why sharing a hash channel name is equivalent to sharing access, the nam
 3. Enter the channel name or paste the secret key
 4. Tap **Add**, your device will derive or store the key and join the channel
 
+
 ### Popular Community Channels
+
 The following channels are commonly used in the MeshCore community. Hash channels can be added by entering the channel name (MeshCore will derive the key automatically) or by entering the secret key directly.
 
 #### General
@@ -129,7 +131,48 @@ The following channels are commonly used in the MeshCore community. Hash channel
 |---|---|
 | `#chicago` | `c1c289b131e5222370cbc2048445844b` |
 | `#chimesh` | `869d8ae6f43e99f7ef463027f916f1fc` |
-| `#suburbs` | `428a0416c430927e63d01a5da35839f0` |
+
+#### Regional
+
+???+ info "Suburbia"
+    | Channel Name | Secret Key |
+    |---|---|
+    | `#suburbs` | `428a0416c430927e63d01a5da35839f0` |
+    | `#northburbs` | `8335ac4590c5e47efc45d0f95a433416` |
+    | `#nshore` | `5e4dc642ec1c7567f58e8356201de580` |
+    | `#neburbs` | `17f8d36fd0c91a6008288b4326b08926` |
+    | `#nwburbs` | `988239d85dac1c5f3805976b4fae1e17` |
+    | `#westburbs` | `61cf1c9e7fccc2df4704864ccf8fe306` |
+    | `#southburbs` | `58ca156a0b1dabd28e7bc6f20411438c` |
+    | `#swburbs` | `b9aa614333e2383a86ed37ad6526e709` |
+    | `#seburbs` | `2a9cace768a60a58c08ee6f759d9c114` |
+    | `#farwestburbs` | `80cd1dba03cd70ac219407d31350c6c2` |
+    | `#farnorthburbs` | `0d2351fe272dff112e1c0980f813424d` |
+    | `#farsouthburbs` | `ace50fc831bccd92f26c1529e3adc4d5` |
+
+???+ info "Counties"
+    | Channel Name | Secret Key |
+    |---|---|
+    | `#cookcounty` | `0325125fe35567cc44bacf6bed8747fb` |
+    | `#dupagecounty` | `ab5b36ae7c50bd90dd3e444eb4d547f8` |
+    | `#lakecounty` | `aa0d82401f5248f1402efab7cfa8743e` |
+    | `#mchenrycounty` | `c8b00c62315feb971caca033eb6bfc4b` |
+    | `#willcounty` | `5ac5b043654b75ef16862c62bb583ac7` |
+    | `#kanecounty` | `35c830c021c8267cbcaf78328a71ca13` |
+
+???+ info "Citywide"
+    | Channel Name | Secret Key |
+    |---|---|
+    | `#downtown` | `31aaffc36782c7761c8d93dd06686510` |
+    | `#loop` | `d41673eb4bae7c3955eb55928783a515` |
+    | `#southloop` | `6acb46b1e07ea6056ab5b4615212872b` |
+    | `#westloop` | `72a79d0a6e492381ce453f075df3a629` |
+    | `#northside` | `b9053b9857296c9d1dfd5f965f377a5f` |
+    | `#southside` | `d340bf424024085c02a4f7bc685894d2` |
+    | `#westside` | `5127c8d00849a07ccefc637d2b8240f3` |
+    | `#farnorthside` | `713ac0d13c5d4a3b23e81c2e67c8d061` |
+    | `#northwestside` | `9ac489ff2888fbc97c33d6306f051fed` |
+    | `#southwestside` | `58eef26ba16e46fc2e6145d380db595d` |
 
 #### Interests
 | Channel Name | Secret Key |
@@ -148,6 +191,15 @@ The following channels are commonly used in the MeshCore community. Hash channel
 | `#bulls` | `1e223bd0935a1983832435b8b876f97d` |
 | `#blackhawks` | `8f84f0a243ad2854c923d154d9c7fbe5` |
 | `#sky` | `caa8572648096df8de3f4aafb0677f04` |
+
+#### Topical
+| Channel Name | Secret Key |
+|---|---|
+| `#weather` | `c06411af759fc5d9d2d20629a31687ca` |
+| `#traffic` | `93c7e543cf5a2c658dc81e9a1655400c` |
+| `#events` | `12535a3f2b86d9164f1d849feb26ea5d` |
+| `#transit` | `3c1ebfb8d64affbcb375e6f31c5fcc48` |
+| `#tech` | `9d7b23a57de521d424b41c130cc45bce` |
 
 #### Utility & Testing
 | Channel Name | Secret Key |
