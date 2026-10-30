@@ -67,6 +67,7 @@ nav:
       - View Externally: https://corescope.chicagolandmesh.org
     - Meshtastic:
       - meshview/index.md
+      - Chat: meshview/chat.md
       - Nodes: meshview/nodelist.md
       - Map: meshview/map.md
       - See everything: meshview/firehose.md
