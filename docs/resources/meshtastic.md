@@ -31,6 +31,10 @@ tags:
 
 <div class="grid cards small" markdown>
 
+- [LoRa Mesh Atlas](https://lorameshatlas.com/)
+
+    Independent Meshtastic and MeshCore hardware reference with manufacturer-linked specifications and device comparisons; based on published documentation, not hands-on testing.
+
 - [Awesome Meshtastic Github](https://github.com/ShakataGaNai/awesome-meshtastic/)
   ![Link Preview](https://image.thum.io/get/width/700/maxAge/672/allowJPG/noanimate/http://github.com/ShakataGaNai/awesome-meshtastic/)
 
